@@ -1,0 +1,175 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "nscale component logs",
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": null,
+  "iteration": 1599141578555,
+  "links": [
+    {
+      "icon": "external link",
+      "tags": [],
+      "title": "ceyoniq",
+      "tooltip": "ceyon",
+      "type": "link",
+      "url": "https://ceyoniq.com"
+    }
+  ],
+  "panels": [
+    {
+      "datasource": "Loki",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 23,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "links": [
+        {
+          "title": "ceyoniq",
+          "url": "https://ceyoniq.com"
+        }
+      ],
+      "options": {
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Ascending",
+        "wrapLogMessage": false
+      },
+      "pluginVersion": "7.1.5",
+      "targets": [
+        {
+          "expr": "{compose_service=\"${component}\"}",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "${component} logs",
+      "type": "logs"
+    }
+  ],
+
+  "refresh": "10s",
+  "schemaVersion": 26,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "application-layer",
+          "value": "application-layer"
+        },
+        "hide": 1,
+        "includeAll": false,
+        "label": "component",
+        "multi": false,
+        "name": "component",
+        "options": [
+          {
+            "selected": true,
+            "text": "application-layer",
+            "value": "application-layer"
+          },
+          {
+            "selected": false,
+            "text": "console",
+            "value": "console"
+          },
+          {
+            "selected": false,
+            "text": "postgresql",
+            "value": "postgresql"
+          },
+          {
+            "selected": false,
+            "text": "rendition-server",
+            "value": "rendition-server"
+          },
+          {
+            "selected": false,
+            "text": "rms",
+            "value": "rms"
+          },
+          {
+            "selected": false,
+            "text": "storage-layer",
+            "value": "storage-layer"
+          },
+          {
+            "selected": false,
+            "text": "application-layer-web",
+            "value": "application-layer-web"
+          }
+        ],
+        "query": "application-layer,console,postgresql,rendition-server,rms,storage-layer,application-layer-web",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "browser",
+  "title": "Loki - nscale logs overview",
+  "uid": null,
+  "version": 0
+}

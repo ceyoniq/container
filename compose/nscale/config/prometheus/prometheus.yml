@@ -1,0 +1,38 @@
+global:
+  scrape_interval: 30s
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:  
+      - targets: ['localhost:9090']
+
+  - job_name: nscale_monitoring-console
+    metrics_path: '/nscalemc/rest/metrics'
+    basic_auth:
+        username: 'admin'
+        password: 'admin'
+    static_configs:
+      - targets: ['monitoring-console:8387']
+
+  - job_name: nscale_components_monitoring-console
+    metrics_path: '/nscalemc/rest/metrics/nscale'
+    basic_auth:
+        username: 'admin'
+        password: 'admin'
+    static_configs:
+      - targets: ['monitoring-console:8387']
+
+  - job_name: nscale_components_application-layer
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['application-layer:8080']
+
+  - job_name: nscale_components_rendition-server
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['rendition-server:8192']      
+
+  - job_name: cadvisor
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['cadvisor:8080']

@@ -1,0 +1,114 @@
+version: "3.5"
+
+# https://grafana.com/docs/loki/latest/installation/docker/
+volumes:
+  loki_data: {}
+  grafana_data: {}
+  prometheus_data: {}
+
+x-logging: &loki-logging
+  driver: loki
+  options:
+    loki-url: "http://172.17.0.1:3100/loki/api/v1/push" # Why 172.17.0.1? -> https://docs.docker.com/network/network-tutorial-standalone/
+    loki-retries: "1"
+
+services:
+  loki:
+    image: ${LOKI_IMAGE}
+    container_name: loki
+    volumes:
+      - loki_data:/loki:rw
+    networks: 
+      - nscale
+    ports:
+      - "3100:3100"
+  
+  grafana:
+    image: ${GRAFANA_IMAGE}
+    container_name: grafana
+    restart: always
+    volumes:
+      - grafana_data:/var/lib/grafana:rw
+      - ./config/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./config/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SERVER_ROOT_URL=/grafana
+      - GF_SERVER_SERVE_FROM_SUB_PATH=true
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_AUTH_ANONYMOUS_ENABLED=false
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/provisioning/dashboards/loki-nscale-logs-overview.json
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=PathPrefix(`/grafana`)"
+      - "traefik.http.routers.grafana.entrypoints=web"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+    networks:
+      - nscale
+    logging:  *loki-logging
+
+  prometheus:
+    image: ${PROMETHEUS_IMAGE}
+    container_name: prometheus
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus:/etc/prometheus
+      - prometheus_data:/data
+    networks:
+      - nscale
+    depends_on:
+      - cadvisor
+    logging:  *loki-logging   
+
+  cadvisor:
+    image: ${CADVISOR_IMAGE}
+    container_name: cadvisor
+    restart: always
+    command: 
+    # https://github.com/google/cadvisor/blob/master/deploy/kubernetes/overlays/examples/cadvisor-args.yaml#L19
+      # scraps just container metrics
+      - --docker_only 
+      # ignores all container labels - they won't be automatically added to prometheus metrics
+      - --store_container_labels=false  
+      # labels to consider
+      - --whitelisted_container_labels=io.kubernetes.container.name,io.kubernetes.pod.name,io.kubernetes.pod.namespace,nscale.component.name,nscale.full.version 
+      - --housekeeping_interval=30s                           
+      - --max_housekeeping_interval=35s
+    ports:
+    - "8888:8080"
+    volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+    networks: 
+      - nscale
+    logging:  *loki-logging   
+
+  postgresql:
+    logging:  *loki-logging
+
+  storage-layer:
+    logging:  *loki-logging
+
+  application-layer:
+    logging:  *loki-logging
+    
+  application-layer-web:
+    logging:  *loki-logging
+
+  console:
+    logging:  *loki-logging
+
+  monitoring-console:
+    logging:  *loki-logging
+
+  rendition-server:
+    logging:  *loki-logging
+    
+  rms:
+    logging:  *loki-logging

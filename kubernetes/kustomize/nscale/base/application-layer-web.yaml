@@ -1,0 +1,115 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-layer-web
+  labels:
+    app: application-layer-web
+spec:
+  selector:
+    matchLabels:
+      app: application-layer-web
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: application-layer-web
+    spec:
+      initContainers:
+      # Copy the configuration from the image into the temporary volume shared by both PODs.
+      - name: application-layer-web-conf
+        image: nscale/application-layer-web
+        command: [ "/bin/sh", "-c" ]
+        args:
+        - |
+          if ! [ "$(ls -A /mnt/conf/)" ]; then
+            cp -r /opt/ceyoniq/nscale-server/application-layer-web/conf/* /mnt/conf/
+          fi
+          cp /etc/ceyoniq/nscale-rms/repository/*.properties /mnt/rms/
+        volumeMounts:
+        - name: application-layer-web-conf
+          mountPath: /mnt/conf      
+        - name: application-layer-web-rms
+          mountPath: /mnt/rms      
+      - name: rms-conf
+        image: nscale/rms
+        command: [ "/bin/sh", "-c" ]
+        args:
+        - |
+          cp /etc/ceyoniq/nscale-rms/repository/*.properties /mnt/rms/
+        volumeMounts:
+        - name: application-layer-web-rms
+          mountPath: /mnt/rms      
+      containers:
+      - name: application-layer-web
+        image: nscale/application-layer-web
+        env:
+          - name: nscale-host
+            value: application-layer
+          - name: nscale-port
+            value: "8080"
+          - name: nscale-instance
+            value: nscalealinst1
+          - name: nscale-ssl
+            value: "false"
+          - name: log4jConfigLocation
+            value: ../conf/nscale_stdout_log_conf.xml
+        readinessProbe:
+          httpGet:
+            path: /nscale_web
+            port: 8090
+          periodSeconds: 5
+          initialDelaySeconds: 30
+        ports:
+        - containerPort: 8090
+          name: web
+        resources:
+          limits:
+            cpu: "2000m"
+            memory: "1300Mi"
+          requests:
+            cpu: "100m"
+            memory: "700Mi"
+        volumeMounts:
+        - name: application-layer-web-conf
+          mountPath: /opt/ceyoniq/nscale-server/application-layer-web/conf
+      - name: rms
+        image: nscale/rms
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "200Mi"
+          requests:
+            cpu: "50m"
+            memory: "50Mi"
+        volumeMounts:
+        - name: application-layer-web-conf
+          mountPath: /opt/ceyoniq/nscale-server/application-layer-web/conf
+        - name: application-layer-web-rms
+          mountPath: /etc/ceyoniq/nscale-rms/repository      
+        ports:
+        - containerPort: 3120
+          name: rms
+      volumes:
+      - name: application-layer-web-rms
+        emptyDir: {}
+      - name: application-layer-web-conf
+        persistentVolumeClaim:
+          claimName: application-layer-web-conf
+      imagePullSecrets:
+      - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: application-layer-web
+  labels:
+    service: application-layer-web
+spec:
+  ports:
+  - port: 8090
+    name: web
+    targetPort: 8090
+  selector:
+    app: application-layer-web

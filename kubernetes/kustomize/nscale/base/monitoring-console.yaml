@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitoring-console
+  labels:
+    app: monitoring-console
+spec:
+  selector:
+    matchLabels:
+      app: monitoring-console
+  replicas: 1
+  strategy:
+    type: Recreate  
+  template:
+    metadata:
+      labels:
+        app: monitoring-console
+    spec:
+      hostname: monitoring-console
+      securityContext:
+        runAsUser: 1001
+        fsGroup: 1001
+      initContainers:
+      # Copy the configuration from the image into the temporary volume shared by both PODs.
+      - name: monitoring-console-conf
+        image: nscale/monitoring-console
+        command: [ "/bin/sh", "-c" ]
+        args:
+        - |
+          if ! [ "$(ls -A /mnt/workspace/)" ]; then
+            cp -r /opt/ceyoniq/nscale-monitoring/workspace/* /mnt/workspace/
+          fi
+          cp /etc/ceyoniq/nscale-rms/repository/*.properties /mnt/rms/
+        volumeMounts:
+        - name: monitoring-console-workspace
+          mountPath: /mnt/workspace
+        - name: monitoring-console-rms
+          mountPath: /mnt/rms      
+      - name: rms-conf
+        image: nscale/rms
+        command: [ "/bin/sh", "-c" ]
+        args:
+        - |
+          cp /etc/ceyoniq/nscale-rms/repository/*.properties /mnt/rms/
+        volumeMounts:
+        - name: monitoring-console-rms
+          mountPath: /mnt/rms      
+      containers:
+      - name: monitoring-console
+        image: nscale/monitoring-console
+        readinessProbe:
+          httpGet:
+            path: /nscalemc/
+            port: 8387
+          periodSeconds: 10
+        ports:
+        - containerPort: 8387
+          name: monitoring
+        resources:
+          limits:
+            cpu: "1000m"
+            memory: "1500Mi"
+          requests:
+            cpu: "100m"
+            memory: "1000Mi"
+        volumeMounts:
+        - name: license
+          mountPath: /opt/ceyoniq/nscale-monitoring/workspace/license.xml
+          subPath: license.xml
+        - name: monitoring-console-workspace
+          mountPath: /opt/ceyoniq/nscale-monitoring/workspace
+      - name: rms
+        image: nscale/rms
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "200Mi"
+          requests:
+            cpu: "50m"
+            memory: "50Mi"
+        volumeMounts:
+        - name: monitoring-console-rms
+          mountPath: /etc/ceyoniq/nscale-rms/repository      
+        - name: monitoring-console-workspace
+          mountPath: /opt/ceyoniq/nscale-monitoring/workspace
+        ports:
+        - containerPort: 3120
+          name: rms
+      volumes:
+      - name: license
+        configMap:
+          name: monitoring-console-license          
+      - name: monitoring-console-rms
+        emptyDir: {}
+      - name: monitoring-console-workspace
+        persistentVolumeClaim:
+          claimName: monitoring-console-workspace
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: monitoring-console
+  labels:
+    app: monitoring-console
+spec:
+  ports:
+  - port: 8387
+    targetPort: 8387
+    name: monitoring-console
+  selector:
+    app: monitoring-console

@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: console
+  labels:
+    app: console
+spec:
+  selector:
+    matchLabels:
+      app: console
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: console
+    spec:
+      containers:
+      - name: console
+        image: nscale/console
+        env:
+        - name: LOG_APPENDER
+          value: "Console"
+        - name: HostName
+          value: "application-layer"
+        - name: Port
+          value: "8080"
+        - name: NAPPL_SSL
+          value: "0"
+        - name: ALInstance
+          value: "nscalealinst1"
+        readinessProbe:
+          httpGet:
+            path: /console
+            port: 8086
+          periodSeconds: 10
+          initialDelaySeconds: 30
+        ports:
+        - containerPort: 8086
+          name: console
+        resources:
+          limits:
+            cpu: "2000m"
+            memory: "1300Mi"
+          requests:
+            cpu: "100m"
+            memory: "700Mi"
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: console
+  labels:
+    service: console
+spec:
+  ports:
+  - port: 8086
+    targetPort: 8086
+    name: console
+  selector:
+    app: console

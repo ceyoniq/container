@@ -1,0 +1,117 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rendition-server
+  labels:
+    app: rendition-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rendition-server
+  template:
+    metadata:
+      labels:
+        app: rendition-server
+    spec:
+      hostname: rendition-server
+      initContainers:
+      # Copy the configuration from the image into the temporary volume shared by both PODs.
+      - name: rendition-server-conf
+        image: nscale/rendition-server
+        command: [ "/bin/sh", "-c" ]
+        args:
+        - |
+          if ! [ "$(ls -A /mnt/conf/)" ]; then
+            cp -r /opt/ceyoniq/nscale-rendition-server/conf/* /mnt/conf/
+          fi
+          cp /etc/ceyoniq/nscale-rms/repository/*.properties /mnt/rms/
+        volumeMounts:
+        - name: rendition-server-conf
+          mountPath: /mnt/conf      
+        - name: rendition-server-rms
+          mountPath: /mnt/rms      
+      - name: rms-conf
+        image: nscale/rms
+        command: [ "/bin/sh", "-c" ]
+        args:
+        - |
+          cp /etc/ceyoniq/nscale-rms/repository/*.properties /mnt/rms/
+        volumeMounts:
+        - name: rendition-server-rms
+          mountPath: /mnt/rms      
+      containers:
+      - name: rendition-server
+        image: nscale/rendition-server
+        readinessProbe:
+          httpGet:
+            path: /rs/
+            port: 8192
+          periodSeconds: 10
+        env:
+        - name: RSX_APPENDER
+          value: Console
+        resources:
+          limits:
+            cpu: "2000m"
+            memory: "2000Mi"
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+        volumeMounts:
+        - name: rendition-server-conf
+          mountPath: /opt/ceyoniq/nscale-rendition-server/conf
+        - name: license
+          mountPath: /opt/ceyoniq/nscale-rendition-server/conf/license.xml
+          subPath: license.xml
+        - name: rendition-server-share
+          mountPath: /opt/ceyoniq/nscale-rendition-server/work
+        ports:
+        - containerPort: 8192
+          name: rendition
+      - name: rms
+        image: nscale/rms
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "200Mi"
+          requests:
+            cpu: "50m"
+            memory: "50Mi"
+        volumeMounts:
+        - name: rendition-server-conf
+          mountPath: /opt/ceyoniq/nscale-rendition-server/conf
+        - name: rendition-server-rms
+          mountPath: /etc/ceyoniq/nscale-rms/repository
+        - name: rendition-server-share
+          mountPath: /opt/ceyoniq/nscale-rendition-server/work
+        ports:
+        - containerPort: 3120
+          name: rms
+      volumes:
+      - name: license
+        configMap:
+          name: rendition-server-license
+      - name: rendition-server-conf
+        emptyDir: {}
+      - name: rendition-server-rms
+        emptyDir: {}
+      - name: rendition-server-share
+        persistentVolumeClaim:
+          claimName: rendition-server-share
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rendition-server
+  labels:
+    service: rendition-server
+spec:
+  ports:
+  - port: 8192
+    targetPort: 8192
+    name: rendition-server
+  selector:
+    app: rendition-server

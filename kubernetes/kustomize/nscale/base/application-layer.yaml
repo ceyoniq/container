@@ -1,0 +1,139 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: application-layer
+  labels:
+    app: application-layer
+spec:
+  serviceName: application-layer
+  selector:
+    matchLabels:
+      app: application-layer
+  replicas: 1
+  volumeClaimTemplates: []
+  template:
+    metadata:
+      labels:
+        app: application-layer
+    spec:
+      initContainers:
+      # wait for database to be ready
+      - name: check-db-ready
+        image: bitnami/postgresql:11.6.0
+        command: ['sh', '-c',
+          'until pg_isready -U postgres -h postgresql -p 5432;
+          do echo waiting for database; sleep 2; done;']
+      - name: application-layer-conf
+        image: nscale/application-layer
+        command: [ "/bin/sh", "-c" ]
+        args:
+        - |
+          if ! [ "$(ls -A /mnt/conf/)" ]; then
+            cp -r /opt/ceyoniq/nscale-server/application-layer/conf/* /mnt/conf/
+          fi
+          cp /etc/ceyoniq/nscale-rms/repository/*.properties /mnt/rms/
+        volumeMounts:
+        - name: application-layer-conf
+          mountPath: /mnt/conf      
+        - name: application-layer-rms
+          mountPath: /mnt/rms      
+      - name: rms-conf
+        image: nscale/rms
+        command: [ "/bin/sh", "-c" ]
+        args:
+        - |
+          cp /etc/ceyoniq/nscale-rms/repository/*.properties /mnt/rms/
+        volumeMounts:
+        - name: application-layer-rms
+          mountPath: /mnt/rms      
+      containers:
+      - name: application-layer
+        image: nscale/application-layer
+        env:
+          - name: INSTANCE1_INSTANCE_LOGGER_CONF
+            value: "instance1-log-console.conf"
+          - name: INSTANCE1_CORE_DB_DIALECT
+            value: "PostgreSQL"
+          - name: INSTANCE1_CORE_DB_DRIVERCLASS
+            value: "org.postgresql.Driver"
+          - name: INSTANCE1_CORE_DB_URL
+            value: "jdbc:postgresql://postgresql:5432/nscale?loggerLevel=OFF"
+          - name: INSTANCE1_CORE_DB_USERNAME
+            value: "nscale"
+          - name: INSTANCE1_CORE_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgresql
+                key: postgresql-password
+          - name: INSTANCE1_CORE_DB_SCHEMA
+            value: "public"
+          - name: INITIALIZE_DOCUMENT_AREA
+            value: "DA"
+        livenessProbe:
+          tcpSocket:
+            port: 20626
+          periodSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - /opt/ceyoniq/nscale-server/application-layer/bin/readiness-probe.sh
+          periodSeconds: 10
+          initialDelaySeconds: 30
+        ports:
+        - containerPort: 8080
+          name: application
+        resources:
+          limits:
+            cpu: "2000m"
+            memory: "3000Mi"
+          requests:
+            cpu: "100m"
+            memory: "1000Mi"
+        volumeMounts:
+        - name: application-layer-conf
+          mountPath: /opt/ceyoniq/nscale-server/application-layer/conf
+        - name: license
+          subPath: license.xml
+          mountPath: /opt/ceyoniq/nscale-server/application-layer/conf/license.xml
+      - name: rms
+        image: nscale/rms
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "200Mi"
+          requests:
+            cpu: "50m"
+            memory: "50Mi"
+        volumeMounts:
+        - name: application-layer-conf
+          mountPath: /opt/ceyoniq/nscale-server/application-layer/conf
+        - name: application-layer-rms
+          mountPath: /etc/ceyoniq/nscale-rms/repository      
+        ports:
+        - containerPort: 3120
+          name: rms
+      volumes:
+      - name: license
+        configMap:
+          name: application-layer-license
+      - name: application-layer-rms
+        emptyDir: {}
+      - name: application-layer-conf
+        emptyDir: {}
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: application-layer
+  labels:
+    app: application-layer
+spec:
+  ports:
+  - port: 8080
+    name: application
+  clusterIP: None
+  selector:
+    app: application-layer

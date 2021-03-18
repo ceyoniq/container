@@ -1,0 +1,95 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# images:
+#   - name: nscale/application-layer
+#     newName: nscale/application-layer
+#     newTag: "8.0"
+#   - name: nscale/application-layer-web
+#     newName: nscale/application-layer-web
+#     newTag: "8.0"
+#   - name: nscale/console
+#     newName: nscale/console
+#     newTag: "8.0"    
+#   - name: nscale/monitoring-console
+#     newName: nscale/monitoring-console
+#     newTag: "8.0"
+#   - name: nscale/rendition-server
+#     newName: nscale/rendition-server
+#     newTag: "8.0"
+#   - name: nscale/rms
+#     newName: nscale/rms
+#     newTag: "1.5.11"
+#   - name: nscale/storage-layer
+#     newName: nscale/storage-layer
+#     newTag: "8.0"
+
+images:
+  - name: nscale/application-layer
+    newName: ceyoniq.azurecr.io/nscale/application-layer
+    newTag: "7.17"
+  - name: nscale/application-layer-web
+    newName: ceyoniq.azurecr.io/nscale/application-layer-web
+    newTag: "7.17"
+  - name: nscale/console
+    newName: ceyoniq.azurecr.io/nscale/console
+    newTag: "7.17"    
+  - name: nscale/monitoring-console
+    newName: ceyoniq.azurecr.io/nscale/monitoring-console
+    newTag: "7.17"
+  - name: nscale/rendition-server
+    newName: ceyoniq.azurecr.io/nscale/rendition-server
+    newTag: "7.17"
+  - name: nscale/rms
+    newName: ceyoniq.azurecr.io/nscale/rms
+    newTag: "1.5.11"
+  - name: nscale/storage-layer
+    newName: ceyoniq.azurecr.io/nscale/storage-layer
+    newTag: "7.17"
+  - name: nscale/cmis-connector
+    newName: ceyoniq.azurecr.io/nscale/cmis-connector
+    newTag: "nightly.develop.7.17"
+  - name: nscale/ilm-connector
+    newName: ceyoniq.azurecr.io/nscale/ilm-connector
+    newTag: "nightly.develop.8.0"
+  - name: nscale/webdav-connector
+    newName: ceyoniq.azurecr.io/nscale/webdav-connector
+    newTag: "nightly.develop.8.0"
+
+generatorOptions:
+  annotations:
+    nscale.ceyoniq.com: Copyright Ceyoniq GmbH
+
+secretGenerator:
+- name: postgresql
+  literals:
+  - postgresql-password=nscale
+
+configMapGenerator:
+- name: application-layer-license
+  files: 
+  - license.xml=license.xml
+- name: monitoring-console-license
+  files: 
+  - license.xml=license.xml
+- name: rendition-server-license
+  files: 
+  - license.xml=license.xml
+- name: storage-layer-license
+  files: 
+  - license.xml=license.xml
+- name: pipeliner-license
+  files: 
+  - license.xml=license.xml
+- name: postgresql-init-script
+  files: 
+  - config/postgresql/0_setup.sh
+
+resources:
+- postgres.yaml
+- application-layer.yaml
+- application-layer-web.yaml
+- monitoring-console.yaml
+- rendition-server.yaml
+- console.yaml
+- storage-layer.yaml

@@ -1,0 +1,23 @@
+version: "3.5"
+
+volumes:
+  pipeliner_data: {}
+  pipeliner_config: {}
+  
+services:
+  pipeliner:
+    image: ${PIPELINER_IMAGE}
+    hostname: ${CONTAINER_HOSTNAME}
+    networks:
+      - nscale
+    volumes:
+      - rms_config:/ceyoniq/etc:rw
+      - pipeliner_data:/opt/ceyoniq/nscale-pipeliner/workdir/data:rw
+      - pipeliner_config:/opt/ceyoniq/nscale-pipeliner/workdir/config:rw
+      - ${PIPELINER_LICENSE_FILE}:/opt/ceyoniq/nscale-pipeliner/workdir/license.xml:ro
+    depends_on:
+      - application-layer
+
+  rms:
+    volumes:
+      - pipeliner_config:/opt/ceyoniq/nscale-pipeliner/workdir/config:rw
