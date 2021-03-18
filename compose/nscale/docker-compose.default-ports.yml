@@ -1,0 +1,40 @@
+version: "3.5"
+
+services:
+  postgresql:
+    ports:
+      - "5432:5432"
+
+  storage-layer:
+    ports:
+      - "3005:3005"
+
+  application-layer:
+    ports:
+      - "8080:8080" # HTTP
+      - "8443:8443" # HTTPS
+
+  application-layer-web:
+    ports:
+      - "8090:8090" # HTTP
+      - "8091:8091" # HTTPS
+
+  console:
+    ports:
+      - "8086:8086" # HTTP
+      - "8087:8087" # HTTPS
+
+  monitoring-console:
+    ports:
+      - "8387:8387" # HTTP
+      - "8388:8388" # HTTPS
+
+  rendition-server:
+    ports:
+      - "8192:8192" # HTTP
+      - "8193:8193" # HTTPS
+
+  administrator:
+    ports:
+      - "8888:8080" # HTTP
+  

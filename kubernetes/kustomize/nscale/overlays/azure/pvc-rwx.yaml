@@ -1,0 +1,27 @@
+# https://docs.microsoft.com/en-us/azure/aks/azure-files-dynamic-pv
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rendition-server-share
+spec:
+  storageClassName: azurefile
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 8Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: application-layer-web-conf
+spec:
+  storageClassName: azurefile
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 8Gi
+

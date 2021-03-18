@@ -1,0 +1,87 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pipeliner
+  labels:
+    app: pipeliner
+spec:
+  template:
+    metadata:
+      labels:
+        app: pipeliner
+    spec:
+      hostname: pipeliner
+      securityContext:
+        runAsUser: 1001
+        fsGroup: 1001
+      initContainers:
+      # Copy the configuration from the image into the temporary volume shared by both PODs.
+      - name: pipelinerconf
+        image: nscale/pipeliner
+        command: [ "/bin/sh", "-c" ]
+        args:
+        - |
+          cp /etc/ceyoniq/nscale-rms/repository/*.properties /mnt/rms/
+        volumeMounts:
+        - name: pipeliner-rms
+          mountPath: /mnt/rms      
+      - name: rms-conf
+        image: nscale/rms
+        command: [ "/bin/sh", "-c" ]
+        args:
+        - |
+          cp /etc/ceyoniq/nscale-rms/repository/*.properties /mnt/rms/
+        volumeMounts:
+        - name: pipeliner-rms
+          mountPath: /mnt/rms
+      containers:
+      - name: pipeliner    
+        image: nscale/pipeliner
+        resources:
+          limits:
+            cpu: "1000m"
+            memory: "2000Mi"
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+        volumeMounts:
+        - name: license
+          subPath: license.xml
+          mountPath: /opt/ceyoniq/nscale-server/pipeliner/etc/license.xml
+        - name: pipeliner-data
+          mountPath: /opt/ceyoniq/nscale-pipeliner/workdir/data
+        - name: pipeliner-conf
+          mountPath: /opt/ceyoniq/nscale-pipeliner/workdir/config
+      - name: rms
+        image: nscale/rms
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "200Mi"
+          requests:
+            cpu: "50m"
+            memory: "50Mi"
+        volumeMounts:
+        - name: pipeliner-rms
+          mountPath: /etc/ceyoniq/nscale-rms/repository
+        - name: pipeliner-conf
+          mountPath: /opt/ceyoniq/nscale-pipeliner/workdir/config
+        ports:
+        - containerPort: 3120
+          name: rms
+      volumes:
+      - name: license
+        configMap:
+          name: pipeliner-license
+      - name: pipeliner-rms
+        emptyDir: {}
+      - name: pipeliner-conf
+        persistentVolumeClaim:
+          claimName: pipeliner-conf
+      - name: pipeliner-data
+        persistentVolumeClaim:
+          claimName: pipeliner-data
+      imagePullSecrets:
+        - name: regcred
+      restartPolicy: Never
+  backoffLimit: 1

@@ -1,0 +1,122 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: storage-layer
+  labels:
+    app: storage-layer
+spec:
+  serviceName: storage-layer
+  selector:
+    matchLabels:
+      app: storage-layer
+  replicas: 1
+  volumeClaimTemplates: []
+  template:
+    metadata:
+      labels:
+        app: storage-layer
+    spec:
+      securityContext:
+        runAsUser: 1001
+        fsGroup: 1001
+      initContainers:
+      # Copy the configuration from the image into the temporary volume shared by both PODs.
+      - name: storage-layer-conf
+        image: nscale/storage-layer
+        command: [ "/bin/sh", "-c" ]
+        args:
+        - |
+          if ! [ "$(ls -A /mnt/etc/)" ]; then
+            cp -r /opt/ceyoniq/nscale-server/storage-layer/etc/* /mnt/etc/
+          fi
+          cp /etc/ceyoniq/nscale-rms/repository/*.properties /mnt/rms/
+        volumeMounts:
+        - name: storage-layer-etc
+          mountPath: /mnt/etc
+        - name: storage-layer-rms
+          mountPath: /mnt/rms      
+      - name: rms-conf
+        image: nscale/rms
+        command: [ "/bin/sh", "-c" ]
+        args:
+        - |
+          cp /etc/ceyoniq/nscale-rms/repository/*.properties /mnt/rms/
+        volumeMounts:
+        - name: storage-layer-rms
+          mountPath: /mnt/rms
+      containers:
+      - name: storage-layer    
+        image: nscale/storage-layer
+        env:
+        - name: LOG_APPENDER
+          value: "Console"
+        ports:
+        - containerPort: 3005
+          name: storage
+        resources:
+          limits:
+            cpu: "2000m"
+            memory: "1000Mi"
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+        volumeMounts:
+        - name: license
+          subPath: license.xml
+          mountPath: /opt/ceyoniq/nscale-server/storage-layer/etc/license.xml
+        - name: storage-layer-etc
+          mountPath: /opt/ceyoniq/nscale-server/storage-layer/etc
+        - name: storage-layer
+          subPath: da
+          mountPath: /opt/ceyoniq/nscale-server/storage-layer/da
+        - name: storage-layer
+          subPath: arc
+          mountPath: /opt/ceyoniq/nscale-server/storage-layer/arc
+        - name: storage-layer-hd
+          mountPath: /opt/ceyoniq/nscale-server/storage-layer/hd   
+      - name: rms
+        image: nscale/rms
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "200Mi"
+          requests:
+            cpu: "50m"
+            memory: "50Mi"
+        volumeMounts:
+        - name: storage-layer-rms
+          mountPath: /etc/ceyoniq/nscale-rms/repository
+        - name: storage-layer-etc
+          mountPath: /opt/ceyoniq/nscale-server/storage-layer/etc
+        ports:
+        - containerPort: 3120
+          name: rms
+      volumes:
+      - name: license
+        configMap:
+          name: storage-layer-license
+      - name: storage-layer-rms
+        emptyDir: {}
+      - name: storage-layer-etc
+        emptyDir: {}
+      - name: storage-layer
+        persistentVolumeClaim:
+          claimName: storage-layer
+      - name: storage-layer-hd
+        persistentVolumeClaim:
+          claimName: storage-layer-hd
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: storage-layer
+  labels:
+    app: storage-layer
+spec:
+  ports:
+  - port: 3005
+    name: storage-layer
+  selector:
+    app: storage-layer

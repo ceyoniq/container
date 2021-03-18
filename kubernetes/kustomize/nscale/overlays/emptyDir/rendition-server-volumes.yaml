@@ -1,0 +1,5 @@
+- op: replace
+  path: /spec/template/spec/volumes/3
+  value: 
+    name: rendition-server-share
+    emptyDir: {}

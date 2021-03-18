@@ -1,0 +1,110 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql
+  labels:
+    app: postgresql
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: postgresql
+      role: master
+  template:
+    metadata:
+      name: postgresql
+      labels:
+        app: postgresql
+        role: master
+    spec:
+      securityContext:
+        runAsUser: 1001
+        fsGroup: 1001
+      containers:
+      - name: postgresql
+        image: bitnami/postgresql:11.6.0
+#        securityContext:
+#          privileged: true
+#          capabilities:
+#            add:
+#            - SYS_ADMIN        
+        #command: [ "/bin/sleep", "infinity" ]
+        resources:
+          limits:
+            cpu: "1000m"
+            memory: "500Mi"            
+          requests:
+            cpu: "100m"
+            memory: "250Mi"            
+        env:
+        - name: BITNAMI_DEBUG
+          value: "false"
+        - name: POSTGRESQL_USERNAME
+          value: "postgres"
+        - name: POSTGRESQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgresql
+              key: postgresql-password
+        - name: NSCALE_USERNAME
+          value: "nscale"
+        - name: NSCALE_DATABASE
+          value: "nscale"
+        - name: NSCALE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgresql
+              key: postgresql-password
+        ports:
+        - name: postgresql
+          containerPort: 5432
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - exec pg_isready -U "postgres" -h 127.0.0.1 -p 5432
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 6
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - |
+              pg_isready -U "postgres" -h 127.0.0.1 -p 5432
+              [ -f /opt/bitnami/postgresql/tmp/.initialized ]
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 6  
+        volumeMounts:
+        - name: custom-init-scripts
+          mountPath: /docker-entrypoint-initdb.d/
+        - name: postgresql-db
+          mountPath: /bitnami/postgresql
+      volumes:
+      - name: custom-init-scripts
+        configMap:
+          name: postgresql-init-script
+      - name: postgresql-db
+        persistentVolumeClaim:
+          claimName: postgresql-db
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql
+spec:
+  ports:
+  - port: 5432
+    name: postgresql
+  selector:
+    app: postgresql

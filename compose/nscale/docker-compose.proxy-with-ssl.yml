@@ -1,0 +1,58 @@
+version: "3.5"
+
+volumes:
+  certs: {}
+
+services:
+
+  application-layer:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.napplsec.rule=Host(`${DOMAIN_NAME}`) && ( PathPrefix(`/nscalealinst1`) || PathPrefix(`/res/`) || Path(`/engine.properties`)|| Path(`/index.html`) )"
+      - "traefik.http.routers.napplsec.entrypoints=websecure"
+      - "traefik.http.routers.napplsec.tls=true"
+      - "traefik.http.routers.napplsec.tls.certresolver=myresolver"
+
+  application-layer-web:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.websec_root.rule=Host(`${DOMAIN_NAME}`) && Path(`/`)"
+      - "traefik.http.routers.websec_root.entrypoints=websecure"
+      - "traefik.http.middlewares.websec_root.addprefix.prefix=/nscale_web"
+      - "traefik.http.routers.websec_root.middlewares=websec_root"
+      - "traefik.http.routers.websec_root.tls=true"
+      - "traefik.http.routers.websec_root.tls.certresolver=myresolver"
+      - "traefik.http.routers.websec.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/nscale_web`)"
+      - "traefik.http.routers.websec.entrypoints=websecure"
+      - "traefik.http.routers.websec.tls=true"
+      - "traefik.http.routers.websec.tls.certresolver=myresolver"
+
+  console:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.consolesec.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/console`)"
+      - "traefik.http.routers.consolesec.entrypoints=websecure"
+      - "traefik.http.routers.consolesec.tls=true"
+      - "traefik.http.routers.consolesec.tls.certresolver=myresolver"
+
+  traefik:
+    image: ${TRAEFIK_IMAGE}
+    command:
+      - "--api=false"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=${EMAIL_ADDRESS}"
+      - "--certificatesresolvers.myresolver.acme.storage=/certs/acme.json"
+      # - "--log.level=DEBUG" # Enable debugging
+      # - "--api.insecure=true"  
+      #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"      
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - certs:/certs
+    ports:
+      - "${TRAEFIK_EXTERNAL_HTTPS_PORT}:443"
+      # - "9090:8080" # Enable the Traefik Dashboard (set --api=true and --api.insecure=true)      
+    networks:
+      - nscale      

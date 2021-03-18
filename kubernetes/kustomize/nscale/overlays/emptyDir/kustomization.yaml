@@ -1,0 +1,34 @@
+bases:
+- ../../base
+
+patchesJson6902:
+- target:  
+    group: apps
+    version: v1
+    kind: Deployment
+    name: postgresql
+  path: postgresql-volumes.yaml    
+- target:  
+    group: apps
+    version: v1
+    kind: Deployment
+    name: monitoring-console
+  path: monitoring-console-volumes.yaml    
+- target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: application-layer-web
+  path: application-layer-web-volumes.yaml
+- target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: rendition-server
+  path: rendition-server-volumes.yaml
+- target:
+    group: apps
+    version: v1
+    kind: StatefulSet
+    name: storage-layer
+  path: storage-layer-volumes.yaml

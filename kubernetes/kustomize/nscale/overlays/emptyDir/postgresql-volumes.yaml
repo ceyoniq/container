@@ -1,0 +1,5 @@
+- op: replace
+  path: /spec/template/spec/volumes/1
+  value: 
+    name: postgresql-db
+    emptyDir: {}
