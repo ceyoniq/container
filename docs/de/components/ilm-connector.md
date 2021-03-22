@@ -1,8 +1,12 @@
 # nscale ERP Connector ILM
 
-## Lizenzierung und Persistierung
+## Lizenzierung
 
-Die Lizenzierung von nscale ERP Connector ILM erfolgt im nscale Server Application Layer. Für den Betrieb von nscale ERP Connector ILM ist es nicht nötig Dateien zu Persistieren.
+nscale Console benötigt keine lokale Lizenzdatei.
+
+## Persistierung
+
+Diese Komponente benötigt keine Persistierung.
 
 ## Umgebungsvariablen
 
@@ -31,11 +35,4 @@ docker run -it \
 -e ILM_AL_SSL=false \
 -e ILM_AL_DOMAIN=nscale \
 ceyoniq.azurecr.io/nscale/ilm-connector:8.0
-```
-
-## Test Service
-
-```bash
-curl -v -X PROPFIND -u admin:admin http://localhost:8297/sap_ilm/nscalealinst1/DA/public
-
 ```

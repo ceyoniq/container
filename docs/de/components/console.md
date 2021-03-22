@@ -6,7 +6,7 @@ nscale Console benötigt keine lokale Lizenzdatei.
 
 ## Persistierung
 
-Um zu gewährleisten, dass Sie nach dem Herunterfahren des Systems weiterhin Zugriff auf Ihre Daten haben, sorgen Sie für eine Persistierung Sie des Ordners "/opt/ceyoniq/nscale-server/console/conf".
+Diese Komponente benötigt keine Persistierung.
 
 ## Umgebungsvariablen
 
@@ -22,25 +22,19 @@ Um zu gewährleisten, dass Sie nach dem Herunterfahren des Systems weiterhin Zug
 |defaultAlInstance=nscalealinst1 |Sie können eine Default-Instanz für die Anmeldung auswählen. Dies ist nur nötig, wenn Sie mehrere nscale Server Application Layer Instanzen installiert haben.|
 |defaultAlName=ApplicationLayer|Sie können einen Defalut-Application Layer für die Anmeldung auswählen. Dies ist nur nötig, wenn Sie mehrere nscale Server Application Layer installiert haben.|
 
-## Limitierungen im Containerumfeld
+## Ports
 
-### Plug-ins
+* 8086
+* 8087
 
-|Plug-in | Verfügbarkeit|
-|---|---|
-|Benutzerverwaltung |verfügbar|
-|Konfiguration|nicht verfügbar|
-|Mail|nicht verfügbar|
-|Navigator|verfügbar|
-|nstore|verfügbar|
-|Partitionen|nicht verfügbar|
-|Willkommen & Information|verfügbar|
-|eGov Administration |verfügbar|
-|AdminType|verfügbar|
+## Start
 
-### Funktionen
-
-Es steht die Funktion "Kennwortänderung zur Verfügung.
-Mit dieser Funktion können Sie das Passwort des angemeldeten Benutzers ändern.
-Beachten Sie dabei, dass sich lediglich das Passwort für nscale Console ändert.
-Die anderen Komponenten sind nicht von dieser Kennwortänderung betroffen.
+```bash
+docker run \
+   -e HostName=application-layer \
+   -e Port=8080 \
+   -e ALInstance=nscalealinst1 \
+   -p 8086:8086 \
+   -e LOG_APPENDER=Console \
+   nscale/console
+```

@@ -25,6 +25,22 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 |nscale-ssl=false |Sie können festlegen ob SSL verwendet werden soll. Der Standardwert ist "false". |
 |log4jConfigLocation=../conf/nscale_stdout_log_conf.xml | In dieser Umgebungsvariable können Sie den Pfad zur Konfigurationsdatei angeben. |
 
+## Ports
+
+* 8090
+* 8453
+
+## Start
+
+```bash
+ docker run \
+   -e nscale-host=application-layer \
+   -e log4jConfigLocation=../conf/nscale_stdout_log_conf.xml \
+   -e nscale-port=8080 \
+   -p 8090:8090 \
+   nscale/application-layer-web
+```
+
 ## Information für Entwickler
 
 Wenn Sie z.B. eigene Plug-ins für nscale Server Application Layer Web entwickeln wollen,  

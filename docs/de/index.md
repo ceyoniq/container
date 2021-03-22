@@ -33,8 +33,8 @@ Bei diesem Dokument handelt es sich um die Dokumentation verschiedener nscaleSer
 Für den Betrieb von nscale Standard Container muss Ihr System die folgenden Mindestvoraussetzung erfüllen:
 
 - min. 4 GB RAM
-- weitere Software bzw. Hardwarevoraussetzungen aus dem Installationshandbuch der jeweiligen Komponente bzw. des Konnektors
-(Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com/>.)
+- weitere Software bzw. Hardwarevoraussetzungen aus dem Installationshandbuch der jeweiligen Komponente bzw. des Konnektors.
+Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com/>.
 
 Außerdem müssen Sie ggf. einige Programme von Drittanbietern installiert haben, um nscale Standard Container starten, betreiben und überwachen zu können. Diese sind:
 
@@ -97,8 +97,8 @@ nscale Server Standard Container ist kein Produkt, sondern eine Vertriebsdefinit
 |nscale WebDAV-Connector|Ja|Ja|Ja|Ja|
 |nscale ERP Connector ILM|Ja|Ja|Ja|Ja|
 
-(*) Die Komponente kann über einen [Horizontal Pod Autoscaler](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/) in Kubernetes skaliert werden
-(**) Die Komponente kann über einen [Service](https://kubernetes.io/docs/concepts/services-networking/service/) in Kubernetes Loadbalancing durchführen
+(*) Die Komponente kann über einen [Horizontal Pod Autoscaler](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/) in Kubernetes skaliert werden.  
+(**) Die Komponente kann über einen [Service](https://kubernetes.io/docs/concepts/services-networking/service/) in Kubernetes Loadbalancing durchführen.
 
 ### Notwendige Rahmenparameter zum Betrieb der Komponenten
 

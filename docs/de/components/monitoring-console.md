@@ -2,21 +2,13 @@
 
 ## Lizenzierung
 
-nscale Monitoring Console benötigt eine lokale Lizenzdatei.
-Hinterlegen Sie diese im Ordner "/opt/ceyoniq/nscale-monitoring/workspace/license.xml".
+Diese Komponente benötigt eine lokale Lizenzdatei.
+Die Datei wird im Container hier erwartet: `/opt/ceyoniq/nscale-monitoring/workspace/license.xml`.
 
 ## Persistierung
 
-Um zu gewährleisten, dass Sie nach dem Herunterfahren des Systems weiterhin Zugriff auf Ihre Daten haben, sorgen Sie für eine Persistierung Sie des Ordners "/opt/ceyoniq/nscale-monitoring/workspace".
-
-## Passwörter
-
-Passwörter für den administrativen Zugriff auf die Monitoring Console werden verschlüsselt im Workspace hinterlegt.
-Zur Benutzerverwaltung können Sie folgendes Kommando verwenden:
-
-```bash
-java -jar lib/mc-cmdclient.jar PASSWD --user admin --password <phrase> 
-```
+Um zu gewährleisten, dass Sie nach dem Herunterfahren des Systems weiterhin Zugriff auf Ihre Daten haben, sorgen Sie für eine Persistierung Sie der Ordner
+`/opt/ceyoniq/nscale-monitoring/workspace`.
 
 ## Konfiguration
 
@@ -44,3 +36,30 @@ Erst nach dem Anpassen der Verbindung zu den nscale-Ressourcen werden alle Senso
 |SOCKET_TIMEOUT=60|Sie können die maximale Requestdauer in Sekunden festlegen. Wenn  nscale Monitoring Console nach Ablaufen der Zeit keine Antwort erhalten hat, wird der Request abgebrochen. |
 |RMI_ACTIVE=false|Sie können RMI aktivieren. Dadurch machen Sie die Java Monitoring Schnittstelle (JMX) auch remote verfügbar.  **Aus Sicherheitsgürnden raten wir von der Verwendung von RMI ab.**|
 |RMI_PORT=8386|Sie können den RMI Port festlegen. Dadurch erhalten Sie Remote-Zugriff über "service:jmx:rmi://hostname:8389/jndi/rmi://hostname:8389/jmxrmi".  **Aus Sicherheitsgürnden raten wir von der Verwendung von RMI ab.**|
+
+## Ports
+
+* 8086
+* 8087
+
+## Start
+
+```bash
+docker run \
+  -e MC_APPENDER=Console \
+  -p 8387:8387 \
+  -h democontainer \
+  -v $(pwd)/workspace:/opt/ceyoniq/nscale-monitoring/workspace \
+  -v $(pwd)/license.xml:/opt/ceyoniq/nscale-monitoring/workspace/license.xml \
+  nscale/monitoring-console
+```
+
+## Passwörter
+
+Passwörter für den administrativen Zugriff auf die Monitoring Console werden verschlüsselt im Workspace hinterlegt.
+Zur Benutzerverwaltung können Sie folgendes Kommando verwenden:
+
+```bash
+java -jar lib/mc-cmdclient.jar PASSWD --user admin --password <phrase> 
+```
+
