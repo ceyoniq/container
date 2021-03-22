@@ -32,11 +32,14 @@ Das Vorgehen zum Erstellen und Bearbeiten einer `cold.xml` ist im nscale Pipelin
 Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com/>.
 
 Die spezielle Konfiguration richtet sich nach der Umgebung in der sie verwendet wird.
-Beachten Sie dass u.U. auch Rechte in nscale für den Betrieb des Pipeliners angepasst werden müssen.
+Beachten Sie dass u.U. auch Rechte in nscale für den Betrieb von nscale Pipeliner angepasst werden müssen.
 
 ### Docker-Compose
 
-Mit dem Start des Pipeliners wird das Spool Verzeichnis im aktuellen Order angelegt, das der Pipeliner verwendet, um Dateien kontinuierlich zu imporieren. Unter `./workdir/data` werden später die Eingangsdaten abgeholt. Die zuvor offline konfigurierte `cold.xml` kann ebenfalls in diesem Order abgelegt und anschließend in den Container gemappt werden. Dazu muss die Kommentarzeile unten herausgenommen und der Container neu instanziert werden.
+Mit dem Start von nscale Pipeliner wird das Spool Verzeichnis im aktuellen Order angelegt, das nscale Pipeliner verwendet, um Dateien kontinuierlich zu importieren.
+Unter `./workdir/data` werden später die Eingangsdaten abgeholt.
+Die zuvor offline konfigurierte `cold.xml` kann ebenfalls in diesem Order abgelegt und anschließend in den Container gemappt werden.
+Dazu muss die Kommentarzeile unten herausgenommen und der Container neu instanziiert werden.
 
 ```bash
 > vi docker-compose.pipeliner.yml
@@ -46,7 +49,7 @@ Mit dem Start des Pipeliners wird das Spool Verzeichnis im aktuellen Order angel
       #- ./workdir/config/cold.xml:/opt/ceyoniq/nscale-pipeliner/workdir/config/runtime/cold.xml:ro
       - ${PIPELINER_LICENSE_FILE}:/opt/ceyoniq/nscale-pipeliner/workdir/license.xml:ro
 
-# Der Container muss neu instanziert werden
+# Der Container muss neu instanziiert werden
 > docker-compose up -d pipeliner
 
 # Logs prüfen
@@ -55,13 +58,13 @@ Mit dem Start des Pipeliners wird das Spool Verzeichnis im aktuellen Order angel
 
 ### Kubernetes
 
-In Kubernetes ist der Pipeliner als StatefulSet definiert und verwendet 4 Volumes:
+In Kubernetes ist nscale Pipeliner als StatefulSet definiert und verwendet 4 Volumes:
 
 | Volume | Herkunft | Beschreibung |
 |---|---|---|
 | `data` | RWX PersistenceVolumeClaim | Enthält das Spool Verzeichnis und kann in mehrere Pods gemappt werden um Daten abzulegen, die vom Pipeliner kontinuierlich importiert werden. |
-| `conf`  | RWO PersistenceVolumeClaim  | Umfasst die Konfiguration des Pipeliners. |
+| `conf`  | RWO PersistenceVolumeClaim  | Umfasst die Konfiguration von nscale Pipeliner. |
 | `cold.xml` | `base/config/pipeliner/cold.xml` | Spezielle offline erstellt Konfigurationsdatei. |
 | `license.xml` | `base/license.xml` | Lizenzdatei |
 
-Zur Aktivierung des Pipeliners müssen in der `base/kustomization.xml` die Pipeliner Resourcen einkommentiert werden.
+Zur Aktivierung von nscale Pipeliner müssen Sie in der `base/kustomization.xml` die Pipeliner Ressourcen einkommentieren.

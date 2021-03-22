@@ -1,10 +1,10 @@
 - op: replace
-  path: /spec/template/spec/volumes/3
+  path: /spec/template/spec/volumes/2
   value: 
     name: storage-layer
     emptyDir: {}
 - op: replace
-  path: /spec/template/spec/volumes/4
+  path: /spec/template/spec/volumes/3
   value: 
     name: storage-layer-hd
     emptyDir: {}

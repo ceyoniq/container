@@ -45,9 +45,9 @@ docker run \
 
 ## Passwörter
 
-Das Passwörter für den administrativen Zugriff auf den Rendition Server ist in der Datei
+Die Passwörter für den administrativen Zugriff auf den Rendition Server sind in der Datei
 `/opt/ceyoniq/nscale-rendition-server/conf/rendition-server.users` hinterlegt.
-Zum Anlegen eines neuen Benutzers verwenden Sie folgendes Kommando:
+Zum Anlegen eines neuen administrativen Zugangs verwenden Sie folgendes Kommando:
 
 ```bash
 echo PASSWORD=$( java -jar ./lib/rms-api-*.jar -e newpassword ) 

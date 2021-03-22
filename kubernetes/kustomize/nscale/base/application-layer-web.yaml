@@ -19,31 +19,21 @@ spec:
       initContainers:
       # Copy the configuration from the image into the temporary volume shared by both PODs.
       - name: application-layer-web-conf
-        image: nscale/application-layer-web
+        image: nscale/application-layer-web:8.0
+        imagePullPolicy: Always
         command: [ "/bin/sh", "-c" ]
         args:
         - |
           if ! [ "$(ls -A /mnt/conf/)" ]; then
-            cp -r /opt/ceyoniq/nscale-server/application-layer-web/conf/* /mnt/conf/
+            cp -a /opt/ceyoniq/nscale-server/application-layer-web/conf/* /mnt/conf/
           fi
-          cp /etc/ceyoniq/nscale-rms/repository/*.properties /mnt/rms/
         volumeMounts:
         - name: application-layer-web-conf
-          mountPath: /mnt/conf      
-        - name: application-layer-web-rms
-          mountPath: /mnt/rms      
-      - name: rms-conf
-        image: nscale/rms
-        command: [ "/bin/sh", "-c" ]
-        args:
-        - |
-          cp /etc/ceyoniq/nscale-rms/repository/*.properties /mnt/rms/
-        volumeMounts:
-        - name: application-layer-web-rms
-          mountPath: /mnt/rms      
+          mountPath: /mnt/conf          
       containers:
       - name: application-layer-web
-        image: nscale/application-layer-web
+        image: nscale/application-layer-web:8.0
+        imagePullPolicy: Always
         env:
           - name: nscale-host
             value: application-layer
@@ -53,14 +43,17 @@ spec:
             value: nscalealinst1
           - name: nscale-ssl
             value: "false"
+          - name: JAVA_OPTS
+            value: "-XX:MaxRAMPercentage=75.0"            
           - name: log4jConfigLocation
             value: ../conf/nscale_stdout_log_conf.xml
         readinessProbe:
-          httpGet:
-            path: /nscale_web
-            port: 8090
-          periodSeconds: 5
-          initialDelaySeconds: 30
+          exec:
+            command:
+            - /bin/sh
+            - /opt/ceyoniq/nscale-server/application-layer-web/bin/readiness-probe.sh
+          periodSeconds: 10
+          initialDelaySeconds: 10
         ports:
         - containerPort: 8090
           name: web
@@ -74,26 +67,7 @@ spec:
         volumeMounts:
         - name: application-layer-web-conf
           mountPath: /opt/ceyoniq/nscale-server/application-layer-web/conf
-      - name: rms
-        image: nscale/rms
-        resources:
-          limits:
-            cpu: "500m"
-            memory: "200Mi"
-          requests:
-            cpu: "50m"
-            memory: "50Mi"
-        volumeMounts:
-        - name: application-layer-web-conf
-          mountPath: /opt/ceyoniq/nscale-server/application-layer-web/conf
-        - name: application-layer-web-rms
-          mountPath: /etc/ceyoniq/nscale-rms/repository      
-        ports:
-        - containerPort: 3120
-          name: rms
       volumes:
-      - name: application-layer-web-rms
-        emptyDir: {}
       - name: application-layer-web-conf
         persistentVolumeClaim:
           claimName: application-layer-web-conf

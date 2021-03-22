@@ -2,7 +2,7 @@
 
 ## Lizenzierung
 
-nscale Console benötigt keine lokale Lizenzdatei.
+Diese Komponente benötigt keine lokale Lizenzdatei.
 
 ## Persistierung
 

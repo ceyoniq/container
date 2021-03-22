@@ -13,18 +13,17 @@ Für mehr Informationen besuchen Sie unsere Website unter <https://www.ceyoniq.c
   - [Informationen zu diesem Dokument](#informationen-zu-diesem-dokument)
   - [Softwarevoraussetzungen](#softwarevoraussetzungen)
   - [Lizenzierung](#lizenzierung)
-  - [nscale Standard Container Produktfamilie](#nscale-standard-container-produktfamilie)
-    - [Images](#images)
-    - [nscale Server Standard Container](#nscale-server-standard-container)
-    - [Produktmerkmale](#produktmerkmale)
-    - [Notwendige Rahmenparameter zum Betrieb der Komponenten](#notwendige-rahmenparameter-zum-betrieb-der-komponenten)
+  - [nscale Server Standard Container](#nscale-server-standard-container)
+  - [Produktmerkmale](#produktmerkmale)
+  - [Betrieb](#betrieb)
   - [Betrieb mit Docker](#betrieb-mit-docker)
   - [Betrieb mit Docker-Compose](#betrieb-mit-docker-compose)
   - [Betrieb mit Kubernetes](#betrieb-mit-kubernetes)
+  - [Externe Quellen](#externe-quellen)
 
 ## Informationen zu diesem Dokument
 
-Bei diesem Dokument handelt es sich um die Dokumentation verschiedener nscaleServerkomponenten und Konnektoren im Container-Betrieb. Dabei richtet sich dieses Dokument ausdrücklich Personen, die sich mit der Administration von nscale beschäftigen.
+Bei diesem Dokument handelt es sich um die Dokumentation verschiedener nscale Serverkomponenten und Konnektoren im Container-Betrieb. Dabei richtet sich dieses Dokument ausdrücklich Personen, die sich mit dem Betrieb von nscale beschäftigen.
 
 > Weiter Informationen zum Betrieb von nscale finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com/>.
 
@@ -54,35 +53,28 @@ Der Betrieb von nscale Standard Container benötigt eine nscale Standard Contain
 Lizenzen können beim Vertrieb der Ceyoniq GmbH erworben werden.  
 Sollten Sie trotz Verwendung einer gültigen Container-Lizenz Probleme haben, wenden Sie sich bitte an den [Ceyoniq Service](docs/de/service-und-support.md).
 
-## nscale Standard Container Produktfamilie
-
-### Images
+## nscale Server Standard Container
 
 Alle nscale Standard Container-Images finden Sie im folgenden Repository: <https://hub.docker.com/u/nscale>  
 
-Folgende Komponenten und Konnektoren nscale stehen als Standard Container zum Download zur Verfügung:
+Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 
-- [nscale Server Application Layer](docs/de/application-layer.md)
-- [nscale Server Storage Layer](docs/de/storage-layer.md)
-- [nscale Server Application Layer Web](docs/de/application-layer-web.md)
-- [nscale Rendition Server](docs/de/rendition-server.md)
-- [nscale Console](docs/de/console.md)
-- [nscale Monitoring Console](docs/de/monitoring-console.md)
-- [nscale Pipeliner](docs/de/pipeliner.md)
-- [nscale CMIS-Connector](docs/de/cmis-connector.md)
-- [nscale WebDAV-Connector](docs/de/webdav-connector.md)
-- [nscale ERP Connector ILM](docs/de/ilm-connector.md)
+- [nscale/application-layer (nscale Server Application Layer)](components/application-layer.md)
+- [nscale/application-laye-web (nscale Server Application Layer Web)](components/application-layer-web.md)
+- [nscale/storage-layer (nscale Server Storage Layer)](components/storage-layer.md)
+- [nscale/rendition-server (nscale Rendition Server)](components/rendition-server.md)
+- [nscale/console (nscale Console)](components/console.md)
+- [nscale/monitoring-console (nscale Monitoring Console)](components/monitoring-console.md)
+- [nscale/pipeliner (nscale Pipeliner)](components/pipeliner.md)
+- [nscale/cmis-connector (nscale CMIS-Connector)](components/cmis-connector.md)
+- [nscale/webdav-connector (nscale WebDAV-Connector)](components/webdav-connector.md)
+- [nscale/ilm-connector (nscale ERP Connector ILM)](components/ilm-connector.md)
 
-### nscale Server Standard Container
+> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern
 
-Der nscale Server Standard Container besteht aus den Komponenten nscale Server Application Layer, nscale Server Storage Layer, nscale Pipeliner und nscale Rendition Server.
+![Komponenten als Container](../images/nscaleStandardContainerOverview.png)
 
-![Komponenten als Container](../images/server-produkt.png)
-
->Hinweis  
-nscale Server Standard Container ist kein Produkt, sondern eine Vertriebsdefinition der Komponenten, die einen nscale Server ausmachen.
-
-### Produktmerkmale
+## Produktmerkmale
 
 | Komponente | Lizenz benötigt | Steuerung über Umgebungsvariablen | Autoscaling* | Loadbalancing** |
 |---|---|---|---|---|
@@ -97,29 +89,12 @@ nscale Server Standard Container ist kein Produkt, sondern eine Vertriebsdefinit
 |nscale WebDAV-Connector|Ja|Ja|Ja|Ja|
 |nscale ERP Connector ILM|Ja|Ja|Ja|Ja|
 
-(*) Die Komponente kann über einen [Horizontal Pod Autoscaler](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/) in Kubernetes skaliert werden.  
+(*) Die Komponente kann über einen [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) in Kubernetes skaliert werden.  
 (**) Die Komponente kann über einen [Service](https://kubernetes.io/docs/concepts/services-networking/service/) in Kubernetes Loadbalancing durchführen.
 
-### Notwendige Rahmenparameter zum Betrieb der Komponenten
+## Betrieb
 
-![Beispiel-Architektur](../images/Bsp.Architektur.png)
-
-In dieser schematischen Darstellung sehen Sie eine Beispielarchitektur für den nscale Server im Containerumfeld.
-Der nscale Server wurde innerhalb eines Namespaces mit dem Namen "nscale Server" installiert und besteht aus nscale Server Application Layer, nscale Server Storage Layer, nscale Pipeliner und nscale Rendition Server.
-Die Server-Komponenten sind dabei jeweils in einzelnen Pods installiert.
-In einem fünften Pod sind nscale Monitoring Console und die nscale Schnittstellen installiert.
-Dieser Pod befindet sich außerhalb des Namespaces.
-
-Um den Betrieb der einzelnen Server-Komponenten zu gewährleisten, müssen jeweils Rahmenparameter eingehalten werden.
-nscale Server Application Layer benötigt eine Verbindung zu einer Datenbank.
-Im Pod von nscale Server Storage Layer müssen Sie ein Persistent Volume definieren.
-Weiter benötigt nscale Server Storage Layer eine Verbindung zu mindestens einem Speichermedium.
-Im Pod von nscale Pipeliner müssen Sie ebenfalls ein Persistent Volume definieren. nscale Pipeliner benötigt außerdem Zugriff auf eine Konfigurationsdatei (Cold.xml) und die Verarbeitungsdateien (VD), die er verarbeiten soll.
-Im Pod von nscale Rendition Server müssen Sie ein ReadWriteMany Persistent Volume definieren.
-
-Informationen dazu, wie Sie Verbindungen zu Datenbanken oder Speichermedien einrichten, finden Sie unter [nscale Server Application Layer](docs/de/application-layer.md)
-und [nscale Server Application Layer Web](docs/de/application-layer-web.md)
-bzw. [nscale Server Storage Layer](docs/de/storage-layer.md).
+![Beispiel-Architektur](../images/exampleKubernetes.png)
 
 ## Betrieb mit Docker
 
@@ -130,26 +105,26 @@ Wir empfehlen allerdings den Einsatz von Docker-Compose oder Kubernetes.
 
 ## Betrieb mit Docker-Compose
 
->Dieses Repository beinhaltet **Beispielkonfigurationen**. Für Produktivsysteme müssen ggf. Anpassungen vornehmen. Unter anderem müssen geeignete Volumes konfiguriert werden damit Ihre Daten persistiert werden.
+>Dieses Repository beinhaltet **Beispielkonfigurationen**. Für Produktivsysteme müssen ggf. Anpassungen vornehmen.
 
 Der Betrieb mit Docker-Compose ist eine Möglichkeit nscale Standard Container zu betreiben.  
-Bei Docker-Compose handelt es sich um ein Tool, mit dem Sie aus mehreren Containern bestehende Docker-Applikationen definieren und betreiben können.
-In der Compose-Umgebung verwenden Sie eine .yml-Datei zur Konfiguration.
-So können Sie auch komplizierte Services mit nur einem Kommando hochfahren.  
+Bei Docker-Compose handelt es sich um ein Tool, mit dem Sie aus mehreren Containern bestehende Applikation definieren und betreiben können.
 
 Weitere Informationen zu Docker-Compose finden Sie  unter <https://docs.docker.com/compose/>.  
 
-In den folgenden Fällen empfehlen wir Ihnen die Verwendung von Docker-Compose für den Betrieb von nscale Standard Container:
+Der Betrieb von nscale Standard Container mit Docker-Compose hat folgende Vorteile:
 
-- im Single-Server-Betrieb
-- für die Entwicklung
-- um eine erste Demo von nscale im Container Betrieb anzusehen
+- sehr einfache Installation im Single-Server-Betrieb
+- für die Entwicklung mit nscale
+- schnelles erzeugen eines Demo- und Test-Systems
 
-Eine genaue Beschreibung der Konfiguration von nscale im Betrieb mit Docker-Compose finden Sie unter [compose](docs/de/compose.md).
+Eine genaue Beschreibung der Konfiguration von nscale im Betrieb mit Docker-Compose finden Sie unter  
+
+[nscale Standard Container in Docker-Compose](compose.md).
 
 ## Betrieb mit Kubernetes
 
->Dieses Repository beinhaltet **Beispielkonfigurationen**. Für Produktivsysteme müssen ggf. Anpassungen vornehmen. Unter anderem müssen geeignete Volumes konfiguriert werden damit Ihre Daten persistiert werden.
+>Dieses Repository beinhaltet **Beispielkonfigurationen**. Für Produktivsysteme müssen ggf. Anpassungen vornehmen.
 
 Bei Kubernetes handelt es sich um eine portable, erweiterbare Open-Source-Plattform zur Verwaltung von containerisierten Arbeitslasten und Services, die sowohl die deklarative Konfiguration als auch die Automatisierung erleichtert.
 Kubernetes zeichnet sich durch ein großes, schnell wachsendes Ökosystem aus.
@@ -162,5 +137,13 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
 - Clusterbildung möglich
 - Fehlertoleranz
 - flexible Skalierbarkeit
+- einfache Installation in Cloud-Umgebungen (z.B in [Microsoft Azure Kubernetes Service - AKS](https://azure.microsoft.com/de-de/services/
 
-Eine genaue Beschreibung der Konfiguration von nscale Standard Container im Betrieb mit Kubernetes finden Sie unter [kustomize](docs/de/kustomize.md).
+Eine genaue Beschreibung der Konfiguration von nscale Standard Container im Betrieb mit Kubernetes finden Sie unter  
+
+[nscale Standard Container mit Kubernetes](kubernetes.md).
+
+## Externe Quellen
+
+- https://github.com/kubernetes/kubernetes/tree/master/logo
+- https://commons.wikimedia.org/wiki/File:Docker_(container_engine)_logo.png

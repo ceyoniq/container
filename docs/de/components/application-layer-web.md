@@ -2,11 +2,11 @@
 
 ## Lizenzierung
 
-nscale Server Application Layer Web benötigt keine lokale Lizenzdatei.
+Diese Komponente benötigt keine lokale Lizenzdatei.
 
 ## Persistierung
 
-nscale Server Application Layer Web benötigt keine Persistierung.
+Diese Komponente benötigt keine Persistierung.
 
 ## Umgebungsvariablen
 

@@ -55,7 +55,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 ## Cluster Konfiguration in Kubernetes
 
 nscale Server Application Layer kann skaliert werden und ein Cluster bilden.
-Bei der Cluster-Bildung greifen mehrere nscale Server Application Layer auf dieselbe Datenbank zu.
+Bei der Cluster-Bildung greifen mehrere nscale Server Application Layer auf die selbe Datenbank zu.
 So wird die Verteilung der Last eines größeren nscale Systems auf mehrere Server bzw. Rechner ermöglicht.
 Dafür ist es notwendig, dass Sie die folgenden Konfigurationen ausführen:
 
@@ -69,15 +69,15 @@ Eine Beispiel-Konfigurationen finden Sie in [application-layer.yaml](../kubernet
 
 Zur Fehleranalyse ist es unter Umständen notwendig, das Log Level des Servers anzupassen.
 Das Log Level des Servers können Sie in der log4j Konfiguration in der Datei `conf/instance1-log.conf` anpassen.
-Kopieren Sie diese Datei zuerst aus dem Container heraus, bearbeiten Sie sie dann offline wie unten beschrieben und transferieren Sie die bearbeitet Datei anschließend wieder zurück in den Container.
+Kopieren Sie diese Datei zuerst aus dem Container heraus, bearbeiten Sie sie dann offline wie unten beschrieben und transferieren Sie die bearbeitete Datei anschließend wieder zurück in den Container.
 Alternativ können Sie auch die Konfigurationsdatei mit dem `vi` im Container bearbeiten.
-Beachten Sie dass Änderungen an Dateien im Container werden nicht persistiert werden.
+Beachten Sie bei diesem Vorgehen, dass Änderungen an Dateien im Container nicht persistiert werden.
 
 Im Cluster muss die Datei in allen Instanzen ausgetauscht werden.
 
 ### Docker-Compose
 
-Wenn Sie nscale Standard Container mit Docker-compose betreiben, verwenden Sie die folgenden Befehle um das Log Level des Servers anzupassen:
+Wenn Sie nscale Standard Container mit Docker-compose betreiben, verwenden Sie die folgenden Befehle um das Log Level des Servers anzupassen.
 
 ```bash
 docker-compose exec application-layer bash

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: console
-        image: nscale/console
+        image: nscale/console:8.0
         env:
         - name: LOG_APPENDER
           value: "Console"
