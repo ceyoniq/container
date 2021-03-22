@@ -1,135 +1,51 @@
 # nscale Standard Container mit Docker-Compose
 
-In dieser Datei finden Sie Informationen dazu, wie Sie nscale im Docker-Container betreiben können. Dabei wird ausschließlich auf den Betrieb über Docker-Compose eingegangen.  
-Informationen zum Betrieb in Kubernetes finden Sie unter [nscale Standard Container in Kubernetes](kubernetes.md).  
+In dieser Dokumentation finden Sie Informationen dazu, wie Sie nscale mit Docker-Compose betreiben können.  
+Weitere Information zu Docker-Compose findet Sieh unter [https://docs.docker.com/compose/](https://docs.docker.com/compose/).
+
+Der Betrieb von nscale Standard Container mit Docker-Compose hat folgende Vorteile:
+
+- sehr einfache Installation im Single-Server-Betrieb
+- für die Entwicklung mit nscale
+- schnelles erzeugen eines Demo- und Test-Systems
+
+> Bitte beachen Sie, dass es sich hierbei um **Beispielkonfigurationen** handelt.  
+> Für Produktivsysteme müssen ggf. Anpassungen vornehmen.
 
 ## Inhalt
 
 - [nscale Standard Container mit Docker-Compose](#nscale-standard-container-mit-docker-compose)
   - [Inhalt](#inhalt)
-  - [Kurz und knapp](#kurz-und-knapp)
-  - [Voraussetzungen](#voraussetzungen)
-  - [Ports](#ports)
-  - [Konfiguration](#konfiguration)
-  - [Herunterladen](#herunterladen)
-  - [Starten](#starten)
-  - [docker-compose Szenarien](#docker-compose-szenarien)
+  - [Quick Start Guide](#quick-start-guide)
+  - [Grundlage](#grundlage)
+  - [docker-compose Beispielszenarien](#docker-compose-beispielszenarien)
   - [Zugriff über nscale Administrator](#zugriff-über-nscale-administrator)
   - [nscale Pipeliner](#nscale-pipeliner)
-  - [Application Cluster](#application-cluster)
-  - [Externe Tools](#externe-tools)
-  - [Log Aggregation](#log-aggregation)
+  - [Log Aggregation mit Loki](#log-aggregation-mit-loki)
     - [Logs exportieren](#logs-exportieren)
   - [Prometheus Anbindung](#prometheus-anbindung)
 
-## Kurz und knapp
+## Quick Start Guide
 
-- Ihre Docker-Installation funktioniert
-- Ihr docker-compose funktioniert
-- Sie haben die Datei "nscale/docker-compose.example.env" nach "nscale/.env" kopiert
+> Dieses Beispiel berücksichtigt den Betrieb mit **Linux**.  
+> Wenn sie mit Windows arbeiten, müssen sie unter umständen die Dateipfade ändern.
+> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern
 
-Führen Sie im Order "nscale" folgende Kommandos aus:
+- Sie haben eine lauffähige Docker-Installation (ab Version 20.10.2)
+- Sie haben eine `docker-compose` (ab Version 1.27.4) installiert
+- Sie besitzen eine gültige **Lizenzdatei**
 
-```bash
-$ cp docker-compose.example.env .env
-$ docker-compose up -d
-$ docker-compose logs -f
-...
-nscale Server Application Layer_1  | Creating default document area scenario...
-nscale Server Application Layer_1  | Done
-```
-
-Fertig! Sie können unter <http://localhost/> auf Ihr nscale zugreifen.
-
-## Voraussetzungen
-
-In der folgenden Anleitung wird davon ausgegangen, dass Ihr System die in [nscale Standard Container](release/README.md) aufgeführten Softwarevoraussetzungen erfüllt.
-
-Außerdem haben Sie eine Lizenzdatei erworben und nach license.xml kopiert.
-
-## Ports
-
-Zur Kommunikation benötigt nscale mehrere Ports.
-Beenden Sie zunächst alle laufenden nscale-Serverprozessse und geben Sie die in der Datei "docker-compose-default-pots.yaml" verwendeten Ports frei.
-Diese sind:
-
-- 5432 (postgres)
-- 3005 (nscale Server Storage Layer)
-- 8080 (nscale Server Application Layer - HTTP)
-- 8443 (nscale Server Application Layer - HTTPS)
-- 8090 (nscale Server Application Layer Web - HTTP)
-- 8091 (nscale Server Application Layer Web - HTTPS)
-- 8086 (nscale Console - HTTP)
-- 8087 (nscale Console - HTTPS)
-- 8387 (nscale Monitoring Console - HTTP)
-- 8388 (nscale Monitoring Console - HTTPS)
-- 8192 (nscale Rendition Server - HTTP)
-- 8193 (nscale Rendition Server - HTTPS)
-- 3120 (RMS)
-- 2200 (RMS mit SSH)
-
->**Hinweis**  
-In produktiven Szenarien können Sie die benötigten Ports durch Konfiguration verringern bzw. verändern.  
-Zum Beispiel können Sie nur den jeweiligen Port für den nscale Server Application Layer Web auf das Host-System routen.
-Zu diesem Zweck können Sie die "docker-compose-default-ports.yml"-Datei bzw. die "docker-compose.yml"-Datei anpassen.
-
-## Konfiguration
-
-In der Datei "docker-compose.example.env" sind diverse Einstellugen hinterlegt.
-Zum Beispiel können Sie hier festlegen, welche Version eines Containers verwendet werden soll.
-Damit Sie nscale starten können, müssen Sie daher eine .env-Datei anlegen. Verwenden Sie dazu einen der folgenden Kommandos:
-
-Linux:  
+Kopieren Sie ihre `license.xml` in den Ordner `compose/nscale`.  
+Im Ordern `compose/nscale` kopieren Sie die Datei `docker-compose.example.env` nach `.env`.
+Führen Sie im Order `compose/nscale` folgende Kommandos aus:
 
 ```bash
-cp docker-compose.example.env .env
+docker-compose up -d
 ```
 
-Windows:  
+Fertig!  
 
-```bash
-copy docker-compose.example.env .env
-```
-
-## Herunterladen
-
-Sie können jetzt die nscale-Container aus der Registry herunterladen. Verwenden Sie dazu das pull-Kommando.  
-
-Nach Abschluss des Downloads sehen Sie die folgenden Meldungen im Ordner "nscale":
-
-```bash
-$ docker-compose pull
-Pulling traefik               ... done
-Pulling application-layer-web ... done
-Pulling monitoring-console    ... done
-Pulling postgresql            ... done
-Pulling console               ... done
-Pulling rendition-server      ... done
-Pulling application-layer     ... done
-Pulling storage-layer         ... done
-Pulling rms                   ... done
-```
-
-## Starten
-
-Mit dem Kommando `docker-compose up` können Sie nun den nscale-Stack hochfahren. Dabei sehen Sie folgende Meldungen:
-
-```bash
-$ docker-compose up
-Creating network "nscale_nscale" with the default driver
-Creating volume "nscale_postgresql_data" with default driver
-Creating volume "nscale_storage-layer_arc" with default driver
-...
-Creating nscale_application-layer_1     ... done
-...
-...
-application-layer-web_1      | INFO: Server startup in 34082 ms
-application-layer_1          | ... - The start of nscale Server Application Layer is completed.
-application-layer_1          | Creating default document area scenario...
-application-layer_1          | Done
-```
-
-Sie können jetzt die URL <http://localhost/> aufrufen um sich mit dem nscale Server Application Layer Web zu verbinden.
+Sie können nun unter <http://localhost/> auf Ihr nscale zugreifen.
 
 Bei der ersten Anmeldung können Sie die Standard-Anmeldedaten verwenden, die beim Start eines neuen nscale Systems automatisch erstellt werden.
 Ändern Sie diese Anmeldedaten für den Produktivbetrieb umgehend.
@@ -140,13 +56,37 @@ User: admin
 Password: admin
 ```
 
-**Herzlichen Glückwunsch! Sie haben ein lauffähiges nscale!**
+## Grundlage
 
-## docker-compose Szenarien
+>Dies ist eine **Beispielkonfigurationen**. Für Produktivsysteme müssen Sie andere angepasste Varianten
+konfigurieren.
+
+Compose ist ein Werkzeug zur Definition und Ausführung von Multi-Container-Docker-Anwendungen. Mit Compose verwenden Sie eine YAML-Datei, um die Dienste Ihrer Anwendung zu konfigurieren. Sie können dann mit einem einzigen Befehl alle Dienste aus Ihrer Konfiguration starten.
+
+Weitere Informationen zu `docker-compose` finden Sie hier:
+<https://docs.docker.com/compose/>
+
+Weitere Information zu den nscale Standard Containern finden Sie hier:
+
+- [nscale/application-layer (nscale Server Application Layer)](components/application-layer.md)
+- [nscale/application-laye-web (nscale Server Application Layer Web)](components/application-layer-web.md)
+- [nscale/storage-layer (nscale Server Storage Layer)](components/storage-layer.md)
+- [nscale/rendition-server (nscale Rendition Server)](components/rendition-server.md)
+- [nscale/console (nscale Console)](components/console.md)
+- [nscale/monitoring-console (nscale Monitoring Console)](components/monitoring-console.md)
+- [nscale/pipeliner (nscale Pipeliner)](components/pipeliner.md)
+- [nscale/cmis-connector (nscale CMIS-Connector)](components/cmis-connector.md)
+- [nscale/webdav-connector (nscale WebDAV-Connector)](components/webdav-connector.md)
+- [nscale/ilm-connector (nscale ERP Connector ILM)](components/ilm-connector.md)
+
+> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern
+> Der Einsatz von loki, grafana, prometheus, etc. dienen nur als Beispielkonfiguration
+
+## docker-compose Beispielszenarien
 
 Im Ordner "nscale" befinden sich die Basis-Docker-Compose-Datei ("docker-compose.yml") und andere ergänzende Compose-Dateien.
 Wenn diese Dateien kombiniert werden, führt der `docker-compose up`-Kommando diese zusammen und führt ein Deployment durch.
-In der Datei "[docker-compose.example.env](./nscale/docker-compose.example.env)" finden Sie verschiedene Möglichkeit nscale zu betreiben.
+In der Datei `docker-compose.example.env` finden Sie verschiedene Möglichkeit nscale zu betreiben.
 
 **docker-compose.proxy.yml**  
 Diese Konfiguration bietet eine Unterstützung von traefik (<https://docs.traefik.io/>) als Reverse Proxy.  
@@ -172,18 +112,13 @@ Außerdem haben Sie die Möglichkeit eigene `.yml`-Dateien zu erstellen und so e
 
 ## Zugriff über nscale Administrator
 
+> Sie benötigen eine nscale Administrator in der Version >= 8.0.500.
+
+Für den Zugriff mit dem nscale Administrator auf Ihre nscale-Installation innerhalb Docker-Compose, steht Ihnen **kein RMS** (nscale Remote Management Service) zur Verfügung. Bitte erzeugen Sie eine neue Komponenten-Gruppe im nscale Administrator, um auf die jeweiligen nscale-Komponenten zugreifen zu können.
+
 Um nscale Server Application Layer zu konfigurieren, Können Sie sich mit nscale Administrator an Ihrem nscale-System anmelden.  
 Wenn Sie die Konfigurationsdatei "docker-compose.proxy.yml" verwenden, ist nscale Server Application Layer auf `localhost` zu erreichen.  
-Wenn Sie die Konfigurationsdatei "docker-compose.default-ports.yml" verwenden, ist nscale Server Application Layer auf `localhost:8080` zu erreichen.  
-
-Bei der ersten Anmeldung können Sie die Standard-Anmeldedaten verwenden, die beim Start eines neuen nscale Systems automatisch erstellt werden.
-Ändern Sie diese Anmeldedaten für den Produktivbetrieb umgehend.
-Die Standard-Anmeldedaten lauten:
-
-```txt
-User: admin
-Password: admin
-```
+Wenn Sie die Konfigurationsdatei "docker-compose.default-ports.yml" verwenden, ist nscale Server Application Layer zusätzlich auf `localhost:8080` zu erreichen.  
 
 ## nscale Pipeliner
 
@@ -193,26 +128,9 @@ Wenn nscale Pipeliner nicht startet, können Sie mit Hilfe von nscale Administra
 Nachdem Sie das Kommando `docker-compose up -d` ausgeführt haben, können Sie mit dem Kommando `docker-compose logs pipeliner` überprüfen, ob nscale Pipeliner erfolgreich gestartet wurde.
 Wenn Sie `docker-compose up -d` ausführen, können Sie nscale Pipeliner nach einer Konfigurationsänderung neu starten.
 
-Das Volume "pipeliner_data" wird auf "/opt/ceyoniq/nscale-pipeliner/workdir/data" gemapped.
-Hier können Sie z.B. den Ordner "import" finden.
+Weitere Informationen zum Pipeliner: <pipeliner.md>
 
-## Application Cluster
-
-Sie können das Standard Application Layer Cluster Setup (UDP multicast) auch in compose verwenden.
-Wählen Sie dazu die proxy Konfiguration und skalieren Sie nscale Server Application Layer über docker-compose.
-Verwenden Sie dazu die folgenden Kommandos:
-
- ```bash
-cat .env
-  COMPOSE_FILE=docker-compose.yml:docker-compose.proxy.yml
-
-# scale up and down with
-docker-compose up -d --scale application-layer=2
- ```
-
-## Externe Tools
-
-## Log Aggregation
+## Log Aggregation mit Loki
 
  Sie können den Loki-Protokollierungstreiber hinzufügen, um Log-Aggregation durch Loki und Grafana verwenden zu können.
  Verwenden Sie dazu die folgenden Kommandos:

@@ -1,3 +1,35 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kubeping-svc-account
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: kubeping-role
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: kubeping-role-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: kubeping-role
+subjects:
+- kind: ServiceAccount
+  name: kubeping-svc-account
+
+--- 
+
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -15,40 +47,43 @@ spec:
     metadata:
       labels:
         app: application-layer
+        ceyoniq.com/application-layer-cluster-name: "cluster1" 
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - application-layer
+            topologyKey: "kubernetes.io/hostname"
+      serviceAccountName: kubeping-svc-account
       initContainers:
       # wait for database to be ready
       - name: check-db-ready
         image: bitnami/postgresql:11.6.0
+        imagePullPolicy: Always
         command: ['sh', '-c',
           'until pg_isready -U postgres -h postgresql -p 5432;
           do echo waiting for database; sleep 2; done;']
       - name: application-layer-conf
-        image: nscale/application-layer
+        image: nscale/application-layer:8.0
+        imagePullPolicy: Always
         command: [ "/bin/sh", "-c" ]
         args:
         - |
           if ! [ "$(ls -A /mnt/conf/)" ]; then
-            cp -r /opt/ceyoniq/nscale-server/application-layer/conf/* /mnt/conf/
+            cp -a /opt/ceyoniq/nscale-server/application-layer/conf/* /mnt/conf/
           fi
-          cp /etc/ceyoniq/nscale-rms/repository/*.properties /mnt/rms/
         volumeMounts:
         - name: application-layer-conf
           mountPath: /mnt/conf      
-        - name: application-layer-rms
-          mountPath: /mnt/rms      
-      - name: rms-conf
-        image: nscale/rms
-        command: [ "/bin/sh", "-c" ]
-        args:
-        - |
-          cp /etc/ceyoniq/nscale-rms/repository/*.properties /mnt/rms/
-        volumeMounts:
-        - name: application-layer-rms
-          mountPath: /mnt/rms      
       containers:
       - name: application-layer
-        image: nscale/application-layer
+        image: nscale/application-layer:8.0
+        imagePullPolicy: Always
         env:
           - name: INSTANCE1_INSTANCE_LOGGER_CONF
             value: "instance1-log-console.conf"
@@ -69,6 +104,20 @@ spec:
             value: "public"
           - name: INITIALIZE_DOCUMENT_AREA
             value: "DA"
+          - name: INSTANCE1_CLUSTER_CORE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: INSTANCE1_CLUSTER_CORE_DESCRIPTION
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace                
+          - name: JAVA_OPTS
+            value: "-XX:MaxRAMPercentage=75.0"            
+          - name: KUBERNETES_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
         livenessProbe:
           tcpSocket:
             port: 20626
@@ -96,29 +145,10 @@ spec:
         - name: license
           subPath: license.xml
           mountPath: /opt/ceyoniq/nscale-server/application-layer/conf/license.xml
-      - name: rms
-        image: nscale/rms
-        resources:
-          limits:
-            cpu: "200m"
-            memory: "200Mi"
-          requests:
-            cpu: "50m"
-            memory: "50Mi"
-        volumeMounts:
-        - name: application-layer-conf
-          mountPath: /opt/ceyoniq/nscale-server/application-layer/conf
-        - name: application-layer-rms
-          mountPath: /etc/ceyoniq/nscale-rms/repository      
-        ports:
-        - containerPort: 3120
-          name: rms
       volumes:
       - name: license
         configMap:
           name: application-layer-license
-      - name: application-layer-rms
-        emptyDir: {}
       - name: application-layer-conf
         emptyDir: {}
       imagePullSecrets:

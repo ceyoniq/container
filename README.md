@@ -13,6 +13,8 @@ nscale Standard Container sind [OCI-kompatible](https://opencontainers.org/) Con
 Häufig wird [Docker](https://www.docker.com/) oder [Kubernetes](https://kubernetes.io/de/) eingesetz, um die Container zu betreiben.  
 Durch die [OCI-Spezifikation](https://github.com/opencontainers/image-spec) sind die Image-Manifest, die Filesystem-Serialisierung und die Image-Konfiguration standardisiert.
 
-Weiter Informationen finden Sie in dieser Dokumentation:
+Weiter Informationen finden Sie in diesen Dokumentationen:
 
-* [Dokumentation (Deutsch)](docs/de/index.md)
+* [Dokumentation](docs/de/index.md)
+* [Quick Start Guide - Kubernetes](docs/de/kubernetes.md#quick-start-guide)
+* [Quick Start Guide - Docker-Compose](docs/de/compose.md#quick-start-guide)

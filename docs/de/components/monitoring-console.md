@@ -7,16 +7,16 @@ Die Datei wird im Container hier erwartet: `/opt/ceyoniq/nscale-monitoring/works
 
 ## Persistierung
 
-Um zu gewährleisten, dass Sie nach dem Herunterfahren des Systems weiterhin Zugriff auf Ihre Daten haben, sorgen Sie für eine Persistierung Sie der Ordner
+Um zu gewährleisten, dass Sie nach dem Herunterfahren des Systems weiterhin Zugriff auf Ihre Daten haben, sorgen Sie für eine Persistierung des Ordners
 `/opt/ceyoniq/nscale-monitoring/workspace`.
 
 ## Konfiguration
 
-nscale Monitoring Console wird über den nscale Administrator konfiguriert in dem neuen Komponenten zur Überwachung eingebunden werden.
+nscale Monitoring Console wird über nscale Administrator konfiguriert in dem neue Komponenten zur Überwachung eingebunden werden.
 Diese Ressourcen müssen in nscale Administrator bereits bekannt sein, um aufgenommen zu werden.
 
 Dabei ist zu beachten, dass nscale Administrator die nscale-Komponenten über das Hostnetzwerk erreicht während nscale Monitoring Console im eigenen Compose Netzwerk bzw. Kubernetes Namespace mit den übrigen nscale Komponenten läuft.
-Dadurch wird es notwendig, dass in der Konfiguration der Komponenten den Hostname aus Sicht von nscale Monitoring Console nachträglich anpassen.
+Dadurch wird es notwendig, dass Sie in der Konfiguration der Komponenten den Hostname aus Sicht von nscale Monitoring Console nachträglich anpassen.
 Diese Änderungen können Sie in nscale Administrator im Knoten *Rechnername*>Monitoring Console>Konfiguration>Ressourcen vornehmen.
 Bearbeiten Sie dazu den Hostname aller Komponenten.
 
@@ -62,4 +62,3 @@ Zur Benutzerverwaltung können Sie folgendes Kommando verwenden:
 ```bash
 java -jar lib/mc-cmdclient.jar PASSWD --user admin --password <phrase> 
 ```
-

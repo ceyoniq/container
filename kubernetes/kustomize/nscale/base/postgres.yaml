@@ -20,18 +20,10 @@ spec:
         app: postgresql
         role: master
     spec:
-      securityContext:
-        runAsUser: 1001
-        fsGroup: 1001
       containers:
       - name: postgresql
         image: bitnami/postgresql:11.6.0
-#        securityContext:
-#          privileged: true
-#          capabilities:
-#            add:
-#            - SYS_ADMIN        
-        #command: [ "/bin/sleep", "infinity" ]
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: "1000m"
@@ -97,6 +89,8 @@ spec:
       - name: postgresql-db
         persistentVolumeClaim:
           claimName: postgresql-db
+      imagePullSecrets:
+        - name: regcred
 ---
 apiVersion: v1
 kind: Service

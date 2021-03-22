@@ -29,7 +29,7 @@ nscale Monitoring Console Ressourcen müssen in nscale Administrator in mehreren
 
 ### Funktionen
 
-Es steht die Funktion "Kennwortänderung zur Verfügung.
-Mit dieser Funktion können Sie das Passwort des angemeldeten Benutzers ändern.
+Es steht die Funktion "Kennwortänderung" zur Verfügung.
+Mit dieser Funktion können Sie das Passwort des angemeldeten Benutzers bzw. der Benutzerin ändern.
 Beachten Sie dabei, dass sich lediglich das Passwort für nscale Console ändert.
 Die anderen Komponenten sind nicht von dieser Kennwortänderung betroffen.
