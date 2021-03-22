@@ -2,14 +2,16 @@
 
 ## Lizenzierung
 
-nscale Server Storage Layer benötigt eine lokale Lizenzdatei. Hinterlegen Sie diese im Ordner "/opt/ceyoniq/nscale-server/storage-layer/etc/license.xml".
+Diese Komponente benötigt eine lokale Lizenzdatei.
+Die Datei wird im Container hier erwartet: `/opt/ceyoniq/nscale-server/storage-layer/etc/license.xml`.
 
 ## Persistierung
 
-Um zu gewährleisten, dass Sie nach dem Herunterfahren des Systems weiterhin Zugriff auf Ihre Daten haben, sorgen Sie für eine Persistierung Sie der Ordner
-"/opt/ceyoniq/nscale-server/storage-layer/arc",
-"/opt/ceyoniq/nscale-server/storage-layer/da" und
-"/opt/ceyoniq/nscale-server/storage-layer/etc".
+Folgende Ordner müssen persistiert werden:
+
+* `/opt/ceyoniq/nscale-server/storage-layer/arc`
+* `/opt/ceyoniq/nscale-server/storage-layer/da`
+* `/opt/ceyoniq/nscale-server/storage-layer/etc`
 
 ## Umgebungsvariablen
 
@@ -22,7 +24,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 
 |Umgebungsvariable | Effekt |
 |---|---|
-|LOG_APPENDER=Console |In dieser Umgebungsvariable können Sie festlegen, wo das Logging des nscale Server Storage Layers stattfindet. |
+|LOG_APPENDER=Console |In dieser Umgebungsvariable können Sie festlegen, wo das Logging des nscale Server Storage Layers stattfindet. Hier erfolgt das Logging statt in Dateien im Container auf der Console. |
 |NSTL_STORAGE-LAYER_LOGLEVEL | In dieser Umgebungsvariable können Sie das Log-Level von nscale Server Storage Layer festlegen. |
 |NSTL_ARCHIVETYPE_900_NAME=NSCALE_DEMO | Mit dieser Umgebungsvariable legen Sie den Namen eines Archivtyps (hier 900) fest. |
 |NSTL_ARCHIVETYPE_900_ID=900 | In dieser Umgebungsvariable können Sie die ID des Archivtyps festlegen. Im Beispiel wird die ID des Archivtyp 900 auf 900 gesetzt. |
@@ -34,3 +36,24 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 |NSTL_HarddiskDevice_0_NAME=HD | Sie können den Namen einer Hard Disk festlegen. |
 |NSTL_HarddiskDevice_0_PATH | In dieser Umgebungsvariable können Sie den Pfad zu einem Harddiskdevice (hier Harddiskdevice 0) angeben. |
 |NSTL_HarddiskDevice_0_PERMANENTMIGRATION=1 | Mit dieser Umgebungsvariable machen Sie die Migration auf ein Harddiskdevice permanent. |
+
+## Ports
+
+* 3005
+
+## Start
+
+```bash
+docker run \
+  -e LOG_APPENDER=Console \
+  -p 3005:3005 \
+  -h democontainer \
+  -v $(pwd)/arc:/opt/ceyoniq/nscale-server/storage-layer/arc \
+  -v $(pwd)/da:/opt/ceyoniq/nscale-server/storage-layer/da \
+  -v $(pwd)/etc:/opt/ceyoniq/nscale-server/storage-layer/etc \
+  -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/storage-layer/etc/license.xml \
+  nscale/storage-layer
+```
+
+
+docker run -h democontainer  -e LOG_APPENDER=Console  -p 3005:3005  -v $(pwd)/demolicense80.xml:/opt/ceyoniq/nscale-server/storage-layer/etc/license.xml  ceyoniq.azurecr.io/nscale/storage-layer:nightly.develop
