@@ -10,16 +10,7 @@ volumes:
   storage-layer_etc: {}
   storage-layer_hd: {}
   rendition-server_share: {}
-  rms_config:
-    driver_opts:
-      type: tmpfs
-      device: tmpfs
-      o: size=1m,uid=1001
-  application-layer_conf: {}
-  application-layer-web_conf: {}
-  console_conf: {}
   monitoring-console_workspace: {}
-  rendition-server_conf: {}
 
 services:
   postgresql:
@@ -42,7 +33,6 @@ services:
     hostname: ${CONTAINER_HOSTNAME}
     stop_signal: SIGTERM
     volumes:
-      - rms_config:/ceyoniq/etc:rw
       - storage-layer_hd:/mnt
       - storage-layer_arc:/opt/ceyoniq/nscale-server/storage-layer/arc
       - storage-layer_da:/opt/ceyoniq/nscale-server/storage-layer/da
@@ -68,8 +58,6 @@ services:
     image: ${APPLICATION_LAYER_IMAGE}
     hostname: ${CONTAINER_HOSTNAME}
     volumes:
-      - rms_config:/ceyoniq/etc:rw
-      - application-layer_conf:/opt/ceyoniq/nscale-server/application-layer/conf:rw
       - ${APPLICATION_LAYER_LICENSE_FILE}:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml:ro
     environment:
       - INSTANCE1_INSTANCE_LOGGER_CONF=instance1-log-console.conf
@@ -80,6 +68,7 @@ services:
       - INSTANCE1_CORE_DB_PASSWORD=password # Do not use this password in production!
       - INSTANCE1_CORE_DB_SCHEMA=public
       - INITIALIZE_DOCUMENT_AREA=DA
+      - JAVA_OPTS=-Xmx2g
     networks:
       - nscale
     depends_on:
@@ -88,24 +77,19 @@ services:
   application-layer-web:
     image: ${APPLICATION_LAYER_WEB_IMAGE}
     hostname: ${CONTAINER_HOSTNAME}
-    volumes:
-      - rms_config:/ceyoniq/etc:rw
-      - application-layer-web_conf:/opt/ceyoniq/nscale-server/application-layer-web/conf:rw
     environment:
       - nscale-host=application-layer
       - nscale-port=8080
       - nscale-instance=nscalealinst1
       - nscale-ssl=false
       - log4jConfigLocation=../conf/nscale_stdout_log_conf.xml
+      - JAVA_OPTS=-Xmx2g 
     networks:
       - nscale
 
   console:
     image: ${CONSOLE_IMAGE}
     hostname: ${CONTAINER_HOSTNAME}
-    volumes:
-      - rms_config:/ceyoniq/etc:rw
-      - console_conf:/opt/ceyoniq/nscale-server/console/conf:rw
     environment:
       - LOG_APPENDER=Console
       - HostName=application-layer
@@ -120,9 +104,12 @@ services:
     hostname: ${CONTAINER_HOSTNAME}
     stop_signal: SIGTERM
     volumes:
-      - rms_config:/ceyoniq/etc:rw
       - monitoring-console_workspace:/opt/ceyoniq/nscale-monitoring/workspace:rw
       - ${MONITORING_CONSOLE_LICENSE_FILE}:/opt/ceyoniq/nscale-monitoring/workspace/license.xml:ro
+    environment:
+      - MC_APPENDER=Console
+      - MC_PASSWORD=admin
+      - JAVA_OPTS=-Xmx1g      
     networks:
       - nscale
 
@@ -130,45 +117,11 @@ services:
     image: ${RENDITION_SERVER_IMAGE}
     hostname: ${CONTAINER_HOSTNAME}
     volumes:
-      - rms_config:/ceyoniq/etc:rw
       - rendition-server_share:/opt/ceyoniq/nscale-rendition-server/share:rw
-      - rendition-server_conf:/opt/ceyoniq/nscale-rendition-server/conf:rw
       - ${RENDITION_SERVER_LICENSE_FILE}:/opt/ceyoniq/nscale-rendition-server/conf/license.xml:ro
     environment:
       - RSX_APPENDER=Console
+      - RSX_PASSWORD=admin
+      - JAVA_OPTS=-Xmx2g
     networks:
       - nscale
-
-  administrator:
-    image: ${ADMINISTRATOR_IMAGE}
-    hostname: ${CONTAINER_HOSTNAME}
-    networks:
-      - nscale      
-
-  rms:
-    image: ${RMS_IMAGE}
-    hostname: ${RMS_HOSTNAME}
-    volumes:
-      - rms_config:/etc/ceyoniq/nscale-rms/repository/
-      - storage-layer_arc:/opt/ceyoniq/nscale-server/storage-layer/arc
-      - storage-layer_da:/opt/ceyoniq/nscale-server/storage-layer/da
-      - storage-layer_etc:/opt/ceyoniq/nscale-server/storage-layer/etc
-      - ${STORAGE_LAYER_LICENSE_FILE}:/opt/ceyoniq/nscale-server/storage-layer/etc/license.xml:ro
-      - application-layer_conf:/opt/ceyoniq/nscale-server/application-layer/conf:rw
-      - ${APPLICATION_LAYER_LICENSE_FILE}:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml:ro
-      - application-layer-web_conf:/opt/ceyoniq/nscale-server/application-layer-web/conf:rw
-      - console_conf:/opt/ceyoniq/nscale-server/console/conf:rw
-      - rendition-server_conf:/opt/ceyoniq/nscale-rendition-server/conf:rw
-      - ${RENDITION_SERVER_LICENSE_FILE}:/opt/ceyoniq/nscale-rendition-server/conf/license.xml:ro
-      - monitoring-console_workspace:/opt/ceyoniq/nscale-monitoring/workspace:rw
-      - ${MONITORING_CONSOLE_LICENSE_FILE}:/opt/ceyoniq/nscale-monitoring/workspace/license.xml:ro
-    networks:
-      - nscale
-    ports:
-      - "${RMS_PORT:-3120}:3120" # Do not use default rms password in production!
-    depends_on:
-      - storage-layer
-      - application-layer
-      - application-layer-web
-      - console
-      - rendition-server

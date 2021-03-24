@@ -16,20 +16,6 @@ spec:
       labels:
         app: application-layer-web
     spec:
-      initContainers:
-      # Copy the configuration from the image into the temporary volume shared by both PODs.
-      - name: application-layer-web-conf
-        image: nscale/application-layer-web:8.0
-        imagePullPolicy: Always
-        command: [ "/bin/sh", "-c" ]
-        args:
-        - |
-          if ! [ "$(ls -A /mnt/conf/)" ]; then
-            cp -a /opt/ceyoniq/nscale-server/application-layer-web/conf/* /mnt/conf/
-          fi
-        volumeMounts:
-        - name: application-layer-web-conf
-          mountPath: /mnt/conf          
       containers:
       - name: application-layer-web
         image: nscale/application-layer-web:8.0
@@ -64,13 +50,6 @@ spec:
           requests:
             cpu: "100m"
             memory: "700Mi"
-        volumeMounts:
-        - name: application-layer-web-conf
-          mountPath: /opt/ceyoniq/nscale-server/application-layer-web/conf
-      volumes:
-      - name: application-layer-web-conf
-        persistentVolumeClaim:
-          claimName: application-layer-web-conf
       imagePullSecrets:
       - name: regcred
 ---

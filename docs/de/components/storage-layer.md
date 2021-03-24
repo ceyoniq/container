@@ -7,11 +7,18 @@ Die Datei wird im Container hier erwartet: `/opt/ceyoniq/nscale-server/storage-l
 
 ## Persistierung
 
+> **Achtung!**
+> Bitte beachten Sie, dass wenn diese Ordner nicht persistiert werden, dass er zum **Datenverlust** kommt!
+
 Folgende Ordner müssen persistiert werden:
 
 * `/opt/ceyoniq/nscale-server/storage-layer/arc`
 * `/opt/ceyoniq/nscale-server/storage-layer/da`
 * `/opt/ceyoniq/nscale-server/storage-layer/etc`
+
+Optional (Retrival Buffer)
+
+* `/opt/ceyoniq/nscale-server/storage-layer/ret`
 
 ## Umgebungsvariablen
 
@@ -47,7 +54,6 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 docker run \
   -e LOG_APPENDER=Console \
   -p 3005:3005 \
-  -h democontainer \
   -v $(pwd)/arc:/opt/ceyoniq/nscale-server/storage-layer/arc \
   -v $(pwd)/da:/opt/ceyoniq/nscale-server/storage-layer/da \
   -v $(pwd)/etc:/opt/ceyoniq/nscale-server/storage-layer/etc \
@@ -55,5 +61,7 @@ docker run \
   nscale/storage-layer
 ```
 
+## Skalierung
 
-docker run -h democontainer  -e LOG_APPENDER=Console  -p 3005:3005  -v $(pwd)/demolicense80.xml:/opt/ceyoniq/nscale-server/storage-layer/etc/license.xml  ceyoniq.azurecr.io/nscale/storage-layer:nightly.develop
+Bitte beachten Sie, dass der nscale Server Storage Layer im Fall von Kubernetes nicht durch ein ReplicaSet skaliert werden kann.  
+Informationen zur Skalierung des nscale Server Storage Layer findet Sie in der nscale Server Storage Layer Dokumentation unter **Distributed Service**.

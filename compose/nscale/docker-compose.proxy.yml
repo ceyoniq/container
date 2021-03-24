@@ -27,13 +27,6 @@ services:
       - "traefik.http.routers.console.entrypoints=web"
       - "traefik.http.services.console.loadbalancer.server.port=8086"
 
-  administrator:
-    labels:
-      - "traefik.enable=true"    
-      - "traefik.http.routers.rap.rule=PathPrefix(`/rapadm`)"
-      - "traefik.http.routers.rap.entrypoints=web"
-      - "traefik.http.services.rap.loadbalancer.server.port=8080"
-
   traefik:
     image: ${TRAEFIK_IMAGE}
     container_name: traefik

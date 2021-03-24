@@ -1,6 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+commonLabels:
+  nscale.ceyoniq.com/version: "8"  
+  app.kubernetes.io/part-of: nscale
+
 generatorOptions:
   annotations:
     nscale.ceyoniq.com: Copyright Ceyoniq GmbH
@@ -29,6 +33,9 @@ configMapGenerator:
 - name: postgresql-init-script
   files: 
   - config/postgresql/0_setup.sh
+- name: pipeliner-config
+  files: 
+  - config/pipeliner/cold.xml
 
 resources:
 - postgres.yaml
@@ -38,3 +45,9 @@ resources:
 - rendition-server.yaml
 - console.yaml
 - storage-layer.yaml
+# Enable pipeliner
+#- pipeliner.yaml
+# Enable nscale connectors if required
+#- cmis-connector.yaml
+#- ilm-connector.yaml
+#- webdav-connector.yaml

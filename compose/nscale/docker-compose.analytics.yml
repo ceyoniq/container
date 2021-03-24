@@ -110,5 +110,3 @@ services:
   rendition-server:
     logging:  *loki-logging
     
-  rms:
-    logging:  *loki-logging

@@ -1,0 +1,50 @@
+version: "3.5"
+
+services:
+  cmis-connector:
+    image: ${CMIS_CONNECTOR}
+    hostname: ${CONTAINER_HOSTNAME}
+    environment:
+      - CMIS_AL_HOST=application-layer
+      - CMIS_AL_PORT=8080
+      - CMIS_AL_SSL=false
+      - CMIS_AL_INSTANCE=nscalealinst1
+    ports:
+      - "8096:8096" # HTTP
+      - "8196:8196" # HTTPS
+    networks:
+      - nscale
+    depends_on:
+      - application-layer
+
+  ilm-connector:
+    image: ${ILM_CONNECTOR}
+    hostname: ${CONTAINER_HOSTNAME}
+    environment:
+      - ILM_AL_HOST=application-layer
+      - ILM_AL_PORT=8080
+      - ILM_AL_SSL=false
+      - ILM_AL_DOMAIN=nscale
+    ports:
+      - "8297:8297" # HTTP
+      - "8397:8397" # HTTPS
+    networks:
+      - nscale
+    depends_on:
+      - application-layer
+
+  webdav-connector:
+    image: ${WEBDAV_CONNECTOR}
+    hostname: ${CONTAINER_HOSTNAME}
+    environment:
+      - WEBDAV_AL_HOST=application-layer
+      - WEBDAV_AL_PORT=8080
+      - WEBDAV_AL_SSL=false
+      - WEBDAV_AL_DOMAIN=nscale      
+    ports:
+      - "8088:8088" # HTTP
+      - "8488:8488" # HTTPS
+    networks:
+      - nscale
+    depends_on:
+      - application-layer

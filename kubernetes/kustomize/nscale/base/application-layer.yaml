@@ -16,7 +16,7 @@ rules:
 
 ---
 
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: kubeping-role-binding
@@ -42,6 +42,8 @@ spec:
     matchLabels:
       app: application-layer
   replicas: 1
+  updateStrategy:
+    type: OnDelete
   volumeClaimTemplates: []
   template:
     metadata:
@@ -68,18 +70,6 @@ spec:
         command: ['sh', '-c',
           'until pg_isready -U postgres -h postgresql -p 5432;
           do echo waiting for database; sleep 2; done;']
-      - name: application-layer-conf
-        image: nscale/application-layer:8.0
-        imagePullPolicy: Always
-        command: [ "/bin/sh", "-c" ]
-        args:
-        - |
-          if ! [ "$(ls -A /mnt/conf/)" ]; then
-            cp -a /opt/ceyoniq/nscale-server/application-layer/conf/* /mnt/conf/
-          fi
-        volumeMounts:
-        - name: application-layer-conf
-          mountPath: /mnt/conf      
       containers:
       - name: application-layer
         image: nscale/application-layer:8.0
@@ -140,8 +130,6 @@ spec:
             cpu: "100m"
             memory: "1000Mi"
         volumeMounts:
-        - name: application-layer-conf
-          mountPath: /opt/ceyoniq/nscale-server/application-layer/conf
         - name: license
           subPath: license.xml
           mountPath: /opt/ceyoniq/nscale-server/application-layer/conf/license.xml
@@ -149,8 +137,6 @@ spec:
       - name: license
         configMap:
           name: application-layer-license
-      - name: application-layer-conf
-        emptyDir: {}
       imagePullSecrets:
         - name: regcred
 ---

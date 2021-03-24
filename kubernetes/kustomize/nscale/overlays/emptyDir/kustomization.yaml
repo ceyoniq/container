@@ -18,12 +18,6 @@ patchesJson6902:
     group: apps
     version: v1
     kind: Deployment
-    name: application-layer-web
-  path: application-layer-web-volumes.yaml
-- target:
-    group: apps
-    version: v1
-    kind: Deployment
     name: rendition-server
   path: rendition-server-volumes.yaml
 - target:
@@ -32,3 +26,9 @@ patchesJson6902:
     kind: StatefulSet
     name: storage-layer
   path: storage-layer-volumes.yaml
+#- target:
+#    group: apps
+#    version: v1
+#    kind: StatefulSet
+#    name: pipeliner
+#  path: pipeliner-volumes.yaml

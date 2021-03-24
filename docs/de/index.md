@@ -13,29 +13,31 @@ Für mehr Informationen besuchen Sie unsere Website unter <https://www.ceyoniq.c
   - [Informationen zu diesem Dokument](#informationen-zu-diesem-dokument)
   - [Softwarevoraussetzungen](#softwarevoraussetzungen)
   - [Lizenzierung](#lizenzierung)
-  - [nscale Server Standard Container](#nscale-server-standard-container)
+  - [nscale Standard Container-Images](#nscale-standard-container-images)
   - [Produktmerkmale](#produktmerkmale)
   - [Betrieb](#betrieb)
   - [Betrieb mit Docker](#betrieb-mit-docker)
   - [Betrieb mit Docker-Compose](#betrieb-mit-docker-compose)
   - [Betrieb mit Kubernetes](#betrieb-mit-kubernetes)
+  - [Limitierungen](#limitierungen)
+  - [FAQ](#faq)
   - [Externe Quellen](#externe-quellen)
 
 ## Informationen zu diesem Dokument
 
-Bei diesem Dokument handelt es sich um die Dokumentation verschiedener nscale Serverkomponenten und Konnektoren im Container-Betrieb. Dabei richtet sich dieses Dokument ausdrücklich Personen, die sich mit dem Betrieb von nscale beschäftigen.
+Bei diesem Dokument handelt es sich um die Dokumentation verschiedener nscale Komponenten im Container-Betrieb. Dabei richtet sich dieses Dokument ausdrücklich an Personen, die sich mit dem Betrieb von nscale beschäftigen.
 
-> Weiter Informationen zum Betrieb von nscale finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com/>.
+> Weitere Informationen zum Betrieb von nscale finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com/>.
 
 ## Softwarevoraussetzungen
 
 Für den Betrieb von nscale Standard Container muss Ihr System die folgenden Mindestvoraussetzung erfüllen:
 
 - min. 4 GB RAM
-- weitere Software bzw. Hardwarevoraussetzungen aus dem Installationshandbuch der jeweiligen Komponente bzw. des Konnektors.
+- weitere Software bzw. Hardwarevoraussetzungen finden Sie im Installationshandbuch der jeweiligen Komponenten.
 Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com/>.
 
-Außerdem müssen Sie ggf. einige Programme von Drittanbietern installiert haben, um nscale Standard Container starten, betreiben und überwachen zu können. Diese sind:
+Außerdem müssen Sie ggf. einige Programme von Drittanbietern installieren, um nscale Standard Container starten, betreiben und überwachen zu können. Diese sind:
 
 - **Docker** ab Version 20.10.2
   - oder eine vergleichbare Container-Laufzeitumgebung für OCI-kompatible Container
@@ -43,9 +45,11 @@ Außerdem müssen Sie ggf. einige Programme von Drittanbietern installiert haben
 - **Kubernetes** ab Version 1.19.3
 
 Alle nscale Standard Container sind **Linux**-Container.  
-Für Test- und Entwicklungssysteme können Sie [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/) verwenden.
 
-Weitere Informationen zu Docker und Kubernetes finden Sie unter <https://www.docker.com/>.
+Für Test- und Entwicklungssysteme können Sie unter anderem [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/) oder [Docker Desktop for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac) verwenden.
+
+Weitere Informationen zu Docker finden Sie unter <https://www.docker.com/>.  
+Weitere Informationen zu Kubernetes finden Sie unter <https://kubernetes.io/>.
 
 ## Lizenzierung
 
@@ -53,7 +57,7 @@ Der Betrieb von nscale Standard Container benötigt eine nscale Standard Contain
 Lizenzen können beim Vertrieb der Ceyoniq GmbH erworben werden.  
 Sollten Sie trotz Verwendung einer gültigen Container-Lizenz Probleme haben, wenden Sie sich bitte an den [Ceyoniq Service](docs/de/service-und-support.md).
 
-## nscale Server Standard Container
+## nscale Standard Container-Images
 
 Alle nscale Standard Container-Images finden Sie im folgenden Repository: <https://hub.docker.com/u/nscale>  
 
@@ -70,7 +74,7 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 - [nscale/webdav-connector (nscale WebDAV-Connector)](components/webdav-connector.md)
 - [nscale/ilm-connector (nscale ERP Connector ILM)](components/ilm-connector.md)
 
-> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern
+> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern die nicht Teil der nscale Standard Container sind.
 
 ![Komponenten als Container](../images/nscaleStandardContainerOverview.png)
 
@@ -99,9 +103,10 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 ## Betrieb mit Docker
 
 Sie können die jeweiligen nscale Standard Container mit Docker, oder einer kompatiblen Laufzeitumgebung für OCI-Container betreiben.
-In der hier vorliegenden Kurzdokumentation und ggf. in der weiterführenden Dokumentation in unserem [Serviceprotal](<https://serviceportal.ceyoniq.com/>) der jeweiligen Komponenten finden sie die notwendigen Informationen zu allen Umgebungsvariablen und den notwendigen Konfigurationen.
+Wir empfehlen den Einsatz von Docker-Compose oder Kubernetes.  
+Weitere Informationen zum Betrieb der nscale Standard Container mit Docker, finden Sie in den jeweiligen Dokumentationen der Komponenten.
 
-Wir empfehlen allerdings den Einsatz von Docker-Compose oder Kubernetes.  
+[Liste aller nscale Server Standard Container](#nscale-standard-container-images)
 
 ## Betrieb mit Docker-Compose
 
@@ -130,20 +135,28 @@ Bei Kubernetes handelt es sich um eine portable, erweiterbare Open-Source-Plattf
 Kubernetes zeichnet sich durch ein großes, schnell wachsendes Ökosystem aus.
 Kubernetes Dienstleistungen, Support und Tools sind weit verbreitet.  
 
-Weitere Informationen zu Kubernetes finden Sie unter <https://kubernetes.io/de/>.
+Weitere Informationen zu Kubernetes finden Sie unter <https://kubernetes.io/>.
 
 Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
 
 - Clusterbildung möglich
 - Fehlertoleranz
 - flexible Skalierbarkeit
-- einfache Installation in Cloud-Umgebungen (z.B in [Microsoft Azure Kubernetes Service - AKS](https://azure.microsoft.com/de-de/services/
+- einfache Installation in Cloud-Umgebungen (z.B in [Microsoft Azure Kubernetes Service - AKS](https://azure.microsoft.com/de-de/services/))
 
 Eine genaue Beschreibung der Konfiguration von nscale Standard Container im Betrieb mit Kubernetes finden Sie unter  
 
 [nscale Standard Container mit Kubernetes](kubernetes.md).
 
+## Limitierungen
+
+Informationen zu Limitierungen finden Sie hier: [limitation.md](limitation.md)
+
+## FAQ
+
+Das FAQ finden Sie hier: [faq.md](faq.md)
+
 ## Externe Quellen
 
-- https://github.com/kubernetes/kubernetes/tree/master/logo
-- https://commons.wikimedia.org/wiki/File:Docker_(container_engine)_logo.png
+- <https://github.com/kubernetes/kubernetes/tree/master/logo>
+- <https://commons.wikimedia.org/wiki/File:Docker_(container_engine)_logo.png>
