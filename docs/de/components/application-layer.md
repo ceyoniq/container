@@ -9,6 +9,9 @@ Die Datei wird im Container hier erwartet: `/opt/ceyoniq/nscale-server/applicati
 
 Diese Komponente benötigt keine Persistierung.
 
+> Sie können weiterhin mit der `/opt/ceyoniq/nscale-server/application-layer/conf/instance1.conf`, oder mit beliebigen anderen Konfigurationsdatei arbeiten.
+> Bitte beachten Sie aber, dass Sie diese Konfigurationsdatei persistieren müssen.
+
 ## Umgebungsvariablen
 
 >Die hier aufgeführte Liste der Umgebungsvariablen ist **nicht vollständig**.
@@ -27,6 +30,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 |INSTANCE1_CORE_DB_USERNAME=nscale | Mit dieser Umgebungsvariable können Sie den Usernamen hinterlegen, mit dem der Application Layer auf die Datenbank zugreift. Hier wurde der Benutzername "nscale" gewählt. |
 |INSTANCE1_CORE_DB_PASSWORD=password | In dieser Umgebungsvariable können Sie das Passwort hinterlegen, mit dem der Application Layer auf die Datenbank zugreift. Ändern Sie das in diesem Beispiel verwendete Passwort unbedingt. |
 |INSTANCE1_CORE_DB_SCHEMA=public | In dieser Umgebungsvariable können Sie das Datenbankschema hinterlegen. Hier wurde das Schema public gewählt. |
+|INSTANCE1_CORE_WORK_DIRECTORY=/mnt/fulltextcache | In dieser Umgebungsvariable können Sie den Ordern für den lokalen Volltext-cache definieren.|
 |INITIALIZE_DOCUMENT_AREA=DA | Mit dieser Umgebungsvariable können Sie einen Dokumentenbereich mit dem Namen "DA" erstellen. |
 |KUBERNETES_NAMESPACE | Diese Umgebungsvariable ist für die Konfiguration des Clusters in Kubernetes notwendig und hat eine spezielle Konfiguration. Lesen Sie bitte die [Cluster Konfiguration in Kubernetes](#cluster-konfiguration-in-kubernetes) für weitere Details |
 

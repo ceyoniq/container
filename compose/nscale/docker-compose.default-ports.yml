@@ -33,8 +33,3 @@ services:
     ports:
       - "8192:8192" # HTTP
       - "8193:8193" # HTTPS
-
-  administrator:
-    ports:
-      - "8888:8080" # HTTP
-  

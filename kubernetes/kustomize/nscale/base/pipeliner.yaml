@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pipeliner
+  labels:
+    app: pipeliner
+spec:
+  serviceName: pipeliner
+  selector:
+    matchLabels:
+      app: pipeliner
+  replicas: 1
+  updateStrategy:
+    type: OnDelete
+  volumeClaimTemplates: []
+  template:
+    metadata:
+      labels:
+        app: pipeliner
+    spec:
+      containers:
+      - name: pipeliner    
+        image: nscale/pipeliner:8.0
+        imagePullPolicy: Always
+        resources:
+          limits:
+            cpu: "1000m"
+            memory: "2000Mi"
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+        volumeMounts:
+        - name: license
+          subPath: license.xml
+          mountPath: /opt/ceyoniq/nscale-pipeliner/workdir/license.xml
+        - name: config
+          subPath: cold.xml
+          mountPath: /opt/ceyoniq/nscale-pipeliner/workdir/config/runtime/cold.xml
+        - name: pipeliner-data
+          mountPath: /opt/ceyoniq/nscale-pipeliner/workdir/data
+      volumes:
+      - name: license
+        configMap:
+          name: pipeliner-license
+      - name: pipeliner-data
+        persistentVolumeClaim:
+          claimName: pipeliner-data
+      - name: config
+        configMap:
+          name: pipeliner-config
+      imagePullSecrets:
+        - name: regcred

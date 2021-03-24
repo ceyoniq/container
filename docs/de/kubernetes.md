@@ -26,13 +26,14 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
     - [Azure](#azure)
   - [Konfiguration mit dem nscale Administrator](#konfiguration-mit-dem-nscale-administrator)
   - [Logging](#logging)
+  - [Zeitzone](#zeitzone)
   - [Metriken](#metriken)
 
 ## Quick Start Guide
 
 > Dieses Beispiel berücksichtigt den Betrieb mit **Linux**.  
-> Wenn sie mit Windows arbeiten, müssen sie unter umständen die Dateipfade ändern.
-> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern
+> Wenn sie mit Windows arbeiten, müssen sie unter umständen die Dateipfade ändern.  
+> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern die nicht Teil der nscale Standard Container sind.
 
 - Sie haben einen Kubernetes-Cluster (ab Version 1.19.3) den Sie mit `kubectl` erreichen können
 - Sie haben einen [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/) eingerichtet
@@ -73,7 +74,7 @@ Password: admin
 ```
 
 > Für den Produktiveinsatz wird ein Ingress-Controller empfohlen.
-> Weiter Informationen dazu befinden sich in diesem Dokument
+> Weitere Informationen dazu befinden sich in diesem Dokument
 
 ## Grundlage
 
@@ -82,7 +83,7 @@ konfigurieren.
 
 In diesem Beispiel wird `kustomize` verwendet. Durch `kustomize` können Sie leicht Anpassung von Kubernetes-Deployments zur Erzeugung mehrerer Varianten (z. B. für unterschiedliche Umgebungen) vornehmen. Dabei werden die originalen YAML-Dateien nicht modifiziert, sondern mit Overlays überlagert. Im Gegensatz zu Helm kommt kustomize also ganz ohne Templates aus, was die Verwendung besonders einfach macht.
 
-Weiter Informationen zu kustomize finden Sie hier:  
+Weitere Informationen zu kustomize finden Sie hier:  
 <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/>
 
 Die nscale Basiskonfiguration ist im Verzeichnis `base` abgelegt.
@@ -106,7 +107,7 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 - [nscale/webdav-connector (nscale WebDAV-Connector)](components/webdav-connector.md)
 - [nscale/ilm-connector (nscale ERP Connector ILM)](components/ilm-connector.md)
 
-> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern
+> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern die nicht Teil der nscale Standard Container sind.
 
 ## Ingress
 
@@ -119,7 +120,7 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 kubectl apply -f ingress.yaml -n nscale
 ```
 
-Weitere Informationen zur Ingress Konfiguration finden Sie in der Dokumentation Ihres Cloud Betreibers.
+Weitere Informationen zur Ingress Konfiguration finden Sie in der Dokumentation Ihres Cloud-Betreibers.
 
 Um auf die jeweiligen nscale-Komponenten zugreifen zu können, benötigen Sie einen [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/).
 In diesem Beispiel wird ein [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/) erwartet.
@@ -144,8 +145,12 @@ kubectl describe ingress ingress-nscale -n nscale
 
 ### emptyDir
 
-Alle Dateien werden gelöscht, nachdem die nscale-Services wieder herunter gefahren werden.  
-Weiter Informationen: <https://kubernetes.io/docs/concepts/storage/volumes/#emptydir>
+Alle Dokumente und Datenbankeinträge werden **gelöscht**, nachdem die nscale-Services wieder heruntergefahren wurden.
+
+> Diese Einstellungen sind nur für den Test- und Demobetrieb geeignet.  
+> **Achtung Datenverlust!**
+
+Weitere Informationen: <https://kubernetes.io/docs/concepts/storage/volumes/#emptydir>
 
 ```bash
 # deployment
@@ -157,8 +162,9 @@ kubectl delete -k overlays/emptydir/ -n nscale
 
 ### HostPath
 
-Alle Dateien werden auf der lokalen Festplatte gespeichert.  
-Weiter Informationen: <https://kubernetes.io/docs/concepts/storage/volumes/#hostpath>
+Alle Dateien werden auf der lokalen Festplatte eines `Nodes` gespeichert.  
+
+Weitere Informationen: <https://kubernetes.io/docs/concepts/storage/volumes/#hostpath>
 
 ```bash
 # deployment
@@ -172,7 +178,7 @@ kubectl delete -k overlays/hostPath/ -n nscale
 
 Alle Dateien werden auf AzureDisk oder AzureFiles gespeichert.
 
-Weiter Informationen:  
+Weitere Informationen:  
 
 - <https://kubernetes.io/docs/concepts/storage/volumes/#azurefile>
 - <https://kubernetes.io/docs/concepts/storage/volumes/#azuredisk>
@@ -190,6 +196,8 @@ kubectl delete -k overlays/azure/ -n nscale
 > Sie benötigen eine nscale Administrator in der Version >= 8.0.500.
 
 Für den Zugriff mit dem nscale Administrator auf Ihre nscale-Installation innerhalb Kubernetes, steht Ihnen **kein RMS** (nscale Remote Management Service) zur Verfügung. Bitte erzeugen Sie eine neue Komponenten-Gruppe im nscale Administrator, um auf die jeweiligen nscale-Komponenten zugreifen zu können.
+
+Weiter Informationen finden Sie hier: [limitation.md](limitation.md)
 
 Damit Sie von außerhalb Ihres Kubernetes-Cluster auf die jeweiligen nscale-Komponenten zugreifen können, müssen die Ports der nscale-Komponenten durch ein `kubectl port-forward` auf Ihr lokal System weiterleitet werden.
 
@@ -217,8 +225,19 @@ Sie können die jeweiligen Logging-Ausgaben wie folgt abrufen:
 kubectl logs application-layer-0 -n nscale
 ```
 
-Weiter Informationen zum Thema Logging in Kubernetes finden Sie hier:  
-https://kubernetes.io/docs/concepts/cluster-administration/logging/
+Weitere Informationen zum Thema Logging in Kubernetes finden Sie hier:  
+<https://kubernetes.io/docs/concepts/cluster-administration/logging/>
+
+## Zeitzone
+
+Die nscale Standard Container verwenden UTC als Zeitzone.  
+Sie können die Zeitzone für den jeweiligen Container mit folgender Umgebungsvariable setzen:  
+
+```yaml
+env:
+   - name: TZ
+     value: Europe/Berlin
+```
 
 ## Metriken
 

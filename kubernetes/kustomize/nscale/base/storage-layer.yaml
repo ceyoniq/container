@@ -10,26 +10,32 @@ spec:
     matchLabels:
       app: storage-layer
   replicas: 1
+  updateStrategy:
+    type: OnDelete
   volumeClaimTemplates: []
   template:
     metadata:
       labels:
         app: storage-layer
     spec:
+      securityContext:
+        fsGroup: 0
       initContainers:
-      # Copy the configuration from the image into the temporary volume shared by both PODs.
+      # The license file mount inside the conf volume prevents the volume to get initialized with the image data.
+      # Therefore we need to copy the data from the image to the volume manually before startup.
       - name: storage-layer-conf
         image: nscale/storage-layer:8.0
         imagePullPolicy: Always
         command: [ "/bin/sh", "-c" ]
         args:
         - |
-          if ! [ "$(ls -A /mnt/etc/)" ]; then
-            cp -a /opt/ceyoniq/nscale-server/storage-layer/etc/* /mnt/etc/
-          fi
+          # Copy the configuration from the image into the volume on first startup.
+          test -f /mnt/DA_HID.DAT ||
+            cp -a /opt/ceyoniq/nscale-server/storage-layer/etc/* /mnt
         volumeMounts:
-        - name: storage-layer-etc
-          mountPath: /mnt/etc
+        - name: storage-layer
+          subPath: etc
+          mountPath: /mnt
       containers:
       - name: storage-layer    
         image: nscale/storage-layer:8.0
@@ -57,7 +63,8 @@ spec:
         - name: license
           subPath: license.xml
           mountPath: /opt/ceyoniq/nscale-server/storage-layer/etc/license.xml
-        - name: storage-layer-etc
+        - name: storage-layer
+          subPath: etc
           mountPath: /opt/ceyoniq/nscale-server/storage-layer/etc
         - name: storage-layer
           subPath: da
@@ -71,8 +78,6 @@ spec:
       - name: license
         configMap:
           name: storage-layer-license
-      - name: storage-layer-etc
-        emptyDir: {}
       - name: storage-layer
         persistentVolumeClaim:
           claimName: storage-layer

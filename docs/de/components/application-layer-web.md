@@ -103,7 +103,7 @@ Zusätzlich wurde das Kontextmenü geändert.
 ```
 
 Erstellen Sie die Datei `menuconfig.xml` und ergänzen Sie Ihre Kontextmenüeinträge.  
-> Weitere Informationen finden Sie im Administrationshandbuch von des nscale Server Application Layer Web.
+> Weitere Informationen finden Sie im Administrationshandbuch vom nscale Server Application Layer Web.
 
 ### Anpassung an der `nscale_web.xml`
 

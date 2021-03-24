@@ -11,13 +11,9 @@ services:
     networks:
       - nscale
     volumes:
-      - rms_config:/ceyoniq/etc:rw
-      - pipeliner_data:/opt/ceyoniq/nscale-pipeliner/workdir/data:rw
-      - pipeliner_config:/opt/ceyoniq/nscale-pipeliner/workdir/config:rw
+      - ./workdir/data:/opt/ceyoniq/nscale-pipeliner/workdir/data:rw
+      #- ./workdir/config/cold.xml:/opt/ceyoniq/nscale-pipeliner/workdir/config/runtime/cold.xml:ro
       - ${PIPELINER_LICENSE_FILE}:/opt/ceyoniq/nscale-pipeliner/workdir/license.xml:ro
     depends_on:
       - application-layer
-
-  rms:
-    volumes:
-      - pipeliner_config:/opt/ceyoniq/nscale-pipeliner/workdir/config:rw
+      - storage-layer

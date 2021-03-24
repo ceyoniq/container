@@ -1,3 +1,5 @@
+# see https://docs.microsoft.com/en-us/azure/aks/azure-disks-dynamic-pv
+#---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:

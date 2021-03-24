@@ -1,35 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: console
+  name: webdav-connector
   labels:
-    app: console
+    app: webdav-connector
 spec:
   selector:
     matchLabels:
-      app: console
+      app: webdav-connector
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: console
+        app: webdav-connector
     spec:
       containers:
-      - name: console
-        image: nscale/console:8.0
+      - name: webdav-connector
+        image: nscale/webdav-connector:8.0
         imagePullPolicy: Always
         env:
-        - name: LOG_APPENDER
-          value: "Console"
-        - name: HostName
+        - name: WEBDAV_AL_HOST
           value: "application-layer"
-        - name: Port
+        - name: WEBDAV_AL_PORT
           value: "8080"
-        - name: NAPPL_SSL
+        - name: WEBDAV_AL_SSL
           value: "0"
-        - name: ALInstance
+        - name: WEBDAV_AL_INSTANCE
           value: "nscalealinst1"
         - name: JAVA_OPTS
           value: "-XX:MaxRAMPercentage=75.0"           
@@ -37,32 +35,32 @@ spec:
           exec:
             command:
             - /bin/sh
-            - /opt/ceyoniq/nscale-server/console/bin/readiness-probe.sh
+            - /opt/ceyoniq/nscale-webdav/bin/readiness-probe.sh
           periodSeconds: 10
           initialDelaySeconds: 10
         ports:
-        - containerPort: 8086
-          name: console
+        - containerPort: 8088
+          name: webdav
         resources:
           limits:
-            cpu: "2000m"
-            memory: "1300Mi"
+            cpu: "1000m"
+            memory: "1000Mi"
           requests:
             cpu: "100m"
-            memory: "700Mi"
+            memory: "500Mi"
       imagePullSecrets:
         - name: regcred
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: console
+  name: webdav-connector
   labels:
-    service: console
+    service: webdav-connector
 spec:
   ports:
-  - port: 8086
-    targetPort: 8086
-    name: console
+  - port: 8088
+    targetPort: 8088
+    name: webdav
   selector:
-    app: console
+    app: webdav-connector

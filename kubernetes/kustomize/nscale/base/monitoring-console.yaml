@@ -10,13 +10,31 @@ spec:
       app: monitoring-console
   replicas: 1
   strategy:
+    type: RollingUpdate
+  strategy:
     type: Recreate  
   template:
     metadata:
       labels:
         app: monitoring-console
     spec:
-      hostname: monitoring-console 
+      securityContext:
+        fsGroup: 0
+      initContainers:
+      # The license file mount inside the workspace volume prevents the volume to get initialized with the image data.
+      # Therefore we need to copy the data from the image to the volume manually before startup.
+      - name: monitoring-console-conf
+        image:  nscale/monitoring-console:8.0
+        imagePullPolicy: Always
+        command: [ "/bin/sh", "-c" ]
+        args:
+        - |
+          # Copy the configuration from the image into the volume on first startup.
+          test -f /mnt/monitoring-config.properties ||
+            cp -a /opt/ceyoniq/nscale-monitoring/workspace/* /mnt
+        volumeMounts:
+        - name: monitoring-console-workspace
+          mountPath: /mnt
       containers:
       - name: monitoring-console
         image: nscale/monitoring-console:8.0
@@ -48,13 +66,15 @@ spec:
             cpu: "100m"
             memory: "1000Mi"
         volumeMounts:
+        - name: monitoring-console-workspace
+          mountPath: /opt/ceyoniq/nscale-monitoring/workspace
         - name: license
           mountPath: /opt/ceyoniq/nscale-monitoring/workspace/license.xml
           subPath: license.xml
       volumes:
       - name: license
         configMap:
-          name: monitoring-console-license
+          name: monitoring-console-license          
       - name: monitoring-console-workspace
         persistentVolumeClaim:
           claimName: monitoring-console-workspace

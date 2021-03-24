@@ -6,6 +6,8 @@ metadata:
     app: rendition-server
 spec:
   replicas: 1
+  strategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app: rendition-server
@@ -14,21 +16,6 @@ spec:
       labels:
         app: rendition-server
     spec:
-      hostname: rendition-server
-      initContainers:
-      # Copy the configuration from the image into the temporary volume shared by both PODs.
-      - name: rendition-server-conf
-        image: nscale/rendition-server:8.0
-        imagePullPolicy: Always
-        command: [ "/bin/sh", "-c" ]
-        args:
-        - |
-          if ! [ "$(ls -A /mnt/conf/)" ]; then
-            cp -a /opt/ceyoniq/nscale-rendition-server/conf/* /mnt/conf/
-          fi
-        volumeMounts:
-        - name: rendition-server-conf
-          mountPath: /mnt/conf  
       containers:
       - name: rendition-server
         image: nscale/rendition-server:8.0
@@ -55,8 +42,6 @@ spec:
             cpu: "100m"
             memory: "100Mi"
         volumeMounts:
-        - name: rendition-server-conf
-          mountPath: /opt/ceyoniq/nscale-rendition-server/conf
         - name: license
           mountPath: /opt/ceyoniq/nscale-rendition-server/conf/license.xml
           subPath: license.xml
@@ -69,8 +54,6 @@ spec:
       - name: license
         configMap:
           name: rendition-server-license
-      - name: rendition-server-conf
-        emptyDir: {}
       - name: rendition-server-share
         persistentVolumeClaim:
           claimName: rendition-server-share

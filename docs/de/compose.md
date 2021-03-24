@@ -23,13 +23,14 @@ Der Betrieb von nscale Standard Container mit Docker-Compose hat folgende Vortei
   - [nscale Pipeliner](#nscale-pipeliner)
   - [Log Aggregation mit Loki](#log-aggregation-mit-loki)
     - [Logs exportieren](#logs-exportieren)
+  - [Zeitzone](#zeitzone)
   - [Prometheus Anbindung](#prometheus-anbindung)
 
 ## Quick Start Guide
 
 > Dieses Beispiel berücksichtigt den Betrieb mit **Linux**.  
-> Wenn sie mit Windows arbeiten, müssen sie unter umständen die Dateipfade ändern.
-> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern
+> Wenn sie mit Windows arbeiten, müssen sie unter umständen die Dateipfade ändern.  
+> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern die nicht Teil der nscale Standard Container sind.
 
 - Sie haben eine lauffähige Docker-Installation (ab Version 20.10.2)
 - Sie haben eine `docker-compose` (ab Version 1.27.4) installiert
@@ -58,8 +59,7 @@ Password: admin
 
 ## Grundlage
 
->Dies ist eine **Beispielkonfigurationen**. Für Produktivsysteme müssen Sie andere angepasste Varianten
-konfigurieren.
+>Dies ist eine **Beispielkonfigurationen**. Für Produktivsysteme müssen Sie andere angepasste Varianten konfigurieren.
 
 Compose ist ein Werkzeug zur Definition und Ausführung von Multi-Container-Docker-Anwendungen. Mit Compose verwenden Sie eine YAML-Datei, um die Dienste Ihrer Anwendung zu konfigurieren. Sie können dann mit einem einzigen Befehl alle Dienste aus Ihrer Konfiguration starten.
 
@@ -79,8 +79,8 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 - [nscale/webdav-connector (nscale WebDAV-Connector)](components/webdav-connector.md)
 - [nscale/ilm-connector (nscale ERP Connector ILM)](components/ilm-connector.md)
 
-> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern
-> Der Einsatz von loki, grafana, prometheus, etc. dienen nur als Beispielkonfiguration
+> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern die nicht Teil der nscale Standard Container sind.
+> Der Einsatz von loki, grafana, prometheus, etc. dient nur als Beispielkonfiguration
 
 ## docker-compose Beispielszenarien
 
@@ -184,6 +184,17 @@ docker run --rm -it \
 --env LOKI_ADDR=http://loki:3100 \
 grafana/logcli:master-72b4c01-amd64 \
 labels
+```
+
+## Zeitzone
+
+Die nscale Standard Container verwenden UTC als Zeitzone.  
+Sie können die Zeitzone mit folgender Umgebungsvariable setzen:  
+
+```yaml
+env:
+   - name: TZ
+     value: Europe/Berlin
 ```
 
 ## Prometheus Anbindung
