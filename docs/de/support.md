@@ -1,12 +1,12 @@
 # Ceyoniq Service & Support
 
-Der Anspruch ist nicht nur an unsere Produkte und Lösungen hoch. Gerade im IT-Bereich spieltauch die Qualität des gebotenen Services eine entscheidende Rolle.
-Um Ihnen bestmöglicheund punktgenaue Unterstützung bieten zu können, ist unser Service & Support in zwei Kategorien geteilt, den Ceyoniq Service und den Ceyoniq Support.  
+Der Anspruch ist nicht nur an unsere Produkte und Lösungen hoch. Gerade im IT-Bereich spielt auch die Qualität des gebotenen Services eine entscheidende Rolle.
+Um Ihnen bestmögliche und punktgenaue Unterstützung bieten zu können, ist unser Service & Support in zwei Kategorien geteilt, den Ceyoniq Service und den Ceyoniq Support.  
 
 In bundeseinheitlichen Feiertagen erfolgt weder eine Störungsannahme noch eine Bearbeitungvon Service- und Supportanfragen.
 
 Die Ceyoniq Technology GmbH behält sich das Recht vor, die im Folgenden genannten Zeiten sowohlfür den Ceyoniq Service als auch den Ceyoniq Support jederzeit zu ändern.
-Unsere aktuellen Servicezeiten können Sie auch auf unserer Homepage unter <https://www.ceyoniq.com/> einsehen.
+Unsere aktuellen Servicezeiten können Sie auch auf unserer Homepage unter <https://www.ceyoniq.com> einsehen.
 Bei individuell vereinbarten Wartungsverträgen können die Service- und Supportzeiten von den oben genannten Zeiten abweichen.
 
 ## Ceyoniq Service
@@ -19,7 +19,7 @@ Annahme und Rückfragen zu:
 - Beratungen
 
 **Verfügbarkeit**  
-montags bis freitags: 9-17 Uhr  
+Mo - Fr: 9-17 Uhr  
 Heiligabend und Silvester: 9-12 Uhr
 
 **Kontakt**  
@@ -38,7 +38,7 @@ Annahme und Rückfragen zu:
 (Produkte und Lösungen)
 
 **Verfügbarkeit**  
-montags bis freitags: 8-17 Uhr  
+Mo - Fr: 8-17 Uhr  
 Heiligabend und Silvester: 8-12 Uhr
 
 **Kontakt**  

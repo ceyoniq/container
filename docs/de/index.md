@@ -64,7 +64,7 @@ Alle nscale Standard Container-Images finden Sie im folgenden Repository: <https
 Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 
 - [nscale/application-layer (nscale Server Application Layer)](components/application-layer.md)
-- [nscale/application-laye-web (nscale Server Application Layer Web)](components/application-layer-web.md)
+- [nscale/application-layer-web (nscale Server Application Layer Web)](components/application-layer-web.md)
 - [nscale/storage-layer (nscale Server Storage Layer)](components/storage-layer.md)
 - [nscale/rendition-server (nscale Rendition Server)](components/rendition-server.md)
 - [nscale/console (nscale Console)](components/console.md)
@@ -74,7 +74,7 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 - [nscale/webdav-connector (nscale WebDAV-Connector)](components/webdav-connector.md)
 - [nscale/ilm-connector (nscale ERP Connector ILM)](components/ilm-connector.md)
 
-> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern die nicht Teil der nscale Standard Container sind.
+> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern die nicht Teil der oben aufgelisteten nscale Standard Container sind.
 
 ![Komponenten als Container](../images/nscaleStandardContainerOverview.png)
 
@@ -104,23 +104,21 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 
 Sie können die jeweiligen nscale Standard Container mit Docker, oder einer kompatiblen Laufzeitumgebung für OCI-Container betreiben.
 Wir empfehlen den Einsatz von Docker-Compose oder Kubernetes.  
-Weitere Informationen zum Betrieb der nscale Standard Container mit Docker, finden Sie in den jeweiligen Dokumentationen der Komponenten.
+Weitere Informationen zum Betrieb der nscale Standard Container mit Docker, finden Sie in den jeweiligen Dokumentationen der Komponenten in diesem Repository.
 
 [Liste aller nscale Server Standard Container](#nscale-standard-container-images)
 
 ## Betrieb mit Docker-Compose
 
->Dieses Repository beinhaltet **Beispielkonfigurationen**. Für Produktivsysteme müssen ggf. Anpassungen vornehmen.
-
 Der Betrieb mit Docker-Compose ist eine Möglichkeit nscale Standard Container zu betreiben.  
 Bei Docker-Compose handelt es sich um ein Tool, mit dem Sie aus mehreren Containern bestehende Applikation definieren und betreiben können.
 
-Weitere Informationen zu Docker-Compose finden Sie  unter <https://docs.docker.com/compose/>.  
+Weitere Informationen zu Docker-Compose finden Sie  unter <https://docs.docker.com/compose>.  
 
 Der Betrieb von nscale Standard Container mit Docker-Compose hat folgende Vorteile:
 
 - sehr einfache Installation im Single-Server-Betrieb
-- für die Entwicklung mit nscale
+- ideal für die Entwicklung mit nscale
 - schnelles erzeugen eines Demo- und Test-Systems
 
 Eine genaue Beschreibung der Konfiguration von nscale im Betrieb mit Docker-Compose finden Sie unter  
@@ -129,32 +127,30 @@ Eine genaue Beschreibung der Konfiguration von nscale im Betrieb mit Docker-Comp
 
 ## Betrieb mit Kubernetes
 
->Dieses Repository beinhaltet **Beispielkonfigurationen**. Für Produktivsysteme müssen ggf. Anpassungen vornehmen.
-
 Bei Kubernetes handelt es sich um eine portable, erweiterbare Open-Source-Plattform zur Verwaltung von containerisierten Arbeitslasten und Services, die sowohl die deklarative Konfiguration als auch die Automatisierung erleichtert.
 Kubernetes zeichnet sich durch ein großes, schnell wachsendes Ökosystem aus.
 Kubernetes Dienstleistungen, Support und Tools sind weit verbreitet.  
 
-Weitere Informationen zu Kubernetes finden Sie unter <https://kubernetes.io/>.
+Weitere Informationen zu Kubernetes finden Sie unter <https://kubernetes.io>.
 
 Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
 
 - Clusterbildung möglich
 - Fehlertoleranz
 - flexible Skalierbarkeit
-- einfache Installation in Cloud-Umgebungen (z.B in [Microsoft Azure Kubernetes Service - AKS](https://azure.microsoft.com/de-de/services/))
+- einfache Installation in Cloud-Umgebungen (z.B. in [Microsoft Azure Kubernetes Service - AKS](https://azure.microsoft.com/de-de/services/))
 
-Eine genaue Beschreibung der Konfiguration von nscale Standard Container im Betrieb mit Kubernetes finden Sie unter  
-
-[nscale Standard Container mit Kubernetes](kubernetes.md).
+Eine genaue Beschreibung der Konfiguration von nscale Standard Container im Betrieb mit Kubernetes finden Sie unter [nscale Standard Container mit Kubernetes](kubernetes.md).
 
 ## Limitierungen
 
-Informationen zu Limitierungen finden Sie hier: [limitation.md](limitation.md)
+Informationen zu Limitierungen finden Sie hier:  
+[limitation.md](limitation.md)
 
 ## FAQ
 
-Das FAQ finden Sie hier: [faq.md](faq.md)
+Das FAQ finden Sie hier:  
+[faq.md](faq.md)
 
 ## Externe Quellen
 

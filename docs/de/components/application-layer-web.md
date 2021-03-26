@@ -15,7 +15,7 @@ Sie bildet lediglich die in unseren Beispielkonfigurationen verwendeten Umgebung
 
 Die Bennennung der Umgebungsvariablen von nscale Server Application Layer Web folgt einem Schema, das wir für Sie im nscale Server Application Layer Administrationshandbuch zusammengefasst haben.
 So können Sie auch alle anderen in der Dokumentation beschriebenen Einstellungen vornehmen.
-Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com/>.
+Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com>.
 
 |Umgebungsvariable | Effekt |
 |---|---|
@@ -107,7 +107,7 @@ Erstellen Sie die Datei `menuconfig.xml` und ergänzen Sie Ihre Kontextmenüeint
 
 ### Anpassung an der `nscale_web.xml`
 
-Damit die zuvor erstellte Datei  `nscale_web_plugins.xml` verwendet werdet kann, müssen Sie die Datei `nscale_web.xml` ändern.  
+Damit die zuvor erstellte Datei  `nscale_web_plugins.xml` verwendet werden kann, müssen Sie die Datei `nscale_web.xml` ändern.  
 
 Führen Sie die folgenden Änderungen innerhalb des `Context`-Tag aus:
 
