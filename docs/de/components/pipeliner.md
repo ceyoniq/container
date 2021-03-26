@@ -29,14 +29,14 @@ nscale Pipeliner kann als einzige nscale Standard Container-Komponente nicht üb
 Stattdessen besteht die Möglichkeit mit nscale Administrator eine Standard Konfigurationsdatei für nscale Pipeliner zu generieren, ohne nscale Administrator vorher mit nscale Pipeliner verbinden zu müssen.
 
 Das Vorgehen zum Erstellen und Bearbeiten einer `cold.xml` ist im nscale Pipeliner Konfigurationshandbuch beschrieben.
-Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com/>.
+Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com>.
 
 Die spezielle Konfiguration richtet sich nach der Umgebung in der sie verwendet wird.
 Beachten Sie dass u.U. auch Rechte in nscale für den Betrieb von nscale Pipeliner angepasst werden müssen.
 
 ### Docker-Compose
 
-Mit dem Start von nscale Pipeliner wird das Spool Verzeichnis im aktuellen Order angelegt, das nscale Pipeliner verwendet, um Dateien kontinuierlich zu importieren.
+Mit dem Start von nscale Pipeliner wird das Spool-Verzeichnis im aktuellen Order angelegt. nscale Pipeliner verwendet das Spool-Verzeichnis um Dateien kontinuierlich zu importieren.
 Unter `./workdir/data` werden später die Eingangsdaten abgeholt.
 Die zuvor offline konfigurierte `cold.xml` kann ebenfalls in diesem Order abgelegt und anschließend in den Container gemappt werden.
 Dazu muss die Kommentarzeile unten herausgenommen und der Container neu instanziiert werden.
@@ -58,13 +58,13 @@ Dazu muss die Kommentarzeile unten herausgenommen und der Container neu instanzi
 
 ### Kubernetes
 
-In Kubernetes ist nscale Pipeliner als StatefulSet definiert und verwendet 4 Volumes:
+In Kubernetes ist nscale Pipeliner als StatefulSet definiert und verwendet vier Volumes:
 
 | Volume | Herkunft | Beschreibung |
 |---|---|---|
-| `data` | RWX PersistenceVolumeClaim | Enthält das Spool Verzeichnis und kann in mehrere Pods gemappt werden um Daten abzulegen, die vom Pipeliner kontinuierlich importiert werden. |
+| `data` | RWX PersistenceVolumeClaim | Enthält das Spool-Verzeichnis und kann in mehrere Pods gemappt werden um Daten abzulegen, die vom Pipeliner kontinuierlich importiert werden. |
 | `conf`  | RWO PersistenceVolumeClaim  | Umfasst die Konfiguration von nscale Pipeliner. |
 | `cold.xml` | `base/config/pipeliner/cold.xml` | Spezielle offline erstellt Konfigurationsdatei. |
 | `license.xml` | `base/license.xml` | Lizenzdatei |
 
-Zur Aktivierung von nscale Pipeliner müssen Sie in der `base/kustomization.xml` die Pipeliner Ressourcen einkommentieren.
+Zur Aktivierung von nscale Pipeliner müssen Sie in der Datei `base/kustomization.xml` die Pipeliner Ressourcen einkommentieren.

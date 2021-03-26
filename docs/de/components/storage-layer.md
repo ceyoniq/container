@@ -7,10 +7,10 @@ Die Datei wird im Container hier erwartet: `/opt/ceyoniq/nscale-server/storage-l
 
 ## Persistierung
 
-> **Achtung!**
-> Bitte beachten Sie, dass wenn diese Ordner nicht persistiert werden, dass er zum **Datenverlust** kommt!
+> **Achtung! Datenverlust!**  
+> Bitte beachten Sie, dass es zum **Datenverlust** kommt, wenn die hier aufgelisteten Ordner nicht persistiert werden!
 
-Folgende Ordner müssen persistiert werden:
+Folgende Ordner müssen persistiert werden, um Datenverlust zu verhindern:
 
 * `/opt/ceyoniq/nscale-server/storage-layer/arc`
 * `/opt/ceyoniq/nscale-server/storage-layer/da`
@@ -19,6 +19,13 @@ Folgende Ordner müssen persistiert werden:
 Optional (Retrival Buffer)
 
 * `/opt/ceyoniq/nscale-server/storage-layer/ret`
+
+## Konfiguration
+
+Sie können Umgebungsvariablen verwenden um den nscale Server Storage Layer zu konfigurieren.  
+Allerdings können sie auch weiterhin die Datei `storagelayer.conf` verwenden, um den nscale Server Storage Layer zu konfigurieren.  
+Beachten Sie aber, dass Umgebungsvariablen eine höhere Priorität haben als Konfigurationseinstellung in der Datei `storagelayer.conf`
+und somit Einstellungen aus der Datei  `storagelayer.conf` überlagern.
 
 ## Umgebungsvariablen
 
@@ -64,4 +71,4 @@ docker run \
 ## Skalierung
 
 Bitte beachten Sie, dass der nscale Server Storage Layer im Fall von Kubernetes nicht durch ein ReplicaSet skaliert werden kann.  
-Informationen zur Skalierung des nscale Server Storage Layer findet Sie in der nscale Server Storage Layer Dokumentation unter **Distributed Service**.
+Informationen zur Skalierung des nscale Server Storage Layer finden Sie in der nscale Server Storage Layer Dokumentation in unserem [Serviceportal](<https://serviceportal.ceyoniq.com/>).

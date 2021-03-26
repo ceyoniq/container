@@ -12,6 +12,13 @@ Diese Komponente benötigt keine Persistierung.
 > Sie können weiterhin mit der `/opt/ceyoniq/nscale-server/application-layer/conf/instance1.conf`, oder mit beliebigen anderen Konfigurationsdatei arbeiten.
 > Bitte beachten Sie aber, dass Sie diese Konfigurationsdatei persistieren müssen.
 
+## Konfiguration
+
+Sie können Umgebungsvariablen verwenden um den nscale Server Application Layer zu konfigurieren.  
+Allerdings können sie auch weiterhin die `instance1.conf` verwenden, um den nscale Server Application Layer zu konfigurieren.  
+Beachten Sie aber, dass Umgebungsvariablen eine höhere Priorität haben als Konfigurationseinstellung in der `instance1.conf`
+und somit Einstellungen aus der `instance1.conf` überlagern.
+
 ## Umgebungsvariablen
 
 >Die hier aufgeführte Liste der Umgebungsvariablen ist **nicht vollständig**.
@@ -32,7 +39,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 |INSTANCE1_CORE_DB_SCHEMA=public | In dieser Umgebungsvariable können Sie das Datenbankschema hinterlegen. Hier wurde das Schema public gewählt. |
 |INSTANCE1_CORE_WORK_DIRECTORY=/mnt/fulltextcache | In dieser Umgebungsvariable können Sie den Ordern für den lokalen Volltext-cache definieren.|
 |INITIALIZE_DOCUMENT_AREA=DA | Mit dieser Umgebungsvariable können Sie einen Dokumentenbereich mit dem Namen "DA" erstellen. |
-|KUBERNETES_NAMESPACE | Diese Umgebungsvariable ist für die Konfiguration des Clusters in Kubernetes notwendig und hat eine spezielle Konfiguration. Lesen Sie bitte die [Cluster Konfiguration in Kubernetes](#cluster-konfiguration-in-kubernetes) für weitere Details |
+|KUBERNETES_NAMESPACE | Diese Umgebungsvariable ist für die Konfiguration des Clusters in Kubernetes notwendig und hat eine spezielle Konfiguration. Für weitere Dateils lesen Sie die [Cluster Konfiguration in Kubernetes](#cluster-konfiguration-in-kubernetes). |
 
 ## Ports
 
@@ -72,7 +79,7 @@ Eine Beispiel-Konfigurationen finden Sie in [application-layer.yaml](../kubernet
 ## Log Level
 
 Zur Fehleranalyse ist es unter Umständen notwendig, das Log Level des Servers anzupassen.
-Das Log Level des Servers können Sie in der log4j Konfiguration in der Datei `conf/instance1-log.conf` anpassen.
+Das Log Level des Servers können Sie in der log4j-Konfiguration in der Datei `conf/instance1-log.conf` anpassen.
 Kopieren Sie diese Datei zuerst aus dem Container heraus, bearbeiten Sie sie dann offline wie unten beschrieben und transferieren Sie die bearbeitete Datei anschließend wieder zurück in den Container.
 Alternativ können Sie auch die Konfigurationsdatei mit dem `vi` im Container bearbeiten.
 Beachten Sie bei diesem Vorgehen, dass Änderungen an Dateien im Container nicht persistiert werden.

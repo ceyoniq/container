@@ -1,7 +1,7 @@
 # nscale Standard Container in Kubernetes
 
 In dieser Dokumentation finden Sie Informationen dazu, wie Sie nscale mit Kubernetes betreiben können.  
-Weitere Information zu Kubernetes findet Sieh unter [https://kubernetes.io/](https://kubernetes.io/).
+Weitere Information zu Kubernetes finden Sie unter [https://kubernetes.io](https://kubernetes.io/).
 
 Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
 
@@ -10,8 +10,8 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
 - flexible Skalierbarkeit
 - einfache Installation in Cloud-Umgebungen (z.B in [Microsoft Azure Kubernetes Service - AKS](https://azure.microsoft.com/de-de/services/kubernetes-service/))
 
-> Bitte beachen Sie, dass es sich hierbei um **Beispielkonfigurationen** handelt.  
-> Für Produktivsysteme müssen ggf. Anpassungen vornehmen.
+> Bitte beachen Sie, dass es sich bei den Konfigurationen in diesem Repository um **Beispielkonfigurationen** handelt.  
+> Für Produktivsysteme müssen Sie ggf. Anpassungen vornehmen.
 
 ## Inhalt
 
@@ -26,20 +26,23 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
     - [Azure](#azure)
   - [Konfiguration mit dem nscale Administrator](#konfiguration-mit-dem-nscale-administrator)
   - [Logging](#logging)
-  - [Zeitzone](#zeitzone)
   - [Metriken](#metriken)
+  - [Limitierungen](#limitierungen)
+  - [FAQ](#faq)
 
 ## Quick Start Guide
 
 > Dieses Beispiel berücksichtigt den Betrieb mit **Linux**.  
-> Wenn sie mit Windows arbeiten, müssen sie unter umständen die Dateipfade ändern.  
+> Wenn Sie mit Windows arbeiten, müssen Sie unter Umständen die Dateipfade ändern.  
 > Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern die nicht Teil der nscale Standard Container sind.
+
+Stellen Sie vor dem Start der nscale Standard Container mit kubernetes sicher, dass Sie die folgenden Voraussetzungen erfüllt haben:
 
 - Sie haben einen Kubernetes-Cluster (ab Version 1.19.3) den Sie mit `kubectl` erreichen können
 - Sie haben einen [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/) eingerichtet
 - Sie besitzen eine gültige **Lizenzdatei**
 
-Kopieren Sie ihre `license.xml` in den Ordner `kubernetes/kustomize/nscale/base/`.  
+Kopieren Sie Ihre Lizenzdatei `license.xml` in den Ordner `kubernetes/kustomize/nscale/base/`.  
 Führen Sie nun folgende Kommandos im Ordner `kubernetes/kustomize/nscale/overlays/emptyDir/` aus:
 
 ```bash
@@ -54,7 +57,7 @@ Nun können Sie prüfen, ob die jeweiligen `Pods` erfolgreich gestartet werden k
 ```
 
 Warten Sie bis alle `Pods` den Status `Running` melden.  
-Im Anschluss rufen Sie bitte folgendes Kommando auf:
+Im Anschluss rufen Sie folgendes Kommando auf:
 
 ```bash
 kubectl port-forward --address 0.0.0.0 deployment/application-layer-web 8090:8090 -n nscale
@@ -74,17 +77,17 @@ Password: admin
 ```
 
 > Für den Produktiveinsatz wird ein Ingress-Controller empfohlen.
-> Weitere Informationen dazu befinden sich in diesem Dokument
+> Weitere Informationen dazu befinden sich in diesem Dokument.
 
 ## Grundlage
 
->Dies ist eine **Beispielkonfigurationen**. Für Produktivsysteme müssen Sie andere angepasste Varianten
+>Dies ist eine **Beispielkonfiguration**. Für Produktivsysteme müssen Sie andere angepasste Varianten
 konfigurieren.
 
-In diesem Beispiel wird `kustomize` verwendet. Durch `kustomize` können Sie leicht Anpassung von Kubernetes-Deployments zur Erzeugung mehrerer Varianten (z. B. für unterschiedliche Umgebungen) vornehmen. Dabei werden die originalen YAML-Dateien nicht modifiziert, sondern mit Overlays überlagert. Im Gegensatz zu Helm kommt kustomize also ganz ohne Templates aus, was die Verwendung besonders einfach macht.
+In diesem Beispiel wird `kustomize` verwendet. Durch `kustomize` können Sie leicht Anpassung von Kubernetes-Deployments zur Erzeugung mehrerer Varianten (z.B. für unterschiedliche Umgebungen) vornehmen. Dabei werden die originalen YAML-Dateien nicht modifiziert, sondern mit Overlays überlagert. Im Gegensatz zu Helm kommt kustomize also ganz ohne Templates aus, was die Verwendung besonders einfach macht.
 
 Weitere Informationen zu kustomize finden Sie hier:  
-<https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/>
+<https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization>
 
 Die nscale Basiskonfiguration ist im Verzeichnis `base` abgelegt.
 Das Verzeichnis `overlay` enthält Ableitungen für unterschiedliche Umgebungen.
@@ -97,7 +100,7 @@ Dazu wird ein eindeutiger voll qualifizierter Hostname für jede nscale Installa
 Weitere Information zu den nscale Standard Containern finden Sie hier:
 
 - [nscale/application-layer (nscale Server Application Layer)](components/application-layer.md)
-- [nscale/application-laye-web (nscale Server Application Layer Web)](components/application-layer-web.md)
+- [nscale/application-layer-web (nscale Server Application Layer Web)](components/application-layer-web.md)
 - [nscale/storage-layer (nscale Server Storage Layer)](components/storage-layer.md)
 - [nscale/rendition-server (nscale Rendition Server)](components/rendition-server.md)
 - [nscale/console (nscale Console)](components/console.md)
@@ -107,11 +110,12 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 - [nscale/webdav-connector (nscale WebDAV-Connector)](components/webdav-connector.md)
 - [nscale/ilm-connector (nscale ERP Connector ILM)](components/ilm-connector.md)
 
-> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern die nicht Teil der nscale Standard Container sind.
+> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern die nicht Teil der oben aufgelisteten nscale Standard Container sind.
+> Weiter erfolgt der Einsatz von Software von Drittanbietern wie Loki, Grafana, Prometheus, etc. hier beispielhaft zum Zwecke der Darstellung innerhalb einer Beispielkonfiguration.
 
 ## Ingress
 
-> Bitte beachten Sie, dass die Ingress-Konfiguration keine Informationen zu ihrem Hostname beinhaltet.
+> Beachten Sie, dass die Ingress-Konfiguration keine Informationen zu Ihrem Hostname beinhaltet.
 > Somit werden alle Anfragen an Ihren Cluster durch diesen Ingress verarbeitet.
 > Passen Sie die Ingress-Konfiguration bei Bedarf an.
 
@@ -125,7 +129,7 @@ Weitere Informationen zur Ingress Konfiguration finden Sie in der Dokumentation 
 Um auf die jeweiligen nscale-Komponenten zugreifen zu können, benötigen Sie einen [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/).
 In diesem Beispiel wird ein [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/) erwartet.
 Passen Sie die Ingress-Regeln an, wenn Sie eine anderen Ingress-Controller verwenden wollen, oder eine OpenShift-`Route` bevorzugen.  
-Führen Sie folgendes Kommando im Ordner `kubernetes/kustomize/nscale/` aus:
+Führen Sie zur Verwendung der Beispielkonfiguration folgendes Kommando im Ordner `kubernetes/kustomize/nscale/` aus:
 
 ```bash
 kubectl apply --namespace nscale ingress.yaml
@@ -147,8 +151,8 @@ kubectl describe ingress ingress-nscale -n nscale
 
 Alle Dokumente und Datenbankeinträge werden **gelöscht**, nachdem die nscale-Services wieder heruntergefahren wurden.
 
+> **Achtung! Datenverlust!**  
 > Diese Einstellungen sind nur für den Test- und Demobetrieb geeignet.  
-> **Achtung Datenverlust!**
 
 Weitere Informationen: <https://kubernetes.io/docs/concepts/storage/volumes/#emptydir>
 
@@ -191,15 +195,15 @@ kubectl apply -k overlays/azure/ -n nscale
 kubectl delete -k overlays/azure/ -n nscale
 ```
 
-## Konfiguration mit dem nscale Administrator
+## Konfiguration mit nscale Administrator
 
-> Sie benötigen eine nscale Administrator in der Version >= 8.0.500.
+> Sie benötigen nscale Administrator ab Version 8.0.500.
 
-Für den Zugriff mit dem nscale Administrator auf Ihre nscale-Installation innerhalb Kubernetes, steht Ihnen **kein RMS** (nscale Remote Management Service) zur Verfügung. Bitte erzeugen Sie eine neue Komponenten-Gruppe im nscale Administrator, um auf die jeweiligen nscale-Komponenten zugreifen zu können.
+Für den Zugriff mit nscale Administrator auf Ihre nscale-Installation innerhalb Kubernetes, steht Ihnen der **kein RMS**-Modus (nscale Remote Management Service) zur Verfügung. Erzeugen Sie eine neue Komponenten-Gruppe in nscale Administrator, um den **kein RMS**-Modus zu verwenden und auf die jeweiligen nscale-Komponenten zugreifen zu können.
 
 Weiter Informationen finden Sie hier: [limitation.md](limitation.md)
 
-Damit Sie von außerhalb Ihres Kubernetes-Cluster auf die jeweiligen nscale-Komponenten zugreifen können, müssen die Ports der nscale-Komponenten durch ein `kubectl port-forward` auf Ihr lokal System weiterleitet werden.
+Damit Sie von außerhalb Ihres Kubernetes-Cluster auf die jeweiligen nscale-Komponenten zugreifen können, müssen die Ports der nscale-Komponenten durch ein `kubectl port-forward` auf Ihr lokales System weiterleitet werden.
 
 ```bash
 
@@ -217,7 +221,7 @@ kubectl port-forward --address 0.0.0.0 deployment/pipeliner 3125:3120 -n nscale
 ## Logging
 
 Alle nscale Standard Container schreiben Ihre Logging-Informationen auf StdOut.
-Somit können Sie mit etablierten Tools, wie zum Beispiel [loki](https://grafana.com/oss/loki/), Logs aggregieren.
+Somit können Sie mit etablierten Tools, wie zum Beispiel [Loki](https://grafana.com/oss/loki/), Logs aggregieren.
 Sie können die jeweiligen Logging-Ausgaben wie folgt abrufen:  
 
 ```bash
@@ -226,26 +230,25 @@ kubectl logs application-layer-0 -n nscale
 ```
 
 Weitere Informationen zum Thema Logging in Kubernetes finden Sie hier:  
-<https://kubernetes.io/docs/concepts/cluster-administration/logging/>
-
-## Zeitzone
-
-Die nscale Standard Container verwenden UTC als Zeitzone.  
-Sie können die Zeitzone für den jeweiligen Container mit folgender Umgebungsvariable setzen:  
-
-```yaml
-env:
-   - name: TZ
-     value: Europe/Berlin
-```
+<https://kubernetes.io/docs/concepts/cluster-administration/logging>
 
 ## Metriken
 
-Die nscale Komponenten werden weiterhin über die nscale Monitoring Console überwacht, die als Deployment im Cluster verfügbar ist. Die Integration der nscale Komponenten als Resource wird wie bisher über den Administrator verwaltet.
+Die nscale-Komponenten werden weiterhin über nscale Monitoring Console überwacht, die als Deployment im Cluster verfügbar ist. Die Integration der nscale-Komponenten als Resource wird wie bisher über den Administrator verwaltet.
 
-Für [Prometheus](https://prometheus.io/) stehen zwei Endpunkte zur Verfügung. Beide sind über Basic-Auth geschützt und brauchen deshalb ein Password für die Monitoring Console. Die Benutzerverwaltung ist über den Administrator verfügbar.
+Für [Prometheus](https://prometheus.io/) stehen zwei Endpunkte zur Verfügung. Beide sind über Basic-Auth geschützt und brauchen deshalb ein Passwort für nscale Monitoring Console. Die Benutzerverwaltung ist über nscale Administrator verfügbar.
 
-Der erste Endpunkt liefert Informationen zur Monitoring Console selbst während der zweite Endpunkt Metriken der eingebundenen nscale Komponenten als Prometheus Sensoren zur Verfügung stellt.
+Der erste Endpunkt liefert Informationen zu nscale Monitoring Console, während der zweite Endpunkt Metriken der eingebundenen nscale-Komponenten als Prometheus Sensoren zur Verfügung stellt.
 
 - /nscalemc/rest/metrics
 - /nscalemc/rest/metrics/nscale
+
+## Limitierungen
+
+Informationen zu Limitierungen finden Sie hier:  
+[limitation.md](limitation.md)
+
+## FAQ
+
+Das FAQ finden Sie hier:  
+[faq.md](faq.md)
