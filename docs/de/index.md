@@ -25,9 +25,12 @@ Für mehr Informationen besuchen Sie unsere Website unter <https://www.ceyoniq.c
 
 ## Informationen zu diesem Dokument
 
-Bei diesem Dokument handelt es sich um die Dokumentation verschiedener nscale Komponenten im Container-Betrieb. Dabei richtet sich dieses Dokument ausdrücklich an Personen, die sich mit dem Betrieb von nscale beschäftigen.
+Bei diesem Dokument handelt es sich um die Dokumentation verschiedener nscale-Komponenten im Container-Betrieb.
+Dieses Dokument richtet sich ausdrücklich an Personen, die sich mit dem Betrieb bzw. der Administration von nscale beschäftigen.
+Sie sollten außerdem Erfahrungen im Umgang mit dem Betrieb von Software bzw. Applikationen in OCI-kompatiblen Containern haben.
+Erfahrungen im Umgang mit einer nscale-Standardinstallation sind ebenfalls wünschenswert.
 
-> Weitere Informationen zum Betrieb von nscale finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com/>.
+> Weitere Informationen zum Betrieb von nscale finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com>.
 
 ## Softwarevoraussetzungen
 
@@ -54,7 +57,7 @@ Weitere Informationen zu Kubernetes finden Sie unter <https://kubernetes.io/>.
 ## Lizenzierung
 
 Der Betrieb von nscale Standard Container benötigt eine nscale Standard Container-Lizenz. Lizenzen, die nicht für den Container-Betrieb von nscale ausgestellt wurden, können nicht verwendet werden.
-Lizenzen können beim Vertrieb der Ceyoniq GmbH erworben werden.  
+Lizenzen können beim Vertrieb der Ceyoniq Technology GmbH erworben werden.  
 Sollten Sie trotz Verwendung einer gültigen Container-Lizenz Probleme haben, wenden Sie sich bitte an den [Ceyoniq Service](docs/de/service-und-support.md).
 
 ## nscale Standard Container-Images
@@ -74,7 +77,7 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 - [nscale/webdav-connector (nscale WebDAV-Connector)](components/webdav-connector.md)
 - [nscale/ilm-connector (nscale ERP Connector ILM)](components/ilm-connector.md)
 
-> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern die nicht Teil der oben aufgelisteten nscale Standard Container sind.
+> Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
 
 ![Komponenten als Container](../images/nscaleStandardContainerOverview.png)
 
@@ -119,11 +122,11 @@ Der Betrieb von nscale Standard Container mit Docker-Compose hat folgende Vortei
 
 - sehr einfache Installation im Single-Server-Betrieb
 - ideal für die Entwicklung mit nscale
-- schnelles erzeugen eines Demo- und Test-Systems
+- schnelles Erzeugen eines Demo- und Test-Systems
 
-Eine genaue Beschreibung der Konfiguration von nscale im Betrieb mit Docker-Compose finden Sie unter  
+Eine genaue Beschreibung der Konfiguration von nscale im Betrieb mit Docker-Compose finden Sie unter:  
 
-[nscale Standard Container in Docker-Compose](compose.md).
+[nscale Standard Container in Docker-Compose](compose.md)
 
 ## Betrieb mit Kubernetes
 
@@ -138,9 +141,11 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
 - Clusterbildung möglich
 - Fehlertoleranz
 - flexible Skalierbarkeit
-- einfache Installation in Cloud-Umgebungen (z.B. in [Microsoft Azure Kubernetes Service - AKS](https://azure.microsoft.com/de-de/services/))
+- einfache Installation in Cloud-Umgebungen (z. B. in [Microsoft Azure Kubernetes Service - AKS](https://azure.microsoft.com/de-de/services/))
 
-Eine genaue Beschreibung der Konfiguration von nscale Standard Container im Betrieb mit Kubernetes finden Sie unter [nscale Standard Container mit Kubernetes](kubernetes.md).
+Eine genaue Beschreibung der Konfiguration von nscale Standard Container im Betrieb mit Kubernetes finden Sie unter:  
+
+[nscale Standard Container mit Kubernetes](kubernetes.md)
 
 ## Limitierungen
 
@@ -154,5 +159,5 @@ Das FAQ finden Sie hier:
 
 ## Externe Quellen
 
-- <https://github.com/kubernetes/kubernetes/tree/master/logo>
-- <https://commons.wikimedia.org/wiki/File:Docker_(container_engine)_logo.png>
+- Kubernetes-Logo: <https://github.com/kubernetes/kubernetes/tree/master/logo>
+- Docker-Logo: <https://commons.wikimedia.org/wiki/File:Docker_(container_engine)_logo.png>

@@ -15,8 +15,8 @@ Diese Komponente benötigt keine Persistierung.
 ## Konfiguration
 
 Sie können Umgebungsvariablen verwenden um den nscale Server Application Layer zu konfigurieren.  
-Allerdings können sie auch weiterhin die `instance1.conf` verwenden, um den nscale Server Application Layer zu konfigurieren.  
-Beachten Sie aber, dass Umgebungsvariablen eine höhere Priorität haben als Konfigurationseinstellung in der `instance1.conf`
+Allerdings können Sie auch weiterhin die `instance1.conf` verwenden, um den nscale Server Application Layer zu konfigurieren.  
+Beachten Sie dabei, dass Umgebungsvariablen eine höhere Priorität haben als Konfigurationseinstellung in der `instance1.conf`
 und somit Einstellungen aus der `instance1.conf` überlagern.
 
 ## Umgebungsvariablen
@@ -26,11 +26,11 @@ Sie bildet lediglich die in unseren Beispielkonfigurationen verwendeten Umgebung
 
 Die Bennennung der Umgebungsvariablen von nscale Server Application Layer kann in mehreren Formaten erfolgen, die wir für Sie im nscale Server Application Layer Administrationshandbuch zusammengefasst haben.
 
-Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com/>.
+Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com>.
 
 |Umgebungsvariable | Effekt |
 |---|---|
-|INSTANCE1_INSTANCE_LOGGER_CONF=instance1-log-console.conf | Wenn Sie diese Umgebungsvariable verwenden, werden alle Logging-Ausgaben von nscale Server Application Layer in nscale Console statt einer Logging-Datei ausgegeben. Das ist im Containerbetrieb sinnvoll, da die Images ggf. verworfen werden und die Logdateien nicht mehr einsehbar sind. Console Ausgaben werden vom Container-System gesammelt.|
+|INSTANCE1_INSTANCE_LOGGER_CONF=instance1-log-console.conf | Wenn Sie diese Umgebungsvariable verwenden, werden alle Logging-Ausgaben von nscale Server Application Layer in der Console statt einer Logging-Datei ausgegeben. Das ist im Containerbetrieb sinnvoll, da die Images ggf. verworfen werden und die Logdateien nicht mehr einsehbar sind. Console Ausgaben werden vom Container-System gesammelt.|
 |INSTANCE1_CORE_DB_DIALECT=PostgreSQL |Mit dieser Umgebungsvariable können Sie den Datenbankdialekt Ihrer Datenbank festlegen. Hier wurde PostgreSQL ausgewählt. |
 |INSTANCE1_CORE_DB_DRIVERCLASS=org.postgresql.Driver | Mit dieser Umgebungsvariable können Sie den Treiber Ihrer Datenbank hinterlegen. Hier wurde der Treiber org.potgresql gewählt. |
 |INSTANCE1_CORE_DB_URLjdbc:postgresql://postgresql:5432/nscale?loggerLevel=OFF | Mit dieser Umgebungsvariable können Sie die URL Ihrer Datenbank hinterlegen. Passen Sie diesen Pfad ggf. an. |
@@ -39,7 +39,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 |INSTANCE1_CORE_DB_SCHEMA=public | In dieser Umgebungsvariable können Sie das Datenbankschema hinterlegen. Hier wurde das Schema public gewählt. |
 |INSTANCE1_CORE_WORK_DIRECTORY=/mnt/fulltextcache | In dieser Umgebungsvariable können Sie den Ordern für den lokalen Volltext-cache definieren.|
 |INITIALIZE_DOCUMENT_AREA=DA | Mit dieser Umgebungsvariable können Sie einen Dokumentenbereich mit dem Namen "DA" erstellen. |
-|KUBERNETES_NAMESPACE | Diese Umgebungsvariable ist für die Konfiguration des Clusters in Kubernetes notwendig und hat eine spezielle Konfiguration. Für weitere Dateils lesen Sie die [Cluster Konfiguration in Kubernetes](#cluster-konfiguration-in-kubernetes). |
+|KUBERNETES_NAMESPACE | Diese Umgebungsvariable ist für die Konfiguration des Clusters in Kubernetes notwendig und hat eine spezielle Konfiguration. Für weitere Details lesen Sie die [Cluster Konfiguration in Kubernetes](#cluster-konfiguration-in-kubernetes). |
 
 ## Ports
 
@@ -88,7 +88,7 @@ Im Cluster muss die Datei in allen Instanzen ausgetauscht werden.
 
 ### Docker-Compose
 
-Wenn Sie nscale Standard Container mit Docker-compose betreiben, verwenden Sie die folgenden Befehle um das Log Level des Servers anzupassen.
+Wenn Sie nscale Standard Container mit Docker-Compose betreiben, verwenden Sie die folgenden Befehle um das Log Level des Servers anzupassen.
 
 ```bash
 docker-compose exec application-layer bash

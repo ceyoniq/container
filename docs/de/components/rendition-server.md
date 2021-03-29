@@ -17,7 +17,7 @@ Um zu gewährleisten, dass Sie nach dem Herunterfahren des Systems weiterhin Zug
 |Umgebungsvariable | Effekt |
 |---|---|
 |RSX_APPENDER=Console | Wenn Sie diese Umgebungsvariable verwenden, werden die Logs auf die Console im Container ausgegeben. |
-|RSX_PASSWORD=admin | Überschreibt das admin Passwort für den Rendition Server. |
+|RSX_PASSWORD=admin | Überschreibt das administrative Passwort für den Rendition Server. |
 |ENV_WORKDIR=<"path">|Sie können das Arbeitsverzeichnis ändern. Standard ist "<"InstallDir">/workspace".|
 |SOCKET_PORT=8192| Sie können den HTTP-Port der Web-Anwendung festlegen.|
 |SOCKET_TIMEOUT=120|Sie können die maximale Requestdauer in Sekunden festlegen. Wenn nscale Rendition Server nach Ablaufen der Zeit keine Antwort erhalten hat, wird der Request abgebrochen.|

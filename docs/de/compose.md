@@ -1,23 +1,23 @@
 # nscale Standard Container mit Docker-Compose
 
 In dieser Dokumentation finden Sie Informationen dazu, wie Sie nscale mit Docker-Compose betreiben können.  
-Weitere Information zu Docker-Compose finden Sie unter [https://docs.docker.com/compose](https://docs.docker.com/compose/).
+Weitere Information zu Docker-Compose finden Sie unter <https://docs.docker.com/compose>.
 
 Der Betrieb von nscale Standard Container mit Docker-Compose hat folgende Vorteile:
 
 - sehr einfache Installation im Single-Server-Betrieb
 - ideal für die Entwicklung mit nscale
-- schnelles erzeugen eines Demo- und Test-Systems
+- schnelles Erzeugen eines Demo- und Test-Systems
 
 > Bitte beachen Sie, dass es sich bei den Konfigurationen in diesem Repository um **Beispielkonfigurationen** handelt.  
-> Für Produktivsysteme müssen ggf. Anpassungen vornehmen.
+> Für Produktivsysteme müssen Sie ggf. Anpassungen an den vorliegenden Konfigurationen vornehmen.
 
 ## Inhalt
 
 - [nscale Standard Container mit Docker-Compose](#nscale-standard-container-mit-docker-compose)
   - [Inhalt](#inhalt)
   - [Quick Start Guide](#quick-start-guide)
-  - [Grundlage](#grundlage)
+  - [Grundlagen](#grundlagen)
   - [docker-compose Beispielszenarien](#docker-compose-beispielszenarien)
   - [Zugriff über nscale Administrator](#zugriff-über-nscale-administrator)
   - [nscale Pipeliner](#nscale-pipeliner)
@@ -30,26 +30,27 @@ Der Betrieb von nscale Standard Container mit Docker-Compose hat folgende Vortei
 ## Quick Start Guide
 
 > Dieses Beispiel berücksichtigt den Betrieb mit **Linux**.  
-> Wenn Sie mit Windows arbeiten, müssen Sie unter umständen die Dateipfade ändern.  
-> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern die nicht Teil der nscale Standard Container sind.
+> Wenn Sie mit Windows arbeiten, müssen Sie unter umständen die Dateipfade aus diesem Beispiel ändern.  
+> Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der nscale Standard Container ist.
 
-Stellen Sie vor dem Start der nscale Standard Container mit docker-compose sicher, dass Sie die folgenden Voraussetzungen erfüllt haben:
+Stellen Sie vor dem Start der nscale Standard Container mit Docker-Compose sicher, dass Sie die folgenden Voraussetzungen erfüllt haben:
 
 - Sie haben eine lauffähige Docker-Installation (ab Version 20.10.2)
-- Sie haben `docker-compose` (ab Version 1.27.4) installiert
+- Sie haben Docker-Compose (ab Version 1.27.4) installiert
 - Sie besitzen eine gültige **Lizenzdatei**
 
-Kopieren Sie Ihre Lizenzdatei `license.xml` in den Ordner `compose/nscale`.  
-Im Order `compose/nscale` kopieren Sie die Datei `docker-compose.example.env` nach `.env`.
-Führen Sie im Order `compose/nscale` folgende Kommandos aus:
+Starten Sie die nscale Standard Container:
+
+1. Kopieren Sie Ihre Lizenzdatei `license.xml` in den Ordner `compose/nscale`.  
+2. Im Order `compose/nscale` kopieren Sie die Datei `docker-compose.example.env` nach `.env`.
+3. Führen Sie im Order `compose/nscale` folgende Kommandos aus:
 
 ```bash
 docker-compose up -d
 ```
 
-Fertig!  
-
-Sie können nun unter <http://localhost/> auf Ihr nscale zugreifen.
+4. Fertig!  
+Sie können nun unter <http://localhost> auf Ihr nscale zugreifen.
 
 Bei der ersten Anmeldung können Sie die Standard-Anmeldedaten verwenden, die beim Start eines neuen nscale Systems automatisch erstellt werden.
 Ändern Sie diese Anmeldedaten für den Produktivbetrieb umgehend.
@@ -60,7 +61,7 @@ User: admin
 Password: admin
 ```
 
-## Grundlage
+## Grundlagen
 
 >Dies ist eine **Beispielkonfigurationen**. Für Produktivsysteme müssen Sie andere angepasste Varianten konfigurieren.
 
@@ -68,7 +69,7 @@ Compose ist ein Werkzeug zur Definition und Ausführung von Multi-Container-Dock
 Mit Compose verwenden Sie eine YAML-Datei, um die Dienste Ihrer Anwendung zu konfigurieren.
 Sie können dann mit einem einzigen Befehl alle Dienste aus Ihrer Konfiguration starten.
 
-Weitere Informationen zu `docker-compose` finden Sie hier:
+Weitere Informationen zu Docker-Compose finden Sie hier:
 <https://docs.docker.com/compose>
 
 Weitere Information zu den nscale Standard Containern finden Sie hier:
@@ -84,8 +85,8 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 - [nscale/webdav-connector (nscale WebDAV-Connector)](components/webdav-connector.md)
 - [nscale/ilm-connector (nscale ERP Connector ILM)](components/ilm-connector.md)
 
-> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern die nicht Teil der oben aufgelisteten nscale Standard Container sind.
-> Weiter erfolgt der Einsatz von Software von Drittanbietern wie Loki, Grafana, Prometheus, etc. hier beispielhaft zum Zwecke der Darstellung innerhalb einer Beispielkonfiguration.
+> Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
+> Weiter erfolgt der Einsatz von Software von Drittanbietern wie Loki, Grafana, Prometheus, etc. hier zum Zweck der Darstellung innerhalb einer Beispielkonfiguration.
 
 ## docker-compose Beispielszenarien
 
@@ -94,11 +95,11 @@ Wenn diese Dateien kombiniert werden, führt das `docker-compose up`-Kommando di
 In der Datei `docker-compose.example.env` finden Sie verschiedene Möglichkeit nscale zu betreiben.
 
 **docker-compose.proxy.yml**  
-Diese Konfiguration bietet eine Unterstützung von traefik (<https://docs.traefik.io>) als Reverse Proxy.  
+Diese Konfiguration bietet eine Unterstützung von Traefik (<https://docs.traefik.io>) als Reverse Proxy.  
 So können Sie nscale Server Application Layer Web, nscale Server Application Layer und nscale Console über den Port 80 erreichen.
 
 **docker-compose.proxy-with-ssl.yml**  
-Diese Konfiguration bietet eine Unterstützung von traefik (<https://docs.traefik.io>) als Reverse Proxy und SSL mit Let's Encrypt.
+Diese Konfiguration bietet eine Unterstützung von Traefik (<https://docs.traefik.io>) als Reverse Proxy und SSL mit Let's Encrypt.
 So können Sie nscale Server Application Layer Web, nscale Server Application Layer und nscale Console über den Port 443 erreichen.
 Beachten Sie, dass der Rechner, auf dem Sie nscale installieren wollen, aus dem Internet erreichbar sein muss, um ein Zertifikat bekommen zu können.
 
@@ -166,7 +167,7 @@ rm logcli-linux-amd64.zip
 Mit diesem Tool können die Logs der Container abgefragt werden.
 
 ```bash
-# loki Addresse
+# loki Adresse
 export LOKI_ADDR=http://localhost:3100/
 
 # Labels anzeigen
@@ -195,7 +196,7 @@ labels
 
 ## Prometheus Anbindung
 
-Die nscale-Komponenten werden weiterhin über nscale Monitoring Console überwacht, die als Container im compose mit gestartet wird. Die Integration der nscale-Komponenten als Resource wird wie bisher über nscale Administrator verwaltet.
+Die nscale-Komponenten werden auch im Container-Betrieb über nscale Monitoring Console überwacht, die als Container in Compose mit gestartet wird. Die Integration der nscale-Komponenten als Resource wird wie bisher über nscale Administrator verwaltet.
 
 Für [Prometheus](https://prometheus.io/) stehen zwei Endpunkte zur Verfügung. Beide sind über Basic-Auth geschützt und brauchen deshalb ein Password für nscale Monitoring Console. Die Benutzerverwaltung ist über nscale Administrator verfügbar.
 

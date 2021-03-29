@@ -12,7 +12,7 @@ Um zu gewährleisten, dass Sie nach dem Herunterfahren des Systems weiterhin Zug
 
 ## Konfiguration
 
-nscale Monitoring Console wird über nscale Administrator konfiguriert indem neue Komponenten zur Überwachung eingebunden werden.
+nscale Monitoring Console wird über nscale Administrator konfiguriert, indem neue Komponenten zur Überwachung eingebunden werden.
 Diese Ressourcen müssen in nscale Administrator bereits bekannt sein, um aufgenommen zu werden.
 
 Dabei ist zu beachten, dass nscale Administrator die nscale-Komponenten über das Hostnetzwerk erreicht, während nscale Monitoring Console im eigenen Compose Netzwerk bzw. Kubernetes Namespace mit den übrigen nscale Komponenten läuft.
@@ -56,7 +56,7 @@ docker run \
 
 ## Passwörter
 
-Passwörter für den administrativen Zugriff auf die Monitoring Console werden verschlüsselt im Workspace hinterlegt.
+Passwörter für den administrativen Zugriff auf nscale Monitoring Console werden verschlüsselt im Workspace hinterlegt.
 Zur Benutzerverwaltung können Sie folgendes Kommando verwenden:
 
 ```bash
