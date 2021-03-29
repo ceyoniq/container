@@ -1,30 +1,30 @@
 # nscale Standard Container in Kubernetes
 
 In dieser Dokumentation finden Sie Informationen dazu, wie Sie nscale mit Kubernetes betreiben können.  
-Weitere Information zu Kubernetes finden Sie unter [https://kubernetes.io](https://kubernetes.io/).
+Weitere Information zu Kubernetes finden Sie unter <https://kubernetes.io>.
 
 Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
 
 - Clusterbildung möglich
 - Fehlertoleranz
 - flexible Skalierbarkeit
-- einfache Installation in Cloud-Umgebungen (z.B in [Microsoft Azure Kubernetes Service - AKS](https://azure.microsoft.com/de-de/services/kubernetes-service/))
+- einfache Installation in Cloud-Umgebungen (z. B. in [Microsoft Azure Kubernetes Service - AKS](https://azure.microsoft.com/de-de/services/kubernetes-service/))
 
 > Bitte beachen Sie, dass es sich bei den Konfigurationen in diesem Repository um **Beispielkonfigurationen** handelt.  
-> Für Produktivsysteme müssen Sie ggf. Anpassungen vornehmen.
+> Für Produktivsysteme müssen Sie ggf. Anpassungen an den vorliegenden Konfigurationen vornehmen.
 
 ## Inhalt
 
 - [nscale Standard Container in Kubernetes](#nscale-standard-container-in-kubernetes)
   - [Inhalt](#inhalt)
   - [Quick Start Guide](#quick-start-guide)
-  - [Grundlage](#grundlage)
+  - [Grundlagen](#grundlagen)
   - [Ingress](#ingress)
   - [Persistierung](#persistierung)
     - [emptyDir](#emptydir)
     - [HostPath](#hostpath)
     - [Azure](#azure)
-  - [Konfiguration mit dem nscale Administrator](#konfiguration-mit-dem-nscale-administrator)
+  - [Konfiguration mit nscale Administrator](#konfiguration-mit-nscale-administrator)
   - [Logging](#logging)
   - [Metriken](#metriken)
   - [Limitierungen](#limitierungen)
@@ -34,7 +34,7 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
 
 > Dieses Beispiel berücksichtigt den Betrieb mit **Linux**.  
 > Wenn Sie mit Windows arbeiten, müssen Sie unter Umständen die Dateipfade ändern.  
-> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern die nicht Teil der nscale Standard Container sind.
+> Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der nscale Standard Container ist.
 
 Stellen Sie vor dem Start der nscale Standard Container mit kubernetes sicher, dass Sie die folgenden Voraussetzungen erfüllt haben:
 
@@ -42,8 +42,10 @@ Stellen Sie vor dem Start der nscale Standard Container mit kubernetes sicher, d
 - Sie haben einen [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/) eingerichtet
 - Sie besitzen eine gültige **Lizenzdatei**
 
-Kopieren Sie Ihre Lizenzdatei `license.xml` in den Ordner `kubernetes/kustomize/nscale/base/`.  
-Führen Sie nun folgende Kommandos im Ordner `kubernetes/kustomize/nscale/overlays/emptyDir/` aus:
+Starten Sie die nscale Standard Container:
+
+1. Kopieren Sie Ihre Lizenzdatei `license.xml` in den Ordner `kubernetes/kustomize/nscale/base/`.  
+2. Führen Sie nun folgende Kommandos im Ordner `kubernetes/kustomize/nscale/overlays/emptyDir/` aus:
 
 ```bash
 kubectl create namespace nscale
@@ -56,15 +58,14 @@ Nun können Sie prüfen, ob die jeweiligen `Pods` erfolgreich gestartet werden k
  kubectl get pods -n nscale -w
 ```
 
-Warten Sie bis alle `Pods` den Status `Running` melden.  
+3. Warten Sie bis alle `Pods` den Status `Running` melden.  
 Im Anschluss rufen Sie folgendes Kommando auf:
 
 ```bash
 kubectl port-forward --address 0.0.0.0 deployment/application-layer-web 8090:8090 -n nscale
 ```
 
-Fertig!  
-
+4. Fertig!  
 Sie können nun unter <http://localhost:8090> auf Ihr nscale zugreifen.
 
 Bei der ersten Anmeldung können Sie die Standard-Anmeldedaten verwenden, die beim Start eines neuen nscale Systems automatisch erstellt werden.
@@ -79,14 +80,16 @@ Password: admin
 > Für den Produktiveinsatz wird ein Ingress-Controller empfohlen.
 > Weitere Informationen dazu befinden sich in diesem Dokument.
 
-## Grundlage
+## Grundlagen
 
->Dies ist eine **Beispielkonfiguration**. Für Produktivsysteme müssen Sie andere angepasste Varianten
-konfigurieren.
+>Dies ist eine **Beispielkonfiguration**. Für Produktivsysteme müssen Sie andere angepasste Varianten konfigurieren.
 
-In diesem Beispiel wird `kustomize` verwendet. Durch `kustomize` können Sie leicht Anpassung von Kubernetes-Deployments zur Erzeugung mehrerer Varianten (z.B. für unterschiedliche Umgebungen) vornehmen. Dabei werden die originalen YAML-Dateien nicht modifiziert, sondern mit Overlays überlagert. Im Gegensatz zu Helm kommt kustomize also ganz ohne Templates aus, was die Verwendung besonders einfach macht.
+In diesem Beispiel wird Kustomize verwendet.
+Durch Kustomize können Sie leicht Anpassung von Kubernetes-Deployments zur Erzeugung mehrerer Varianten (z. B. für unterschiedliche Umgebungen) vornehmen.
+Dabei werden die originalen YAML-Dateien nicht modifiziert, sondern mit Overlays überlagert.
+Im Gegensatz zu Helm kommt kustomize so ganz ohne Templates aus, was die Verwendung besonders einfach macht.
 
-Weitere Informationen zu kustomize finden Sie hier:  
+Weitere Informationen zu Kustomize finden Sie hier:  
 <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization>
 
 Die nscale Basiskonfiguration ist im Verzeichnis `base` abgelegt.
@@ -94,7 +97,7 @@ Das Verzeichnis `overlay` enthält Ableitungen für unterschiedliche Umgebungen.
 Jede konkrete nscale Installation wird in einem eigenen **Namespace** installiert.
 Dazu wird mindestens eine Lizenzdatei, sowie ein voll qualifizierter Hostname benötigt.
 
-Von außen erreichbar sind die Web Schnittstellen der Komponente über **Ingress** Regeln.
+Die Web Schnittstellen der Komponente sind von außen über **Ingress** Regeln erreichbar.
 Dazu wird ein eindeutiger voll qualifizierter Hostname für jede nscale Installation angegeben.
 
 Weitere Information zu den nscale Standard Containern finden Sie hier:
@@ -110,8 +113,8 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 - [nscale/webdav-connector (nscale WebDAV-Connector)](components/webdav-connector.md)
 - [nscale/ilm-connector (nscale ERP Connector ILM)](components/ilm-connector.md)
 
-> Wir übernehmen keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern die nicht Teil der oben aufgelisteten nscale Standard Container sind.
-> Weiter erfolgt der Einsatz von Software von Drittanbietern wie Loki, Grafana, Prometheus, etc. hier beispielhaft zum Zwecke der Darstellung innerhalb einer Beispielkonfiguration.
+> Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
+> Weiter erfolgt der Einsatz von Software von Drittanbietern wie Loki, Grafana, Prometheus, etc. hier zum Zweck der Darstellung innerhalb einer Beispielkonfiguration.
 
 ## Ingress
 
@@ -128,7 +131,7 @@ Weitere Informationen zur Ingress Konfiguration finden Sie in der Dokumentation 
 
 Um auf die jeweiligen nscale-Komponenten zugreifen zu können, benötigen Sie einen [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/).
 In diesem Beispiel wird ein [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/) erwartet.
-Passen Sie die Ingress-Regeln an, wenn Sie eine anderen Ingress-Controller verwenden wollen, oder eine OpenShift-`Route` bevorzugen.  
+Passen Sie die Ingress-Regeln an, wenn Sie eine anderen Ingress-Controller verwenden wollen, oder eine OpenShift-Route bevorzugen.  
 Führen Sie zur Verwendung der Beispielkonfiguration folgendes Kommando im Ordner `kubernetes/kustomize/nscale/` aus:
 
 ```bash
@@ -152,7 +155,7 @@ kubectl describe ingress ingress-nscale -n nscale
 Alle Dokumente und Datenbankeinträge werden **gelöscht**, nachdem die nscale-Services wieder heruntergefahren wurden.
 
 > **Achtung! Datenverlust!**  
-> Diese Einstellungen sind nur für den Test- und Demobetrieb geeignet.  
+> Da alle Dokumente und Datenbankeintäge beim Herunterfahren der nscale-Services gelöscht werden, ist diese Einstellung **nur für den Test- und Demobetrieb geeignet**.  
 
 Weitere Informationen: <https://kubernetes.io/docs/concepts/storage/volumes/#emptydir>
 

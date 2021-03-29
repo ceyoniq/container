@@ -13,7 +13,7 @@ Diese Komponente benötigt keine Persistierung.
 >Die hier aufgeführte Liste der Umgebungsvariablen ist **nicht vollständig**.
 Sie bildet lediglich die in unseren Beispielkonfigurationen verwendeten Umgebungsvariablen ab.
 
-Die Bennennung der Umgebungsvariablen von nscale Server Application Layer Web folgt einem Schema, das wir für Sie im nscale Server Application Layer Administrationshandbuch zusammengefasst haben.
+Die Bennennung der Umgebungsvariablen von nscale Server Application Layer Web folgt einem Schema, das wir für Sie im nscale Server Application Layer Web Administrationshandbuch zusammengefasst haben.
 So können Sie auch alle anderen in der Dokumentation beschriebenen Einstellungen vornehmen.
 Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com>.
 
@@ -46,8 +46,8 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 Wenn Sie z.B. eigene Plug-ins für nscale Server Application Layer Web entwickeln wollen,  
 können Sie das mit nscale Standard Container umsetzen.  
 
-In diesem Beispiel wird ein **Plug-in**, eine Änderung am **Kontextmenü** und Anpassungen an den **Icons** demonstriert.  
-Es wird davon ausgegangen, dass die Datei `myplugin.jar` und die Datei `myicons.jar` zuvor von Ihnen erstellt wurde.
+In diesem Beispiel wird ein Plug-in, eine Änderung am Kontextmenü und Anpassungen an den Icons demonstriert.  
+Es wird davon ausgegangen, dass Sie bereits die Datei `myplugin.jar` und die Datei `myicons.jar` erstellt haben.
 
 >Weitere Informationen zu den jeweiligen SDKs entnehmen Sie bitte den entsprechenden Dokumentationen.
 
@@ -103,7 +103,7 @@ Zusätzlich wurde das Kontextmenü geändert.
 ```
 
 Erstellen Sie die Datei `menuconfig.xml` und ergänzen Sie Ihre Kontextmenüeinträge.  
-> Weitere Informationen finden Sie im Administrationshandbuch vom nscale Server Application Layer Web.
+> Weitere Informationen zur Konfiguration von nscale Server Application Layer Web finden Sie im Administrationshandbuch vom nscale Server Application Layer Web.
 
 ### Anpassung an der `nscale_web.xml`
 
@@ -130,9 +130,9 @@ Damit nscale Server Application Layer Web Ihre Konfiguration verabeiten kann, m�
 Alle Dateien müssen im Container in dem Ordner `/opt/ceyoniq/nscale-server/application-layer-web/conf/` verfügbar gemacht werden.
 Dies kann abhängig von der gewählten Technologie durch ein `bind-mount`, ein `volume` oder ein zuvor erstelltes Custom Container-Image erfolgen.
 
-#### Beispiel `docker-compose`
+#### Beispiel Docker-Compose
 
-Wenn Sie `docker-compose` verwenden, können Sie zum Beispiel die Dateien als `bind-mount` konfigurieren.  
+Wenn Sie Docker-Compose verwenden, können Sie zum Beispiel die Dateien als `bind-mount` konfigurieren.  
 
 ```yaml
   application-layer-web:

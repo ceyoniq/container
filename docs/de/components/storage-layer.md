@@ -8,7 +8,7 @@ Die Datei wird im Container hier erwartet: `/opt/ceyoniq/nscale-server/storage-l
 ## Persistierung
 
 > **Achtung! Datenverlust!**  
-> Bitte beachten Sie, dass es zum **Datenverlust** kommt, wenn die hier aufgelisteten Ordner nicht persistiert werden!
+> Wenn die hier aufgelisteten Ordner nicht persistiert werden, kommt es zum **Datenverlust**.
 
 Folgende Ordner müssen persistiert werden, um Datenverlust zu verhindern:
 
@@ -16,14 +16,14 @@ Folgende Ordner müssen persistiert werden, um Datenverlust zu verhindern:
 * `/opt/ceyoniq/nscale-server/storage-layer/da`
 * `/opt/ceyoniq/nscale-server/storage-layer/etc`
 
-Optional (Retrival Buffer)
+Optional (Retrieval Buffer)
 
 * `/opt/ceyoniq/nscale-server/storage-layer/ret`
 
 ## Konfiguration
 
 Sie können Umgebungsvariablen verwenden um den nscale Server Storage Layer zu konfigurieren.  
-Allerdings können sie auch weiterhin die Datei `storagelayer.conf` verwenden, um den nscale Server Storage Layer zu konfigurieren.  
+Allerdings können Sie auch weiterhin die Datei `storagelayer.conf` verwenden, um nscale Server Storage Layer zu konfigurieren.  
 Beachten Sie aber, dass Umgebungsvariablen eine höhere Priorität haben als Konfigurationseinstellung in der Datei `storagelayer.conf`
 und somit Einstellungen aus der Datei  `storagelayer.conf` überlagern.
 
@@ -34,11 +34,11 @@ Sie bildet lediglich die in unseren Beispielkonfigurationen verwendeten Umgebung
 
 Die Bennennung der Umgebungsvariablen von nscale Server Storage Layer folgt einem Schema, das wir für Sie im nscale Server Storage Layer Administrationshandbuch zusammengefasst haben.
 So können Sie auch alle anderen in der Dokumentation beschriebenen Einstellungen vornehmen.
-Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com/>.
+Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com>.
 
 |Umgebungsvariable | Effekt |
 |---|---|
-|LOG_APPENDER=Console |In dieser Umgebungsvariable können Sie festlegen, wo das Logging des nscale Server Storage Layers stattfindet. Hier erfolgt das Logging statt in Dateien im Container auf der Console. |
+|LOG_APPENDER=Console |In dieser Umgebungsvariable können Sie festlegen, wo das Logging von nscale Server Storage Layer stattfindet. Hier erfolgt das Logging statt in Dateien im Container auf der Console. |
 |NSTL_STORAGE-LAYER_LOGLEVEL | In dieser Umgebungsvariable können Sie das Log-Level von nscale Server Storage Layer festlegen. |
 |NSTL_ARCHIVETYPE_900_NAME=NSCALE_DEMO | Mit dieser Umgebungsvariable legen Sie den Namen eines Archivtyps (hier 900) fest. |
 |NSTL_ARCHIVETYPE_900_ID=900 | In dieser Umgebungsvariable können Sie die ID des Archivtyps festlegen. Im Beispiel wird die ID des Archivtyp 900 auf 900 gesetzt. |
@@ -70,5 +70,5 @@ docker run \
 
 ## Skalierung
 
-Bitte beachten Sie, dass der nscale Server Storage Layer im Fall von Kubernetes nicht durch ein ReplicaSet skaliert werden kann.  
-Informationen zur Skalierung des nscale Server Storage Layer finden Sie in der nscale Server Storage Layer Dokumentation in unserem [Serviceportal](<https://serviceportal.ceyoniq.com/>).
+Bitte beachten Sie, dass nscale Server Storage Layer im Fall von Kubernetes nicht durch ein ReplicaSet skaliert werden kann.  
+Informationen zur Skalierung von nscale Server Storage Layer finden Sie in der nscale Server Storage Layer Dokumentation in unserem [Serviceportal](<https://serviceportal.ceyoniq.com/>).
