@@ -10,8 +10,6 @@ spec:
     matchLabels:
       app: storage-layer
   replicas: 1
-  updateStrategy:
-    type: OnDelete
   volumeClaimTemplates: []
   template:
     metadata:
@@ -72,8 +70,6 @@ spec:
         - name: storage-layer
           subPath: arc
           mountPath: /opt/ceyoniq/nscale-server/storage-layer/arc
-        - name: storage-layer-hd
-          mountPath: /opt/ceyoniq/nscale-server/storage-layer/hd
       volumes:
       - name: license
         configMap:
@@ -81,11 +77,6 @@ spec:
       - name: storage-layer
         persistentVolumeClaim:
           claimName: storage-layer
-      - name: storage-layer-hd
-        persistentVolumeClaim:
-          claimName: storage-layer-hd
-      imagePullSecrets:
-        - name: regcred
 ---
 apiVersion: v1
 kind: Service

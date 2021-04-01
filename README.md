@@ -8,10 +8,10 @@ Für mehr Informationen besuchen Sie unsere Website unter <https://www.ceyoniq.c
 
 ## Was sind nscale Standard Container?
 
-nscale Standard Container sind [OCI-kompatible](https://opencontainers.org/) Container-Images die Sie auf Ihrem Rechner, in Ihrem Rechenzentrum oder in der Cloud einsetzen können um den kompletten nscale-Server-Stack betreiben zu können.  
+nscale Standard Container sind [OCI-kompatible](https://opencontainers.org/) Container-Images, die Sie auf Ihrem Rechner, in Ihrem Rechenzentrum oder in der Cloud einsetzen können, um den kompletten nscale-Server-Stack betreiben zu können.  
 
-Häufig wird [Docker](https://www.docker.com/) oder [Kubernetes](https://kubernetes.io/de/) eingesetz, um die Container zu betreiben.  
-Durch die [OCI-Spezifikation](https://github.com/opencontainers/image-spec) sind die Image-Manifest, die Filesystem-Serialisierung und die Image-Konfiguration standardisiert.
+Häufig wird [Docker](https://www.docker.com/) oder [Kubernetes](https://kubernetes.io/de/) eingesetzt, um die Container zu betreiben.  
+Durch die [OCI-Spezifikation](https://github.com/opencontainers/image-spec) sind das Image-Manifest, die Filesystem-Serialisierung und die Image-Konfiguration standardisiert.
 
 Weitere Informationen finden Sie in diesen Dokumentationen:
 

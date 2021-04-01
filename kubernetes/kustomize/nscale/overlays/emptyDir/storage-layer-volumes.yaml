@@ -3,8 +3,3 @@
   value: 
     name: storage-layer
     emptyDir: {}
-- op: replace
-  path: /spec/template/spec/volumes/2
-  value: 
-    name: storage-layer-hd
-    emptyDir: {}

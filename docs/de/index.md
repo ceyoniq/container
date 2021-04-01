@@ -27,14 +27,13 @@ Für mehr Informationen besuchen Sie unsere Website unter <https://www.ceyoniq.c
 
 Bei diesem Dokument handelt es sich um die Dokumentation verschiedener nscale-Komponenten im Container-Betrieb.
 Dieses Dokument richtet sich ausdrücklich an Personen, die sich mit dem Betrieb bzw. der Administration von nscale beschäftigen.
-Sie sollten außerdem Erfahrungen im Umgang mit dem Betrieb von Software bzw. Applikationen in OCI-kompatiblen Containern haben.
-Erfahrungen im Umgang mit einer nscale-Standardinstallation sind ebenfalls wünschenswert.
+Sie sollten außerdem Erfahrungen im Umgang mit dem Betrieb von Software bzw. Applikationen in OCI-kompatiblen Containern, sowie Grundwissen zum Aufbau und Zusammenspiel eines nscale-Systems haben.
 
 > Weitere Informationen zum Betrieb von nscale finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com>.
 
 ## Softwarevoraussetzungen
 
-Für den Betrieb von nscale Standard Container muss Ihr System die folgenden Mindestvoraussetzung erfüllen:
+Für den Betrieb von nscale Standard Container muss Ihr System die folgenden Mindestvoraussetzungen erfüllen:
 
 - min. 4 GB RAM
 - weitere Software bzw. Hardwarevoraussetzungen finden Sie im Installationshandbuch der jeweiligen Komponenten.
@@ -105,16 +104,16 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 
 ## Betrieb mit Docker
 
-Sie können die jeweiligen nscale Standard Container mit Docker, oder einer kompatiblen Laufzeitumgebung für OCI-Container betreiben.
+Sie können die jeweiligen nscale Standard Container mit Docker oder einer kompatiblen Laufzeitumgebung für OCI-Container betreiben.
 Wir empfehlen den Einsatz von Docker-Compose oder Kubernetes.  
-Weitere Informationen zum Betrieb der nscale Standard Container mit Docker, finden Sie in den jeweiligen Dokumentationen der Komponenten in diesem Repository.
+Weitere Informationen zum Betrieb der nscale Standard Container mit Docker finden Sie in den jeweiligen Dokumentationen der Komponenten in diesem Repository.
 
 [Liste aller nscale Server Standard Container](#nscale-standard-container-images)
 
 ## Betrieb mit Docker-Compose
 
-Der Betrieb mit Docker-Compose ist eine Möglichkeit nscale Standard Container zu betreiben.  
-Bei Docker-Compose handelt es sich um ein Tool, mit dem Sie aus mehreren Containern bestehende Applikation definieren und betreiben können.
+Der Betrieb mit Docker-Compose ist eine Möglichkeit, nscale Standard Container zu betreiben.  
+Bei Docker-Compose handelt es sich um ein Tool, mit dem Sie aus mehreren Containern bestehende Applikationen definieren und betreiben können.
 
 Weitere Informationen zu Docker-Compose finden Sie  unter <https://docs.docker.com/compose>.  
 
@@ -132,7 +131,7 @@ Eine genaue Beschreibung der Konfiguration von nscale im Betrieb mit Docker-Comp
 
 Bei Kubernetes handelt es sich um eine portable, erweiterbare Open-Source-Plattform zur Verwaltung von containerisierten Arbeitslasten und Services, die sowohl die deklarative Konfiguration als auch die Automatisierung erleichtert.
 Kubernetes zeichnet sich durch ein großes, schnell wachsendes Ökosystem aus.
-Kubernetes Dienstleistungen, Support und Tools sind weit verbreitet.  
+Dienstleistungen, Support und Tools für Kubernetes sind weit verbreitet.  
 
 Weitere Informationen zu Kubernetes finden Sie unter <https://kubernetes.io>.
 

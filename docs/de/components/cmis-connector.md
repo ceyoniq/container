@@ -1,5 +1,15 @@
 # nscale CMIS-Connector
 
+## Inhalt
+
+- [nscale CMIS-Connector](#nscale-cmis-connector)
+  - [Inhalt](#inhalt)
+  - [Lizenzierung](#lizenzierung)
+  - [Persistierung](#persistierung)
+  - [Umgebungsvariablen](#umgebungsvariablen)
+  - [Ports](#ports)
+  - [Start mit Docker](#start-mit-docker)
+
 ## Lizenzierung
 
 Diese Komponente benötigt keine lokale Lizenzdatei.
@@ -15,16 +25,16 @@ Diese Komponente benötigt keine Persistierung.
 |Umgebungsvariable | Effekt |
 |----|---|
 |CMIS_AL_HOST=localhost|Sie müssen den Namen oder die IP-Adresse des Containers angeben, über den der nscale Server Application Layer erreichbar ist, um eine Verbindung aufzubauen.|
-|CMIS_AL_PORT=8080 |Sie können den Port angeben, der verwendet werden soll, um eine Verbindung zu nscale Server Application Layer aufzubauen. Der Standradwert ist "8080".|
-|CMIS_AL_SSL=false |Sie können festlegen, ob SSL verwendet werden soll, um eine Verbindung zu nscale Server Application Layer  aufzubauen. Der Standardwert ist "false".|
+|CMIS_AL_PORT=8080 |Sie können den Port angeben, der verwendet werden soll, um eine Verbindung zu nscale Server Application Layer aufzubauen. Der Standardwert ist "8080".|
+|CMIS_AL_SSL=false |Sie können festlegen, ob SSL verwendet werden soll, um eine Verbindung zu nscale Server Application Layer aufzubauen. Der Standardwert ist "false".|
 |CMIS_AL_INSTANCE=nscalealinst1 |Sie können die Instanz für den Anmeldeversuch am nscale Server Application Layer auswählen.|
 
 ## Ports
 
-* 8096
-* 8196
+- 8096
+- 8196
 
-## Start
+## Start mit Docker
 
 ```bash
 docker run -it \

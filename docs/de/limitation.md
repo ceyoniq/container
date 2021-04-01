@@ -22,7 +22,7 @@ Weitere Informationen finden Sie in diesem Dokument.
 ## nscale RMS
 
 Der nscale RMS (Remote Management Service) steht für die nscale Standard Container nicht zur Verfügung.
-Verwenden Sie in nscale Administrator die Funktion "New component group" um nscale Standard Container zu konfigurieren.
+Verwenden Sie in nscale Administrator die Funktion "Neue Komponentengruppe", um nscale Standard Container zu konfigurieren.
 
 Eine genaue Anleitung finden Sie im Handbuch von nscale Administrator.
 
@@ -35,28 +35,28 @@ Eine genaue Anleitung finden Sie im Handbuch von nscale Administrator.
 
 ## nscale Server Application Layer
 
-- Die Offline-Konfiguration (z. B. alle Konfigurationsmerkmale die über die `instance1.conf` gesetzt werden können), ist in nscale Administrator nicht verfügbar.
+- Die Offline-Konfiguration (z. B. alle Konfigurationsmerkmale, die über die Datei `instance1.conf` gesetzt werden können) ist in nscale Administrator nicht verfügbar.
 
-Weitere Informationen zur nscale Server Application Layer:  
+Weitere Informationen zum nscale Server Application Layer:  
 [components/application-layer.md](components/application-layer.md)
 
 ## nscale Server Application Layer Web
 
-- Der nscale Server Application Layer Web kann nicht in nscale Administrator konfiguriert werden.  
+- nscale Server Application Layer Web kann nicht in nscale Administrator konfiguriert werden.  
 
-Weitere Informationen zur nscale Server Application Layer Web:  
+Weitere Informationen zum nscale Server Application Layer Web:  
 [components/application-layer-web.md](components/application-layer-web.md)
 
 ## nscale Server Storage Layer
 
-- Die Offline-Konfiguration (alle Konfigurationsmerkmale die über die `storagelayer.conf` gesetzt werden können), ist in nscale Administrator nicht  verfügbar.
+- Die Offline-Konfiguration (alle Konfigurationsmerkmale, die über die Datei `storagelayer.conf` gesetzt werden können) ist in nscale Administrator nicht  verfügbar.
 
 Weitere Informationen zum nscale Server Storage Layer:  
 [components/storage-layer.md](components/storage-layer.md)
 
 ## nscale Rendition Server
 
-- Die Offline-Konfiguration, ist in nscale Administrator nicht verfügbar.
+- Die Offline-Konfiguration ist in nscale Administrator nicht verfügbar.
 - Das Passwort kann nicht über nscale Administrator gesetzt werden.
 - Der Port kann nicht über nscale Administrator gesetzt werden.
 
@@ -65,19 +65,19 @@ Weitere Informationen zum nscale Rendition Server:
 
 ## nscale Monitoring Console
 
-- Die Offline-Konfiguration, ist in nscale Administrator nicht verfügbar.
+- Die Offline-Konfiguration ist in nscale Administrator nicht verfügbar.
 - Das Passwort kann nicht über nscale Administrator gesetzt werden.
 - In nscale Administrator sind die nscale-Komponenten über das Hostnetzwerk erreichbar, während nscale Monitoring Console im eigenen Compose Netzwerk bzw. Kubernetes Namespace mit den übrigen nscale-Komponenten nicht über das Hostnetzwerk kommunizieren kann.
 Dadurch wird es notwendig, dass Sie in der Konfiguration der Komponenten den Hostname aus Sicht von nscale Monitoring Console nachträglich anpassen.
-Diese Änderungen können Sie in nscale Administrator im Knoten `"Rechnername">Monitoring Console> Konfiguration>Ressourcen` vornehmen.
+Diese Änderungen können Sie in nscale Administrator im Knoten `"Rechnername" > Monitoring Console > Konfiguration > Ressourcen` vornehmen.
 Bearbeiten Sie dazu den Hostnamen aller Komponenten.
 
-Weitere Informationen zu nscale Monitoring Console:  
+Weitere Informationen zur nscale Monitoring Console:  
 [components/monitoring-console.md](components/monitoring-console.md)
 
 ## nscale Console
 
-- Die Offline-Konfiguration, ist in nscale Administrator nicht verfügbar.
+- Die Offline-Konfiguration ist in nscale Administrator nicht verfügbar.
 - Die folgenden Plug-ins sind verfügbar:
   - Benutzerverwaltung
   - nstore
@@ -85,15 +85,15 @@ Weitere Informationen zu nscale Monitoring Console:
   - Willkommen & Information
   - eGov Administration
   - AdminType
-- Mit der Funktion "Kennwortänderung" können Sie Ihr Kennwort für nscale Console ändern. Die Kennwörter für die anderen Komponenten sind nicht betroffen
+- Mit der Funktion "Kennwortänderung" können Sie Ihr Kennwort für nscale Console ändern. Die Kennwörter für die anderen Komponenten sind nicht betroffen.
 
 Weitere Informationen zur nscale Console:  
 [components/console.md](components/console.md)
 
 ## nscale Pipeliner
 
-Die Offline-Konfiguration (alle Konfigurationsmerkmale die über die `cold.xml` gesetzt werden können),
-ist in nscale Administrator nicht mehr verfügbar.
+- Die Online-Konfiguration ist in nscale Administrator nicht verfügbar.
+- Die Offline-Konfiguration kann nur durch Import und Export einer Konfigurationsdatei (`cold.xml)` in nscale Administrator erfolgen werden.
 
-Weiter Information zum nscale Pipeliner:  
+Weitere Information zum nscale Pipeliner:  
 [components/pipeliner.md](components/pipeliner.md)
