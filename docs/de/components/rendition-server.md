@@ -1,5 +1,16 @@
 # nscale Rendition Server
 
+## Inhalt
+
+- [nscale Rendition Server](#nscale-rendition-server)
+  - [Inhalt](#inhalt)
+  - [Lizenzierung](#lizenzierung)
+  - [Persistierung](#persistierung)
+  - [Umgebungsvariablen](#umgebungsvariablen)
+  - [Ports](#ports)
+  - [Start mit Docker](#start-mit-docker)
+  - [Passwörter](#passwörter)
+
 ## Lizenzierung
 
 Diese Komponente benötigt eine lokale Lizenzdatei.
@@ -7,7 +18,7 @@ Die Datei wird im Container hier erwartet: `/opt/ceyoniq/nscale-rendition-server
 
 ## Persistierung
 
-Um zu gewährleisten, dass Sie nach dem Herunterfahren des Systems weiterhin Zugriff auf Ihre Daten haben, sorgen Sie für eine Persistierung Sie der Ordner
+Um zu gewährleisten, dass Sie nach dem Herunterfahren des Systems weiterhin Zugriff auf Ihre Daten haben, sorgen Sie für eine Persistierung des Ordners
 `/opt/ceyoniq/nscale-rendition-server/share`.
 
 ## Umgebungsvariablen
@@ -16,22 +27,22 @@ Um zu gewährleisten, dass Sie nach dem Herunterfahren des Systems weiterhin Zug
 
 |Umgebungsvariable | Effekt |
 |---|---|
-|RSX_APPENDER=Console | Wenn Sie diese Umgebungsvariable verwenden, werden die Logs auf die Console im Container ausgegeben. |
+|RSX_APPENDER=Console | Wenn Sie diese Umgebungsvariable verwenden, werden die Logs auf die Konsole im Container ausgegeben. |
 |RSX_PASSWORD=admin | Überschreibt das administrative Passwort für den Rendition Server. |
 |ENV_WORKDIR=<"path">|Sie können das Arbeitsverzeichnis ändern. Standard ist "<"InstallDir">/workspace".|
 |SOCKET_PORT=8192| Sie können den HTTP-Port der Web-Anwendung festlegen.|
-|SOCKET_TIMEOUT=120|Sie können die maximale Requestdauer in Sekunden festlegen. Wenn nscale Rendition Server nach Ablaufen der Zeit keine Antwort erhalten hat, wird der Request abgebrochen.|
+|SOCKET_TIMEOUT=120|Sie können die maximale Requestdauer in Sekunden festlegen. Wenn nscale Rendition Server nach Ablauf der Zeit keine Antwort erhalten hat, wird der Request abgebrochen.|
 |SSL_ACTIVE=true|Sie können SSL aktivieren bzw. deaktivieren.|
 |SSL_PORT=8193|Sie können den HTTPS-Port für die Web-Anwendung festlegen.|
-|RMI_ACTIVE=false|Sie können RMI aktivieren. Dadurch ermöglichen Sie den Remote-Zugriff auf die Java Monitoring Schnittstelle (JMX). **Aus Sicherheitsgründen raten wir von der Verwendung von RMI ab.**|
-|RMI_PORT=8194|Sie können den RMI-Port festlegen. So erhalten Sie Remote-Zugriff über "service:jmx:rmi://hostname: 8194/jndi/rmi://hostname: 8194/jmxrmi". **Aus Sicherheitsgründen raten wir von der Verwendung von RMI ab.** |
+|RMI_ACTIVE=false| Aus Sicherheitsgründen raten wir von der Verwendung von RMI ab. |
+|RMI_PORT=8194| Aus Sicherheitsgründen raten wir von der Verwendung von RMI ab. |
 
 ## Ports
 
-* 8192
-* 8193
+- 8192
+- 8193
 
-## Start
+## Start mit Docker
 
 ```bash
 docker run \

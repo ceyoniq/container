@@ -40,17 +40,6 @@ services:
       - ${STORAGE_LAYER_LICENSE_FILE}:/opt/ceyoniq/nscale-server/storage-layer/etc/license.xml:ro
     environment:
       - LOG_APPENDER=Console
-      - NSTL_STORAGE-LAYER_LOGLEVEL=4
-      - NSTL_ARCHIVETYPE_900_NAME=NSCALE_DEMO
-      - NSTL_ARCHIVETYPE_900_ID=900
-      - NSTL_ARCHIVETYPE_900_LOCALMIGRATION=0
-      - NSTL_ARCHIVETYPE_900_LOCALMIGRATIONTYPE=HD
-      - NSTL_ARCHIVETYPE_900_HARDDISK=1
-      - NSTL_HarddiskDevice_0_ARCHIVETYPES=NSCALE_DEMO
-      - NSTL_HarddiskDevice_0_INDEX=1
-      - NSTL_HarddiskDevice_0_NAME=HD
-      - NSTL_HarddiskDevice_0_PATH=/mnt
-      - NSTL_HarddiskDevice_0_PERMANENTMIGRATION=1
     networks:
       - nscale
 
@@ -69,6 +58,7 @@ services:
       - INSTANCE1_CORE_DB_SCHEMA=public
       - INITIALIZE_DOCUMENT_AREA=DA
       - JAVA_OPTS=-Xmx2g
+      - INSTANCE1_CORE_FULLTEST_INDEX_MIRROR_LOCALCACHE=off
     networks:
       - nscale
     depends_on:

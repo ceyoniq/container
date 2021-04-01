@@ -13,18 +13,7 @@ spec:
       storage: 8Gi
 
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: storage-layer-hd
-spec:
-  storageClassName: default
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 8Gi
----
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:

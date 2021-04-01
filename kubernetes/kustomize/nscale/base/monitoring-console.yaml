@@ -10,8 +10,6 @@ spec:
       app: monitoring-console
   replicas: 1
   strategy:
-    type: RollingUpdate
-  strategy:
     type: Recreate  
   template:
     metadata:
@@ -78,8 +76,6 @@ spec:
       - name: monitoring-console-workspace
         persistentVolumeClaim:
           claimName: monitoring-console-workspace
-      imagePullSecrets:
-        - name: regcred
 ---
 apiVersion: v1
 kind: Service

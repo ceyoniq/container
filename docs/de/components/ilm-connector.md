@@ -1,5 +1,15 @@
 # nscale ERP Connector ILM
 
+## Inhalt
+
+- [nscale ERP Connector ILM](#nscale-erp-connector-ilm)
+  - [Inhalt](#inhalt)
+  - [Lizenzierung](#lizenzierung)
+  - [Persistierung](#persistierung)
+  - [Umgebungsvariablen](#umgebungsvariablen)
+  - [Ports](#ports)
+  - [Start mit Docker](#start-mit-docker)
+
 ## Lizenzierung
 
 Diese Komponente benötigt keine lokale Lizenzdatei.
@@ -15,16 +25,16 @@ Diese Komponente benötigt keine Persistierung.
 |Umgebungsvariable | Effekt |
 |----|---|
 |ILM_AL_HOST=localhost|Sie müssen den Namen oder die IP-Adresse des Containers angeben, über den der nscale Server Application Layer erreichbar ist, um eine Verbindung aufzubauen.|
-|ILM_AL_PORT=8080|Sie können den Port angeben, der verwendet werden soll, um eine Verbindung zu nscale Server Application Layer aufzubauen. Der Standradwert ist "8080".|
+|ILM_AL_PORT=8080|Sie können den Port angeben, der verwendet werden soll, um eine Verbindung zu nscale Server Application Layer aufzubauen. Der Standardwert ist "8080".|
 |ILM_AL_SSL=false|Sie können festlegen, ob SSL verwendet werden soll, um eine Verbindung zu nscale Server Application Layer aufzubauen. Der Standardwert ist "false".|
-|ILM_AL_DOMAIN=nscale|Sie können die Domäne  Domain für die Anmeldung an nscale Server Application Layer festlegen.|
+|ILM_AL_DOMAIN=nscale|Sie können die Domäne für die Anmeldung an nscale Server Application Layer festlegen.|
 
 ## Ports
 
-+ 8297
-+ 8397
+- 8297
+- 8397
 
-## Start
+## Start mit Docker
 
 ```bash
 docker run -it \
@@ -34,5 +44,5 @@ docker run -it \
 -e ILM_AL_PORT=8080 \
 -e ILM_AL_SSL=false \
 -e ILM_AL_DOMAIN=nscale \
-ceyoniq.azurecr.io/nscale/ilm-connector:8.0
+nscale/ilm-connector:8.0
 ```

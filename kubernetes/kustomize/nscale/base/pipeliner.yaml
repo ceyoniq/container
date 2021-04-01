@@ -48,5 +48,3 @@ spec:
       - name: config
         configMap:
           name: pipeliner-config
-      imagePullSecrets:
-        - name: regcred

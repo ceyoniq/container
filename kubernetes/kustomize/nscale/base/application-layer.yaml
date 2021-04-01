@@ -42,8 +42,6 @@ spec:
     matchLabels:
       app: application-layer
   replicas: 1
-  updateStrategy:
-    type: OnDelete
   volumeClaimTemplates: []
   template:
     metadata:
@@ -108,6 +106,8 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.namespace
+          - name: INSTANCE1_CORE_FULLTEST_INDEX_MIRROR_LOCALCACHE
+            value: "off"           
         livenessProbe:
           tcpSocket:
             port: 20626
@@ -137,8 +137,6 @@ spec:
       - name: license
         configMap:
           name: application-layer-license
-      imagePullSecrets:
-        - name: regcred
 ---
 apiVersion: v1
 kind: Service

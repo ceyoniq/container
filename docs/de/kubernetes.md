@@ -24,7 +24,7 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
     - [emptyDir](#emptydir)
     - [HostPath](#hostpath)
     - [Azure](#azure)
-  - [Konfiguration mit nscale Administrator](#konfiguration-mit-nscale-administrator)
+  - [Zugriff mit nscale Administrator](#konfiguration-mit-nscale-administrator)
   - [Logging](#logging)
   - [Metriken](#metriken)
   - [Limitierungen](#limitierungen)
@@ -38,7 +38,7 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
 
 Stellen Sie vor dem Start der nscale Standard Container mit kubernetes sicher, dass Sie die folgenden Voraussetzungen erfüllt haben:
 
-- Sie haben einen Kubernetes-Cluster (ab Version 1.19.3) den Sie mit `kubectl` erreichen können
+- Sie haben einen Kubernetes-Cluster (ab Version 1.19.3), den Sie mit `kubectl` erreichen können
 - Sie haben einen [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/) eingerichtet
 - Sie besitzen eine gültige **Lizenzdatei**
 
@@ -52,20 +52,20 @@ kubectl create namespace nscale
 kubectl apply --namespace nscale -k .
 ```
 
-Nun können Sie prüfen, ob die jeweiligen `Pods` erfolgreich gestartet werden konnten.
+3. Sie können prüfen, ob die jeweiligen `Pods` erfolgreich gestartet werden konnten.
 
 ```bash
  kubectl get pods -n nscale -w
 ```
 
-3. Warten Sie bis alle `Pods` den Status `Running` melden.  
-Im Anschluss rufen Sie folgendes Kommando auf:
+4. Warten Sie bis alle `Pods` den Status `Running` melden.  
+5. Rufen Sie folgendes Kommando auf:
 
 ```bash
 kubectl port-forward --address 0.0.0.0 deployment/application-layer-web 8090:8090 -n nscale
 ```
 
-4. Fertig!  
+6. Fertig!  
 Sie können nun unter <http://localhost:8090> auf Ihr nscale zugreifen.
 
 Bei der ersten Anmeldung können Sie die Standard-Anmeldedaten verwenden, die beim Start eines neuen nscale Systems automatisch erstellt werden.
@@ -78,16 +78,16 @@ Password: admin
 ```
 
 > Für den Produktiveinsatz wird ein Ingress-Controller empfohlen.
-> Weitere Informationen dazu befinden sich in diesem Dokument.
+> Weitere Informationen dazu finden Sie in diesem Dokument.
 
 ## Grundlagen
 
 >Dies ist eine **Beispielkonfiguration**. Für Produktivsysteme müssen Sie andere angepasste Varianten konfigurieren.
 
 In diesem Beispiel wird Kustomize verwendet.
-Durch Kustomize können Sie leicht Anpassung von Kubernetes-Deployments zur Erzeugung mehrerer Varianten (z. B. für unterschiedliche Umgebungen) vornehmen.
+Durch Kustomize können Sie leicht Anpassungen von Kubernetes-Deployments zur Erzeugung mehrerer Varianten (z. B. für unterschiedliche Umgebungen) vornehmen.
 Dabei werden die originalen YAML-Dateien nicht modifiziert, sondern mit Overlays überlagert.
-Im Gegensatz zu Helm kommt kustomize so ganz ohne Templates aus, was die Verwendung besonders einfach macht.
+Im Gegensatz zu Helm kommt Kustomize so ganz ohne Templates aus, was die Verwendung besonders einfach macht.
 
 Weitere Informationen zu Kustomize finden Sie hier:  
 <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization>
@@ -95,7 +95,7 @@ Weitere Informationen zu Kustomize finden Sie hier:
 Die nscale Basiskonfiguration ist im Verzeichnis `base` abgelegt.
 Das Verzeichnis `overlay` enthält Ableitungen für unterschiedliche Umgebungen.
 Jede konkrete nscale Installation wird in einem eigenen **Namespace** installiert.
-Dazu wird mindestens eine Lizenzdatei, sowie ein voll qualifizierter Hostname benötigt.
+Dazu werden mindestens eine Lizenzdatei sowie ein voll qualifizierter Hostname benötigt.
 
 Die Web Schnittstellen der Komponente sind von außen über **Ingress** Regeln erreichbar.
 Dazu wird ein eindeutiger voll qualifizierter Hostname für jede nscale Installation angegeben.
@@ -131,14 +131,14 @@ Weitere Informationen zur Ingress Konfiguration finden Sie in der Dokumentation 
 
 Um auf die jeweiligen nscale-Komponenten zugreifen zu können, benötigen Sie einen [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/).
 In diesem Beispiel wird ein [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/) erwartet.
-Passen Sie die Ingress-Regeln an, wenn Sie eine anderen Ingress-Controller verwenden wollen, oder eine OpenShift-Route bevorzugen.  
+Passen Sie die Ingress-Regeln an, wenn Sie einen anderen Ingress-Controller verwenden wollen oder eine OpenShift-`Route` bevorzugen.  
 Führen Sie zur Verwendung der Beispielkonfiguration folgendes Kommando im Ordner `kubernetes/kustomize/nscale/` aus:
 
 ```bash
 kubectl apply --namespace nscale ingress.yaml
 ```
 
-Informationen über die gesetzten Ingress-Regeln bekommen Sie über folgende Kommandos:  
+Informationen über die gesetzten Ingress-Regeln können Sie abrufen, indem Sie die folgenden Kommandos ausführen:  
 
 ```bash
 # Übersicht über alle Ingress-Regeln in Ihrem Cluster
@@ -150,6 +150,10 @@ kubectl describe ingress ingress-nscale -n nscale
 
 ## Persistierung
 
+In diesem Beispiel wird Ihnen gezeigt, wie Sie Daten innerhalb Kubernetes speichern können. Je nach Kubernetes-Umgebung können sich die Persistierungsmöglichkeiten bei Ihnen unterscheiden.
+
+Alle Beispiele müssen im Ordner `kubernetes/kustomize/nscale` ausgeführt werden.
+
 ### emptyDir
 
 Alle Dokumente und Datenbankeinträge werden **gelöscht**, nachdem die nscale-Services wieder heruntergefahren wurden.
@@ -159,11 +163,15 @@ Alle Dokumente und Datenbankeinträge werden **gelöscht**, nachdem die nscale-S
 
 Weitere Informationen: <https://kubernetes.io/docs/concepts/storage/volumes/#emptydir>
 
-```bash
-# deployment
-kubectl apply -k overlays/emptydir/ -n nscale
+Anlegen aller Ressourcen:
 
-# delete installation
+```bash
+kubectl apply -k overlays/emptydir/ -n nscale
+```
+
+Löschen aller Ressourcen:
+
+```bash
 kubectl delete -k overlays/emptydir/ -n nscale
 ```
 
@@ -173,11 +181,23 @@ Alle Dateien werden auf der lokalen Festplatte eines `Nodes` gespeichert.
 
 Weitere Informationen: <https://kubernetes.io/docs/concepts/storage/volumes/#hostpath>
 
-```bash
-# deployment
-kubectl apply -k overlays/hostPath/ -n nscale
+Anlegen aller Ressourcen:
 
-# delete installation
+```bash
+kubectl apply -k overlays/hostPath/ -n nscale
+```
+
+Löschen aller Ressourcen (außer PVs und PVCs):
+
+```bash
+kubectl delete -k base/ -n nscale
+```
+
+Löschen aller Ressourcen (PVs und PVCs werden **gelöscht**)
+> **Achtung! Datenverlust!**  
+> Wenn die PVs und PVCs gelöscht werden, können die darin gespeicherten Daten nicht wiederhergestellt werden.
+
+```bash
 kubectl delete -k overlays/hostPath/ -n nscale
 ```
 
@@ -190,27 +210,39 @@ Weitere Informationen:
 - <https://kubernetes.io/docs/concepts/storage/volumes/#azurefile>
 - <https://kubernetes.io/docs/concepts/storage/volumes/#azuredisk>
 
-```bash
-# deployment
-kubectl apply -k overlays/azure/ -n nscale
+Anlegen aller Ressourcen:
 
-# delete installation
+```bash
+kubectl apply -k overlays/azure/ -n nscale
+```
+
+Löschen aller Ressourcen (außer PVs und PVCs):
+
+```bash
+kubectl delete -k base/ -n nscale
+```
+
+Löschen aller Ressourcen (PVs und PVCs werden **gelöscht**)
+> **Achtung! Datenverlust!**  
+> Wenn die PVs und PVCs gelöscht werden, können die darin gespeicherten Daten nicht wiederhergestellt werden.
+
+```bash
 kubectl delete -k overlays/azure/ -n nscale
 ```
 
-## Konfiguration mit nscale Administrator
+## Zugriff mit nscale Administrator
 
-> Sie benötigen nscale Administrator ab Version 8.0.500.
+> Sie benötigen nscale Administrator ab Version 8.0.5000.
 
-Für den Zugriff mit nscale Administrator auf Ihre nscale-Installation innerhalb Kubernetes, steht Ihnen der **kein RMS**-Modus (nscale Remote Management Service) zur Verfügung. Erzeugen Sie eine neue Komponenten-Gruppe in nscale Administrator, um den **kein RMS**-Modus zu verwenden und auf die jeweiligen nscale-Komponenten zugreifen zu können.
+Für den Zugriff mit nscale Administrator auf Ihre nscale-Installation innerhalb Kubernetes steht Ihnen der **kein RMS**-Modus (RMS = nscale Remote Management Service) zur Verfügung. Erzeugen Sie eine neue Komponenten-Gruppe in nscale Administrator, um den **kein RMS**-Modus zu verwenden und auf die jeweiligen nscale-Komponenten zugreifen zu können.
 
-Weiter Informationen finden Sie hier: [limitation.md](limitation.md)
+Weitere Informationen finden Sie hier: [limitation.md](limitation.md)
 
 Damit Sie von außerhalb Ihres Kubernetes-Cluster auf die jeweiligen nscale-Komponenten zugreifen können, müssen die Ports der nscale-Komponenten durch ein `kubectl port-forward` auf Ihr lokales System weiterleitet werden.
 
 ```bash
 
-# statefulset
+# stateful set
 kubectl port-forward --address 0.0.0.0 pod/application-layer-0 080:8080 8443:8443 -n nscale
 kubectl port-forward --address 0.0.0.0 pod/storage-layer-0 3005:3005 -n nscale
 
@@ -223,8 +255,8 @@ kubectl port-forward --address 0.0.0.0 deployment/pipeliner 3125:3120 -n nscale
 
 ## Logging
 
-Alle nscale Standard Container schreiben Ihre Logging-Informationen auf StdOut.
-Somit können Sie mit etablierten Tools, wie zum Beispiel [Loki](https://grafana.com/oss/loki/), Logs aggregieren.
+Alle nscale Standard Container schreiben ihre Logging-Informationen auf StdOut.
+Mit etablierten Tools, wie zum Beispiel [Loki](https://grafana.com/oss/loki/), können Sie deshalb Logs aggregieren.
 Sie können die jeweiligen Logging-Ausgaben wie folgt abrufen:  
 
 ```bash
@@ -237,7 +269,7 @@ Weitere Informationen zum Thema Logging in Kubernetes finden Sie hier:
 
 ## Metriken
 
-Die nscale-Komponenten werden weiterhin über nscale Monitoring Console überwacht, die als Deployment im Cluster verfügbar ist. Die Integration der nscale-Komponenten als Resource wird wie bisher über den Administrator verwaltet.
+Die nscale-Komponenten werden weiterhin über nscale Monitoring Console überwacht, die als Deployment im Cluster verfügbar ist. Die Integration der nscale-Komponenten als Ressource wird wie bisher über nscale Administrator verwaltet.
 
 Für [Prometheus](https://prometheus.io/) stehen zwei Endpunkte zur Verfügung. Beide sind über Basic-Auth geschützt und brauchen deshalb ein Passwort für nscale Monitoring Console. Die Benutzerverwaltung ist über nscale Administrator verfügbar.
 
