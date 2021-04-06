@@ -51,7 +51,7 @@ docker run \
   -h democontainer \
   -v $(pwd)/share:/opt/ceyoniq/nscale-rendition-server/share \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-rendition-server/conf/license.xml \
-  nscale/rendition-server
+  nscale/rendition-server:8.0
 ```
 
 ## Passwörter

@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: ilm-connector
-        image: nscale/ilm-connector:8.0
+        image: nscale/ilm-connector:8.0.5000.2021032309.87912327506
         imagePullPolicy: Always
         env:
         - name: ILM_AL_HOST

@@ -70,7 +70,7 @@ spec:
           do echo waiting for database; sleep 2; done;']
       containers:
       - name: application-layer
-        image: nscale/application-layer:8.0
+        image: nscale/application-layer:8.0.5003.2021033114.18381050795
         imagePullPolicy: Always
         env:
           - name: INSTANCE1_INSTANCE_LOGGER_CONF

@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: pipeliner    
-        image: nscale/pipeliner:8.0
+        image: nscale/pipeliner:8.0.5003.2021033116.775856262571
         imagePullPolicy: Always
         resources:
           limits:

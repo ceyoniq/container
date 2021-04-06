@@ -31,7 +31,7 @@ docker run \
   -v $(pwd)/cold.xml:/opt/ceyoniq/nscale-pipeliner/workdir/config/runtime/cold.xml \
   -v $(pwd)/data:/opt/ceyoniq/nscale-pipeliner/workdir/data \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-pipeliner/workdir/license.xml \
-  nscale/pipeliner
+  nscale/pipeliner:8.0
 ```
 
 ## Konfiguration

@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: webdav-connector
-        image: nscale/webdav-connector:8.0
+        image: nscale/webdav-connector:8.0.5000.2021031902.87912327506
         imagePullPolicy: Always
         env:
         - name: WEBDAV_AL_HOST

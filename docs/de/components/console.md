@@ -46,5 +46,5 @@ docker run \
    -e ALInstance=nscalealinst1 \
    -p 8086:8086 \
    -e LOG_APPENDER=Console \
-   nscale/console
+   nscale/console:8.0
 ```

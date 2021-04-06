@@ -55,7 +55,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
    -e log4jConfigLocation=../conf/nscale_stdout_log_conf.xml \
    -e nscale-port=8080 \
    -p 8090:8090 \
-   nscale/application-layer-web
+   nscale/application-layer-web:8.0.5000.2021040520-pre
 ```
 
 ## Information für Entwickler
