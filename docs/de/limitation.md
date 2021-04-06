@@ -93,7 +93,7 @@ Weitere Informationen zur nscale Console:
 ## nscale Pipeliner
 
 - Die Online-Konfiguration ist in nscale Administrator nicht verfügbar.
-- Die Offline-Konfiguration kann nur durch Import und Export einer Konfigurationsdatei (`cold.xml)` in nscale Administrator erfolgen werden.
+- Die Offline-Konfiguration kann nur durch Import und Export einer Konfigurationsdatei (`cold.xml`) in nscale Administrator erfolgen.
 
 Weitere Information zum nscale Pipeliner:  
 [components/pipeliner.md](components/pipeliner.md)

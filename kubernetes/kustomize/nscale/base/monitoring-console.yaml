@@ -22,7 +22,7 @@ spec:
       # The license file mount inside the workspace volume prevents the volume to get initialized with the image data.
       # Therefore we need to copy the data from the image to the volume manually before startup.
       - name: monitoring-console-conf
-        image:  nscale/monitoring-console:8.0
+        image:  nscale/monitoring-console:8.0.5001.2021032418.272724022754
         imagePullPolicy: Always
         command: [ "/bin/sh", "-c" ]
         args:
@@ -35,7 +35,7 @@ spec:
           mountPath: /mnt
       containers:
       - name: monitoring-console
-        image: nscale/monitoring-console:8.0
+        image: nscale/monitoring-console:8.0.5001.2021032418.272724022754
         imagePullPolicy: Always
         readinessProbe:
           exec:

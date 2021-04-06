@@ -65,16 +65,20 @@ Alle nscale Standard Container-Images finden Sie im folgenden Repository: <https
 
 Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 
-- [nscale/application-layer (nscale Server Application Layer)](components/application-layer.md)
-- [nscale/application-layer-web (nscale Server Application Layer Web)](components/application-layer-web.md)
-- [nscale/storage-layer (nscale Server Storage Layer)](components/storage-layer.md)
-- [nscale/rendition-server (nscale Rendition Server)](components/rendition-server.md)
-- [nscale/console (nscale Console)](components/console.md)
-- [nscale/monitoring-console (nscale Monitoring Console)](components/monitoring-console.md)
-- [nscale/pipeliner (nscale Pipeliner)](components/pipeliner.md)
-- [nscale/cmis-connector (nscale CMIS-Connector)](components/cmis-connector.md)
-- [nscale/webdav-connector (nscale WebDAV-Connector)](components/webdav-connector.md)
-- [nscale/ilm-connector (nscale ERP Connector ILM)](components/ilm-connector.md)
+> Der Eintrag in Spalte **nscale Komponente** führt Sie jeweils zu weiteren Informationen.
+
+| Image | Release Tag | nscale Komponente |
+|:---|:---|:---|
+| [nscale/application-layer](https://hub.docker.com/repository/docker/nscale/application-layer/general) | <application-layer-tag>8.0.5003.2021033114.18381050795</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
+| [nscale/application-layer-web](https://hub.docker.com/repository/docker/nscale/application-layer-web/general) | <application-layer-web-tag>8.0.5000.2021040520-pre</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
+| [nscale/storage-layer](https://hub.docker.com/repository/docker/nscale/storage-layer/general) | <storage-layer-tag>8.0.5001.2021033108.551023531334</storage-layer-tag> | [nscale Server Storage Layer](components/storage-layer.md) |
+| [nscale/rendition-server](https://hub.docker.com/repository/docker/nscale/rendition-server/general) | <rendition-server-tag>8.0.5001.2021032409.33030950467</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
+| [nscale/console](https://hub.docker.com/repository/docker/nscale/console/general) | <console-tag>8.0.5000.12150.87912327506</console-tag> | [nscale Console](components/console.md) |
+| [nscale/monitoring-console](https://hub.docker.com/repository/docker/nscale/monitoring-console/general) | <monitoring-console-tag>8.0.5001.2021032418.272724022754</monitoring-console-tag> | [nscale Monitoring Console](components/monitoring-console.md) |
+| [nscale/pipeliner](https://hub.docker.com/repository/docker/nscale/pipeliner/general) | <pipeliner-tag>8.0.5003.2021033116.775856262571</pipeliner-tag> | [nscale Pipeliner](components/pipeliner.md) |
+| [nscale/cmis-connector](https://hub.docker.com/repository/docker/nscale/cmis-connector/general) | <cmis-connector-tag>8.0.5000.2021032508.518926779920</cmis-connector-tag> | [nscale CMIS-Connector](components/cmis-connector.md) |
+| [nscale/webdav-connector](https://hub.docker.com/repository/docker/nscale/webdav-connector/general) | <webdav-connector-tag>8.0.5000.2021031902.87912327506</webdav-connector-tag> | [nscale WebDAV-Connector](components/webdav-connector.md) |
+| [nscale/ilm-connector](https://hub.docker.com/repository/docker/nscale/ilm-connector/general) | <ilm-connector-tag>8.0.5000.2021032309.87912327506</ilm-connector-tag> | [nscale ERP Connector ILM](components/ilm-connector.md) |
 
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
 

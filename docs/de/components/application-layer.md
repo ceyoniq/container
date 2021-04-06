@@ -77,7 +77,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
    -h democontainer \
    -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
    -p 8080:8080 \
-   nscale/application-layer
+   nscale/application-layer:8.0
 ```
 
 ## Cluster-Konfiguration in Kubernetes
