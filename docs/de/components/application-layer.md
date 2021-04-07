@@ -10,6 +10,9 @@
   - [Umgebungsvariablen](#umgebungsvariablen)
   - [Ports](#ports)
   - [Start mit Docker](#start-mit-docker)
+  - [Microsoft Windows Schriftarten](#microsoft-windows-schriftarten)
+    - [Nachinstallation über ein eigenes Container-Image](#nachinstallation-über-ein-eigenes-container-image)
+    - [Bereitstellung über Volumes und Bind-Mounts](#bereitstellung-über-volumes-und-bind-mounts)
   - [Cluster-Konfiguration in Kubernetes](#cluster-konfiguration-in-kubernetes)
   - [Volltext-Cache](#volltext-cache)
   - [Inkludieren und Exkludieren von Job-Typen](#inkludieren-und-exkludieren-von-job-typen)
@@ -77,7 +80,48 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
    -h democontainer \
    -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
    -p 8080:8080 \
-   nscale/application-layer:8.0
+   nscale/application-layer:8.0.5003.2021033114.659339082154
+```
+
+## Microsoft Windows Schriftarten
+
+Der nscale Application Layer Server benötigt True-Type Schriftarten für die Konvertierung von
+Dokumenten.  
+Die Microsoft Windows Schriftarten sind nicht installiert und müssen durch den Benutzer nachinstalliert werden.
+Sind keine Microsoft Windows Schriftarten installiert, so werden Ersatzschriftarten verwendet.
+
+Der nscale Application Layer Server erwartet die Schriftarten im folgendem Ordner:  
+
+```/usr/share/fonts/truetype/msttcorefonts```
+
+### Nachinstallation über ein eigenes Container-Image
+
+Sie können die Microsoft Windows Schriftarten nachinstallieren, indem Sie eigene Container-Images bauen.
+Mit dem folgenden Kommando werden die Schriftarten nachinstalliert:
+
+```bash
+apt install ttf-mscorefonts-installer
+```
+
+### Bereitstellung über Volumes und Bind-Mounts
+
+Sie können die Microsoft Windows Schriftarten auch durch ein Bind-Mount oder durch ein Volume bereitstellen.
+
+Der nscale Application Layer Server erwartet die Schriftarten im folgendem Ordner:
+
+```/usr/share/fonts/truetype/msttcorefonts```
+
+**Beispiel Docker:**
+
+```bash
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont nscale/application-layer:8.0.5003.2021033114.659339082154
+```
+
+**Beispiel Docker-Compose:**
+
+```yaml
+volumes:
+    - ./fonts:/usr/share/fonts/truetype/msttcorefonts:ro
 ```
 
 ## Cluster-Konfiguration in Kubernetes

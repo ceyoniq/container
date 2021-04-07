@@ -9,6 +9,9 @@
   - [Umgebungsvariablen](#umgebungsvariablen)
   - [Ports](#ports)
   - [Start mit Docker](#start-mit-docker)
+  - [Microsoft Windows Schriftarten](#microsoft-windows-schriftarten)
+    - [Nachinstallation über ein eigenes Container-Image](#nachinstallation-über-ein-eigenes-container-image)
+    - [Bereitstellung über Volumes und Bind-Mounts](#bereitstellung-über-volumes-und-bind-mounts)
   - [Passwörter](#passwörter)
 
 ## Lizenzierung
@@ -51,7 +54,48 @@ docker run \
   -h democontainer \
   -v $(pwd)/share:/opt/ceyoniq/nscale-rendition-server/share \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-rendition-server/conf/license.xml \
-  nscale/rendition-server:8.0
+  nscale/rendition-server:8.0.5001.2021032409.1090993771737
+```
+
+## Microsoft Windows Schriftarten
+
+Der nscale Rendition Server benötigt True-Type Schriftarten für die Konvertierung von
+Dokumenten.  
+Die Microsoft Windows Schriftarten sind nicht installiert und müssen durch den Benutzer nachinstalliert werden.
+Sind keine Microsoft Windows Schriftarten installiert, so werden Ersatzschriftarten verwendet.
+
+Der nscale Rendition Server erwartet die Schriftarten im folgendem Ordner:  
+
+```/usr/share/fonts/truetype/msttcorefonts```
+
+### Nachinstallation über ein eigenes Container-Image
+
+Sie können die Microsoft Windows Schriftarten nachinstallieren, indem Sie eigene Container-Images bauen.
+Mit dem folgenden Kommando werden die Schriftarten nachinstalliert:
+
+```bash
+apt install ttf-mscorefonts-installer
+```
+
+### Bereitstellung über Volumes und Bind-Mounts
+
+Sie können die Microsoft Windows Schriftarten auch durch ein Bind-Mount oder durch ein Volume bereitstellen.
+
+Der nscale Rendition Server erwartet die Schriftarten im folgendem Ordner:
+
+```/usr/share/fonts/truetype/msttcorefonts```
+
+**Beispiel Docker:**
+
+```bash
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont nscale/application-layer:8.0.5003.2021033114.659339082154
+```
+
+**Beispiel Docker-Compose:**
+
+```yaml
+volumes:
+    - ./fonts:/usr/share/fonts/truetype/msttcorefonts:ro
 ```
 
 ## Passwörter
