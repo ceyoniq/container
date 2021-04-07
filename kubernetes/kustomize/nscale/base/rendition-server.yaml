@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: rendition-server
-        image: nscale/rendition-server:8.0.5001.2021032409.33030950467
+        image: nscale/rendition-server:8.0.5001.2021032409.1090993771737
         imagePullPolicy: Always
         readinessProbe:
           exec:

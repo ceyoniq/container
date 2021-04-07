@@ -69,10 +69,10 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 
 | Image | Release Tag | nscale Komponente |
 |:---|:---|:---|
-| [nscale/application-layer](https://hub.docker.com/repository/docker/nscale/application-layer/general) | <application-layer-tag>8.0.5003.2021033114.18381050795</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
+| [nscale/application-layer](https://hub.docker.com/repository/docker/nscale/application-layer/general) | <application-layer-tag>8.0.5003.2021033114.659339082154</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
 | [nscale/application-layer-web](https://hub.docker.com/repository/docker/nscale/application-layer-web/general) | <application-layer-web-tag>8.0.5000.2021040520-pre</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
 | [nscale/storage-layer](https://hub.docker.com/repository/docker/nscale/storage-layer/general) | <storage-layer-tag>8.0.5001.2021033108.551023531334</storage-layer-tag> | [nscale Server Storage Layer](components/storage-layer.md) |
-| [nscale/rendition-server](https://hub.docker.com/repository/docker/nscale/rendition-server/general) | <rendition-server-tag>8.0.5001.2021032409.33030950467</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
+| [nscale/rendition-server](https://hub.docker.com/repository/docker/nscale/rendition-server/general) | <rendition-server-tag>8.0.5001.2021032409.1090993771737</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
 | [nscale/console](https://hub.docker.com/repository/docker/nscale/console/general) | <console-tag>8.0.5000.12150.87912327506</console-tag> | [nscale Console](components/console.md) |
 | [nscale/monitoring-console](https://hub.docker.com/repository/docker/nscale/monitoring-console/general) | <monitoring-console-tag>8.0.5001.2021032418.272724022754</monitoring-console-tag> | [nscale Monitoring Console](components/monitoring-console.md) |
 | [nscale/pipeliner](https://hub.docker.com/repository/docker/nscale/pipeliner/general) | <pipeliner-tag>8.0.5003.2021033116.775856262571</pipeliner-tag> | [nscale Pipeliner](components/pipeliner.md) |

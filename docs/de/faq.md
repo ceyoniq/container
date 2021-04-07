@@ -8,6 +8,7 @@
   - [Wie kann ich die Zeitzone ändern?](#wie-kann-ich-die-zeitzone-ändern)
   - [Wie kann ich Java Startoptionen (JAVA_OPTS) setzen?](#wie-kann-ich-java-startoptionen-java_opts-setzen)
   - [Wie kann ich die Java Heap Size anpassen?](#wie-kann-ich-die-java-heap-size-anpassen)
+  - [Wie kann ich die Microsoft Windows Schriftarten (Microsoft TrueType Fonts) verwenden?](#wie-kann-ich-die-microsoft-windows-schriftarten-microsoft-truetype-fonts-verwenden)
 
 ## Was kann ich tun, wenn ein nscale Standard Container nicht startet?
 
@@ -156,3 +157,11 @@ In diesem Beispiel wurde die Java Heap Size so gewählt, dass 85% des im Contain
 Beachten Sie, dass die Eigenschaft `resources.requests` in der Container-Definition Auswirkungen auf die Berechnung hat.  
 
 Weitere Informationen: <https://kubernetes.io/docs/concepts/configuration/manage-resources-containers>
+
+## Wie kann ich die Microsoft Windows Schriftarten (Microsoft TrueType Fonts) verwenden?
+
+Die Microsoft Windows Schriftarten werden nicht mitgeliefert.  
+Eine Installationsanleitung finden Sie hier:  
+
+- [nscale Server Application Layer](components/application-layer.md#microsoft-windows-schriftarten)
+- [nscale Rendition Server](components/rendition-server.md#microsoft-windows-schriftarten)
