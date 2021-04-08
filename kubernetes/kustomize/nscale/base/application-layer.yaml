@@ -49,16 +49,6 @@ spec:
         app: application-layer
         ceyoniq.com/application-layer-cluster-name: "cluster1" 
     spec:
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - application-layer
-            topologyKey: "kubernetes.io/hostname"
       serviceAccountName: kubeping-svc-account
       initContainers:
       # wait for database to be ready
