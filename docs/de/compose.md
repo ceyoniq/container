@@ -121,7 +121,7 @@ Außerdem haben Sie die Möglichkeit, eigene YAML-Dateien zu erstellen und so ei
 > Sie benötigen nscale Administrator ab Version 8.0.5000.
 
 Für den Zugriff mit nscale Administrator auf Ihre nscale-Installation innerhalb Docker-Compose steht Ihnen der **kein RMS**-Modus (RMS = nscale Remote Management Service) zur Verfügung.
-Erzeugen Sie eine neue Komponenten-Gruppe im nscale Administrator, um den **kein RMS**-Modus zu verwenden und auf die jeweiligen nscale-Komponenten zugreifen zu können.
+Erzeugen Sie eine neue Komponenten-Gruppe in nscale Administrator, um den **kein RMS**-Modus zu verwenden und auf die jeweiligen nscale-Komponenten zugreifen zu können.
 
 Wenn Sie die Konfigurationsdatei `docker-compose.proxy.yml` verwenden, ist nscale Server Application Layer auf `localhost` zu erreichen.  
 Wenn Sie die Konfigurationsdatei `docker-compose.default-ports.yml` verwenden, ist nscale Server Application Layer zusätzlich auf `localhost:8080` zu erreichen.  

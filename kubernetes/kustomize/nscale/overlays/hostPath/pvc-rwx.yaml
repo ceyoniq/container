@@ -16,19 +16,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: application-layer-web-conf
-spec:
-  storageClassName: hostpath
-  accessModes:
-  - ReadWriteMany
-  resources:
-    requests:
-      storage: 1Gi
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
   name: pipeliner-data
 spec:
   storageClassName: hostpath

@@ -90,7 +90,7 @@ Dokumenten.
 Die Microsoft Windows Schriftarten sind nicht installiert und müssen durch den Benutzer nachinstalliert werden.
 Sind keine Microsoft Windows Schriftarten installiert, so werden Ersatzschriftarten verwendet.
 
-Der nscale Application Layer Server erwartet die Schriftarten im folgendem Ordner:  
+Der nscale Application Layer Server erwartet die Schriftarten im folgenden Ordner:  
 
 ```/usr/share/fonts/truetype/msttcorefonts```
 
@@ -107,7 +107,7 @@ apt install ttf-mscorefonts-installer
 
 Sie können die Microsoft Windows Schriftarten auch durch ein Bind-Mount oder durch ein Volume bereitstellen.
 
-Der nscale Application Layer Server erwartet die Schriftarten im folgendem Ordner:
+Der nscale Application Layer Server erwartet die Schriftarten im folgenden Ordner:
 
 ```/usr/share/fonts/truetype/msttcorefonts```
 

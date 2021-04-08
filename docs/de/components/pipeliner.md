@@ -10,6 +10,9 @@
   - [Konfiguration](#konfiguration)
     - [Docker-Compose](#docker-compose)
     - [Kubernetes](#kubernetes)
+    - [Anpassen der `doc_mime_suff.tsv`](#anpassen-der-doc_mime_sufftsv)
+      - [Vorbereitung](#vorbereitung)
+      - [Verwendung von externen Dateien (Bind-Mount und Volumes)](#verwendung-von-externen-dateien-bind-mount-und-volumes)
 
 ## Lizenzierung
 
@@ -18,7 +21,13 @@ Die Datei wird im Container hier erwartet: `/opt/ceyoniq/nscale-pipeliner/workdi
 
 ## Persistierung
 
-Folgende Ordner müssen persistiert werden:
+> **Achtung! Datenverlust!**  
+> Wenn die hier aufgelisteten Ordner nicht persistiert werden, kommt es zum **Datenverlust**.
+
+Je nach Konfiguration wird der Pipeliner Dateien lesen, schreiben und ändern.  
+Diese Ordner müssen als Volume oder als Bind-Mount gesichert werden.
+
+Zum Beispiel können folgende Ordner persistiert werden:
 
 - `/opt/ceyoniq/nscale-pipeliner/workdir/data`
 - `/opt/ceyoniq/nscale-pipeliner/workdir/config`
@@ -43,7 +52,7 @@ Das Vorgehen zum Erstellen und Bearbeiten einer solchen `cold.xml` ist im nscale
 Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com>.
 
 Die spezielle Konfiguration richtet sich nach der Umgebung, in der sie verwendet wird.
-Beachten Sie dass unter Umständen auch Rechte in nscale für den Betrieb von nscale Pipeliner angepasst werden müssen.
+Beachten Sie, dass unter Umständen auch Rechte in nscale für den Betrieb von nscale Pipeliner angepasst werden müssen.
 
 ### Docker-Compose
 
@@ -79,3 +88,57 @@ In Kubernetes ist nscale Pipeliner als StatefulSet definiert und verwendet vier 
 | `license.xml` | `base/license.xml` | Lizenzdatei |
 
 Zur Aktivierung von nscale Pipeliner müssen Sie in der Datei `base/kustomization.xml` die Pipeliner Ressourcen einkommentieren.
+
+### Anpassen der `doc_mime_suff.tsv`
+
+> Die Vorgehensweise kann auch auf andere Konfigurationsdateien angewendet werden.
+
+Die Datei `doc_mime_suff.tsv` enthält Konfigurationen für MimeType, DocType und FileExtensions.
+Diese Konfiguration kann angepasst werden.
+
+#### Vorbereitung
+
+Um Anpassungen an der `doc_mime_suff.tsv` vornehmen zu können, benötigen Sie diese Datei auf Ihrem Entwicklungssystem.
+Diese Datei können Sie dem Image `nscale/pipeliner:8.0` entnehmen.
+
+Kopieren Sie die Datei `doc_mime_suff.tsv` lokal auf Ihr System:  
+
+```bash
+# Erzeugen eines temporären Containers
+$ docker create nscale/pipeliner:8.0 
+a0123456789 
+
+# Kopieren der Datei doc_mime_suff.tsv auf Ihr Entwicklungssystem
+docker cp a0123456789:/opt/ceyoniq/nscale-pipeliner/workdir/config/common/doc_mime_suff.tsv ./
+
+# Löschen des temporären Containers
+docker rm a0123456789
+```
+
+#### Verwendung von externen Dateien (Bind-Mount und Volumes)
+
+Um angepasste Dateien in dem jeweiligen Container verwenden zu können, müssen diese dem Container als Bind-Mount oder als Volume zur Verfügung gestellt werden. Je nach Betriebsumgebung unterscheidet sich die Vorgehensweise.
+
+**Beispiel Docker:**
+
+Um die angepasste `doc_mime_suff.tsv` verwenden zu können, muss diese Datei als Bind-Mount verfügbar gemacht werden.  
+
+```bash
+docker run -it ... -v ${PWD}/doc_mime_suff.tsv:/opt/ceyoniq/nscale-pipeliner/workdir/config/common/doc_mime_suff.tsv nscale/pipeliner:8.0
+```
+
+**Beispiel Docker-Compose:**
+
+Um die angepasste `doc_mime_suff.tsv` verwenden zu können, muss diese Datei als Bind-Mount verfügbar gemacht werden.  
+
+```yaml
+volumes:
+    - ./doc_mime_suff.tsv:/opt/ceyoniq/nscale-pipeliner/workdir/config/common/doc_mime_suff.tsv:ro
+```
+
+**Beispiel Kubernetes:**
+
+Um die angepasste `doc_mime_suff.tsv` verwenden zu können, kann diese Datei als `ConfigMap` in Kubernetes konfiguriert werden.  
+
+Weiter Informationen zu `ConfigMap` finden Sie hier:  
+<https://kubernetes.io/docs/concepts/configuration/configmap/>

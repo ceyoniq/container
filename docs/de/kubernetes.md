@@ -24,7 +24,7 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
     - [emptyDir](#emptydir)
     - [HostPath](#hostpath)
     - [Azure](#azure)
-  - [Zugriff mit nscale Administrator](#konfiguration-mit-nscale-administrator)
+  - [Zugriff mit nscale Administrator](#zugriff-mit-nscale-administrator)
   - [Logging](#logging)
   - [Metriken](#metriken)
   - [Limitierungen](#limitierungen)
@@ -49,7 +49,7 @@ Starten Sie die nscale Standard Container:
 
 ```bash
 kubectl create namespace nscale
-kubectl apply --namespace nscale -k .
+kubectl apply -n nscale -k .
 ```
 
 3. Sie können prüfen, ob die jeweiligen `Pods` erfolgreich gestartet werden konnten.
@@ -122,20 +122,14 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 > Somit werden alle Anfragen an Ihren Cluster durch diesen Ingress verarbeitet.
 > Passen Sie die Ingress-Konfiguration bei Bedarf an.
 
-```bash
-# Zugriff über den Cluster Hostname
-kubectl apply -f ingress.yaml -n nscale
-```
-
-Weitere Informationen zur Ingress Konfiguration finden Sie in der Dokumentation Ihres Cloud-Betreibers.
-
 Um auf die jeweiligen nscale-Komponenten zugreifen zu können, benötigen Sie einen [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/).
 In diesem Beispiel wird ein [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/) erwartet.
 Passen Sie die Ingress-Regeln an, wenn Sie einen anderen Ingress-Controller verwenden wollen oder eine OpenShift-`Route` bevorzugen.  
+
 Führen Sie zur Verwendung der Beispielkonfiguration folgendes Kommando im Ordner `kubernetes/kustomize/nscale/` aus:
 
 ```bash
-kubectl apply --namespace nscale ingress.yaml
+kubectl apply -n nscale -f ingress.yaml
 ```
 
 Informationen über die gesetzten Ingress-Regeln können Sie abrufen, indem Sie die folgenden Kommandos ausführen:  
@@ -148,9 +142,14 @@ kubectl get ingress -A
 kubectl describe ingress ingress-nscale -n nscale
 ```
 
+Sie können nun über die IP-Adresse oder den Hostname auf Ihr nscale-System zugreifen.
+
+> Weitere Informationen zur Ingress Konfiguration finden Sie in der Dokumentation Ihres Cloud-Betreibers.
+
 ## Persistierung
 
-In diesem Beispiel wird Ihnen gezeigt, wie Sie Daten innerhalb Kubernetes speichern können. Je nach Kubernetes-Umgebung können sich die Persistierungsmöglichkeiten bei Ihnen unterscheiden.
+In diesem Beispiel wird Ihnen gezeigt, wie Sie Daten innerhalb Kubernetes speichern können.  
+Je nach Kubernetes-Umgebung können sich die Persistierungsmöglichkeiten bei Ihnen unterscheiden.
 
 Alle Beispiele müssen im Ordner `kubernetes/kustomize/nscale` ausgeführt werden.
 
@@ -176,6 +175,12 @@ kubectl delete -k overlays/emptydir/ -n nscale
 ```
 
 ### HostPath
+
+Prüfen Sie zuvor, ob die storageclass `hostpath` bei Ihnen verfügbar ist.
+
+```bash
+kubectl get storageclass
+```
 
 Alle Dateien werden auf der lokalen Festplatte eines `Nodes` gespeichert.  
 
