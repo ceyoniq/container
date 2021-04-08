@@ -29,8 +29,8 @@ Diese Komponente benötigt keine Persistierung.
 |NAPPL_SSL=false | Sie können festelgen, ob SSL verwendet werden soll, um eine Verbindung aufzubauen. Der Standardwert ist "false". |
 |ALInstance=nscalealinst1 |Sie können die Application Layer Instanz für den Anmeldeversuch am nscale Server Application Layer auswählen. Dies ist nur nötig, wenn Sie mehrere nscale Server Application Layer Instanzen installiert haben.|
 |AlName=ApplicationLayer |Sie können den Application Layer für den Anmeldeversuch auswählen. Dies ist nur nötig, wenn Sie mehrere nscale Server Application Layer installiert haben.|
-|defaultAlInstance=nscalealinst1 |Sie können eine Default-Instanz für die Anmeldung auswählen. Dies ist nur nötig, wenn Sie mehrere nscale Server Application Layer Instanzen installiert haben.|
-|defaultAlName=ApplicationLayer|Sie können einen Defalut-Application Layer für die Anmeldung auswählen. Dies ist nur nötig, wenn Sie mehrere nscale Server Application Layer installiert haben.|
+|defaultAlInstance=nscalealinst1 |Sie können eine Instanz als Standard für die Anmeldung auswählen. Dies ist nur nötig, wenn Sie mehrere nscale Server Application Layer Instanzen installiert haben.|
+|defaultAlName=ApplicationLayer|Sie können einen Application Layer als Standard für die Anmeldung auswählen. Dies ist nur nötig, wenn Sie mehrere nscale Server Application Layer installiert haben.|
 
 ## Ports
 

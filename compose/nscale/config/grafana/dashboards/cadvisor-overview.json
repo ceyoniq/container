@@ -27,7 +27,6 @@
       "fieldConfig": {
         "defaults": {
           "custom": {},
-          "displayName": "m",
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -124,12 +123,6 @@
           "interval": "",
           "legendFormat": "{{name}}",
           "refId": "L"
-        },
-        {
-          "expr": "(container_start_time_seconds{name=~\"nscale_rms_.\"} > bool 0) + 1",
-          "interval": "",
-          "legendFormat": "{{name}}",
-          "refId": "F"
         }
       ],
       "thresholds": [],
@@ -866,7 +859,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "CAdvisor - Overview",
+  "title": "nscale Resources Usage",
   "uid": "XPyqYWRMk",
   "version": 2
 }

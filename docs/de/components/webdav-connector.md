@@ -24,7 +24,7 @@ Diese Komponente benötigt keine Persistierung.
 
 |Umgebungsvariable | Effekt |
 |----|---|
-|WEBDAV_AL_HOST=localhost |Sie müssen den Namen oder die IP-Adresse des Containers angeben, über den der nscale Server Application Layer erreichbar ist, um eine Verbindung aufzubauen.|
+|WEBDAV_AL_HOST=localhost |Sie müssen den Namen oder die IP-Adresse des Containers angeben, über den nscale Server Application Layer erreichbar ist, um eine Verbindung aufzubauen.|
 |WEBDAV_AL_PORT=8080|Sie können den Port angeben, der verwendet werden soll, um eine Verbindung zu nscale Server Application Layer aufzubauen. Der Standardwert ist "8080".|
 |WEBDAV_AL_SSL=false|Sie können festlegen, ob SSL verwendet werden soll, um eine Verbindung zu nscale Server Application Layer aufzubauen. Der Standardwert ist "false".|
 |WEBDAV_AL_DOMAIN=nscale|Sie können die Domäne für die Anmeldung an nscale Server Application Layer festlegen.|

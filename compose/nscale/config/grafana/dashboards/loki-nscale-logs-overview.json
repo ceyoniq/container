@@ -129,11 +129,6 @@
           },
           {
             "selected": false,
-            "text": "rms",
-            "value": "rms"
-          },
-          {
-            "selected": false,
             "text": "storage-layer",
             "value": "storage-layer"
           },
@@ -143,7 +138,7 @@
             "value": "application-layer-web"
           }
         ],
-        "query": "application-layer,console,postgresql,rendition-server,rms,storage-layer,application-layer-web",
+        "query": "application-layer,console,postgresql,rendition-server,storage-layer,application-layer-web",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
@@ -169,7 +164,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "Loki - nscale logs overview",
+  "title": "nscale Logs",
   "uid": null,
   "version": 0
 }
