@@ -21,8 +21,8 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
   - [Grundlagen](#grundlagen)
   - [Ingress](#ingress)
   - [Persistierung](#persistierung)
-    - [emptyDir](#emptydir)
-    - [HostPath](#hostpath)
+    - [EmptyDir](#emptydir)
+    - [Default](#default)
     - [Azure](#azure)
   - [Zugriff mit nscale Administrator](#zugriff-mit-nscale-administrator)
   - [Logging](#logging)
@@ -153,7 +153,7 @@ Je nach Kubernetes-Umgebung können sich die Persistierungsmöglichkeiten bei Ih
 
 Alle Beispiele müssen im Ordner `kubernetes/kustomize/nscale` ausgeführt werden.
 
-### emptyDir
+### EmptyDir
 
 Alle Dokumente und Datenbankeinträge werden **gelöscht**, nachdem die nscale-Services wieder heruntergefahren wurden.
 
@@ -174,22 +174,17 @@ Löschen aller Ressourcen:
 kubectl delete -k overlays/emptydir/ -n nscale
 ```
 
-### HostPath
+### Default
 
-Prüfen Sie zuvor, ob die storageclass `hostpath` bei Ihnen verfügbar ist.
+Es wird die `StorageClass` **default**  in den `PersistentVolumeClaims` verwendet.
+Sie können mit dem Kommando `kubectl get storageclass` die jeweilige `StorageClass` Ihres Kubernetes-Cluster abfragen (z.B. `hostpath` oder `local-path`).
 
-```bash
-kubectl get storageclass
-```
-
-Alle Dateien werden auf der lokalen Festplatte eines `Nodes` gespeichert.  
-
-Weitere Informationen: <https://kubernetes.io/docs/concepts/storage/volumes/#hostpath>
+> Weitere Informationen zur `StorageClass`  finden Sie in der Dokumentation Ihres Kubernetes-Cluster.
 
 Anlegen aller Ressourcen:
 
 ```bash
-kubectl apply -k overlays/hostPath/ -n nscale
+kubectl apply -k overlays/default/ -n nscale
 ```
 
 Löschen aller Ressourcen (außer PVs und PVCs):
@@ -203,7 +198,7 @@ Löschen aller Ressourcen (PVs und PVCs werden **gelöscht**)
 > Wenn die PVs und PVCs gelöscht werden, können die darin gespeicherten Daten nicht wiederhergestellt werden.
 
 ```bash
-kubectl delete -k overlays/hostPath/ -n nscale
+kubectl delete -k overlays/default/ -n nscale
 ```
 
 ### Azure

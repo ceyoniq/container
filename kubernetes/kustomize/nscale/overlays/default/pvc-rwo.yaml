@@ -1,11 +1,8 @@
-# see https://docs.microsoft.com/en-us/azure/aks/azure-disks-dynamic-pv
-#---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgresql-db
 spec:
-  storageClassName: hostpath
   accessModes:
   - ReadWriteOnce
   resources:
@@ -18,7 +15,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: storage-layer
 spec:
-  storageClassName: hostpath
   accessModes:
   - ReadWriteOnce
   resources:
@@ -31,7 +27,29 @@ kind: PersistentVolumeClaim
 metadata:
   name: monitoring-console-workspace
 spec:
-  storageClassName: hostpath
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rendition-server-share
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pipeliner-data
+spec:
   accessModes:
   - ReadWriteOnce
   resources:

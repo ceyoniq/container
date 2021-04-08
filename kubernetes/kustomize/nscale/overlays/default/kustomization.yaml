@@ -3,4 +3,3 @@ bases:
 
 resources:
 - pvc-rwo.yaml
-- pvc-rwx.yaml
