@@ -19,7 +19,6 @@ spec:
       containers:
       - name: cmis-connector
         image: nscale/cmis-connector:8.0.5000.2021032508.518926779920
-        imagePullPolicy: Always
         env:
         - name: CMIS_AL_HOST
           value: "application-layer"

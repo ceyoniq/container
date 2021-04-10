@@ -54,14 +54,12 @@ spec:
       # wait for database to be ready
       - name: check-db-ready
         image: bitnami/postgresql:11.6.0
-        imagePullPolicy: Always
         command: ['sh', '-c',
           'until pg_isready -U postgres -h postgresql -p 5432;
           do echo waiting for database; sleep 2; done;']
       containers:
       - name: application-layer
-        image: nscale/application-layer:8.0.5003.2021033114.659339082154
-        imagePullPolicy: Always
+        image: nscale/application-layer:8.0.5003.2021033114.23093603638
         env:
           - name: INSTANCE1_INSTANCE_LOGGER_CONF
             value: "instance1-log-console.conf"
