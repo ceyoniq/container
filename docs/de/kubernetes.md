@@ -180,6 +180,8 @@ Es wird die `StorageClass` **default**  in den `PersistentVolumeClaims` verwende
 Sie können mit dem Kommando `kubectl get storageclass` die jeweilige `StorageClass` Ihres Kubernetes-Cluster abfragen (z.B. `hostpath` oder `local-path`).
 
 > Weitere Informationen zur `StorageClass`  finden Sie in der Dokumentation Ihres Kubernetes-Cluster.
+> Bitte beachten Sie, dass z. B. der nscale Rendition Server ein ReadWriteMany PersistentVolumeClaim benötigt,  
+> wenn mehr als ein nscale Rendition Server verwendet wird.
 
 Anlegen aller Ressourcen:
 

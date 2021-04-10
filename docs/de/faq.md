@@ -9,6 +9,7 @@
   - [Wie kann ich Java Startoptionen (JAVA_OPTS) setzen?](#wie-kann-ich-java-startoptionen-java_opts-setzen)
   - [Wie kann ich die Java Heap Size anpassen?](#wie-kann-ich-die-java-heap-size-anpassen)
   - [Wie kann ich die Microsoft Windows Schriftarten (Microsoft TrueType Fonts) verwenden?](#wie-kann-ich-die-microsoft-windows-schriftarten-microsoft-truetype-fonts-verwenden)
+  - [Wie kann ich mit Kustomize Änderungen an der Kubernetes-Konfiguration vornehmen?](#wie-kann-ich-mit-kustomize-änderungen-an-der-kubernetes-konfiguration-vornehmen)
 
 ## Was kann ich tun, wenn ein nscale Standard Container nicht startet?
 
@@ -165,3 +166,73 @@ Eine Installationsanleitung finden Sie hier:
 
 - [nscale Server Application Layer](components/application-layer.md#microsoft-windows-schriftarten)
 - [nscale Rendition Server](components/rendition-server.md#microsoft-windows-schriftarten)
+
+## Wie kann ich mit Kustomize Änderungen an der Kubernetes-Konfiguration vornehmen?
+
+In diesem Beispiel wird gezeigt, wie sie mit Hilfe von `kustomize` die Konfiguration des nscale Server Storage Layer anpassen können.
+Es werden neue Umgebungsvariablen hinzugefügt um ein neuen Archivtyp und ein HarddiskDevice zu definieren.
+Außerdem soll die Konfiguration `default` verwendet werden, damit automatisch `PVC`und `PV` erzeugt werden.
+
+Weitere Informationen zu Kustomize finden Sie hier:  
+<https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/>
+
+1. Legen Sie im Ordner `kubernetes/kustomize/nscale/overlays` den Ordner `custom` an.
+
+2. Wechseln Sie in den Order `kubernetes/kustomize/nscale/overlays/custom`
+
+3. Erstellen Sie eine Datei `kustomization.yaml` mit folgenden Inhalt:
+
+```yaml
+bases:
+- ../default
+
+patchesStrategicMerge:
+- storage-layer-env.yaml
+```
+
+4. Erzeugen Sie eine Datei `storage-layer-env.yaml` mit folgenden Inhalt:
+
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: storage-layer
+spec:
+  template:
+    spec:
+      containers:
+      - name: storage-layer    
+        env:
+            - name: NSTL_ARCHIVETYPE_900_NAME
+              value: "DEMOARCHIVETYPE"
+            - name: NSTL_ARCHIVETYPE_900_ID
+              value: "900"
+            - name: NSTL_ARCHIVETYPE_900_LOCALMIGRATION
+              value: "0"
+            - name: NSTL_ARCHIVETYPE_900_LOCALMIGRATIONTYPE
+              value: "HD"
+            - name: NSTL_ARCHIVETYPE_900_HARDDISK
+              value: "1"
+            - name: NSTL_HarddiskDevice_0_ARCHIVETYPES
+              value: "DEMOARCHIVETYPE"
+            - name: NSTL_HarddiskDevice_0_INDEX
+              value: "1"
+            - name: NSTL_HarddiskDevice_0_NAME
+              value: "HD"
+            - name: NSTL_HarddiskDevice_0_PATH
+              value: "/mnt"
+            - name: NSTL_HarddiskDevice_0_PERMANENTMIGRATION
+              value: "1"
+```
+
+5. Starten Sie alle Komponenten mit folgenden Kommando:
+
+```bash
+kubectl apply -k . -n nscale
+```
+
+6. Prüfen Sie mit folgendem Kommando, ob die Umgebungsvariablen korrekt gesetzt wurden.  
+
+```bash
+kubectl describe pod/storage-layer-0 -n nscale
+```

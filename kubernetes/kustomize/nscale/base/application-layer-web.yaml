@@ -19,7 +19,6 @@ spec:
       containers:
       - name: application-layer-web
         image: nscale/application-layer-web:8.0.5000.2021040520-pre
-        imagePullPolicy: Always
         env:
           - name: nscale-host
             value: application-layer

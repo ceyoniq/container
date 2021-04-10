@@ -23,7 +23,6 @@ spec:
       # Therefore we need to copy the data from the image to the volume manually before startup.
       - name: storage-layer-conf
         image: nscale/storage-layer:8.0.5001.2021033108.551023531334
-        imagePullPolicy: Always
         command: [ "/bin/sh", "-c" ]
         args:
         - |
@@ -37,7 +36,6 @@ spec:
       containers:
       - name: storage-layer    
         image: nscale/storage-layer:8.0.5001.2021033108.551023531334
-        imagePullPolicy: Always
         readinessProbe:
           exec:
             command:

@@ -11,6 +11,10 @@
   - [Ports](#ports)
   - [Start mit Docker](#start-mit-docker)
   - [Skalierung](#skalierung)
+  - [Beispiel Konfigurationen](#beispiel-konfigurationen)
+    - [Verwenden eines HardDisk-Device](#verwenden-eines-harddisk-device)
+    - [Verwendung eines S3-Speichers (Objektspeicher)](#verwendung-eines-s3-speichers-objektspeicher)
+    - [Verwendung von Accounting und Monitoring](#verwendung-von-accounting-und-monitoring)
 
 ## Lizenzierung
 
@@ -82,5 +86,184 @@ docker run \
 
 ## Skalierung
 
-Bitte beachten Sie, dass nscale Server Storage Layer im Fall von Kubernetes nicht durch ein ReplicaSet skaliert werden kann.  
+Bitte beachten Sie, dass nscale Server Storage Layer im Fall von Kubernetes **nicht** durch ein ReplicaSet skaliert werden kann.  
 Informationen zur Skalierung von nscale Server Storage Layer finden Sie in der nscale Server Storage Layer Dokumentation in unserem [Serviceportal](<https://serviceportal.ceyoniq.com/>).
+
+## Beispiel Konfigurationen
+
+Weitere Informationen zur Konfiguration von nscale Server Storage Layer finden Sie in der nscale Server Storage Layer Dokumentation in unserem [Serviceportal](<https://serviceportal.ceyoniq.com/>).
+
+### Verwenden eines HardDisk-Device
+
+Mit einem HardDisk-Device haben Sie die Möglichkeit, in Docker-Compose eine `Volume` zu verwenden und in Kubernetes `PersistentVolumeClaim` und `PersistentVolume` einzusetzen.  
+In diesem Beispiel werden Dateien für den neuen Archivtype `DEMOARCHIVETYPE` in den Ordner `/mnt` migriert.
+`/mnt` muss als `Volume` verfügbar sein.
+
+> Bitte beachten Sie, dass hier der Order `/mnt` gewählt wurde, damit dieses Beispiel möglichst einfach gehalten werden kann.
+
+**Beispiel Docker-Compose:**
+
+```yaml
+volumes:
+    environment:
+      - NSTL_ARCHIVETYPE_900_NAME=DEMOARCHIVETYPE
+      - NSTL_ARCHIVETYPE_900_ID=900
+      - NSTL_ARCHIVETYPE_900_LOCALMIGRATION=0
+      - NSTL_ARCHIVETYPE_900_LOCALMIGRATIONTYPE=HD
+      - NSTL_ARCHIVETYPE_900_HARDDISK=1
+      - NSTL_HarddiskDevice_0_ARCHIVETYPES=DEMOARCHIVETYPE
+      - NSTL_HarddiskDevice_0_INDEX=1
+      - NSTL_HarddiskDevice_0_NAME=HD
+      - NSTL_HarddiskDevice_0_PATH=/mnt
+      - NSTL_HarddiskDevice_0_PERMANENTMIGRATION=1
+```
+
+**Beispiel Kubernetes:**
+
+```yaml
+env:
+    - name: NSTL_ARCHIVETYPE_900_NAME
+      value: "DEMOARCHIVETYPE"
+    - name: NSTL_ARCHIVETYPE_900_ID
+      value: "900"
+    - name: NSTL_ARCHIVETYPE_900_LOCALMIGRATION
+      value: "0"
+    - name: NSTL_ARCHIVETYPE_900_LOCALMIGRATIONTYPE
+      value: "HD"
+    - name: NSTL_ARCHIVETYPE_900_HARDDISK
+      value: "1"
+    - name: NSTL_HarddiskDevice_0_ARCHIVETYPES
+      value: "DEMOARCHIVETYPE"
+    - name: NSTL_HarddiskDevice_0_INDEX
+      value: "1"
+    - name: NSTL_HarddiskDevice_0_NAME
+      value: "HD"
+    - name: NSTL_HarddiskDevice_0_PATH
+      value: "/mnt"
+    - name: NSTL_HarddiskDevice_0_PERMANENTMIGRATION
+      value: "1"
+```
+
+**Konfiguration über die `storagelayer.conf`:**
+
+Wenn Sie den nscale Server Storage Layer nicht über Umgebungsvariablen steuern möchten, dann können Sie weiterhin die `storagelayer.conf` verwenden. Bitte kopieren Sie sich die `storagelayer.conf` aus dem  nscale Server Storage Layer Standard Container und verwenden Sie diese Datei als Kubernetes `ConfigMap` oder als Docker-Compose `Bind-Mount`.
+
+Erweitern Sie Ihre Konfiguration in der `storagelayer.conf` mit folgenden Eigenschaften:
+
+```ini
+[ArchiveType]
+  Name = DEMOARCHIVETYPE
+  Id = 900
+  LocalMigration = 0
+  LocalMigrationType = HD
+  Hardisk = 1
+
+[HarddiskAdapter]
+  Active = 1
+  Index = 0
+  Name = HD
+  Path = /mnt
+  ArchiveTypes = DEMOARCHIVETYPE
+  PermanentMigration = 1
+```
+
+> Bitte beachten Sie, dass der neue Archivtype in Ihrer Objektklassenkonfiguration verwendet werden muss um einen Effekt zu erzielen.
+
+### Verwendung eines S3-Speichers (Objektspeicher)
+
+Objektspeicher ist eine hierarchiefreie Methode zum Speichern von Daten, die normalerweise in der Cloud verwendet wird.
+
+**Beispiel Docker-Compose:**
+
+```yaml
+volumes:
+    environment:
+      - NSTL_ARCHIVETYPE_13_NAME=S3
+      - NSTL_ARCHIVETYPE_13_ID=13
+      - NSTL_ARCHIVETYPE_13_LOCALMIGRATION=0
+      - NSTL_ARCHIVETYPE_13_LOCALMIGRATIONTYPE=NONE
+      - NSTL_ARCHIVETYPE_13_S3Migration=1
+      - NSTL_S3_0_CONFIGURED=1
+      - NSTL_S3_0_INDEX=1
+      - NSTL_S3_0_TYPE=AMAZON
+      - NSTL_S3_0_NAME=AMAZON
+      - NSTL_S3_0_InitiallyActive=1
+      - NSTL_S3_0_BucketName=s3device1
+      - NSTL_S3_0_Region=eu-central-1
+      - NSTL_S3_0_AccessId=[ID]          # Tragen Sie hier Ihre Id ein
+      - NSTL_S3_0_SecretKey=[SECRET]     # Tragen Sie hier Ihren Schlüssel ein
+      - NSTL_S3_0_ArchiveTypes=S3
+      - NSTL_S3_0_PermanentMigration=1
+```
+
+**Beispiel Kubernetes:**
+
+```yaml
+env:
+      - name: NSTL_ARCHIVETYPE_13_NAME
+        value: "S3"
+      - name: NSTL_ARCHIVETYPE_13_ID
+        value: "13"
+      - name: NSTL_ARCHIVETYPE_13_LOCALMIGRATION
+        value: "0"
+      - name: NSTL_ARCHIVETYPE_13_LOCALMIGRATIONTYPE
+        value: "NONE"
+      - name: NSTL_ARCHIVETYPE_13_S3Migration
+        value: "1"
+      - name: NSTL_S3_0_CONFIGURED
+        value: "1"
+      - name: NSTL_S3_0_INDEX
+        value: "1"
+      - name: NSTL_S3_0_TYPE
+        value: "AMAZON"
+      - name: NSTL_S3_0_NAME
+        value: "AMAZON"
+      - name: NSTL_S3_0_InitiallyActive
+        value: "1"
+      - name: NSTL_S3_0_BucketName
+        value: "s3device1"
+      - name: NSTL_S3_0_Region
+        value: "eu- name:central- name:1"
+      - name: NSTL_S3_0_AccessId
+        value: "[ID]              # Tragen Sie hier Ihre Id ein, oder verwenden Sie ein Kubernetes-Secret"
+      - name: NSTL_S3_0_SecretKey
+        value: "[SECRET]          # Tragen Sie hier Ihren Schlüssel ein, oder verwenden Sie ein Kubernetes-Secret"
+      - name: NSTL_S3_0_ArchiveTypes
+        value: "S3"
+      - name: NSTL_S3_0_PermanentMigration
+        value: "1"
+```
+
+> Bitte beachten Sie, dass der neue Archivtype in Ihrer Objektklassenkonfiguration verwendet werden muss um einen Effekt zu erzielen.
+
+### Verwendung von Accounting und Monitoring
+
+Weitere Informationen zur `ACCOUNTING` und `MONITORING` finden Sie in der nscale Server Storage Layer Dokumentation in unserem [Serviceportal](<https://serviceportal.ceyoniq.com/>).
+
+**Beispiel Docker-Compose:**
+
+```yaml
+volumes:
+    environment:
+      - NSTL_ACCOUNTING_BasePath=/mnt/accounting
+      - NSTL_ACCOUNTING_ACTIVE=1
+      - NSTL_MONITORING_ACTIVE=1
+      - NSTL_MONITORING_CSVACTIVE=1
+      - NSTL_MONITORING_CSVBaseDir=/mnt/monitoring
+```
+
+**Beispiel Kubernetes:**
+
+```yaml
+env:
+    - name: NSTL_ACCOUNTING_BasePath
+      value: /mnt/accounting
+    - name: NSTL_ACCOUNTING_ACTIVE
+      value: 1
+    - name: NSTL_MONITORING_ACTIVE
+      value: 1
+    - name: NSTL_MONITORING_CSVACTIVE
+      value: 1
+    - name: NSTL_MONITORING_CSVBaseDir
+      value: /mnt/monitoring
+```

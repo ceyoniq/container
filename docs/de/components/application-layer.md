@@ -17,8 +17,6 @@
   - [Volltext-Cache](#volltext-cache)
   - [Inkludieren und Exkludieren von Job-Typen](#inkludieren-und-exkludieren-von-job-typen)
   - [Log Level](#log-level)
-    - [Docker-Compose](#docker-compose)
-    - [Kubernetes](#kubernetes)
 
 ## Lizenzierung
 
@@ -80,7 +78,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
    -h democontainer \
    -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
    -p 8080:8080 \
-   nscale/application-layer:8.0.5003.2021033114.659339082154
+   nscale/application-layer:8.0.5003.2021033114.23093603638
 ```
 
 ## Microsoft Windows Schriftarten
@@ -114,7 +112,7 @@ Der nscale Application Layer Server erwartet die Schriftarten im folgenden Ordne
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont nscale/application-layer:8.0.5003.2021033114.659339082154
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont nscale/application-layer:8.0.5003.2021033114.23093603638
 ```
 
 **Beispiel Docker-Compose:**
@@ -189,18 +187,14 @@ Beachten Sie bei diesem Vorgehen, dass Änderungen an Dateien im Container nicht
 
 Im Cluster muss die Datei in allen Instanzen ausgetauscht werden.
 
-### Docker-Compose
-
-Wenn Sie nscale Standard Container mit Docker-Compose betreiben, verwenden Sie die folgenden Befehle, um das Loglevel des Servers anzupassen.
+**Beispiel Docker-Compose:**
 
 ```bash
 docker-compose exec application-layer bash
 > vi /opt/ceyoniq/nscale-server/application-layer/conf/instance1-log.conf 
 ```
 
-### Kubernetes
-
-Wenn Sie nscale Standard Container mit Kubernetes betreiben, verwenden Sie die folgenden Befehle, um das Loglevel des Servers anzupassen.
+**Beispiel Kubernetes:**
 
 ```bash
 # copy file to host
