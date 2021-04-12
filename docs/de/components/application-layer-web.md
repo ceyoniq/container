@@ -55,7 +55,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
    -e log4jConfigLocation=../conf/nscale_stdout_log_conf.xml \
    -e nscale-port=8080 \
    -p 8090:8090 \
-   nscale/application-layer-web:8.0.5000.2021040520-pre
+   ceyoniq.azurecr.io/release/nscale/application-layer-web:8.0.5000.2021040520-pre
 ```
 
 ## Information für Entwickler
@@ -77,7 +77,7 @@ Kopieren Sie die Datei `nscale_web.xml` lokal auf Ihr System:
 
 ```bash
 # Erzeugen eines temporären Containers
-$ docker create nscale/application-layer-web:[version]  # Passen Sie bitte diese Version an
+$ docker create ceyoniq.azurecr.io/release/nscale/application-layer-web:[version]  # Passen Sie bitte diese Version an
 a0123456789                                             # Diese ID wird auf Ihrem System eine andere sein
 
 # Kopieren der Datei nscale_web.xml auf Ihr Entwicklungssystem

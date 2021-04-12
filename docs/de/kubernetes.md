@@ -19,6 +19,7 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
   - [Inhalt](#inhalt)
   - [Quick Start Guide](#quick-start-guide)
   - [Grundlagen](#grundlagen)
+  - [Container-Registry](#container-registry)
   - [Ingress](#ingress)
   - [Persistierung](#persistierung)
     - [EmptyDir](#emptydir)
@@ -41,31 +42,42 @@ Stellen Sie vor dem Start der nscale Standard Container mit kubernetes sicher, d
 - Sie haben einen Kubernetes-Cluster (ab Version 1.19.3), den Sie mit `kubectl` erreichen können
 - Sie haben einen [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/) eingerichtet
 - Sie besitzen eine gültige **Lizenzdatei**
+- Sie haben Login-Daten für die Container-Registry **ceyoniq.azurecr.io**
 
 Starten Sie die nscale Standard Container:
 
-1. Kopieren Sie Ihre Lizenzdatei `license.xml` in den Ordner `kubernetes/kustomize/nscale/base/`.  
-2. Führen Sie nun folgende Kommandos im Ordner `kubernetes/kustomize/nscale/overlays/emptyDir/` aus:
+1. Erzeugen Sie ein `Secret` mit Ihren Login-Daten (weiter Informationen: [Container-Registry](#container-registry)).
+
+```bash
+kubectl create secret docker-registry regcred \
+  --docker-server=ceyoniq.azurecr.io \
+  --docker-username=[username] \
+  --docker-password=[token] \
+  --namespace nscale
+```
+
+2. Kopieren Sie Ihre Lizenzdatei `license.xml` in den Ordner `kubernetes/kustomize/nscale/base/`.  
+3. Führen Sie nun folgende Kommandos im Ordner `kubernetes/kustomize/nscale/overlays/emptyDir/` aus:
 
 ```bash
 kubectl create namespace nscale
 kubectl apply -n nscale -k .
 ```
 
-3. Sie können prüfen, ob die jeweiligen `Pods` erfolgreich gestartet werden konnten.
+4. Sie können prüfen, ob die jeweiligen `Pods` erfolgreich gestartet werden konnten.
 
 ```bash
  kubectl get pods -n nscale -w
 ```
 
-4. Warten Sie bis alle `Pods` den Status `Running` melden.  
-5. Rufen Sie folgendes Kommando auf:
+5. Warten Sie bis alle `Pods` den Status `Running` melden.  
+6. Rufen Sie folgendes Kommando auf:
 
 ```bash
 kubectl port-forward --address 0.0.0.0 deployment/application-layer-web 8090:8090 -n nscale
 ```
 
-6. Fertig!  
+7. Fertig!  
 Sie können nun unter <http://localhost:8090> auf Ihr nscale zugreifen.
 
 Bei der ersten Anmeldung können Sie die Standard-Anmeldedaten verwenden, die beim Start eines neuen nscale Systems automatisch erstellt werden.
@@ -115,6 +127,23 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
 > Weiter erfolgt der Einsatz von Software von Drittanbietern wie Loki, Grafana, Prometheus, etc. hier zum Zweck der Darstellung innerhalb einer Beispielkonfiguration.
+
+## Container-Registry
+
+Um auf die nscale Standard Container zugreifen zu können, benötigen Sie ein Login auf die Ceyoniq Container Registry **ceyoniq.azurecr.io**.  
+Weitere Informationen erhalten Sie vom [Ceyoniq Service](docs/de/service-und-support.md).
+
+Um sich bei der Ceyoniq Container Registry anmelden zu können, verwenden Sie Ihren `username` und Ihr  `token`.  
+
+```bash
+kubectl create secret docker-registry regcred \
+  --docker-server=ceyoniq.azurecr.io \
+  --docker-username=[username] \
+  --docker-password=[token]] \
+  --namespace nscale
+```
+
+> Bitte beachten Sie, dass das Secret `regcred` für jeden Namespace zur Verfügung stehen muss.
 
 ## Ingress
 

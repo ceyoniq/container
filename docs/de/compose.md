@@ -18,8 +18,9 @@ Der Betrieb von nscale Standard Container mit Docker-Compose hat folgende Vortei
   - [Inhalt](#inhalt)
   - [Quick Start Guide](#quick-start-guide)
   - [Grundlagen](#grundlagen)
+  - [Container-Registry](#container-registry)
   - [docker-compose Beispielszenarien](#docker-compose-beispielszenarien)
-  - [Zugriff über nscale Administrator](#zugriff-über-nscale-administrator)
+  - [Zugriff mit nscale Administrator](#zugriff-mit-nscale-administrator)
   - [nscale Pipeliner](#nscale-pipeliner)
   - [Log Aggregation mit Loki](#log-aggregation-mit-loki)
     - [Logs exportieren](#logs-exportieren)
@@ -38,12 +39,15 @@ Stellen Sie vor dem Start der nscale Standard Container mit Docker-Compose siche
 - Sie haben eine lauffähige Docker-Installation (ab Version 20.10.2)
 - Sie haben Docker-Compose (ab Version 1.27.4) installiert
 - Sie besitzen eine gültige **Lizenzdatei**
+- Sie haben Login-Daten für die Container-Registry **ceyoniq.azurecr.io**
 
 Starten Sie die nscale Standard Container:
 
-1. Kopieren Sie Ihre Lizenzdatei `license.xml` in den Ordner `compose/nscale`.  
-2. Im Ordner `compose/nscale` kopieren Sie die Datei `docker-compose.example.env` nach `.env`.
-3. Führen Sie im Order `compose/nscale` folgende Kommandos aus:
+1. Melden Sie sich mit Ihren Login-Daten bei der Ceyoniq Container Registry **ceyoniq.azurecr.io** an
+   ```bash docker login ceyoniq.azurecr.io -u [username] -p [token] ```
+2. Kopieren Sie Ihre Lizenzdatei `license.xml` in den Ordner `compose/nscale`.  
+3. Im Ordner `compose/nscale` kopieren Sie die Datei `docker-compose.example.env` nach `.env`.
+4. Führen Sie im Order `compose/nscale` folgende Kommandos aus:
 
 ```bash
 docker-compose up -d
@@ -87,6 +91,17 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
 > Weiter erfolgt der Einsatz von Software von Drittanbietern wie Loki, Grafana, Prometheus, etc. hier zum Zweck der Darstellung innerhalb einer Beispielkonfiguration.
+
+## Container-Registry
+
+Um auf die nscale Standard Container zugreifen zu können, benötigen Sie ein Login auf die Ceyoniq Container Registry **ceyoniq.azurecr.io**.  
+Weitere Informationen erhalten Sie vom [Ceyoniq Service](docs/de/service-und-support.md).
+
+Um sich bei der Ceyoniq Container Registry anmelden zu können, verwenden Sie Ihren `username` und Ihr  `token`.  
+
+```bash
+docker login ceyoniq.azurecr.io -u [username] -p [token]
+```
 
 ## docker-compose Beispielszenarien
 

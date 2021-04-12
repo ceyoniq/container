@@ -44,5 +44,5 @@ docker run -it \
 -e WEBDAV_AL_PORT=8080 \
 -e WEBDAV_AL_SSL=false \
 -e WEBDAV_AL_DOMAIN=nscale \
-nscale/webdav-connector:8.0.5000.2021031902.87912327506
+ceyoniq.azurecr.io/release/nscale/webdav-connector:8.0.5000.2021031902.87912327506
 ```

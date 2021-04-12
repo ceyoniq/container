@@ -16,9 +16,11 @@ spec:
       labels:
         app: webdav-connector
     spec:
+      imagePullSecrets:
+      - name: regcred     
       containers:
       - name: webdav-connector
-        image: nscale/webdav-connector:8.0.5000.2021031902.87912327506
+        image: ceyoniq.azurecr.io/release/nscale/webdav-connector:8.0.5000.2021031902.87912327506
         env:
         - name: WEBDAV_AL_HOST
           value: "application-layer"

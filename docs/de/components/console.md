@@ -46,5 +46,5 @@ docker run \
    -e ALInstance=nscalealinst1 \
    -p 8086:8086 \
    -e LOG_APPENDER=Console \
-   nscale/console:8.0.5000.12150.87912327506
+   ceyoniq.azurecr.io/release/nscale/console:8.0.5000.12150.87912327506
 ```
