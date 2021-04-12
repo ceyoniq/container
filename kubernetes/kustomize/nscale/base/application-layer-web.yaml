@@ -16,9 +16,11 @@ spec:
       labels:
         app: application-layer-web
     spec:
+      imagePullSecrets:
+      - name: regcred      
       containers:
       - name: application-layer-web
-        image: nscale/application-layer-web:8.0.5000.2021040520-pre
+        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:8.0.5000.2021040520-pre
         env:
           - name: nscale-host
             value: application-layer

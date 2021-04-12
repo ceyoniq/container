@@ -13,6 +13,7 @@ Für mehr Informationen besuchen Sie unsere Website unter <https://www.ceyoniq.c
   - [Informationen zu diesem Dokument](#informationen-zu-diesem-dokument)
   - [Softwarevoraussetzungen](#softwarevoraussetzungen)
   - [Lizenzierung](#lizenzierung)
+  - [Container-Registry](#container-registry)
   - [nscale Standard Container-Images](#nscale-standard-container-images)
   - [Produktmerkmale](#produktmerkmale)
   - [Betrieb](#betrieb)
@@ -59,6 +60,11 @@ Der Betrieb von nscale Standard Container benötigt eine nscale Standard Contain
 Lizenzen können beim Vertrieb der Ceyoniq Technology GmbH erworben werden.  
 Sollten Sie trotz Verwendung einer gültigen Container-Lizenz Probleme haben, wenden Sie sich bitte an den [Ceyoniq Service](docs/de/service-und-support.md).
 
+## Container-Registry
+
+Um auf die nscale Standard Container zugreifen zu können, benötigen Sie ein Login auf die Ceyoniq Container Registry **ceyoniq.azurecr.io**.  
+Weitere Informationen erhalten Sie vom [Ceyoniq Service](docs/de/service-und-support.md).
+
 ## nscale Standard Container-Images
 
 Alle nscale Standard Container-Images finden Sie im folgenden Repository: <https://hub.docker.com/u/nscale>  
@@ -69,16 +75,16 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 
 | Image | Release Tag | nscale Komponente |
 |:---|:---|:---|
-| [nscale/application-layer](https://hub.docker.com/r/nscale/application-layer) | <application-layer-tag>8.0.5003.2021033114.23093603638</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
-| [nscale/application-layer-web](https://hub.docker.com/r/nscale/application-layer-web) | <application-layer-web-tag>8.0.5000.2021040520-pre</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
-| [nscale/storage-layer](https://hub.docker.com/r/nscale/storage-layer) | <storage-layer-tag>8.0.5001.2021033108.551023531334</storage-layer-tag> | [nscale Server Storage Layer](components/storage-layer.md) |
-| [nscale/rendition-server](https://hub.docker.com/r/nscale/rendition-server) | <rendition-server-tag>8.0.5001.2021032409.23093603638</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
-| [nscale/console](https://hub.docker.com/r/nscale/console) | <console-tag>8.0.5000.12150.87912327506</console-tag> | [nscale Console](components/console.md) |
-| [nscale/monitoring-console](https://hub.docker.com/r/nscale/monitoring-console) | <monitoring-console-tag>8.0.5001.2021032418.23093603638</monitoring-console-tag> | [nscale Monitoring Console](components/monitoring-console.md) |
-| [nscale/pipeliner](https://hub.docker.com/r/nscale/pipeliner) | <pipeliner-tag>8.0.5003.2021033116.775856262571</pipeliner-tag> | [nscale Pipeliner](components/pipeliner.md) |
-| [nscale/cmis-connector](https://hub.docker.com/r/nscale/cmis-connector) | <cmis-connector-tag>8.0.5000.2021032508.518926779920</cmis-connector-tag> | [nscale CMIS-Connector](components/cmis-connector.md) |
-| [nscale/webdav-connector](https://hub.docker.com/r/nscale/webdav-connector) | <webdav-connector-tag>8.0.5000.2021031902.87912327506</webdav-connector-tag> | [nscale WebDAV-Connector](components/webdav-connector.md) |
-| [nscale/ilm-connector](https://hub.docker.com/r/nscale/ilm-connector) | <ilm-connector-tag>8.0.5000.2021032309.87912327506</ilm-connector-tag> | [nscale ERP Connector ILM](components/ilm-connector.md) |
+| ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>8.0.5003.2021033114.23093603638</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
+| ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>8.0.5000.2021040520-pre</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
+| ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>8.0.5001.2021033108.551023531334</storage-layer-tag> | [nscale Server Storage Layer](components/storage-layer.md) |
+| ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>8.0.5001.2021032409.23093603638</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
+| ceyoniq.azurecr.io/release/nscale/console | <console-tag>8.0.5000.12150.87912327506</console-tag> | [nscale Console](components/console.md) |
+| ceyoniq.azurecr.io/release/nscale/monitoring-console | <monitoring-console-tag>8.0.5001.2021032418.23093603638</monitoring-console-tag> | [nscale Monitoring Console](components/monitoring-console.md) |
+| ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>8.0.5003.2021033116.775856262571</pipeliner-tag> | [nscale Pipeliner](components/pipeliner.md) |
+| ceyoniq.azurecr.io/release/nscale/cmis-connector | <cmis-connector-tag>8.0.5000.2021032508.518926779920</cmis-connector-tag> | [nscale CMIS-Connector](components/cmis-connector.md) |
+| ceyoniq.azurecr.io/release/nscale/webdav-connector | <webdav-connector-tag>8.0.5000.2021031902.87912327506</webdav-connector-tag> | [nscale WebDAV-Connector](components/webdav-connector.md) |
+| ceyoniq.azurecr.io/release/nscale/ilm-connector | <ilm-connector-tag>8.0.5000.2021032309.87912327506</ilm-connector-tag> | [nscale ERP Connector ILM](components/ilm-connector.md) |
 
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
 

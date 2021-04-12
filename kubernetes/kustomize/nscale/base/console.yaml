@@ -16,9 +16,11 @@ spec:
       labels:
         app: console
     spec:
+      imagePullSecrets:
+      - name: regcred
       containers:
       - name: console
-        image: nscale/console:8.0.5000.12150.87912327506
+        image: ceyoniq.azurecr.io/release/nscale/console:8.0.5000.12150.87912327506
         env:
         - name: LOG_APPENDER
           value: "Console"

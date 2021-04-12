@@ -17,7 +17,7 @@ spec:
   #  - example.org
   #  secretName: tls-secret
   rules:
-  #- host: nscale.dev.ceyoniq-cloud.net
+  #- host: example.org
   - http:
       paths:
       - path: /nscalealinst1

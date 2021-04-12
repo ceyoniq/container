@@ -16,9 +16,11 @@ spec:
       labels:
         app: rendition-server
     spec:
+      imagePullSecrets:
+      - name: regcred    
       containers:
       - name: rendition-server
-        image: nscale/rendition-server:8.0.5001.2021032409.23093603638
+        image: ceyoniq.azurecr.io/release/nscale/rendition-server:8.0.5001.2021032409.23093603638
         readinessProbe:
           exec:
             command:

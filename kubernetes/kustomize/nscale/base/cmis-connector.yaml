@@ -16,9 +16,11 @@ spec:
       labels:
         app: cmis-connector
     spec:
+      imagePullSecrets:
+      - name: regcred   
       containers:
       - name: cmis-connector
-        image: nscale/cmis-connector:8.0.5000.2021032508.518926779920
+        image: ceyoniq.azurecr.io/release/nscale/cmis-connector:8.0.5000.2021032508.518926779920
         env:
         - name: CMIS_AL_HOST
           value: "application-layer"

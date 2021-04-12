@@ -18,9 +18,11 @@ spec:
       labels:
         app: pipeliner
     spec:
+      imagePullSecrets:
+      - name: regcred    
       containers:
       - name: pipeliner    
-        image: nscale/pipeliner:8.0.5003.2021033116.775856262571
+        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5003.2021033116.775856262571
         resources:
           limits:
             cpu: "1000m"
