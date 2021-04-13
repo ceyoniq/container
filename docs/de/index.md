@@ -58,12 +58,12 @@ Weitere Informationen zu Kubernetes finden Sie unter <https://kubernetes.io/>.
 
 Der Betrieb von nscale Standard Container benötigt eine nscale Standard Container-Lizenz. Lizenzen, die nicht für den Container-Betrieb von nscale ausgestellt wurden, können nicht verwendet werden.
 Lizenzen können beim Vertrieb der Ceyoniq Technology GmbH erworben werden.  
-Sollten Sie trotz Verwendung einer gültigen Container-Lizenz Probleme haben, wenden Sie sich bitte an den [Ceyoniq Service](docs/de/service-und-support.md).
+Sollten Sie trotz Verwendung einer gültigen Container-Lizenz Probleme haben, wenden Sie sich bitte an den [Ceyoniq Service](support.md).
 
 ## Container-Registry
 
 Um auf die nscale Standard Container zugreifen zu können, benötigen Sie ein Login auf die Ceyoniq Container Registry **ceyoniq.azurecr.io**.  
-Weitere Informationen erhalten Sie vom [Ceyoniq Service](docs/de/service-und-support.md).
+Weitere Informationen erhalten Sie vom [Ceyoniq Service](support.md).
 
 ## nscale Standard Container-Images
 

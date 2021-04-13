@@ -43,8 +43,13 @@ Stellen Sie vor dem Start der nscale Standard Container mit Docker-Compose siche
 
 Starten Sie die nscale Standard Container:
 
-1. Melden Sie sich mit Ihren Login-Daten bei der Ceyoniq Container Registry **ceyoniq.azurecr.io** an
-   ```bash docker login ceyoniq.azurecr.io -u [username] -p [token] ```
+1. Melden Sie sich mit Ihren Login-Daten bei der Ceyoniq Container Registry **ceyoniq.azurecr.io**  
+
+
+```bash
+docker login ceyoniq.azurecr.io
+```
+
 2. Kopieren Sie Ihre Lizenzdatei `license.xml` in den Ordner `compose/nscale`.  
 3. Im Ordner `compose/nscale` kopieren Sie die Datei `docker-compose.example.env` nach `.env`.
 4. Führen Sie im Order `compose/nscale` folgende Kommandos aus:
@@ -53,7 +58,7 @@ Starten Sie die nscale Standard Container:
 docker-compose up -d
 ```
 
-4. Fertig!  
+5. Fertig!  
 Sie können nun unter <http://localhost> auf Ihr nscale zugreifen.
 
 Bei der ersten Anmeldung können Sie die Standard-Anmeldedaten verwenden, die beim Start eines neuen nscale Systems automatisch erstellt werden.
@@ -95,7 +100,7 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 ## Container-Registry
 
 Um auf die nscale Standard Container zugreifen zu können, benötigen Sie ein Login auf die Ceyoniq Container Registry **ceyoniq.azurecr.io**.  
-Weitere Informationen erhalten Sie vom [Ceyoniq Service](docs/de/service-und-support.md).
+Weitere Informationen erhalten Sie vom [Ceyoniq Service](support.md).
 
 Um sich bei der Ceyoniq Container Registry anmelden zu können, verwenden Sie Ihren `username` und Ihr  `token`.  
 
