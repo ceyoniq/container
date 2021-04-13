@@ -46,7 +46,13 @@ Stellen Sie vor dem Start der nscale Standard Container mit kubernetes sicher, d
 
 Starten Sie die nscale Standard Container:
 
-1. Erzeugen Sie ein `Secret` mit Ihren Login-Daten (weiter Informationen: [Container-Registry](#container-registry)).
+1. Erzeugen Sie ein Namespace `nscale`
+
+```bash
+kubectl create namespace nscale
+```
+
+2. Erzeugen Sie ein `Secret` mit Ihren Login-Daten (weiter Informationen: [Container-Registry](#container-registry)).
 
 ```bash
 kubectl create secret docker-registry regcred \
@@ -60,7 +66,6 @@ kubectl create secret docker-registry regcred \
 3. Führen Sie nun folgende Kommandos im Ordner `kubernetes/kustomize/nscale/overlays/emptyDir/` aus:
 
 ```bash
-kubectl create namespace nscale
 kubectl apply -n nscale -k .
 ```
 
@@ -131,7 +136,7 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 ## Container-Registry
 
 Um auf die nscale Standard Container zugreifen zu können, benötigen Sie ein Login auf die Ceyoniq Container Registry **ceyoniq.azurecr.io**.  
-Weitere Informationen erhalten Sie vom [Ceyoniq Service](docs/de/service-und-support.md).
+Weitere Informationen erhalten Sie vom [Ceyoniq Service](support.md).
 
 Um sich bei der Ceyoniq Container Registry anmelden zu können, verwenden Sie Ihren `username` und Ihr  `token`.  
 
