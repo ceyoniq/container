@@ -9,7 +9,7 @@ Der Betrieb von nscale Standard Container mit Docker-Compose hat folgende Vortei
 - ideal für die Entwicklung mit nscale
 - schnelles Erzeugen eines Demo- bzw. Test-Systems
 
-> Bitte beachen Sie, dass es sich bei den Konfigurationen in diesem Repository um **Beispielkonfigurationen** handelt.  
+> Bitte beachten Sie, dass es sich bei den Konfigurationen in diesem Repository um **Beispielkonfigurationen** handelt.  
 > Für Produktivsysteme müssen Sie ggf. Anpassungen an den vorliegenden Konfigurationen vornehmen.
 
 ## Inhalt

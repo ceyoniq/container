@@ -18,8 +18,6 @@ spec:
     spec:
       imagePullSecrets:
       - name: regcred    
-      securityContext:
-        fsGroup: 0
       initContainers:
       # The license file mount inside the conf volume prevents the volume to get initialized with the image data.
       # Therefore we need to copy the data from the image to the volume manually before startup.

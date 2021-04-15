@@ -10,7 +10,7 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
 - flexible Skalierbarkeit
 - einfache Installation in Cloud-Umgebungen (z. B. in [Microsoft Azure Kubernetes Service - AKS](https://azure.microsoft.com/de-de/services/kubernetes-service/))
 
-> Bitte beachen Sie, dass es sich bei den Konfigurationen in diesem Repository um **Beispielkonfigurationen** handelt.  
+> Bitte beachten Sie, dass es sich bei den Konfigurationen in diesem Repository um **Beispielkonfigurationen** handelt.  
 > Für Produktivsysteme müssen Sie ggf. Anpassungen an den vorliegenden Konfigurationen vornehmen.
 
 ## Inhalt
@@ -192,7 +192,7 @@ Alle Beispiele müssen im Ordner `kubernetes/kustomize/nscale` ausgeführt werde
 Alle Dokumente und Datenbankeinträge werden **gelöscht**, nachdem die nscale-Services wieder heruntergefahren wurden.
 
 > **Achtung! Datenverlust!**  
-> Da alle Dokumente und Datenbankeintäge beim Herunterfahren der nscale-Services gelöscht werden, ist diese Einstellung **nur für den Test- und Demobetrieb geeignet**.  
+> Da alle Dokumente und Datenbankeinträge beim Herunterfahren der nscale-Services gelöscht werden, ist diese Einstellung **nur für den Test- und Demobetrieb geeignet**.  
 
 Weitere Informationen: <https://kubernetes.io/docs/concepts/storage/volumes/#emptydir>
 
@@ -210,10 +210,10 @@ kubectl delete -k overlays/emptydir/ -n nscale
 
 ### Default
 
-Es wird die `StorageClass` **default**  in den `PersistentVolumeClaims` verwendet.
+Es wird die `StorageClass` **default** in den `PersistentVolumeClaims` verwendet.
 Sie können mit dem Kommando `kubectl get storageclass` die jeweilige `StorageClass` Ihres Kubernetes-Cluster abfragen (z.B. `hostpath` oder `local-path`).
 
-> Weitere Informationen zur `StorageClass`  finden Sie in der Dokumentation Ihres Kubernetes-Cluster.
+> Weitere Informationen zur `StorageClass` finden Sie in der Dokumentation Ihres Kubernetes-Cluster.
 > Bitte beachten Sie, dass z. B. der nscale Rendition Server ein ReadWriteMany PersistentVolumeClaim benötigt,  
 > wenn mehr als ein nscale Rendition Server verwendet wird.
 
