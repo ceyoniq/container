@@ -20,8 +20,6 @@ spec:
         app: postgresql
         role: master
     spec:
-      securityContext:
-        fsGroup: 1001
       containers:
       - name: postgresql
         image: bitnami/postgresql:11.6.0
