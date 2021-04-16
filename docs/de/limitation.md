@@ -37,21 +37,21 @@ Eine genaue Anleitung finden Sie im Handbuch von nscale Administrator.
 
 - Die Offline-Konfiguration (z. B. alle Konfigurationsmerkmale, die über die Datei `instance1.conf` gesetzt werden können) ist in nscale Administrator nicht verfügbar.
 
-Weitere Informationen zum nscale Server Application Layer:  
+Weitere Informationen zu nscale Server Application Layer:  
 [components/application-layer.md](components/application-layer.md)
 
 ## nscale Server Application Layer Web
 
 - nscale Server Application Layer Web kann nicht in nscale Administrator konfiguriert werden.  
 
-Weitere Informationen zum nscale Server Application Layer Web:  
+Weitere Informationen zu nscale Server Application Layer Web:  
 [components/application-layer-web.md](components/application-layer-web.md)
 
 ## nscale Server Storage Layer
 
-- Die Offline-Konfiguration (alle Konfigurationsmerkmale, die über die Datei `storagelayer.conf` gesetzt werden können) ist in nscale Administrator nicht  verfügbar.
+- Die Offline-Konfiguration (alle Konfigurationsmerkmale, die über die Datei `storagelayer.conf` gesetzt werden können) ist in nscale Administrator nicht verfügbar.
 
-Weitere Informationen zum nscale Server Storage Layer:  
+Weitere Informationen zu nscale Server Storage Layer:  
 [components/storage-layer.md](components/storage-layer.md)
 
 ## nscale Rendition Server
@@ -60,7 +60,7 @@ Weitere Informationen zum nscale Server Storage Layer:
 - Das Passwort kann nicht über nscale Administrator gesetzt werden.
 - Der Port kann nicht über nscale Administrator gesetzt werden.
 
-Weitere Informationen zum nscale Rendition Server:  
+Weitere Informationen zu nscale Rendition Server:  
 [components/rendition-server.md](components/rendition-server.md)
 
 ## nscale Monitoring Console
@@ -72,7 +72,7 @@ Dadurch wird es notwendig, dass Sie in der Konfiguration der Komponenten den Hos
 Diese Änderungen können Sie in nscale Administrator im Knoten `"Rechnername" > Monitoring Console > Konfiguration > Ressourcen` vornehmen.
 Bearbeiten Sie dazu den Hostnamen aller Komponenten.
 
-Weitere Informationen zur nscale Monitoring Console:  
+Weitere Informationen zu nscale Monitoring Console:  
 [components/monitoring-console.md](components/monitoring-console.md)
 
 ## nscale Console
@@ -87,7 +87,7 @@ Weitere Informationen zur nscale Monitoring Console:
   - AdminType
 - Mit der Funktion "Kennwortänderung" können Sie Ihr Kennwort für nscale Console ändern. Die Kennwörter für die anderen Komponenten sind nicht betroffen.
 
-Weitere Informationen zur nscale Console:  
+Weitere Informationen zu nscale Console:  
 [components/console.md](components/console.md)
 
 ## nscale Pipeliner
@@ -95,5 +95,5 @@ Weitere Informationen zur nscale Console:
 - Die Online-Konfiguration ist in nscale Administrator nicht verfügbar.
 - Die Offline-Konfiguration kann nur durch Import und Export einer Konfigurationsdatei (`cold.xml`) in nscale Administrator erfolgen.
 
-Weitere Information zum nscale Pipeliner:  
+Weitere Information zu nscale Pipeliner:  
 [components/pipeliner.md](components/pipeliner.md)

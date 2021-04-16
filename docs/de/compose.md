@@ -52,7 +52,7 @@ docker login ceyoniq.azurecr.io
 
 2. Kopieren Sie Ihre Lizenzdatei `license.xml` in den Ordner `compose/nscale`.  
 3. Im Ordner `compose/nscale` kopieren Sie die Datei `docker-compose.example.env` nach `.env`.
-4. Führen Sie im Order `compose/nscale` folgende Kommandos aus:
+4. Führen Sie im Ordner `compose/nscale` folgende Kommandos aus:
 
 ```bash
 docker-compose up -d
@@ -102,7 +102,7 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 Um auf die nscale Standard Container zugreifen zu können, benötigen Sie ein Login auf die Ceyoniq Container Registry **ceyoniq.azurecr.io**.  
 Weitere Informationen erhalten Sie vom [Ceyoniq Service](support.md).
 
-Um sich bei der Ceyoniq Container Registry anmelden zu können, verwenden Sie Ihren `username` und Ihr  `token`.  
+Um sich bei der Ceyoniq Container Registry anmelden zu können, verwenden Sie Ihren `username` und Ihr `token`.  
 
 ```bash
 docker login ceyoniq.azurecr.io -u [username] -p [token]

@@ -76,7 +76,7 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 | Image | Release Tag | nscale Komponente |
 |:---|:---|:---|
 | ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>8.0.5003.2021033114.23093603638</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
-| ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>8.0.5000.2021040520-pre</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
+| ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>8.0.5000.2021041613.813944997346</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
 | ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>8.0.5001.2021033108.551023531334</storage-layer-tag> | [nscale Server Storage Layer](components/storage-layer.md) |
 | ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>8.0.5001.2021032409.23093603638</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
 | ceyoniq.azurecr.io/release/nscale/console | <console-tag>8.0.5000.12150.87912327506</console-tag> | [nscale Console](components/console.md) |
@@ -105,7 +105,7 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 |nscale WebDAV-Connector|Ja|Ja|Ja|Ja|
 |nscale ERP Connector ILM|Ja|Ja|Ja|Ja|
 
-(*) Die Komponente kann über einen [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) in Kubernetes skaliert werden.  
+(*) Die Komponente kann über ein [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) in Kubernetes skaliert werden.  
 (**) Die Komponente kann über einen [Service](https://kubernetes.io/docs/concepts/services-networking/service/) in Kubernetes Loadbalancing durchführen.
 
 ## Betrieb

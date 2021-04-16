@@ -15,7 +15,6 @@ volumes:
 services:
   postgresql:
     image: ${POSTGRESQL_IMAGE}
-    hostname: ${CONTAINER_HOSTNAME}
     volumes:
       - postgresql_data:/bitnami/postgresql
       - ./config/postgresql/0_setup.sh:/docker-entrypoint-initdb.d/0_setup.sh
@@ -30,7 +29,6 @@ services:
 
   storage-layer:
     image: ${STORAGE_LAYER_IMAGE}
-    hostname: ${CONTAINER_HOSTNAME}
     stop_signal: SIGTERM
     volumes:
       - storage-layer_hd:/mnt
@@ -45,7 +43,6 @@ services:
 
   application-layer:
     image: ${APPLICATION_LAYER_IMAGE}
-    hostname: ${CONTAINER_HOSTNAME}
     volumes:
       - ${APPLICATION_LAYER_LICENSE_FILE}:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml:ro
     environment:
@@ -66,7 +63,6 @@ services:
 
   application-layer-web:
     image: ${APPLICATION_LAYER_WEB_IMAGE}
-    hostname: ${CONTAINER_HOSTNAME}
     environment:
       - nscale-host=application-layer
       - nscale-port=8080
@@ -79,7 +75,6 @@ services:
 
   console:
     image: ${CONSOLE_IMAGE}
-    hostname: ${CONTAINER_HOSTNAME}
     environment:
       - LOG_APPENDER=Console
       - HostName=application-layer
@@ -91,7 +86,6 @@ services:
 
   monitoring-console:
     image: ${MONITORING_CONSOLE_IMAGE}
-    hostname: ${CONTAINER_HOSTNAME}
     stop_signal: SIGTERM
     volumes:
       - monitoring-console_workspace:/opt/ceyoniq/nscale-monitoring/workspace:rw
@@ -105,7 +99,6 @@ services:
 
   rendition-server:
     image: ${RENDITION_SERVER_IMAGE}
-    hostname: ${CONTAINER_HOSTNAME}
     volumes:
       - rendition-server_share:/opt/ceyoniq/nscale-rendition-server/share:rw
       - ${RENDITION_SERVER_LICENSE_FILE}:/opt/ceyoniq/nscale-rendition-server/conf/license.xml:ro
