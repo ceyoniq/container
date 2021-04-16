@@ -37,7 +37,7 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
 > Wenn Sie mit Windows arbeiten, müssen Sie unter Umständen die Dateipfade ändern.  
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der nscale Standard Container ist.
 
-Stellen Sie vor dem Start der nscale Standard Container mit kubernetes sicher, dass Sie die folgenden Voraussetzungen erfüllt haben:
+Stellen Sie vor dem Start der nscale Standard Container mit Kubernetes sicher, dass Sie die folgenden Voraussetzungen erfüllt haben:
 
 - Sie haben einen Kubernetes-Cluster (ab Version 1.19.3), den Sie mit `kubectl` erreichen können
 - Sie haben einen [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/) eingerichtet
@@ -46,13 +46,13 @@ Stellen Sie vor dem Start der nscale Standard Container mit kubernetes sicher, d
 
 Starten Sie die nscale Standard Container:
 
-1. Erzeugen Sie ein Namespace `nscale`
+1. Erzeugen Sie einen Namespace `nscale`
 
 ```bash
 kubectl create namespace nscale
 ```
 
-2. Erzeugen Sie ein `Secret` mit Ihren Login-Daten (weiter Informationen: [Container-Registry](#container-registry)).
+2. Erzeugen Sie ein `Secret` mit Ihren Login-Daten (weitere Informationen: [Container-Registry](#container-registry)).
 
 ```bash
 kubectl create secret docker-registry regcred \
@@ -138,7 +138,7 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 Um auf die nscale Standard Container zugreifen zu können, benötigen Sie ein Login auf die Ceyoniq Container Registry **ceyoniq.azurecr.io**.  
 Weitere Informationen erhalten Sie vom [Ceyoniq Service](support.md).
 
-Um sich bei der Ceyoniq Container Registry anmelden zu können, verwenden Sie Ihren `username` und Ihr  `token`.  
+Um sich bei der Ceyoniq Container Registry anmelden zu können, verwenden Sie Ihren `username` und Ihr `token`.  
 
 ```bash
 kubectl create secret docker-registry regcred \
@@ -213,7 +213,7 @@ kubectl delete -k overlays/emptydir/ -n nscale
 Es wird die `StorageClass` **default** in den `PersistentVolumeClaims` verwendet.
 Sie können mit dem Kommando `kubectl get storageclass` die jeweilige `StorageClass` Ihres Kubernetes-Cluster abfragen (z.B. `hostpath` oder `local-path`).
 
-> Weitere Informationen zur `StorageClass` finden Sie in der Dokumentation Ihres Kubernetes-Cluster.
+> Weitere Informationen zur `StorageClass` finden Sie in der Dokumentation Ihres Kubernetes-Clusters.
 > Bitte beachten Sie, dass z. B. der nscale Rendition Server ein ReadWriteMany PersistentVolumeClaim benötigt,  
 > wenn mehr als ein nscale Rendition Server verwendet wird.
 
@@ -309,7 +309,7 @@ Die nscale-Komponenten werden weiterhin über nscale Monitoring Console überwac
 
 Für [Prometheus](https://prometheus.io/) stehen zwei Endpunkte zur Verfügung. Beide sind über Basic-Auth geschützt und brauchen deshalb ein Passwort für nscale Monitoring Console. Die Benutzerverwaltung ist über nscale Administrator verfügbar.
 
-Der erste Endpunkt liefert Informationen zu nscale Monitoring Console, während der zweite Endpunkt Metriken der eingebundenen nscale-Komponenten als Prometheus Sensoren zur Verfügung stellt.
+Der erste Endpunkt liefert Informationen zu nscale Monitoring Console, während der zweite Endpunkt Metriken der eingebundenen nscale-Komponenten als Prometheus-Sensoren zur Verfügung stellt.
 
 - /nscalemc/rest/metrics
 - /nscalemc/rest/metrics/nscale

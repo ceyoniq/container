@@ -95,11 +95,11 @@ Weitere Informationen zur Konfiguration von nscale Server Storage Layer finden S
 
 ### Verwenden eines HardDisk-Device
 
-Mit einem HardDisk-Device haben Sie die Möglichkeit, in Docker-Compose eine `Volume` zu verwenden und in Kubernetes `PersistentVolumeClaim` und `PersistentVolume` einzusetzen.  
-In diesem Beispiel werden Dateien für den neuen Archivtype `DEMOARCHIVETYPE` in den Ordner `/mnt` migriert.
+Mit einem HardDisk-Device haben Sie die Möglichkeit, in Docker-Compose ein `Volume` zu verwenden und in Kubernetes `PersistentVolumeClaim` und `PersistentVolume` einzusetzen.  
+In diesem Beispiel werden Dateien für den neuen Archivtyp `DEMOARCHIVETYPE` in den Ordner `/mnt` migriert.
 `/mnt` muss als `Volume` verfügbar sein.
 
-> Bitte beachten Sie, dass hier der Order `/mnt` gewählt wurde, damit dieses Beispiel möglichst einfach gehalten werden kann.
+> Bitte beachten Sie, dass hier der Ordner `/mnt` gewählt wurde, damit dieses Beispiel möglichst einfach gehalten werden kann.
 
 **Beispiel Docker-Compose:**
 
@@ -146,9 +146,9 @@ env:
 
 **Konfiguration über die `storagelayer.conf`:**
 
-Wenn Sie den nscale Server Storage Layer nicht über Umgebungsvariablen steuern möchten, dann können Sie weiterhin die `storagelayer.conf` verwenden. Bitte kopieren Sie sich die `storagelayer.conf` aus dem  nscale Server Storage Layer Standard Container und verwenden Sie diese Datei als Kubernetes `ConfigMap` oder als Docker-Compose `Bind-Mount`.
+Wenn Sie nscale Server Storage Layer nicht über Umgebungsvariablen steuern möchten, können Sie weiterhin die `storagelayer.conf` verwenden. Bitte kopieren Sie sich die `storagelayer.conf` aus dem nscale Server Storage Layer Standard Container und verwenden Sie diese Datei als Kubernetes `ConfigMap` oder als Docker-Compose `Bind-Mount`.
 
-Erweitern Sie Ihre Konfiguration in der `storagelayer.conf` mit folgenden Eigenschaften:
+Erweitern Sie Ihre Konfiguration in der `storagelayer.conf` um folgende Eigenschaften:
 
 ```ini
 [ArchiveType]
@@ -167,7 +167,7 @@ Erweitern Sie Ihre Konfiguration in der `storagelayer.conf` mit folgenden Eigens
   PermanentMigration = 1
 ```
 
-> Bitte beachten Sie, dass der neue Archivtype in Ihrer Objektklassenkonfiguration verwendet werden muss um einen Effekt zu erzielen.
+> Bitte beachten Sie, dass der neue Archivtyp in Ihrer Objektklassenkonfiguration verwendet werden muss, um einen Effekt zu erzielen.
 
 ### Verwendung eines S3-Speichers (Objektspeicher)
 
@@ -234,11 +234,11 @@ env:
         value: "1"
 ```
 
-> Bitte beachten Sie, dass der neue Archivtype in Ihrer Objektklassenkonfiguration verwendet werden muss um einen Effekt zu erzielen.
+> Bitte beachten Sie, dass der neue Archivtyp in Ihrer Objektklassenkonfiguration verwendet werden muss, um einen Effekt zu erzielen.
 
 ### Verwendung von Accounting und Monitoring
 
-Weitere Informationen zur `ACCOUNTING` und `MONITORING` finden Sie in der nscale Server Storage Layer Dokumentation in unserem [Serviceportal](<https://serviceportal.ceyoniq.com/>).
+Weitere Informationen zu `ACCOUNTING` und `MONITORING` finden Sie in der nscale Server Storage Layer Dokumentation in unserem [Serviceportal](<https://serviceportal.ceyoniq.com/>).
 
 **Beispiel Docker-Compose:**
 

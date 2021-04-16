@@ -7,7 +7,6 @@ volumes:
 services:
   pipeliner:
     image: ${PIPELINER_IMAGE}
-    hostname: ${CONTAINER_HOSTNAME}
     networks:
       - nscale
     volumes:

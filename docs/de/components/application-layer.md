@@ -83,12 +83,12 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 
 ## Microsoft Windows Schriftarten
 
-Der nscale Application Layer Server benötigt True-Type Schriftarten für die Konvertierung von
+nscale Application Layer Server benötigt True-Type Schriftarten für die Konvertierung von
 Dokumenten.  
 Die Microsoft Windows Schriftarten sind nicht installiert und müssen durch den Benutzer nachinstalliert werden.
 Sind keine Microsoft Windows Schriftarten installiert, so werden Ersatzschriftarten verwendet.
 
-Der nscale Application Layer Server erwartet die Schriftarten im folgenden Ordner:  
+nscale Application Layer Server erwartet die Schriftarten im folgenden Ordner:  
 
 ```/usr/share/fonts/truetype/msttcorefonts```
 
@@ -105,7 +105,7 @@ apt install ttf-mscorefonts-installer
 
 Sie können die Microsoft Windows Schriftarten auch durch ein Bind-Mount oder durch ein Volume bereitstellen.
 
-Der nscale Application Layer Server erwartet die Schriftarten im folgenden Ordner:
+nscale Application Layer Server erwartet die Schriftarten im folgenden Ordner:
 
 ```/usr/share/fonts/truetype/msttcorefonts```
 

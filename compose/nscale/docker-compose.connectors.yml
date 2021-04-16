@@ -3,7 +3,6 @@ version: "3.5"
 services:
   cmis-connector:
     image: ${CMIS_CONNECTOR}
-    hostname: ${CONTAINER_HOSTNAME}
     environment:
       - CMIS_AL_HOST=application-layer
       - CMIS_AL_PORT=8080
@@ -19,7 +18,6 @@ services:
 
   ilm-connector:
     image: ${ILM_CONNECTOR}
-    hostname: ${CONTAINER_HOSTNAME}
     environment:
       - ILM_AL_HOST=application-layer
       - ILM_AL_PORT=8080
@@ -35,7 +33,6 @@ services:
 
   webdav-connector:
     image: ${WEBDAV_CONNECTOR}
-    hostname: ${CONTAINER_HOSTNAME}
     environment:
       - WEBDAV_AL_HOST=application-layer
       - WEBDAV_AL_PORT=8080

@@ -17,7 +17,7 @@ Wenn ein nscale Standard Container nicht startet, kann es dafür viele Gründe g
 Um den Start eines nscale Standard Containers genauer zu untersuchen, können Sie wie folgt vorgehen:
 
 1. Starten Sie den jeweiligen nscale Standard Container, ohne dabei die eigentliche Applikation zu starten.
-Jeder nscale Standard Container verwendet einen `ENTRYPOINT` und eine `CMD`.
+Jeder nscale Standard Container verwendet einen `ENTRYPOINT` und ein `CMD`.
 Die `CMD`-Eigenschaft kann leicht übersteuert werden, sodass der Start der eigentlichen Applikation verhindert werden kann.
 
 Weitere Informationen zu `CMD` und `ENTRYPOINT`:  
@@ -169,8 +169,8 @@ Eine Installationsanleitung finden Sie hier:
 
 ## Wie kann ich mit Kustomize Änderungen an der Kubernetes-Konfiguration vornehmen?
 
-In diesem Beispiel wird gezeigt, wie sie mit Hilfe von `kustomize` die Konfiguration des nscale Server Storage Layer anpassen können.
-Es werden neue Umgebungsvariablen hinzugefügt um ein neuen Archivtyp und ein HarddiskDevice zu definieren.
+In diesem Beispiel wird gezeigt, wie Sie mit Hilfe von `kustomize` die Konfiguration von nscale Server Storage Layer anpassen können.
+Es werden neue Umgebungsvariablen hinzugefügt, um ein neuen Archivtyp und ein Harddisk-Device zu definieren.
 Außerdem soll die Konfiguration `default` verwendet werden, damit automatisch `PVC`und `PV` erzeugt werden.
 
 Weitere Informationen zu Kustomize finden Sie hier:  
@@ -178,9 +178,9 @@ Weitere Informationen zu Kustomize finden Sie hier:
 
 1. Legen Sie im Ordner `kubernetes/kustomize/nscale/overlays` den Ordner `custom` an.
 
-2. Wechseln Sie in den Order `kubernetes/kustomize/nscale/overlays/custom`
+2. Wechseln Sie in den Ordner `kubernetes/kustomize/nscale/overlays/custom`
 
-3. Erstellen Sie eine Datei `kustomization.yaml` mit folgenden Inhalt:
+3. Erstellen Sie eine Datei `kustomization.yaml` mit folgendem Inhalt:
 
 ```yaml
 bases:
@@ -190,7 +190,7 @@ patchesStrategicMerge:
 - storage-layer-env.yaml
 ```
 
-4. Erzeugen Sie eine Datei `storage-layer-env.yaml` mit folgenden Inhalt:
+4. Erzeugen Sie eine Datei `storage-layer-env.yaml` mit folgendem Inhalt:
 
 ```yaml
 apiVersion: apps/v1
@@ -225,7 +225,7 @@ spec:
               value: "1"
 ```
 
-5. Starten Sie alle Komponenten mit folgenden Kommando:
+5. Starten Sie alle Komponenten mit folgendem Kommando:
 
 ```bash
 kubectl apply -k . -n nscale
