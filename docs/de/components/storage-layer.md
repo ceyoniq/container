@@ -81,7 +81,7 @@ docker run \
   -v $(pwd)/da:/opt/ceyoniq/nscale-server/storage-layer/da \
   -v $(pwd)/etc:/opt/ceyoniq/nscale-server/storage-layer/etc \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/storage-layer/etc/license.xml \
-  ceyoniq.azurecr.io/release/nscale/storage-layer:8.0.5001.2021033108.551023531334
+  ceyoniq.azurecr.io/release/nscale/storage-layer:8.0.5102.2021042910.227030331090
 ```
 
 ## Skalierung
@@ -99,7 +99,7 @@ Mit einem HardDisk-Device haben Sie die Möglichkeit, in Docker-Compose ein `Vol
 In diesem Beispiel werden Dateien für den neuen Archivtyp `DEMOARCHIVETYPE` in den Ordner `/mnt` migriert.
 `/mnt` muss als `Volume` verfügbar sein.
 
-> Bitte beachten Sie, dass hier der Ordner `/mnt` gewählt wurde, damit dieses Beispiel möglichst einfach gehalten werden kann.
+> Bitte beachten Sie, dass hier der Ordner `/mnt` gewählt wurde, um dieses Beispiel möglichst einfach zu halten.
 
 **Beispiel Docker-Compose:**
 
@@ -146,7 +146,7 @@ env:
 
 **Konfiguration über die `storagelayer.conf`:**
 
-Wenn Sie nscale Server Storage Layer nicht über Umgebungsvariablen steuern möchten, können Sie weiterhin die `storagelayer.conf` verwenden. Bitte kopieren Sie sich die `storagelayer.conf` aus dem nscale Server Storage Layer Standard Container und verwenden Sie diese Datei als Kubernetes `ConfigMap` oder als Docker-Compose `Bind-Mount`.
+Wenn Sie nscale Server Storage Layer nicht über Umgebungsvariablen steuern möchten, können Sie weiterhin die `storagelayer.conf` verwenden. Kopieren Sie dazu die `storagelayer.conf` aus dem nscale Server Storage Layer Standard Container und verwenden Sie diese Datei als Kubernetes `ConfigMap` oder als Docker-Compose `Bind-Mount`.
 
 Erweitern Sie Ihre Konfiguration in der `storagelayer.conf` um folgende Eigenschaften:
 

@@ -225,7 +225,11 @@ Der erste Endpunkt liefert Informationen zur nscale Monitoring Console, während
 
 ## Limitierungen
 
-Informationen zu Limitierungen finden Sie hier:  
+Bitte beachten Sie, dass eine Clusterbildung mit Docker-Compose nicht möglich ist.
+Wenn Sie mehere Maschinen einsetzen wollen, um nscale zu betreiben, dann wird Ihnen der Einsatz 
+in Kubernetes empfohlen.  
+
+Informationen zu weiteren Limitierungen finden Sie hier:  
 [limitation.md](limitation.md)
 
 ## FAQ

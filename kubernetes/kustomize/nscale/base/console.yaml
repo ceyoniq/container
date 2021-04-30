@@ -20,7 +20,7 @@ spec:
       - name: regcred
       containers:
       - name: console
-        image: ceyoniq.azurecr.io/release/nscale/console:8.0.5000.12150.87912327506
+        image: ceyoniq.azurecr.io/release/nscale/console:8.0.5101.12209.140544592238
         env:
         - name: LOG_APPENDER
           value: "Console"
@@ -33,14 +33,24 @@ spec:
         - name: ALInstance
           value: "nscalealinst1"
         - name: JAVA_OPTS
-          value: "-XX:MaxRAMPercentage=75.0"           
+          value: "-XX:MaxRAMPercentage=75.0"
+        startupProbe:
+          exec:
+            command:
+            - /bin/sh
+            - ./liveness-probe.sh
+          failureThreshold: 5
+          periodSeconds: 10
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - ./liveness-probe.sh
         readinessProbe:
           exec:
             command:
             - /bin/sh
-            - /opt/ceyoniq/nscale-server/console/bin/readiness-probe.sh
-          periodSeconds: 10
-          initialDelaySeconds: 10
+            - ./readiness-probe.sh
         ports:
         - containerPort: 8086
           name: console

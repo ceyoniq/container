@@ -170,7 +170,7 @@ Eine Installationsanleitung finden Sie hier:
 ## Wie kann ich mit Kustomize Änderungen an der Kubernetes-Konfiguration vornehmen?
 
 In diesem Beispiel wird gezeigt, wie Sie mit Hilfe von `kustomize` die Konfiguration von nscale Server Storage Layer anpassen können.
-Es werden neue Umgebungsvariablen hinzugefügt, um ein neuen Archivtyp und ein Harddisk-Device zu definieren.
+Es werden neue Umgebungsvariablen hinzugefügt, um einen neuen Archivtyp und ein Harddisk-Device zu definieren.
 Außerdem soll die Konfiguration `default` verwendet werden, damit automatisch `PVC`und `PV` erzeugt werden.
 
 Weitere Informationen zu Kustomize finden Sie hier:  
@@ -231,7 +231,7 @@ spec:
 kubectl apply -k . -n nscale
 ```
 
-6. Prüfen Sie mit folgendem Kommando, ob die Umgebungsvariablen korrekt gesetzt wurden.  
+6. Prüfen Sie mit folgendem Kommando, ob die Umgebungsvariablen korrekt gesetzt wurden:  
 
 ```bash
 kubectl describe pod/storage-layer-0 -n nscale

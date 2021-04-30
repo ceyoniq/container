@@ -20,7 +20,7 @@ spec:
       - name: regcred      
       containers:
       - name: application-layer-web
-        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:8.0.5000.2021041613.813944997346
+        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:8.0.5100.2021042609.140544592238
         env:
           - name: nscale-host
             value: application-layer
@@ -34,13 +34,23 @@ spec:
             value: "-XX:MaxRAMPercentage=75.0"            
           - name: log4jConfigLocation
             value: ../conf/nscale_stdout_log_conf.xml
+        startupProbe:
+          exec:
+            command:
+            - /bin/sh
+            - ./liveness-probe.sh
+          failureThreshold: 5
+          periodSeconds: 10
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - ./liveness-probe.sh
         readinessProbe:
           exec:
             command:
             - /bin/sh
-            - /opt/ceyoniq/nscale-server/application-layer-web/bin/readiness-probe.sh
-          periodSeconds: 10
-          initialDelaySeconds: 10
+            - ./readiness-probe.sh
         ports:
         - containerPort: 8090
           name: web
