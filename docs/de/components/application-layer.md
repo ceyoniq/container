@@ -78,12 +78,12 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
    -h democontainer \
    -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
    -p 8080:8080 \
-   ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5003.2021033114.23093603638
+   ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5102.2021042821.833604378728
 ```
 
 ## Microsoft Windows Schriftarten
 
-nscale Application Layer Server benötigt True-Type Schriftarten für die Konvertierung von
+nscale Application Layer Server benötigt TrueType Schriftarten für die Konvertierung von
 Dokumenten.  
 Die Microsoft Windows Schriftarten sind nicht installiert und müssen durch den Benutzer nachinstalliert werden.
 Sind keine Microsoft Windows Schriftarten installiert, so werden Ersatzschriftarten verwendet.
@@ -112,7 +112,7 @@ nscale Application Layer Server erwartet die Schriftarten im folgenden Ordner:
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5003.2021033114.23093603638
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5102.2021042821.833604378728
 ```
 
 **Beispiel Docker-Compose:**

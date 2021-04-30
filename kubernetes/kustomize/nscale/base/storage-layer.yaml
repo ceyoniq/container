@@ -22,7 +22,7 @@ spec:
       # The license file mount inside the conf volume prevents the volume to get initialized with the image data.
       # Therefore we need to copy the data from the image to the volume manually before startup.
       - name: storage-layer-conf
-        image: ceyoniq.azurecr.io/release/nscale/storage-layer:8.0.5001.2021033108.551023531334
+        image: ceyoniq.azurecr.io/release/nscale/storage-layer:8.0.5102.2021042910.227030331090
         command: [ "/bin/sh", "-c" ]
         args:
         - |
@@ -35,13 +35,17 @@ spec:
           mountPath: /mnt
       containers:
       - name: storage-layer    
-        image: ceyoniq.azurecr.io/release/nscale/storage-layer:8.0.5001.2021033108.551023531334
+        image: ceyoniq.azurecr.io/release/nscale/storage-layer:8.0.5102.2021042910.227030331090
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - ./bin/liveness-probe.sh
         readinessProbe:
           exec:
             command:
             - /bin/sh
-            - /opt/ceyoniq/nscale-server/storage-layer/bin/readiness-probe.sh
-          periodSeconds: 10
+            - ./bin/readiness-probe.sh
         env:
         - name: LOG_APPENDER
           value: "Console"

@@ -22,7 +22,7 @@ spec:
       # The license file mount inside the workspace volume prevents the volume to get initialized with the image data.
       # Therefore we need to copy the data from the image to the volume manually before startup.
       - name: monitoring-console-conf
-        image:  ceyoniq.azurecr.io/release/nscale/monitoring-console:8.0.5001.2021032418.23093603638
+        image:  ceyoniq.azurecr.io/release/nscale/monitoring-console:8.0.5001.2021032418.140544592238
         command: [ "/bin/sh", "-c" ]
         args:
         - |
@@ -34,14 +34,24 @@ spec:
           mountPath: /mnt
       containers:
       - name: monitoring-console
-        image: ceyoniq.azurecr.io/release/nscale/monitoring-console:8.0.5001.2021032418.23093603638
+        image: ceyoniq.azurecr.io/release/nscale/monitoring-console:8.0.5001.2021032418.140544592238
+        startupProbe:
+          exec:
+            command:
+            - /bin/sh
+            - ./readiness-probe.sh
+          failureThreshold: 5
+          periodSeconds: 10
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - ./liveness-probe.sh
         readinessProbe:
           exec:
             command:
             - /bin/sh
-            - /opt/ceyoniq/nscale-monitoring/readiness-probe.sh
-          periodSeconds: 10
-          initialDelaySeconds: 10
+            - ./readiness-probe.sh
         ports:
         - containerPort: 8387
           name: monitoring

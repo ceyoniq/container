@@ -20,7 +20,7 @@ spec:
       - name: regcred     
       containers:
       - name: webdav-connector
-        image: ceyoniq.azurecr.io/release/nscale/webdav-connector:8.0.5000.2021031902.87912327506
+        image: ceyoniq.azurecr.io/release/nscale/webdav-connector:8.0.5000.2021031902.140544592238
         env:
         - name: WEBDAV_AL_HOST
           value: "application-layer"
@@ -32,13 +32,16 @@ spec:
           value: "nscalealinst1"
         - name: JAVA_OPTS
           value: "-XX:MaxRAMPercentage=75.0"           
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - ./liveness-probe.sh
         readinessProbe:
           exec:
             command:
             - /bin/sh
-            - /opt/ceyoniq/nscale-webdav/bin/readiness-probe.sh
-          periodSeconds: 10
-          initialDelaySeconds: 10
+            - ./readiness-probe.sh
         ports:
         - containerPort: 8088
           name: webdav

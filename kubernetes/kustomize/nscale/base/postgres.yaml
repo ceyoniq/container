@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: postgresql
-        image: bitnami/postgresql:11.6.0
+        image: bitnami/postgresql:13
         resources:
           limits:
             cpu: "1000m"
@@ -58,11 +58,6 @@ spec:
             - sh
             - -c
             - exec pg_isready -U "postgres" -h 127.0.0.1 -p 5432
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 5
-          successThreshold: 1
-          failureThreshold: 6
         readinessProbe:
           exec:
             command:
@@ -71,11 +66,6 @@ spec:
             - |
               pg_isready -U "postgres" -h 127.0.0.1 -p 5432
               [ -f /opt/bitnami/postgresql/tmp/.initialized ]
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          timeoutSeconds: 5
-          successThreshold: 1
-          failureThreshold: 6  
         volumeMounts:
         - name: custom-init-scripts
           mountPath: /docker-entrypoint-initdb.d/

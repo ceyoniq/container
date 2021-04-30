@@ -27,6 +27,7 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
     - [Azure](#azure)
   - [Zugriff mit nscale Administrator](#zugriff-mit-nscale-administrator)
   - [Logging](#logging)
+  - [Logs exportieren](#logs-exportieren)
   - [Metriken](#metriken)
   - [Limitierungen](#limitierungen)
   - [FAQ](#faq)
@@ -214,7 +215,7 @@ Es wird die `StorageClass` **default** in den `PersistentVolumeClaims` verwendet
 Sie können mit dem Kommando `kubectl get storageclass` die jeweilige `StorageClass` Ihres Kubernetes-Cluster abfragen (z.B. `hostpath` oder `local-path`).
 
 > Weitere Informationen zur `StorageClass` finden Sie in der Dokumentation Ihres Kubernetes-Clusters.
-> Bitte beachten Sie, dass z. B. der nscale Rendition Server ein ReadWriteMany PersistentVolumeClaim benötigt,  
+> Bitte beachten Sie, dass z. B. der nscale Rendition Server ein ReadWriteMany PersistentVolumeClaim benötigt,
 > wenn mehr als ein nscale Rendition Server verwendet wird.
 
 Anlegen aller Ressourcen:
@@ -302,6 +303,23 @@ kubectl logs application-layer-0 -n nscale
 
 Weitere Informationen zum Thema Logging in Kubernetes finden Sie hier:  
 <https://kubernetes.io/docs/concepts/cluster-administration/logging>
+
+## Logs exportieren
+
+Die Log Dateien der einzelnen Komponenten können aus Loki exportiert werden.
+
+Dazu können Sie das Kommandozeilentool [LogCLI](https://grafana.com/docs/loki/latest/getting-started/logcli/) mit dem Image `grafana/logcli` verwenden.
+
+Beispiel:
+
+```bash
+kubectl run logcli --rm -it \
+--image=grafana/logcli:master-72b4c01-amd64 \
+--namespace=loki-stack \
+--env=LOKI_ADDR=http://loki:3100  \
+--restart=Never \
+-- query '{namespace="nscale", app="application-layer"}' --quiet --from=2020-12-06T08:06:09Z --to=2020-12-07T12:06:26Z --limit=10000 > /c/tmp/log.txt
+```
 
 ## Metriken
 

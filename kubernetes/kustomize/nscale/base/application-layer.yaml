@@ -55,13 +55,13 @@ spec:
       initContainers:
       # wait for database to be ready
       - name: check-db-ready
-        image: bitnami/postgresql:11.6.0
+        image: bitnami/postgresql:13
         command: ['sh', '-c',
           'until pg_isready -U postgres -h postgresql -p 5432;
           do echo waiting for database; sleep 2; done;']
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5003.2021033114.23093603638
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5102.2021042821.833604378728
         env:
           - name: INSTANCE1_INSTANCE_LOGGER_CONF
             value: "instance1-log-console.conf"
@@ -98,17 +98,23 @@ spec:
                 fieldPath: metadata.namespace
           - name: INSTANCE1_CORE_FULLTEST_INDEX_MIRROR_LOCALCACHE
             value: "off"           
+        startupProbe:
+          exec:
+            command:
+            - /bin/sh
+            - ./liveness-probe.sh
+          failureThreshold: 30
+          periodSeconds: 10
         livenessProbe:
-          tcpSocket:
-            port: 20626
-          periodSeconds: 5
+          exec:
+            command:
+            - /bin/sh
+            - ./liveness-probe.sh
         readinessProbe:
           exec:
             command:
             - /bin/sh
-            - /opt/ceyoniq/nscale-server/application-layer/bin/readiness-probe.sh
-          periodSeconds: 10
-          initialDelaySeconds: 30
+            - ./readiness-probe.sh
         ports:
         - containerPort: 8080
           name: application
