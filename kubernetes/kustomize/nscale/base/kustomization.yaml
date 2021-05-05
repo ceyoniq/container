@@ -38,6 +38,7 @@ configMapGenerator:
   - config/pipeliner/cold.xml
 
 resources:
+- rbac.yaml
 - postgres.yaml
 - application-layer.yaml
 - application-layer-web.yaml
