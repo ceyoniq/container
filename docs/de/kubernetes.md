@@ -113,7 +113,6 @@ Weitere Informationen zu Kustomize finden Sie hier:
 Die nscale Basiskonfiguration ist im Verzeichnis `base` abgelegt.
 Das Verzeichnis `overlay` enthält Ableitungen für unterschiedliche Umgebungen.
 Jede konkrete nscale Installation wird in einem eigenen **Namespace** installiert.
-Dazu werden mindestens eine Lizenzdatei sowie ein voll qualifizierter Hostname benötigt.
 
 Die Web Schnittstellen der Komponente sind von außen über **Ingress** Regeln erreichbar.
 Dazu wird ein eindeutiger voll qualifizierter Hostname für jede nscale Installation angegeben.
