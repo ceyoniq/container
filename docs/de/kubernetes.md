@@ -27,7 +27,6 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
     - [Azure](#azure)
   - [Zugriff mit nscale Administrator](#zugriff-mit-nscale-administrator)
   - [Logging](#logging)
-  - [Logs exportieren](#logs-exportieren)
   - [Metriken](#metriken)
   - [Limitierungen](#limitierungen)
   - [FAQ](#faq)
@@ -270,16 +269,16 @@ kubectl delete -k overlays/azure/ -n nscale
 
 > Sie benötigen nscale Administrator ab Version 8.0.5000.
 
-Für den Zugriff mit nscale Administrator auf Ihre nscale-Installation innerhalb Kubernetes steht Ihnen der **kein RMS**-Modus (RMS = nscale Remote Management Service) zur Verfügung. Erzeugen Sie eine neue Komponenten-Gruppe in nscale Administrator, um den **kein RMS**-Modus zu verwenden und auf die jeweiligen nscale-Komponenten zugreifen zu können.
+Für den Zugriff mit nscale Administrator auf Ihre nscale-Installation innerhalb Kubernetes steht Ihnen der **kein RMS**-Modus (RMS = nscale Remote Management Service) zur Verfügung. Erzeugen Sie eine neue Komponenten-Gruppe in nscale Administrator, um auf die jeweiligen nscale-Komponenten zugreifen zu können.
 
 Weitere Informationen finden Sie hier: [limitation.md](limitation.md)
 
-Damit Sie von außerhalb Ihres Kubernetes-Cluster auf die jeweiligen nscale-Komponenten zugreifen können, müssen die Ports der nscale-Komponenten durch ein `kubectl port-forward` auf Ihr lokales System weiterleitet werden.
+Damit Sie von außerhalb Ihres Kubernetes-Cluster auf die jeweiligen nscale-Komponenten zugreifen können, müssen die Ports der nscale-Komponenten durch ein `kubectl port-forward` auf Ihr lokales System weitergeleitet werden.
 
 ```bash
 
 # stateful set
-kubectl port-forward --address 0.0.0.0 pod/application-layer-0 080:8080 8443:8443 -n nscale
+kubectl port-forward --address 0.0.0.0 pod/application-layer-0 8080:8080 8443:8443 -n nscale
 kubectl port-forward --address 0.0.0.0 pod/storage-layer-0 3005:3005 -n nscale
 
 # deployment
@@ -302,23 +301,6 @@ kubectl logs application-layer-0 -n nscale
 
 Weitere Informationen zum Thema Logging in Kubernetes finden Sie hier:  
 <https://kubernetes.io/docs/concepts/cluster-administration/logging>
-
-## Logs exportieren
-
-Die Log Dateien der einzelnen Komponenten können aus Loki exportiert werden.
-
-Dazu können Sie das Kommandozeilentool [LogCLI](https://grafana.com/docs/loki/latest/getting-started/logcli/) mit dem Image `grafana/logcli` verwenden.
-
-Beispiel:
-
-```bash
-kubectl run logcli --rm -it \
---image=grafana/logcli:master-72b4c01-amd64 \
---namespace=loki-stack \
---env=LOKI_ADDR=http://loki:3100  \
---restart=Never \
--- query '{namespace="nscale", app="application-layer"}' --quiet --from=2020-12-06T08:06:09Z --to=2020-12-07T12:06:26Z --limit=10000 > /c/tmp/log.txt
-```
 
 ## Metriken
 

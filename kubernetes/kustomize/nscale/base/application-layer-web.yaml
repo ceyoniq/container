@@ -20,7 +20,7 @@ spec:
       - name: regcred      
       containers:
       - name: application-layer-web
-        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:8.0.5100.2021042609.140544592238
+        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:8.0.5200.2021052714.787088699941
         env:
           - name: nscale-host
             value: application-layer

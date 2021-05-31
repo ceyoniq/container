@@ -20,7 +20,7 @@ spec:
       - name: regcred
       containers:
       - name: console
-        image: ceyoniq.azurecr.io/release/nscale/console:8.0.5101.12209.140544592238
+        image: ceyoniq.azurecr.io/release/nscale/console:8.0.5101.12209.777635089529
         env:
         - name: LOG_APPENDER
           value: "Console"

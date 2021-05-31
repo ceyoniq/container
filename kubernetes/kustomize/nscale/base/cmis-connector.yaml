@@ -20,7 +20,7 @@ spec:
       - name: regcred   
       containers:
       - name: cmis-connector
-        image: ceyoniq.azurecr.io/release/nscale/cmis-connector:8.0.5000.2021032508.140544592238
+        image: ceyoniq.azurecr.io/release/nscale/cmis-connector:8.0.5000.2021032508.777635089529
         env:
         - name: CMIS_AL_HOST
           value: "application-layer"
