@@ -29,7 +29,7 @@ spec:
           do echo waiting for database; sleep 2; done;']
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5102.2021042821.833604378728
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5201.2021052609.691762250460
         env:
           - name: INSTANCE1_INSTANCE_LOGGER_CONF
             value: "instance1-log-console.conf"

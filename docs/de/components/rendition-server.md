@@ -54,7 +54,7 @@ docker run \
   -h democontainer \
   -v $(pwd)/share:/opt/ceyoniq/nscale-rendition-server/share \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-rendition-server/conf/license.xml \
-  ceyoniq.azurecr.io/release/nscale/rendition-server:8.0.5100.2021042214.140544592238
+  ceyoniq.azurecr.io/release/nscale/rendition-server:8.0.5200.2021051718.777635089529
 ```
 
 ## Microsoft Windows Schriftarten
@@ -88,7 +88,7 @@ nscale Rendition Server erwartet die Schriftarten im folgenden Ordner:
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5102.2021042821.833604378728
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5201.2021052609.691762250460
 ```
 
 **Beispiel Docker-Compose:**
