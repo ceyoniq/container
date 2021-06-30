@@ -9,3 +9,4 @@ patchesStrategicMerge:
 - storage-layer.yaml
 - monitoring-console.yaml
 - postgres.yaml
+#- pipeliner.yaml

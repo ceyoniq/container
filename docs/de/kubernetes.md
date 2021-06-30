@@ -62,21 +62,21 @@ kubectl create secret docker-registry regcred \
   --namespace nscale
 ```
 
-2. Kopieren Sie Ihre Lizenzdatei `license.xml` in den Ordner `kubernetes/kustomize/nscale/base/`.  
-3. Führen Sie nun folgende Kommandos im Ordner `kubernetes/kustomize/nscale/overlays/emptyDir/` aus:
+3. Kopieren Sie Ihre Lizenzdatei `license.xml` in den Ordner `kubernetes/kustomize/nscale/base/`.  
+4. Führen Sie nun folgende Kommandos im Ordner `kubernetes/kustomize/nscale/overlays/emptyDir/` aus:
 
 ```bash
 kubectl apply -n nscale -k .
 ```
 
-4. Sie können prüfen, ob die jeweiligen `Pods` erfolgreich gestartet werden konnten.
+5. Sie können prüfen, ob die jeweiligen `Pods` erfolgreich gestartet werden konnten.
 
 ```bash
  kubectl get pods -n nscale -w
 ```
 
-5. Warten Sie bis alle `Pods` den Status `Running` melden.  
-6. Rufen Sie folgendes Kommando auf:
+6. Warten Sie bis alle `Pods` den Status `Running` melden.  
+7. Rufen Sie folgendes Kommando auf:
 
 ```bash
 kubectl port-forward --address 0.0.0.0 deployment/application-layer-web 8090:8090 -n nscale
@@ -134,7 +134,7 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 
 ## Container-Registry
 
-Um auf die nscale Standard Container zugreifen zu können, benötigen Sie ein Login auf die Ceyoniq Container Registry **ceyoniq.azurecr.io**.  
+Um auf die nscale Standard Container zugreifen zu können, benötigen Sie einen Zugang für die Ceyoniq Container Registry **ceyoniq.azurecr.io**.  
 Weitere Informationen erhalten Sie vom [Ceyoniq Service](support.md).
 
 Um sich bei der Ceyoniq Container Registry anmelden zu können, verwenden Sie Ihren `username` und Ihr `token`.  
@@ -151,7 +151,7 @@ kubectl create secret docker-registry regcred \
 
 ## Ingress
 
-> Beachten Sie, dass die Ingress-Konfiguration keine Informationen zu Ihrem Hostname beinhaltet.
+> Die Ingress-Konfiguration beinhaltet Informationen zu Ihrem Hostname.
 > Somit werden alle Anfragen an Ihren Cluster durch diesen Ingress verarbeitet.
 > Passen Sie die Ingress-Konfiguration bei Bedarf an.
 
@@ -181,7 +181,7 @@ Sie können nun über die IP-Adresse oder den Hostname auf Ihr nscale-System zug
 
 ## Persistierung
 
-In diesem Beispiel wird Ihnen gezeigt, wie Sie Daten innerhalb Kubernetes speichern können.  
+In diesem Beispiel sehen Sie, wie Sie Daten innerhalb von Kubernetes speichern können.  
 Je nach Kubernetes-Umgebung können sich die Persistierungsmöglichkeiten bei Ihnen unterscheiden.
 
 Alle Beispiele müssen im Ordner `kubernetes/kustomize/nscale` ausgeführt werden.
@@ -213,7 +213,7 @@ Es wird die `StorageClass` **default** in den `PersistentVolumeClaims` verwendet
 Sie können mit dem Kommando `kubectl get storageclass` die jeweilige `StorageClass` Ihres Kubernetes-Cluster abfragen (z.B. `hostpath` oder `local-path`).
 
 > Weitere Informationen zur `StorageClass` finden Sie in der Dokumentation Ihres Kubernetes-Clusters.
-> Bitte beachten Sie, dass z. B. der nscale Rendition Server ein ReadWriteMany PersistentVolumeClaim benötigt,
+> Bitte beachten Sie, dass z.B. der nscale Rendition Server ein ReadWriteMany PersistentVolumeClaim benötigt,
 > wenn mehr als ein nscale Rendition Server verwendet wird.
 
 Anlegen aller Ressourcen:
@@ -280,12 +280,12 @@ Damit Sie von außerhalb Ihres Kubernetes-Cluster auf die jeweiligen nscale-Komp
 # stateful set
 kubectl port-forward --address 0.0.0.0 pod/application-layer-0 8080:8080 8443:8443 -n nscale
 kubectl port-forward --address 0.0.0.0 pod/storage-layer-0 3005:3005 -n nscale
+kubectl port-forward --address 0.0.0.0 pod/pipeliner-0 4173:4173 -n nscale
 
 # deployment
 kubectl port-forward --address 0.0.0.0 deployment/application-layer-web 8090:8090 -n nscale
 kubectl port-forward --address 0.0.0.0 deployment/rendition-server 8192:8192 -n nscale
 kubectl port-forward --address 0.0.0.0 deployment/monitoring-console 8387:8387 -n nscale
-kubectl port-forward --address 0.0.0.0 deployment/pipeliner 3125:3120 -n nscale
 ```
 
 ## Logging
@@ -320,5 +320,5 @@ Informationen zu Limitierungen finden Sie hier:
 
 ## FAQ
 
-Das FAQ finden Sie hier:  
+Die FAQ finden Sie hier:  
 [faq.md](faq.md)

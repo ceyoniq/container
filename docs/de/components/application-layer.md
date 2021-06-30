@@ -16,6 +16,7 @@
   - [Cluster-Konfiguration in Kubernetes](#cluster-konfiguration-in-kubernetes)
   - [Volltext-Cache](#volltext-cache)
   - [Inkludieren und Exkludieren von Job-Typen](#inkludieren-und-exkludieren-von-job-typen)
+  - [SAP Anbindung](#sap-anbindung)
   - [Log Level](#log-level)
 
 ## Lizenzierung
@@ -78,14 +79,14 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
    -h democontainer \
    -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
    -p 8080:8080 \
-   ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5201.2021052609.691762250460
+   ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5301.2021062421.129368058850
 ```
 
 ## Microsoft Windows Schriftarten
 
 nscale Application Layer Server benötigt TrueType Schriftarten für die Konvertierung von
 Dokumenten.  
-Die Microsoft Windows Schriftarten sind nicht installiert und müssen durch den Benutzer nachinstalliert werden.
+Die Microsoft Windows Schriftarten sind nicht installiert, können aber nachinstalliert werden.
 Sind keine Microsoft Windows Schriftarten installiert, so werden Ersatzschriftarten verwendet.
 
 nscale Application Layer Server erwartet die Schriftarten im folgenden Ordner:  
@@ -112,7 +113,7 @@ nscale Application Layer Server erwartet die Schriftarten im folgenden Ordner:
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5201.2021052609.691762250460
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5301.2021062421.129368058850
 ```
 
 **Beispiel Docker-Compose:**
@@ -176,6 +177,14 @@ INSTANCE1_CLUSTER_CORE_JOB_COORDINATOR_JOBNAMES=ArchiveJob,AuditLogJob
 ```
 
 Weitere Informationen dazu finden Sie in der Dokumentation von nscale Server Application Layer.
+
+## SAP Anbindung
+
+Für den SAP Java Connector für die RFC-Kommunikation im Application Layer werden zusätzliche Bibliotheken benötigt,
+die nicht im Standard Container ausgeliefert werden (siehe 4.3.1.2.1 "SAP Java Connector" im ERP Manual).
+Wird die ERP Installation im Container durchgeführt sollte eine Ableitung des Application Layer Standard Containers benutzt werden.
+
+Bisher wurde die erweiterte SAP Funktion insbesondere auch Application Layer Cluster noch nicht getestet.
 
 ## Log Level
 

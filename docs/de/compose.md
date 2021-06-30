@@ -45,7 +45,6 @@ Starten Sie die nscale Standard Container:
 
 1. Melden Sie sich mit Ihren Login-Daten bei der Ceyoniq Container Registry **ceyoniq.azurecr.io**  
 
-
 ```bash
 docker login ceyoniq.azurecr.io
 ```
@@ -99,7 +98,7 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 
 ## Container-Registry
 
-Um auf die nscale Standard Container zugreifen zu können, benötigen Sie ein Login auf die Ceyoniq Container Registry **ceyoniq.azurecr.io**.  
+Um auf die nscale Standard Container zugreifen zu können, benötigen Sie einen Zugang für die Ceyoniq Container Registry **ceyoniq.azurecr.io**.  
 Weitere Informationen erhalten Sie vom [Ceyoniq Service](support.md).
 
 Um sich bei der Ceyoniq Container Registry anmelden zu können, verwenden Sie Ihren `username` und Ihr `token`.  
@@ -226,13 +225,12 @@ Der erste Endpunkt liefert Informationen zur nscale Monitoring Console, während
 ## Limitierungen
 
 Bitte beachten Sie, dass eine Clusterbildung mit Docker-Compose nicht möglich ist.
-Wenn Sie mehere Maschinen einsetzen wollen, um nscale zu betreiben, dann wird Ihnen der Einsatz 
-in Kubernetes empfohlen.  
+Wenn Sie mehrere Maschinen einsetzen wollen, um nscale zu betreiben, empfehlen wir Ihnen den Einsatz in Kubernetes.  
 
 Informationen zu weiteren Limitierungen finden Sie hier:  
 [limitation.md](limitation.md)
 
 ## FAQ
 
-Das FAQ finden Sie hier:  
+Die FAQ finden Sie hier:  
 [faq.md](faq.md)
