@@ -22,7 +22,7 @@ spec:
       - name: regcred    
       containers:
       - name: pipeliner    
-        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5201.2021052611.715581609330
+        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5301.2021062812.31595313320
         resources:
           limits:
             cpu: "1000m"
@@ -56,6 +56,9 @@ spec:
           mountPath: /opt/ceyoniq/nscale-pipeliner/workdir/config/runtime/cold.xml
         - name: pipeliner-data
           mountPath: /opt/ceyoniq/nscale-pipeliner/workdir/data
+        - name: pipeliner-setup
+          subPath: setup.sh
+          mountPath: /setup.sh    
       volumes:
       - name: license
         configMap:
@@ -66,3 +69,17 @@ spec:
       - name: config
         configMap:
           name: pipeliner-config
+      - name: pipeliner-setup
+        configMap:
+          name: pipeliner-setup
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pipeliner
+spec:
+  ports:
+  - port: 4173
+    name: pipeliner
+  selector:
+    app: pipeliner

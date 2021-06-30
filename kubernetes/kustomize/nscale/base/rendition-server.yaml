@@ -20,7 +20,7 @@ spec:
       - name: regcred    
       containers:
       - name: rendition-server
-        image: ceyoniq.azurecr.io/release/nscale/rendition-server:8.0.5200.2021051718.777635089529
+        image: ceyoniq.azurecr.io/release/nscale/rendition-server:8.0.5300.2021062118.898632778901
         startupProbe:
           exec:
             command:

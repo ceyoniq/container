@@ -36,6 +36,9 @@ configMapGenerator:
 - name: pipeliner-config
   files: 
   - config/pipeliner/cold.xml
+- name: pipeliner-setup
+  files: 
+  - config/pipeliner/setup.sh
 
 resources:
 - rbac.yaml

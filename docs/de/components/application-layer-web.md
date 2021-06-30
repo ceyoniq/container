@@ -55,7 +55,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
    -e log4jConfigLocation=../conf/nscale_stdout_log_conf.xml \
    -e nscale-port=8080 \
    -p 8090:8090 \
-   ceyoniq.azurecr.io/release/nscale/application-layer-web:8.0.5200.2021052714.787088699941
+   ceyoniq.azurecr.io/release/nscale/application-layer-web:8.0.5300.2021062912.328722566831
 ```
 
 ## Information für Entwickler

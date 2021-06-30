@@ -62,7 +62,7 @@ Sollten Sie trotz Verwendung einer gültigen Container-Lizenz Probleme haben, we
 
 ## Container-Registry
 
-Um auf die nscale Standard Container zugreifen zu können, benötigen Sie ein Login auf die Ceyoniq Container Registry **ceyoniq.azurecr.io**.  
+Um auf die nscale Standard Container zugreifen zu können, benötigen Sie einen Zugang für die Ceyoniq Container Registry **ceyoniq.azurecr.io**.  
 Weitere Informationen erhalten Sie vom [Ceyoniq Service](support.md).
 
 ## nscale Standard Container-Images
@@ -73,13 +73,13 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 
 | Image | Release Tag | nscale Komponente |
 |:---|:---|:---|
-| ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>8.0.5201.2021052609.691762250460</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
-| ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>8.0.5200.2021052714.787088699941</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
-| ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>8.0.5102.2021042910.777635089529</storage-layer-tag> | [nscale Server Storage Layer](components/storage-layer.md) |
-| ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>8.0.5200.2021051718.777635089529</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
+| ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>8.0.5301.2021062421.129368058850</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
+| ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>8.0.5300.2021062912.328722566831</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
+| ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>8.0.5300.2021062315.663766968682</storage-layer-tag> | [nscale Server Storage Layer](components/storage-layer.md) |
+| ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>8.0.5300.2021062118.898632778901</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
 | ceyoniq.azurecr.io/release/nscale/console | <console-tag>8.0.5101.12209.777635089529</console-tag> | [nscale Console](components/console.md) |
 | ceyoniq.azurecr.io/release/nscale/monitoring-console | <monitoring-console-tag>8.0.5001.2021032418.777635089529</monitoring-console-tag> | [nscale Monitoring Console](components/monitoring-console.md) |
-| ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>8.0.5201.2021052611.715581609330</pipeliner-tag> | [nscale Pipeliner](components/pipeliner.md) |
+| ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>8.0.5301.2021062812.31595313320</pipeliner-tag> | [nscale Pipeliner](components/pipeliner.md) |
 | ceyoniq.azurecr.io/release/nscale/cmis-connector | <cmis-connector-tag>8.0.5000.2021032508.777635089529</cmis-connector-tag> | [nscale CMIS-Connector](components/cmis-connector.md) |
 | ceyoniq.azurecr.io/release/nscale/webdav-connector | <webdav-connector-tag>8.0.5000.2021031902.777635089529</webdav-connector-tag> | [nscale WebDAV-Connector](components/webdav-connector.md) |
 | ceyoniq.azurecr.io/release/nscale/ilm-connector | <ilm-connector-tag>8.0.5000.2021032309.777635089529</ilm-connector-tag> | [nscale ERP Connector ILM](components/ilm-connector.md) |
@@ -161,7 +161,7 @@ Informationen zu Limitierungen finden Sie hier:
 
 ## FAQ
 
-Das FAQ finden Sie hier:  
+Die FAQ finden Sie hier:  
 [faq.md](faq.md)
 
 ## Externe Quellen

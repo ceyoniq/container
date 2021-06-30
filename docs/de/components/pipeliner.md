@@ -40,7 +40,7 @@ docker run \
   -v $(pwd)/cold.xml:/opt/ceyoniq/nscale-pipeliner/workdir/config/runtime/cold.xml \
   -v $(pwd)/data:/opt/ceyoniq/nscale-pipeliner/workdir/data \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-pipeliner/workdir/license.xml \
-  ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5201.2021052611.715581609330
+  ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5301.2021062812.31595313320
 ```
 
 ## Konfiguration
@@ -80,14 +80,12 @@ Dazu muss die Kommentarzeile unten herausgenommen und der Container neu instanzi
 
 In Kubernetes ist nscale Pipeliner als StatefulSet definiert und verwendet vier Volumes:
 
-| Volume | Herkunft | Beschreibung |
-|---|---|---|
 | `data` | RWX PersistenceVolumeClaim | Enthält das Spool-Verzeichnis und kann in mehrere Pods gemappt werden, um Daten abzulegen, die vom Pipeliner kontinuierlich importiert werden. |
-| `conf`  | RWO PersistenceVolumeClaim  | Umfasst die Konfiguration von nscale Pipeliner. |
-| `cold.xml` | `base/config/pipeliner/cold.xml` | Spezielle, offline erstellte Konfigurationsdatei. |
+| `setup`  | config map  | Vorbereitung des Pipeliner starts. |
+| `cold` | `base/config/pipeliner/cold.xml` | Spezielle, offline erstellte Konfigurationsdatei. |
 | `license.xml` | `base/license.xml` | Lizenzdatei |
 
-Zur Aktivierung von nscale Pipeliner müssen Sie in der Datei `base/kustomization.xml` die Pipeliner Ressourcen einkommentieren.
+Zur Aktivierung von nscale Pipeliner müssen Sie in der Datei `base/kustomization.yaml` und `overlay/*/kustomization.yaml` die Pipeliner Ressourcen einkommentieren.
 
 ### Anpassen der `doc_mime_suff.tsv`
 
@@ -99,13 +97,13 @@ Diese Konfiguration kann angepasst werden.
 #### Vorbereitung
 
 Um Anpassungen an der `doc_mime_suff.tsv` vornehmen zu können, benötigen Sie diese Datei auf Ihrem Entwicklungssystem.
-Diese Datei können Sie dem Image `ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5201.2021052611.715581609330
+Diese Datei können Sie dem Image `ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5301.2021062812.31595313320
 
 Kopieren Sie die Datei `doc_mime_suff.tsv` lokal auf Ihr System:  
 
 ```bash
 # Erzeugen eines temporären Containers
-$ docker create ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5201.2021052611.715581609330
+$ docker create ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5301.2021062812.31595313320
 a0123456789 
 
 # Kopieren der Datei doc_mime_suff.tsv auf Ihr Entwicklungssystem
@@ -124,7 +122,7 @@ Um angepasste Dateien in dem jeweiligen Container verwenden zu können, müssen 
 Um die angepasste `doc_mime_suff.tsv` verwenden zu können, muss diese Datei als Bind-Mount verfügbar gemacht werden.  
 
 ```bash
-docker run -it ... -v ${PWD}/doc_mime_suff.tsv:/opt/ceyoniq/nscale-pipeliner/workdir/config/common/doc_mime_suff.tsv ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5201.2021052611.715581609330
+docker run -it ... -v ${PWD}/doc_mime_suff.tsv:/opt/ceyoniq/nscale-pipeliner/workdir/config/common/doc_mime_suff.tsv ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5301.2021062812.31595313320
 ```
 
 **Beispiel Docker-Compose:**
