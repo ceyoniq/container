@@ -20,7 +20,7 @@ spec:
       - name: regcred    
       containers:
       - name: ilm-connector
-        image: ceyoniq.azurecr.io/release/nscale/ilm-connector:8.0.5000.2021032309.777635089529
+        image: ceyoniq.azurecr.io/release/nscale/ilm-connector:8.0.5400.2021070802.665621793349
         env:
         - name: ILM_AL_HOST
           value: "application-layer"

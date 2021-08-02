@@ -22,7 +22,7 @@ Die Datei wird im Container hier erwartet: `/opt/ceyoniq/nscale-rendition-server
 ## Persistierung
 
 Um zu gewährleisten, dass Sie nach dem Herunterfahren des Systems weiterhin Zugriff auf Ihre Daten haben, sorgen Sie für eine Persistierung des Ordners
-`/opt/ceyoniq/nscale-rendition-server/share`.
+`/opt/ceyoniq/nscale-rendition-server/work`.
 
 ## Umgebungsvariablen
 
@@ -52,9 +52,9 @@ docker run \
   -e RSX_APPENDER=Console \
   -p 8192:8192 \
   -h democontainer \
-  -v $(pwd)/share:/opt/ceyoniq/nscale-rendition-server/share \
+  -v $(pwd)/work:/opt/ceyoniq/nscale-rendition-server/work \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-rendition-server/conf/license.xml \
-  ceyoniq.azurecr.io/release/nscale/rendition-server:8.0.5300.2021062118.898632778901
+  ceyoniq.azurecr.io/release/nscale/rendition-server:8.0.5401.2021072018.591181770886
 ```
 
 ## Microsoft Windows Schriftarten
@@ -88,7 +88,7 @@ nscale Rendition Server erwartet die Schriftarten im folgenden Ordner:
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5301.2021062421.129368058850
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5400.2021071521.679549675713
 ```
 
 **Beispiel Docker-Compose:**

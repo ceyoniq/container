@@ -22,7 +22,7 @@ spec:
       - name: regcred    
       containers:
       - name: pipeliner    
-        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5301.2021062812.31595313320
+        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5400.2021071612.806457530597
         resources:
           limits:
             cpu: "1000m"

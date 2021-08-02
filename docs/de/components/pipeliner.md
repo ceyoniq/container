@@ -40,7 +40,7 @@ docker run \
   -v $(pwd)/cold.xml:/opt/ceyoniq/nscale-pipeliner/workdir/config/runtime/cold.xml \
   -v $(pwd)/data:/opt/ceyoniq/nscale-pipeliner/workdir/data \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-pipeliner/workdir/license.xml \
-  ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5301.2021062812.31595313320
+  ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5400.2021071612.806457530597
 ```
 
 ## Konfiguration
@@ -97,13 +97,13 @@ Diese Konfiguration kann angepasst werden.
 #### Vorbereitung
 
 Um Anpassungen an der `doc_mime_suff.tsv` vornehmen zu können, benötigen Sie diese Datei auf Ihrem Entwicklungssystem.
-Diese Datei können Sie dem Image `ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5301.2021062812.31595313320
+Diese Datei können Sie dem Image `ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5400.2021071612.806457530597
 
 Kopieren Sie die Datei `doc_mime_suff.tsv` lokal auf Ihr System:  
 
 ```bash
 # Erzeugen eines temporären Containers
-$ docker create ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5301.2021062812.31595313320
+$ docker create ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5400.2021071612.806457530597
 a0123456789 
 
 # Kopieren der Datei doc_mime_suff.tsv auf Ihr Entwicklungssystem
@@ -122,7 +122,7 @@ Um angepasste Dateien in dem jeweiligen Container verwenden zu können, müssen 
 Um die angepasste `doc_mime_suff.tsv` verwenden zu können, muss diese Datei als Bind-Mount verfügbar gemacht werden.  
 
 ```bash
-docker run -it ... -v ${PWD}/doc_mime_suff.tsv:/opt/ceyoniq/nscale-pipeliner/workdir/config/common/doc_mime_suff.tsv ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5301.2021062812.31595313320
+docker run -it ... -v ${PWD}/doc_mime_suff.tsv:/opt/ceyoniq/nscale-pipeliner/workdir/config/common/doc_mime_suff.tsv ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5400.2021071612.806457530597
 ```
 
 **Beispiel Docker-Compose:**

@@ -58,6 +58,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 |INSTANCE1_CORE_DB_SCHEMA=public | In dieser Umgebungsvariable können Sie das Datenbankschema hinterlegen. Hier wurde das Schema public gewählt. |
 |INSTANCE1_CORE_WORK_DIRECTORY=/mnt/fulltextcache | In dieser Umgebungsvariable können Sie den Ordner für den lokalen Volltext-Cache definieren.|
 |INITIALIZE_DOCUMENT_AREA=DA | Mit dieser Umgebungsvariable können Sie einen Dokumentenbereich mit dem Namen "DA" erstellen. |
+|INITIALIZE_DOCUMENT_AREA_DISPLAYNAME=DA | Mit dieser Umgebungsvariable können Sie den Displayname des neu erstellten Dokumentenbereichs überschreiben. |
 |KUBERNETES_NAMESPACE | Diese Umgebungsvariable ist für die Konfiguration des Clusters in Kubernetes notwendig, sie hat eine spezielle Konfiguration. Für weitere Details lesen Sie die [Cluster-Konfiguration in Kubernetes](#cluster-konfiguration-in-kubernetes). |
 
 ## Ports
@@ -79,7 +80,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
    -h democontainer \
    -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
    -p 8080:8080 \
-   ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5301.2021062421.129368058850
+   ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5400.2021071521.679549675713
 ```
 
 ## Microsoft Windows Schriftarten
@@ -113,7 +114,7 @@ nscale Application Layer Server erwartet die Schriftarten im folgenden Ordner:
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5301.2021062421.129368058850
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5400.2021071521.679549675713
 ```
 
 **Beispiel Docker-Compose:**
@@ -189,7 +190,7 @@ Bisher wurde die erweiterte SAP Funktion insbesondere auch Application Layer Clu
 ## Log Level
 
 Zur Fehleranalyse ist es unter Umständen notwendig, das Loglevel des Servers anzupassen.
-Das Loglevel des Servers können Sie in der log4j-Konfiguration in der Datei `conf/instance1-log.conf` anpassen.
+Das Loglevel des Servers können Sie in der log4j-Konfiguration in der Datei `conf/instance1-log-console.conf` anpassen.
 Kopieren Sie diese Datei zuerst aus dem Container heraus, bearbeiten Sie sie dann offline wie unten beschrieben und transferieren Sie die bearbeitete Datei anschließend wieder zurück in den Container.
 Alternativ können Sie auch die Konfigurationsdatei mit dem `vi` im Container bearbeiten.
 Beachten Sie bei diesem Vorgehen, dass Änderungen an Dateien im Container nicht persistiert werden.
@@ -200,17 +201,17 @@ Im Cluster muss die Datei in allen Instanzen ausgetauscht werden.
 
 ```bash
 docker-compose exec application-layer bash
-> vi /opt/ceyoniq/nscale-server/application-layer/conf/instance1-log.conf 
+> vi /opt/ceyoniq/nscale-server/application-layer/conf/instance1-log-console.conf 
 ```
 
 **Beispiel Kubernetes:**
 
 ```bash
 # copy file to host
-kubectl cp application-layer-0:/opt/ceyoniq/nscale-server/application-layer/conf/instance1-log.conf instance1-log.conf -n <namespace> -c application-layer
+kubectl cp application-layer-0:/opt/ceyoniq/nscale-server/application-layer/conf/instance1-log-console.conf instance1-log-console.conf -n <namespace> -c application-layer
 
 # edit locally
 
 # copy file to nappl container
-kubectl cp instance1-log.conf application-layer-0:/opt/ceyoniq/nscale-server/application-layer/conf/instance1-log.conf -n <namespace> -c application-layer
+kubectl cp instance1-log-console.conf application-layer-0:/opt/ceyoniq/nscale-server/application-layer/conf/instance1-log-console.conf -n <namespace> -c application-layer
 ```
