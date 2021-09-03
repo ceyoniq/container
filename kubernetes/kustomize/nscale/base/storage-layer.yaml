@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: storage-layer
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
