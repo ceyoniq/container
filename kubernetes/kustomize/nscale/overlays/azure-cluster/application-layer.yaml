@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: application-layer
+spec:
+  replicas: 2
+  template:
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - application-layer
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - name: application-layer
+        volumeMounts:
+        - name: keystore
+          subPath: certificates.store
+          mountPath: /opt/ceyoniq/nscale-server/application-layer/conf/certificates.store
+      volumes:
+      - name: keystore
+        configMap:
+          name: nappl-keystore

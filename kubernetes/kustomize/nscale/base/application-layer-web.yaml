@@ -16,24 +16,24 @@ spec:
       labels:
         app: application-layer-web
     spec:
+      serviceAccountName: default
+      automountServiceAccountToken: false
       imagePullSecrets:
-      - name: regcred      
+      - name: regcred
       containers:
       - name: application-layer-web
-        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:8.0.5400.2021072914.773703903253
-        env:
-          - name: nscale-host
-            value: application-layer
-          - name: nscale-port
-            value: "8080"
-          - name: nscale-instance
-            value: nscalealinst1
-          - name: nscale-ssl
-            value: "false"
-          - name: JAVA_OPTS
-            value: "-XX:MaxRAMPercentage=75.0"            
-          - name: log4jConfigLocation
-            value: ../conf/nscale_stdout_log_conf.xml
+        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:8.0.5500.2021082720.979826006107
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: false
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 10001
+          capabilities:
+            drop:
+              - ALL
+            add:
+              - NET_BIND_SERVICE
         startupProbe:
           exec:
             command:
@@ -51,6 +51,19 @@ spec:
             command:
             - /bin/sh
             - ./readiness-probe.sh
+        env:
+          - name: nscale-host
+            value: application-layer
+          - name: nscale-port
+            value: "8080"
+          - name: nscale-instance
+            value: nscalealinst1
+          - name: nscale-ssl
+            value: "false"
+          - name: JAVA_OPTS
+            value: "-XX:MaxRAMPercentage=75.0"
+          - name: log4jConfigLocation
+            value: ../conf/log4j/nscale_stdout_log_conf.xml
         ports:
         - containerPort: 8090
           name: web
@@ -61,6 +74,14 @@ spec:
           requests:
             cpu: "100m"
             memory: "700Mi"
+        volumeMounts:
+        - name: log4j
+          mountPath: /opt/ceyoniq/nscale-server/application-layer-web/conf/log4j
+      volumes:
+      - name: log4j
+        configMap:
+          name: application-layer-web-log4j
+
 ---
 apiVersion: v1
 kind: Service

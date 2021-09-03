@@ -7,6 +7,7 @@
   - [Lizenzierung](#lizenzierung)
   - [Persistierung](#persistierung)
   - [Umgebungsvariablen](#umgebungsvariablen)
+  - [Logging in Kubernetes](#logging-in-kubernetes)
   - [Ports](#ports)
   - [Start mit Docker](#start-mit-docker)
   - [Information für Entwickler](#information-für-entwickler)
@@ -41,6 +42,15 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 |nscale-instance=nscalealinst1 | In dieser Umgebungsvariable können Sie eine nscale Instanz benennen. Der Standard ist "nscalealinst1". |
 |nscale-ssl=false |Sie können festlegen, ob SSL verwendet werden soll. Der Standardwert ist "false". |
 |log4jConfigLocation=../conf/nscale_stdout_log_conf.xml | In dieser Umgebungsvariable können Sie den Pfad zur Konfigurationsdatei für das Logging angeben. |
+## Logging in Kubernetes
+
+Um das Log Level im Kubernetes Betrieb zu ändern kann eine ConfigMap verwendet werden. Diese ConfigMap sollte die Log4j 
+Konfiguration aus dem Originalimage enthalten. Wird diese ConfigMap als Volume auf ein Verzeichnis gemappt
+muss über die oben beschriebene Umgebungsvariable ```log4jConfigLocation``` die neue Datei referenziert werden.
+Ändert sich die ConfigMap im Cluster wird diese automatisch verteilt und über log4j Mechanismen nach wenigen Minuten in den
+Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in einem Deployment.
+
+*Achtung:* Die ConfigMap muss auf ein Verzeichnis gemappt werden. Die Verwendung von subPath im Volume Mount verhindert eine automatische Aktualiserung bei Änderungen der ConfigMap!
 
 ## Ports
 
@@ -55,7 +65,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
    -e log4jConfigLocation=../conf/nscale_stdout_log_conf.xml \
    -e nscale-port=8080 \
    -p 8090:8090 \
-   ceyoniq.azurecr.io/release/nscale/application-layer-web:8.0.5400.2021072914.773703903253
+   ceyoniq.azurecr.io/release/nscale/application-layer-web:8.0.5500.2021082720.979826006107
 ```
 
 ## Information für Entwickler

@@ -1,0 +1,64 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: storage-layer
+spec:
+  replicas: 2
+  template:
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - storage-layer
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - name: storage-layer
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: NSTL_FILE
+          value: "conf/$(POD_NAME).conf"
+        ports:
+        - containerPort: 3006
+          name: storage-ssl
+        volumeMounts:
+        - name: conf
+          mountPath: /opt/ceyoniq/nscale-server/storage-layer/conf
+        - name: azure-cert
+          subPath: azure-ca.cer
+          mountPath: /opt/ceyoniq/nscale-server/storage-layer/etc/CA.CER
+        - name: users
+          subPath: GROUPS.DAT
+          mountPath: /opt/ceyoniq/nscale-server/storage-layer/etc/GROUPS.DAT
+        - name: certs
+          mountPath: /opt/ceyoniq/nscale-server/storage-layer/etc/certs
+      volumes:
+      - name: users
+        secret:
+          secretName: users
+      - name: conf
+        secret:
+          secretName: storage-layer-conf
+      - name: azure-cert
+        configMap:
+          name: azure-cert
+      - name: certs
+        configMap:
+          name: storage-layer-certs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: storage-layer
+spec:
+  ports:
+  - port: 3006
+    name: storage-layer-ssl

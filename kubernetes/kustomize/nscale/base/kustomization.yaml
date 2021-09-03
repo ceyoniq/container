@@ -2,10 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 commonLabels:
-  nscale.ceyoniq.com/version: "8"  
+  nscale.ceyoniq.com/version: "8"
   app.kubernetes.io/part-of: nscale
 
 generatorOptions:
+  disableNameSuffixHash: true
   annotations:
     nscale.ceyoniq.com: Copyright Ceyoniq GmbH
 
@@ -16,29 +17,35 @@ secretGenerator:
 
 configMapGenerator:
 - name: application-layer-license
-  files: 
+  files:
   - license.xml=license.xml
 - name: monitoring-console-license
-  files: 
+  files:
   - license.xml=license.xml
 - name: rendition-server-license
-  files: 
+  files:
   - license.xml=license.xml
 - name: storage-layer-license
-  files: 
+  files:
   - license.xml=license.xml
 - name: pipeliner-license
-  files: 
+  files:
   - license.xml=license.xml
 - name: postgresql-init-script
-  files: 
+  files:
   - config/postgresql/0_setup.sh
 - name: pipeliner-config
-  files: 
+  files:
   - config/pipeliner/cold.xml
 - name: pipeliner-setup
-  files: 
+  files:
   - config/pipeliner/setup.sh
+- name: application-layer-log4j
+  files:
+  - config/application-layer/instance1-log-console.conf
+- name: application-layer-web-log4j
+  files:
+  - config/application-layer-web/nscale_stdout_log_conf.xml
 
 resources:
 - rbac.yaml

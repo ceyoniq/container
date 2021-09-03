@@ -10,19 +10,34 @@ spec:
       app: monitoring-console
   replicas: 1
   strategy:
-    type: Recreate  
+    type: Recreate
   template:
     metadata:
       labels:
         app: monitoring-console
     spec:
+      serviceAccountName: default
+      automountServiceAccountToken: false
+      securityContext:
+        fsGroup: 0
       imagePullSecrets:
-      - name: regcred    
+      - name: regcred
       initContainers:
       # The license file mount inside the workspace volume prevents the volume to get initialized with the image data.
       # Therefore we need to copy the data from the image to the volume manually before startup.
       - name: monitoring-console-conf
         image:  ceyoniq.azurecr.io/release/nscale/monitoring-console:8.0.5400.2021071218.1061909966281
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 10001
+          capabilities:
+            drop:
+              - ALL
+            add:
+              - NET_BIND_SERVICE
         command: [ "/bin/sh", "-c" ]
         args:
         - |
@@ -35,6 +50,17 @@ spec:
       containers:
       - name: monitoring-console
         image: ceyoniq.azurecr.io/release/nscale/monitoring-console:8.0.5400.2021071218.1061909966281
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 10001
+          capabilities:
+            drop:
+              - ALL
+            add:
+              - NET_BIND_SERVICE
         startupProbe:
           exec:
             command:
@@ -52,9 +78,6 @@ spec:
             command:
             - /bin/sh
             - ./readiness-probe.sh
-        ports:
-        - containerPort: 8387
-          name: monitoring
         env:
         - name: MC_APPENDER
           value: Console
@@ -63,7 +86,10 @@ spec:
         - name: MC_PASSWORD
           value: "admin"
         - name: JAVA_OPTS
-          value: "-XX:MaxRAMPercentage=75.0"           
+          value: "-XX:MaxRAMPercentage=75.0"
+        ports:
+        - containerPort: 8387
+          name: monitoring
         resources:
           limits:
             cpu: "1000m"
@@ -80,7 +106,7 @@ spec:
       volumes:
       - name: license
         configMap:
-          name: monitoring-console-license          
+          name: monitoring-console-license
       - name: monitoring-console-workspace
         persistentVolumeClaim:
           claimName: monitoring-console-workspace

@@ -16,22 +16,24 @@ spec:
       labels:
         app: cmis-connector
     spec:
+      serviceAccountName: default
+      automountServiceAccountToken: false
       imagePullSecrets:
-      - name: regcred   
+      - name: regcred
       containers:
       - name: cmis-connector
         image: ceyoniq.azurecr.io/release/nscale/cmis-connector:8.0.5000.2021032508.777635089529
-        env:
-        - name: CMIS_AL_HOST
-          value: "application-layer"
-        - name: CMIS_AL_PORT
-          value: "8080"
-        - name: CMIS_AL_SSL
-          value: "0"
-        - name: CMIS_AL_INSTANCE
-          value: "nscalealinst1"
-        - name: JAVA_OPTS
-          value: "-XX:MaxRAMPercentage=75.0"               
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 10001
+          capabilities:
+            drop:
+              - ALL
+            add:
+              - NET_BIND_SERVICE
         livenessProbe:
           exec:
             command:
@@ -42,6 +44,17 @@ spec:
             command:
             - /bin/sh
             - ./readiness-probe.sh
+        env:
+        - name: CMIS_AL_HOST
+          value: "application-layer"
+        - name: CMIS_AL_PORT
+          value: "8080"
+        - name: CMIS_AL_SSL
+          value: "0"
+        - name: CMIS_AL_INSTANCE
+          value: "nscalealinst1"
+        - name: JAVA_OPTS
+          value: "-XX:MaxRAMPercentage=75.0"
         ports:
         - containerPort: 8096
           name: cmis
@@ -52,6 +65,12 @@ spec:
           requests:
             cpu: "100m"
             memory: "500Mi"
+        volumeMounts:
+        - name: temp
+          mountPath: /opt/ceyoniq/nscale-cmis-connector/temp/
+      volumes:
+      - name: temp
+        emptyDir: {}
 ---
 apiVersion: v1
 kind: Service

@@ -8,6 +8,7 @@
   - [Persistierung](#persistierung)
   - [Konfiguration](#konfiguration)
   - [Umgebungsvariablen](#umgebungsvariablen)
+  - [Logging in Kubernetes](#logging-in-kubernetes)
   - [Ports](#ports)
   - [Start mit Docker](#start-mit-docker)
   - [Microsoft Windows Schriftarten](#microsoft-windows-schriftarten)
@@ -18,6 +19,9 @@
   - [Inkludieren und Exkludieren von Job-Typen](#inkludieren-und-exkludieren-von-job-typen)
   - [SAP Anbindung](#sap-anbindung)
   - [Log Level](#log-level)
+  - [Erweiterte Konfigurationen](#erweiterte-konfigurationen)
+    - [LDAP](#ldap)
+    - [SMTP](#smtp)
 
 ## Lizenzierung
 
@@ -53,13 +57,23 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 |INSTANCE1_CORE_DB_DIALECT=PostgreSQL |Mit dieser Umgebungsvariable können Sie den Datenbankdialekt Ihrer Datenbank festlegen. Hier wurde PostgreSQL ausgewählt. |
 |INSTANCE1_CORE_DB_DRIVERCLASS=org.postgresql.Driver | Mit dieser Umgebungsvariable können Sie den Treiber Ihrer Datenbank hinterlegen. Hier wurde der Treiber org.postgresql.Driver gewählt. |
 |INSTANCE1_CORE_DB_URL=jdbc:postgresql://postgresql:5432/nscale?loggerLevel=OFF | Mit dieser Umgebungsvariable können Sie die URL Ihrer Datenbank hinterlegen. Passen Sie diesen Pfad ggf. an. |
-|INSTANCE1_CORE_DB_USERNAME=nscale | Mit dieser Umgebungsvariable können Sie den Usernamen hinterlegen, mit dem der Application Layer auf die Datenbank zugreift. Hier wurde der Benutzername "nscale" gewählt. |
+|INSTANCE1_CORE_DB_USERNAME=nscale | Mit dieser Umgebungsvariable können Sie den Usernamen hinterlegen, mit dem der Application Layer auf die Datenbank zugreift. Hier wurde der Name "nscale" gewählt. |
 |INSTANCE1_CORE_DB_PASSWORD=password | In dieser Umgebungsvariable können Sie das Passwort hinterlegen, mit dem der Application Layer auf die Datenbank zugreift. Ändern Sie das in diesem Beispiel verwendete Passwort unbedingt. |
 |INSTANCE1_CORE_DB_SCHEMA=public | In dieser Umgebungsvariable können Sie das Datenbankschema hinterlegen. Hier wurde das Schema public gewählt. |
 |INSTANCE1_CORE_WORK_DIRECTORY=/mnt/fulltextcache | In dieser Umgebungsvariable können Sie den Ordner für den lokalen Volltext-Cache definieren.|
 |INITIALIZE_DOCUMENT_AREA=DA | Mit dieser Umgebungsvariable können Sie einen Dokumentenbereich mit dem Namen "DA" erstellen. |
 |INITIALIZE_DOCUMENT_AREA_DISPLAYNAME=DA | Mit dieser Umgebungsvariable können Sie den Displayname des neu erstellten Dokumentenbereichs überschreiben. |
 |KUBERNETES_NAMESPACE | Diese Umgebungsvariable ist für die Konfiguration des Clusters in Kubernetes notwendig, sie hat eine spezielle Konfiguration. Für weitere Details lesen Sie die [Cluster-Konfiguration in Kubernetes](#cluster-konfiguration-in-kubernetes). |
+
+## Logging in Kubernetes
+
+Um das Log Level im Kubernetes Betrieb zu ändern kann eine ConfigMap verwendet werden. Diese ConfigMap sollte die Log4j 
+Konfiguration aus dem Originalimage enthalten. Wird diese ConfigMap als Volume auf ein Verzeichnis gemappt
+muss über die oben beschriebene Umgebungsvariable ```INSTANCE1_INSTANCE_LOGGER_CONF``` die neue Datei referenziert werden.
+Ändert sich die ConfigMap im Cluster wird diese automatisch verteilt und über log4j Mechanismen nach wenigen Minuten in den
+Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in einem Deployment.
+
+*Achtung:* Die ConfigMap muss auf ein Verzeichnis gemappt werden. Die Verwendung von subPath im Volume Mount verhindert eine automatische Aktualiserung bei Änderungen der ConfigMap!
 
 ## Ports
 
@@ -80,7 +94,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
    -h democontainer \
    -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
    -p 8080:8080 \
-   ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5400.2021071521.679549675713
+   ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5500.2021081821.609104873509
 ```
 
 ## Microsoft Windows Schriftarten
@@ -114,7 +128,7 @@ nscale Application Layer Server erwartet die Schriftarten im folgenden Ordner:
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5400.2021071521.679549675713
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5500.2021081821.609104873509
 ```
 
 **Beispiel Docker-Compose:**
@@ -214,4 +228,139 @@ kubectl cp application-layer-0:/opt/ceyoniq/nscale-server/application-layer/conf
 
 # copy file to nappl container
 kubectl cp instance1-log-console.conf application-layer-0:/opt/ceyoniq/nscale-server/application-layer/conf/instance1-log-console.conf -n <namespace> -c application-layer
+```
+
+## Erweiterte Konfigurationen
+
+Im Container von nscale Server Application Layer befindet sich ein Konfigurations-Skript unter `/opt/ceyoniq/nscale-server/application-layer/bin/application-layer-setup.sh`.
+Dieses Skript wird beim Start des Containers aufgerufen.
+Es kann um die LDAP-Konfiguration und die SMTP-Konfiguration erweitert werden.
+Die dafür benötigten Konfigurationsdateien werden über Befehle in der Application Layer Command Line (`al`) im Container erzeugt.
+
+>Beachten Sie, dass einige JSON-Konfigurationsdateien sensible Daten enthalten. Verwenden Sie daher [secrets](https://kubernetes.io/docs/concepts/configuration/secret/) oder andere Sicherheitsmaßnahmen, die besser zu Ihrem Szenario passen.
+
+### LDAP
+
+Verwenden Sie die folgenden Befehle, um die LDAP-Konfigurationsdatei `LDAP.json` zu erzeugen:
+
+```bash
+# use this commando to encode your pass
+# and save its output to use in the JSON file
+al dbpass %my-secret-pass%
+
+# add the LDAP configuration
+al cfg-add -type LdapSetting -file LDAP.json
+```
+
+Unten sehen Sie ein Beispiel, wie die Datei `LDAP.json` aussehen könnte.
+Der Parameter `encodedPassword` ist die Ausgabe des Befehl `al dbpass`.
+
+```json
+{
+"ldapServiceName" : "CT",
+"serverAddress" :
+
+{ "host" : "001ctads2.CT.com", "port" : 636 }
+,
+"ssl" : true,
+"baseDN" : "dc=CT,dc=com",
+"managerDN" : "print",
+"encodedPassword" : "%my-econcoded-pass%",
+"userBaseDN" : "ou=Benutzer",
+"groupBaseDN" : "ou=Gruppen",
+"ldapDialect" : "ActiveDirectory2012",
+"loginSuffix" : null,
+"userSearchFilter" : "(&(objectClass=top)(objectClass=person)(objectClass=organizationalPerson)(objectClass=user))",
+"groupSearchFilter" : "(&(objectClass=top)(objectClass=group))",
+"uuidAttributeName" : "objectGUID",
+"uuidAttributeBinaryType" : true,
+"uuidOverlayAttributeName" : null,
+"uuidOverlayAttributeBinaryType" : true,
+"loginAttributeName" : "userPrincipalName",
+"groupNameAttributeName" : "name",
+"memberAttributeName" : "member",
+"commonNameAttributeName" : "cn",
+"descriptionAttributeName" : "description",
+"emailAttributeName" : "mail",
+"lastModifiedAttributeName" : "modifyTimeStamp",
+"accountNameAttributeName" : null,
+"managerAttributeName" : "manager",
+"hashAlgorithm" : null,
+"usePaging" : true,
+"pageSize" : 2000,
+"timeout" : 2001,
+"firstNameAttributeName" : "givenName",
+"lastNameAttributeName" : "sn",
+"organizationAttributeName" : "company",
+"roleAttributeName" : "department",
+"titleAttributeName" : "title",
+"officeAttributeName" : "physicalDeliveryOfficeName",
+"urlAttributeName" : "wWWHomePage",
+"photoAttributeName" : "ThumbnailPhoto",
+"noteAttributeName" : "info",
+"languageAttributeName" : "preferredLanguage",
+"initialsAttributeName" : "initials",
+"personnelNumberAttributeName" : "employeeID",
+"publicKeyAttributeName" : null,
+"departmentAttributeName" : null,
+"addressLabelAttributeName" : "cn",
+"addressPOBoxAttributeName" : "postofficebox",
+"addressStreetAttributeName" : "streetAddress",
+"addressPostalCodeAttributeName" : "postalCode",
+"addressLocalityAttributeName" : "l",
+"addressRegionAttributeName" : "st",
+"addressCountryAttributeName" : "co",
+"homePhoneAttributeName" : "homePhone",
+"workPhoneAttributeName" : "telephoneNumber",
+"faxAttributeName" : "facsimileTelephoneNumber",
+"mobileAttributeName" : "mobile",
+"pagerAttributeName" : "pager",
+"synchronizePrincipalInfo" : true,
+"enableExtendedUserAttributes" : true,
+"enableExtendedGroupAttributes" : true,
+"overwriteMultiValues" : false,
+"synchronizeCompetences" : true,
+"multiValueUpdatePolicies" : { },
+"lastModified" : 1602223431107
+}
+```
+
+### SMTP
+
+Verwenden Sie den folgenden Befehl, um die SMTP-Konfigurationsdatei `SMTP.json` zu erzeugen:
+
+```bash
+# add the SMTP configuration
+al cfg-add -type EmailServer -file SMTP.json
+```
+
+Hier sehen Sie ein Beispiel, wie die Datei `SMTP.json` aussehen könnte.
+
+```json
+{
+"name" : "default",
+"serverAddress" :
+
+{ "host" : "localhost", "port" : 465 }
+,
+"userName" : "admin",
+"userPassword" : "28f64920fc",
+"defaultSenderMailAddress" : "ncloud@ceyoniq.com",
+"defaultSenderName" : null,
+"defaultReplyToAddress" : "ncloud@ceyoniq.com",
+"sslMode" : "SSL",
+"calendarRequests" : false,
+"default_" : true,
+"active" : true,
+"exchangeServerSetting" :
+
+{ "version" : null, "ewsEnabled" : false, "domainName" : null, "synchronizePrincipalInfoToContactFolders" : false }
+,
+"encoding" : null,
+"sign" : false,
+"keyStore" : null,
+"keyStorePassword" : null,
+"keyStoreAlias" : null,
+"lastModified" : 1626699787582
+}
 ```

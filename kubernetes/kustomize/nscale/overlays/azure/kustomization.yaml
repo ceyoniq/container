@@ -4,9 +4,3 @@ bases:
 resources:
 - pvc-rwo.yaml
 - pvc-rwx.yaml
-
-patchesStrategicMerge:
-- storage-layer.yaml
-- monitoring-console.yaml
-- postgres.yaml
-#- pipeliner.yaml

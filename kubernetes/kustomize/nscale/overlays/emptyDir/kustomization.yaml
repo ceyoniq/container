@@ -2,18 +2,18 @@ bases:
 - ../../base
 
 patchesJson6902:
-- target:  
+- target:
     group: apps
     version: v1
     kind: Deployment
     name: postgresql
-  path: postgresql-volumes.yaml    
-- target:  
+  path: postgresql-volumes.yaml
+- target:
     group: apps
     version: v1
     kind: Deployment
     name: monitoring-console
-  path: monitoring-console-volumes.yaml    
+  path: monitoring-console-volumes.yaml
 - target:
     group: apps
     version: v1

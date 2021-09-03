@@ -1,5 +1,8 @@
 - op: replace
+  path: /spec/volumeClaimTemplates
+  value: []
+- op: replace
   path: /spec/template/spec/volumes/1
-  value: 
+  value:
     name: storage-layer
     emptyDir: {}

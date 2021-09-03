@@ -1,0 +1,31 @@
+bases:
+- ../azure
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+- name: nappl-keystore
+  files:
+  - config/application-layer/certs/certificates.store
+- name: azure-cert
+  files:
+  - config/storage-layer/azure-ca.cer
+- name: storage-layer-certs
+  files:
+  - config/storage-layer/certs/rootCA.crt
+  - config/storage-layer/certs/nstl.crt
+  - config/storage-layer/certs/nstl.key
+
+secretGenerator:
+- name: storage-layer-conf
+  files:
+  - config/storage-layer/storage-layer-0.conf
+  - config/storage-layer/storage-layer-1.conf
+- name: users
+  files:
+  - config/storage-layer/GROUPS.DAT
+
+patchesStrategicMerge:
+- storage-layer.yaml
+- application-layer.yaml

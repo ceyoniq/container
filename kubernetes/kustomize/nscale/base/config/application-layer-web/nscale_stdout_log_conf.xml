@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+        <!-- ============================== -->
+        <!-- Append messages to the console -->
+        <!-- ============================== -->
+        <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+                <param name="Threshold" value="all"/>
+                <param name="Target" value="System.out"/>
+                <layout class="org.apache.log4j.PatternLayout">
+                        <param name="ConversionPattern" value="%d{HH:mm:ss} %-5p [%c] [%t] %m - [%C]%n"/>
+                </layout>
+        </appender>
+
+        <!-- ============================== -->
+        <!-- Root                           -->
+        <!-- ============================== -->
+        <logger name="CTCMWebclient" additivity="false">
+                <level value="error"/>
+                <appender-ref ref="CONSOLE"/>
+        </logger>
+
+        <!-- ============================== -->
+        <!-- Configuration Logger               -->
+        <!-- ============================== -->
+        <logger name="CTCMWebclient.CONFIG" additivity="false">
+                <level value="warn"/>
+                <appender-ref ref="CONSOLE"/>
+        </logger>
+
+        <!-- ============================== -->
+        <!-- System Logger               -->
+        <!-- ============================== -->
+        <logger name="CTCMWebclient.SYSTEM" additivity="false">
+                <level value="error"/>
+                <appender-ref ref="CONSOLE"/>
+        </logger>
+
+        <!-- ============================== -->
+        <!-- Layout Logger               -->
+        <!-- ============================== -->
+        <logger name="CTCMWebclient.LAYOUT" additivity="false">
+                <level value="error"/>
+                <appender-ref ref="CONSOLE"/>
+        </logger>
+
+        <!-- ============================== -->
+        <!-- Login Logger               -->
+        <!-- ============================== -->
+        <logger name="CTCMWebclient.SYSTEM.LOGIN" additivity="false">
+                <level value="warn"/>
+                <appender-ref ref="CONSOLE"/>
+        </logger>
+
+        <!-- ============================== -->
+        <!-- Logger for nscale Connector    -->
+        <!-- ============================== -->
+        <!--
+        <logger name="CTCMWebclient.NAPPL" additivity="false">
+                <level value="debug"/>
+                <appender-ref ref="CONSOLE"/>
+        </logger>
+        -->
+
+        <!-- ============================== -->
+        <!-- Request Logger for nscale      -->
+        <!-- ============================== -->
+        <logger name="CTCMWebclient.NAPPL.REQUEST" additivity="false">
+                <level value="warn"/>
+                <appender-ref ref="CONSOLE"/>
+        </logger>
+
+        <!-- ============================== -->
+        <!-- Apache Tapestry                -->
+        <!-- ============================== -->
+        <logger name="org.apache.tapestry" additivity="false">
+                <level value="error" />
+                <appender-ref ref="CONSOLE"/>
+        </logger>
+        <logger name="tapestry.render.com.ceyoniq.nscale.webclient.tap5.pages" additivity="false">
+                <level value="error" />
+                <appender-ref ref="CONSOLE"/>
+        </logger>
+
+        <root>
+                <level value="error"/>
+                <appender-ref ref="CONSOLE"/>
+        </root>
+
+</log4j:configuration>
