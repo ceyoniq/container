@@ -16,11 +16,26 @@ spec:
       labels:
         app: rendition-server
     spec:
+      serviceAccountName: default
+      automountServiceAccountToken: false
+      securityContext:
+        fsGroup: 0
       imagePullSecrets:
-      - name: regcred    
+      - name: regcred
       containers:
       - name: rendition-server
-        image: ceyoniq.azurecr.io/release/nscale/rendition-server:8.0.5401.2021072018.591181770886
+        image: ceyoniq.azurecr.io/release/nscale/rendition-server:8.0.5500.2021081818.810170711885
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 10001
+          capabilities:
+            drop:
+              - ALL
+            add:
+              - NET_BIND_SERVICE
         startupProbe:
           exec:
             command:

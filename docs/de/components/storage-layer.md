@@ -15,6 +15,13 @@
     - [Verwenden eines HardDisk-Device](#verwenden-eines-harddisk-device)
     - [Verwendung eines S3-Speichers (Objektspeicher)](#verwendung-eines-s3-speichers-objektspeicher)
     - [Verwendung von Accounting und Monitoring](#verwendung-von-accounting-und-monitoring)
+    - [Storage Layer Proxy in Kubernetes](#storage-layer-proxy-in-kubernetes)
+      - [Persistent Volume](#persistent-volume)
+      - [storagelayer.conf](#storagelayerconf)
+      - [Server ID](#server-id)
+      - [Azure Blob Container](#azure-blob-container)
+      - [Kennwörter](#kennwörter)
+      - [SSL Verschlüsselung](#ssl-verschlüsselung)
 
 ## Lizenzierung
 
@@ -55,6 +62,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 |Umgebungsvariable | Effekt |
 |---|---|
 |LOG_APPENDER=Console |In dieser Umgebungsvariable können Sie festlegen, wo das Logging von nscale Server Storage Layer geschrieben wird. Hier erfolgt das Logging statt in Dateien im Container auf die Konsole. |
+|NSTL_FILE | Dateipfad für die Konfigurationsdatei (Default etc/storagelayer.conf) |
 |NSTL_STORAGE-LAYER_LOGLEVEL | In dieser Umgebungsvariable können Sie das Log-Level von nscale Server Storage Layer festlegen. |
 |NSTL_ARCHIVETYPE_900_NAME=NSCALE_DEMO | Mit dieser Umgebungsvariable legen Sie den Namen eines Archivtyps (hier Archivtyp 900) fest. |
 |NSTL_ARCHIVETYPE_900_ID=900 | In dieser Umgebungsvariable können Sie die ID des Archivtyps festlegen. Im Beispiel wird die ID des Archivtyps 900 auf 900 gesetzt. |
@@ -81,7 +89,7 @@ docker run \
   -v $(pwd)/da:/opt/ceyoniq/nscale-server/storage-layer/da \
   -v $(pwd)/etc:/opt/ceyoniq/nscale-server/storage-layer/etc \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/storage-layer/etc/license.xml \
-  ceyoniq.azurecr.io/release/nscale/storage-layer:8.0.5300.2021062315.663766968682
+  ceyoniq.azurecr.io/release/nscale/storage-layer:8.0.5500.2021082311.455874704774
 ```
 
 ## Skalierung
@@ -266,4 +274,69 @@ env:
       value: 1
     - name: NSTL_MONITORING_CSVBaseDir
       value: /mnt/monitoring
+```
+
+### Storage Layer Proxy in Kubernetes
+
+Zur Ausfallsicherheit werden üblicherweise zwei Instanzen vom Storage Layers betrieben, die ihre Daten auf demselben S3 Endgerät ablegen.
+Die DA Verwaltungsdaten werden untereinander ausgetauscht (DA Forwarding).
+Eine solche Architektur ist im Kustomize [''azure-cluster''](../../../kubernetes/kustomize/nscale/overlays/azure-cluster/) Overlay speziell für den Azure Kubernetes Service hinterlegt.
+
+Das StatefulSet mit zwei Storage Layer Instanzen verwendet unterschiedliche storagelayer.conf Konfigurationsdateien, um die spezielle Proxy Konfiguration umzusetzen.
+
+Dabei werden beide Instanzen auf verschiedenen Nodes des Clusters gestartet um maximal Ausfallsicherheit zu gewährleisten.
+
+#### Persistent Volume
+
+In Kubernetes wird die Persistent Volume Claim in einem StatefulSet *nicht* automatisch gelöscht wenn der Service deinstalliert wird
+[Referenz](https://kubernetes.io/docs/tasks/run-application/delete-stateful-set/).
+Das dient der Sicherheit um gegebenenfalls nachträglich Daten aus dem Volume zu sichern.
+
+#### storagelayer.conf
+
+Die klassischen Konfigurationsdateien werden über eine Secret in die Container gemapped.
+Da es sich um ein StatefulSet handelt ist die Zuordnung von Container und Persistent Volume vordefiniert.
+Über den eindeutigen Container Namen kann deshalb auch die Verknüpfung mit der individuellen ``storagelayer.conf`` hergestellt werden.
+
+#### Server ID
+
+Die Storage Layer Instanzen müssen unterschiedliche Server IDs verwenden.
+In der Beispielkonfiguration werden diese nicht aus der Lizenz sondern aus der ``storagelayer.conf``  ausgelesen.
+Dazu darf in der Lizenz keine Server ID festgelegt sein und zudem muss das Flag ``DomainOnly`` in der Lizenz vorhanden sein.
+
+#### Azure Blob Container
+
+In dem ``Azure`` Abschnitt der Konfigurationsdatei werden die Verbindungsdaten zum Azure Blob Container hinterlegt.
+Bitte beachten Sie dass die Konfigurationsdatei aus einem Secret gelesen wird!
+
+#### Kennwörter
+
+Die Storage Layer eigene Kennwort Verwaltung in der ''GROUPS.DAT'' wird über ein Secret in den Container gemapped.
+
+#### SSL Verschlüsselung
+
+Es wird zunächst ein Root Zertifikat benötigt von dem das Zertifikat für die einzelnen Storage Layer Instanzen abgeleitet wird.
+Diese Root Zertifikat wird später im Application Layer verwendet, um die Verbindung zum Storage Layer zu verifizieren.
+
+Schritte zum Erstellen der Zertifikate:
+
+```bash
+# create self signed root certificate
+openssl genrsa -out rootCA.key 4096
+openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 3650 -out rootCA.crt -subj "/C=US/ST=CA/O=MyOrg, Inc./CN=mydomain.com"
+openssl x509 -text -noout -in rootCA.crt
+
+# convert certificate to use in application layer
+openssl x509 -in rootCA.crt -outform der -out rootCA.der
+
+# create single certificate for all storage layer instances
+openssl genrsa -out nstl.key 2048
+
+# create a signing request first
+openssl req -new -sha256 -key nstl.key -subj "/C=US/ST=CA/O=MyOrg, Inc./CN=mydomain.com" -out nstl.csr
+openssl req -in nstl.csr -noout -text
+
+# sign certificate with self-signed rootCA
+openssl x509 -req -in nstl.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out nstl.crt -days 3650 -sha256
+openssl x509 -in nstl.crt -text -noout
 ```

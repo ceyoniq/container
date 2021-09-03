@@ -7,6 +7,7 @@
   - [Lizenzierung](#lizenzierung)
   - [Persistierung](#persistierung)
   - [Umgebungsvariablen](#umgebungsvariablen)
+  - [Logging in Kubernetes](#logging-in-kubernetes)
   - [Ports](#ports)
   - [Start mit Docker](#start-mit-docker)
   - [Microsoft Windows Schriftarten](#microsoft-windows-schriftarten)
@@ -40,6 +41,16 @@ Um zu gewährleisten, dass Sie nach dem Herunterfahren des Systems weiterhin Zug
 |RMI_ACTIVE=false| Aus Sicherheitsgründen raten wir von der Verwendung von RMI ab. |
 |RMI_PORT=8194| Aus Sicherheitsgründen raten wir von der Verwendung von RMI ab. |
 
+## Logging in Kubernetes
+
+Um das Log Level im Kubernetes Betrieb zu ändern kann eine ConfigMap verwendet werden. Diese ConfigMap sollte die Log4j 
+Konfiguration ```log4j2.xml``` aus dem Originalimage enthalten. 
+Diese ConfigMap muss auf ```/opt/ceyoniq/nscale-rendition-server/conf/log4j``` im Container gemappt werden.
+Ändert sich die ConfigMap im Cluster wird diese automatisch verteilt und über log4j Mechanismen nach wenigen Minuten in den
+Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in einem Deployment.
+
+*Achtung:* Die ConfigMap muss auf ein Verzeichnis gemappt werden. Die Verwendung von subPath im Volume Mount verhindert eine automatische Aktualiserung bei Änderungen der ConfigMap!
+
 ## Ports
 
 - 8192
@@ -54,7 +65,7 @@ docker run \
   -h democontainer \
   -v $(pwd)/work:/opt/ceyoniq/nscale-rendition-server/work \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-rendition-server/conf/license.xml \
-  ceyoniq.azurecr.io/release/nscale/rendition-server:8.0.5401.2021072018.591181770886
+  ceyoniq.azurecr.io/release/nscale/rendition-server:8.0.5500.2021081818.810170711885
 ```
 
 ## Microsoft Windows Schriftarten
@@ -88,7 +99,7 @@ nscale Rendition Server erwartet die Schriftarten im folgenden Ordner:
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5400.2021071521.679549675713
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5500.2021081821.609104873509
 ```
 
 **Beispiel Docker-Compose:**

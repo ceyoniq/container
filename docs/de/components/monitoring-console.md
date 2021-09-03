@@ -49,6 +49,16 @@ Erst nach dem Anpassen der Verbindung zu den nscale-Ressourcen werden alle Senso
 |RMI_ACTIVE=false| Aus Sicherheitsgründen raten wir von der Verwendung von RMI ab. |
 |RMI_PORT=8389| Aus Sicherheitsgründen raten wir von der Verwendung von RMI ab. |
 
+## Logging in Kubernetes
+
+Um das Log Level im Kubernetes Betrieb zu ändern kann eine ConfigMap verwendet werden. Diese ConfigMap sollte die Log4j 
+Konfiguration ```log4j2.xml``` aus dem Originalimage enthalten. 
+Diese ConfigMap muss auf ```/opt/ceyoniq/nscale-monitoring/workspace/log4j``` im Container gemappt werden.
+Ändert sich die ConfigMap im Cluster wird diese automatisch verteilt und über log4j Mechanismen nach wenigen Minuten in den
+Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in einem Deployment.
+
+*Achtung:* Die ConfigMap muss auf ein Verzeichnis gemappt werden. Die Verwendung von subPath im Volume Mount verhindert eine automatische Aktualiserung bei Änderungen der ConfigMap!
+
 ## Ports
 
 - 8387
@@ -69,7 +79,7 @@ docker run \
 ## Passwörter
 
 Passwörter für den administrativen Zugriff auf nscale Monitoring Console werden verschlüsselt im Workspace hinterlegt.
-Zur Benutzerverwaltung können Sie folgendes Kommando verwenden:
+Zur Zugangskontenverwaltung können Sie folgendes Kommando verwenden:
 
 ```bash
 java -jar lib/mc-cmdclient.jar PASSWD --user admin --password <phrase> 

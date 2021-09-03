@@ -12,24 +12,31 @@ spec:
   replicas: 1
   updateStrategy:
     type: OnDelete
-  volumeClaimTemplates: []
   template:
     metadata:
       labels:
         app: pipeliner
     spec:
+      serviceAccountName: default
+      automountServiceAccountToken: false
+      securityContext:
+        fsGroup: 0
       imagePullSecrets:
-      - name: regcred    
+      - name: regcred
       containers:
-      - name: pipeliner    
-        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5400.2021071612.806457530597
-        resources:
-          limits:
-            cpu: "1000m"
-            memory: "2000Mi"
-          requests:
-            cpu: "100m"
-            memory: "100Mi"
+      - name: pipeliner
+        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5500.2021081909.1091124784249
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 10001
+          capabilities:
+            drop:
+              - ALL
+            add:
+              - NET_BIND_SERVICE
         startupProbe:
           exec:
             command:
@@ -47,6 +54,13 @@ spec:
             command:
             - /bin/sh
             - ./readiness-probe.sh
+        resources:
+          limits:
+            cpu: "1000m"
+            memory: "2000Mi"
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
         volumeMounts:
         - name: license
           subPath: license.xml
@@ -58,7 +72,7 @@ spec:
           mountPath: /opt/ceyoniq/nscale-pipeliner/workdir/data
         - name: pipeliner-setup
           subPath: setup.sh
-          mountPath: /setup.sh    
+          mountPath: /setup.sh
       volumes:
       - name: license
         configMap:
@@ -72,6 +86,14 @@ spec:
       - name: pipeliner-setup
         configMap:
           name: pipeliner-setup
+  volumeClaimTemplates:
+  - metadata:
+      name: pipeliner
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 8Gi
 ---
 apiVersion: v1
 kind: Service

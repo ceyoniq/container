@@ -215,7 +215,7 @@ labels
 
 Auch im Container-Betrieb werden die nscale-Komponenten über nscale Monitoring Console überwacht, die als Container in Compose mit gestartet wird. Die Integration der nscale-Komponenten als Ressource wird wie bisher über nscale Administrator verwaltet.
 
-Für [Prometheus](https://prometheus.io/) stehen zwei Endpunkte zur Verfügung. Beide sind über Basic-Auth geschützt und brauchen deshalb ein Kennwort für nscale Monitoring Console. Die Benutzerverwaltung ist über nscale Administrator verfügbar.
+Für [Prometheus](https://prometheus.io/) stehen zwei Endpunkte zur Verfügung. Beide sind über Basic-Auth geschützt und brauchen deshalb ein Kennwort für nscale Monitoring Console. Die Zugangskontenverwaltung ist über nscale Administrator verfügbar.
 
 Der erste Endpunkt liefert Informationen zur nscale Monitoring Console, während der zweite Endpunkt Metriken der eingebundenen nscale-Komponenten als Prometheus Sensoren zur Verfügung stellt.
 

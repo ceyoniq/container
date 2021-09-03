@@ -29,6 +29,16 @@ Diese Komponente benötigt keine Persistierung.
 |ILM_AL_SSL=false|Sie können festlegen, ob SSL verwendet werden soll, um eine Verbindung zu nscale Server Application Layer aufzubauen. Der Standardwert ist "false".|
 |ILM_AL_DOMAIN=nscale|Sie können die Domäne für die Anmeldung an nscale Server Application Layer festlegen.|
 
+## Logging in Kubernetes
+
+Um das Log Level im Kubernetes Betrieb zu ändern kann eine ConfigMap verwendet werden. Diese ConfigMap sollte die Log4j 
+Konfiguration ```log4j.properties``` aus dem Originalimage enthalten. 
+Diese ConfigMap muss auf ```/opt/ceyoniq/nscale-cmis-connector/conf/log4j``` im Container gemappt werden.
+Ändert sich die ConfigMap im Cluster wird diese automatisch verteilt und über log4j Mechanismen nach wenigen Minuten in den
+Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in einem Deployment.
+
+*Achtung:* Die ConfigMap muss auf ein Verzeichnis gemappt werden. Die Verwendung von subPath im Volume Mount verhindert eine automatische Aktualiserung bei Änderungen der ConfigMap!
+
 ## Ports
 
 - 8297

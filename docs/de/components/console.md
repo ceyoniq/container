@@ -7,6 +7,7 @@
   - [Lizenzierung](#lizenzierung)
   - [Persistierung](#persistierung)
   - [Umgebungsvariablen](#umgebungsvariablen)
+  - [Logging in Kubernetes](#logging-in-kubernetes)
   - [Ports](#ports)
   - [Start mit Docker](#start-mit-docker)
 
@@ -32,6 +33,16 @@ Diese Komponente benötigt keine Persistierung.
 |defaultAlInstance=nscalealinst1 |Sie können eine Instanz als Standard für die Anmeldung auswählen. Dies ist nur nötig, wenn Sie mehrere nscale Server Application Layer Instanzen installiert haben.|
 |defaultAlName=ApplicationLayer|Sie können einen Application Layer als Standard für die Anmeldung auswählen. Dies ist nur nötig, wenn Sie mehrere nscale Server Application Layer installiert haben.|
 
+## Logging in Kubernetes
+
+Um das Log Level im Kubernetes Betrieb zu ändern kann eine ConfigMap verwendet werden. Diese ConfigMap sollte die Log4j 
+Konfiguration ```log4j.properties``` aus dem Originalimage enthalten. 
+Diese ConfigMap muss auf ```/opt/ceyoniq/nscale-server/console/conf/log4j``` im Container gemappt werden.
+Ändert sich die ConfigMap im Cluster wird diese automatisch verteilt und über log4j Mechanismen nach wenigen Minuten in den
+Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in einem Deployment.
+
+*Achtung:* Die ConfigMap muss auf ein Verzeichnis gemappt werden. Die Verwendung von subPath im Volume Mount verhindert eine automatische Aktualiserung bei Änderungen der ConfigMap!
+
 ## Ports
 
 - 8086
@@ -46,5 +57,5 @@ docker run \
    -e ALInstance=nscalealinst1 \
    -p 8086:8086 \
    -e LOG_APPENDER=Console \
-   ceyoniq.azurecr.io/release/nscale/console:8.0.5400.12321.300115008486
+   ceyoniq.azurecr.io/release/nscale/console:8.0.5500.12338.810170711885
 ```

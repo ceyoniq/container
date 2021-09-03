@@ -79,7 +79,7 @@ Weitere Informationen zu nscale Monitoring Console:
 
 - Die Offline-Konfiguration ist in nscale Administrator nicht verfügbar.
 - Die folgenden Plug-ins sind verfügbar:
-  - Benutzerverwaltung
+  - Zugangskontenverwaltung
   - nstore
   - Navigator
   - Willkommen & Information

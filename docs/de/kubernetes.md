@@ -306,7 +306,7 @@ Weitere Informationen zum Thema Logging in Kubernetes finden Sie hier:
 
 Die nscale-Komponenten werden weiterhin über nscale Monitoring Console überwacht, die als Deployment im Cluster verfügbar ist. Die Integration der nscale-Komponenten als Ressource wird wie bisher über nscale Administrator verwaltet.
 
-Für [Prometheus](https://prometheus.io/) stehen zwei Endpunkte zur Verfügung. Beide sind über Basic-Auth geschützt und brauchen deshalb ein Passwort für nscale Monitoring Console. Die Benutzerverwaltung ist über nscale Administrator verfügbar.
+Für [Prometheus](https://prometheus.io/) stehen zwei Endpunkte zur Verfügung. Beide sind über Basic-Auth geschützt und brauchen deshalb ein Passwort für nscale Monitoring Console. Die Zugangskontenverwaltung ist über nscale Administrator verfügbar.
 
 Der erste Endpunkt liefert Informationen zu nscale Monitoring Console, während der zweite Endpunkt Metriken der eingebundenen nscale-Komponenten als Prometheus-Sensoren zur Verfügung stellt.
 
