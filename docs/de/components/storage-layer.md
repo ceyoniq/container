@@ -89,7 +89,7 @@ docker run \
   -v $(pwd)/da:/opt/ceyoniq/nscale-server/storage-layer/da \
   -v $(pwd)/etc:/opt/ceyoniq/nscale-server/storage-layer/etc \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/storage-layer/etc/license.xml \
-  ceyoniq.azurecr.io/release/nscale/storage-layer:8.0.5500.2021082311.455874704774
+  ceyoniq.azurecr.io/release/nscale/storage-layer:8.1.1000.2021092318
 ```
 
 ## Skalierung

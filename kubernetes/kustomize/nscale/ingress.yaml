@@ -25,7 +25,7 @@ spec:
         backend:
           service:
             name: application-layer
-            port: 
+            port:
               name: application
       - path: /index.html
         pathType: Prefix
@@ -39,33 +39,40 @@ spec:
         backend:
           service:
             name: application-layer
-            port: 
+            port:
               name: application
       - path: /engine.properties
         pathType: Prefix
         backend:
           service:
             name: application-layer
-            port: 
+            port:
               name: application
       - path: /console
         pathType: Prefix
         backend:
           service:
             name: console
-            port: 
+            port:
               name: console
       - path: /nscale_web
         pathType: Prefix
         backend:
           service:
             name: application-layer-web
-            port: 
+            port:
               name: web
       - path: /nscalemc
         pathType: Prefix
         backend:
           service:
             name: monitoring-console
-            port: 
+            port:
               name: monitoring
+      - path: /rapadm
+        pathType: Prefix
+        backend:
+          service:
+            name: administrator
+            port:
+              name: administrator

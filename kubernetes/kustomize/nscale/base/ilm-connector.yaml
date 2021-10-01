@@ -16,24 +16,13 @@ spec:
       labels:
         app: ilm-connector
     spec:
-      serviceAccountName: default
       automountServiceAccountToken: false
       imagePullSecrets:
       - name: regcred
       containers:
       - name: ilm-connector
-        image: ceyoniq.azurecr.io/release/nscale/ilm-connector:8.0.5400.2021070802.665621793349
+        image: ceyoniq.azurecr.io/release/nscale/ilm-connector:8.1.1000.2021090810
         imagePullPolicy: Always
-        securityContext:
-          readOnlyRootFilesystem: true
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          runAsUser: 10001
-          capabilities:
-            drop:
-              - ALL
-            add:
-              - NET_BIND_SERVICE
         livenessProbe:
           exec:
             command:

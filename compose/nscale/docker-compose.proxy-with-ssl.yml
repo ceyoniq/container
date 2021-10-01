@@ -35,6 +35,14 @@ services:
       - "traefik.http.routers.consolesec.tls=true"
       - "traefik.http.routers.consolesec.tls.certresolver=myresolver"
 
+  administrator:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.adminsec.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/rapadm`)"
+      - "traefik.http.routers.adminsec.entrypoints=websecure"
+      - "traefik.http.routers.adminsec.tls=true"
+      - "traefik.http.routers.adminsec.tls.certresolver=myresolver"
+
   traefik:
     image: ${TRAEFIK_IMAGE}
     command:

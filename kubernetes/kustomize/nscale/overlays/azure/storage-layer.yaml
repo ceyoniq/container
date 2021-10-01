@@ -1,0 +1,9 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: storage-layer
+spec:
+  template:
+    spec:
+      securityContext:
+        fsGroup: 0

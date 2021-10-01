@@ -16,24 +16,14 @@ spec:
       labels:
         app: application-layer-web
     spec:
-      serviceAccountName: default
       automountServiceAccountToken: false
       imagePullSecrets:
       - name: regcred
+      initContainers: []
       containers:
       - name: application-layer-web
-        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:8.0.5500.2021082720.979826006107
+        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:8.1.1000.2021092910
         imagePullPolicy: Always
-        securityContext:
-          readOnlyRootFilesystem: false
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          runAsUser: 10001
-          capabilities:
-            drop:
-              - ALL
-            add:
-              - NET_BIND_SERVICE
         startupProbe:
           exec:
             command:

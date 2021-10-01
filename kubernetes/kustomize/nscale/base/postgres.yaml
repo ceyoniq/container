@@ -20,24 +20,11 @@ spec:
         app: postgresql
         role: master
     spec:
-      serviceAccountName: default
       automountServiceAccountToken: false
-      securityContext:
-        fsGroup: 0
       containers:
       - name: postgresql
         image: bitnami/postgresql:13
         imagePullPolicy: Always
-        securityContext:
-          readOnlyRootFilesystem: false
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          runAsUser: 10001
-          capabilities:
-            drop:
-              - ALL
-            add:
-              - NET_BIND_SERVICE
         livenessProbe:
           exec:
             command:

@@ -1,5 +1,11 @@
 # Änderungshistorie
 
+## 8.1.1000 (Oktober 2021)
+
+* Aktualisierung der Container Images.
+* Kleiner Fehlerbehebungen in der Dokumentation.
+* Beispielhafte Konfiguration des Administrators.
+
 ## 8.0.5500 (September 2021)
 
 * Aktualisierung der Container Images.

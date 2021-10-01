@@ -25,55 +25,13 @@ spec:
       - name: check-db-ready
         image: bitnami/postgresql:13
         imagePullPolicy: Always
-        securityContext:
-          readOnlyRootFilesystem: true
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          runAsUser: 10001
-          capabilities:
-            drop:
-              - ALL
-            add:
-              - NET_BIND_SERVICE
         command: ['sh', '-c',
           'until pg_isready -U postgres -h postgresql -p 5432;
           do echo waiting for database; sleep 2; done;']
-      - name: conf
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5500.2021081821.609104873509
-        imagePullPolicy: Always
-        securityContext:
-          readOnlyRootFilesystem: true
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          runAsUser: 10001
-          capabilities:
-            drop:
-              - ALL
-            add:
-              - NET_BIND_SERVICE
-        command: [ "/bin/sh", "-c" ]
-        args:
-        - |
-          if ! [ "$(ls -A /mnt/conf/)" ]; then
-            cp -a /opt/ceyoniq/nscale-server/application-layer/conf/* /mnt/conf/
-          fi          
-        volumeMounts:
-        - name: conf
-          mountPath: /mnt/conf      
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.0.5500.2021081821.609104873509
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.1.1002.2021092921
         imagePullPolicy: Always
-        securityContext:
-          readOnlyRootFilesystem: true
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          runAsUser: 10001
-          capabilities:
-            drop:
-              - ALL
-            add:
-              - NET_BIND_SERVICE
         startupProbe:
           exec:
             command:
@@ -143,8 +101,6 @@ spec:
           mountPath: /opt/ceyoniq/nscale-server/application-layer/conf/license.xml
         - name: log4j
           mountPath: /opt/ceyoniq/nscale-server/application-layer/conf/log4j
-        - name: conf
-          mountPath: /opt/ceyoniq/nscale-server/application-layer/conf
         - name: logs
           mountPath: /opt/ceyoniq/nscale-server/application-layer/logs
         - name: temp
@@ -156,8 +112,6 @@ spec:
       - name: log4j
         configMap:
           name: application-layer-log4j
-      - name: conf
-        emptyDir: {}
       - name: logs
         emptyDir: {}
       - name: temp

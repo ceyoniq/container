@@ -1,0 +1,18 @@
+bases:
+- ../../base
+
+patchesStrategicMerge:
+- postgres.yaml
+- application-layer.yaml
+- application-layer-web.yaml
+- monitoring-console.yaml
+- rendition-server.yaml
+- console.yaml
+- storage-layer.yaml
+- administrator.yaml
+# Enable pipeliner
+#- pipeliner.yaml
+# Enable nscale connectors if required
+#- cmis-connector.yaml
+#- ilm-connector.yaml
+#- webdav-connector.yaml

@@ -93,7 +93,7 @@ services:
     environment:
       - MC_APPENDER=Console
       - MC_PASSWORD=admin
-      - JAVA_OPTS=-Xmx1g      
+      - JAVA_OPTS=-Xmx1g
     networks:
       - nscale
 
@@ -108,3 +108,17 @@ services:
       - JAVA_OPTS=-Xmx2g
     networks:
       - nscale
+
+  administrator:
+    image: ${ADMINISTRATOR_IMAGE}
+    environment:
+      - TEMP=/tmp
+      - APPLICATION_LAYER_HOST=application-layer
+      - APPLICATION_LAYER_PORT=8080
+      - APPLICATION_LAYER_INSTANCE=nscalealinst1
+      - APPLICATION_LAYER_SSL=false
+      - JAVA_OPTIONS=-Dorg.eclipse.rap.rwt.settingStoreFactory=settings-per-user
+    networks:
+      - nscale
+    depends_on:
+      - application-layer

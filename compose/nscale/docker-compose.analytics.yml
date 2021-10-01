@@ -109,4 +109,6 @@ services:
 
   rendition-server:
     logging:  *loki-logging
-    
+
+  administrator:
+    logging:  *loki-logging

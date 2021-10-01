@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitoring-console
+spec:
+  template:
+    spec:
+      securityContext:
+        fsGroup: 0
+      initContainers:
+      - name: monitoring-console-conf
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 10001
+          capabilities:
+            drop:
+              - ALL
+      containers:
+      - name: monitoring-console
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 10001
+          capabilities:
+            drop:
+              - ALL

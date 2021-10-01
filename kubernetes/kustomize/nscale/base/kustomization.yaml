@@ -56,6 +56,7 @@ resources:
 - rendition-server.yaml
 - console.yaml
 - storage-layer.yaml
+- administrator.yaml
 # Enable pipeliner
 #- pipeliner.yaml
 # Enable nscale connectors if required

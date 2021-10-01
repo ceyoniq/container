@@ -16,28 +16,15 @@ spec:
       labels:
         app: monitoring-console
     spec:
-      serviceAccountName: default
       automountServiceAccountToken: false
-      securityContext:
-        fsGroup: 0
       imagePullSecrets:
       - name: regcred
       initContainers:
       # The license file mount inside the workspace volume prevents the volume to get initialized with the image data.
       # Therefore we need to copy the data from the image to the volume manually before startup.
       - name: monitoring-console-conf
-        image:  ceyoniq.azurecr.io/release/nscale/monitoring-console:8.0.5400.2021071218.1061909966281
+        image: ceyoniq.azurecr.io/release/nscale/monitoring-console:8.1.1000.2021091318
         imagePullPolicy: Always
-        securityContext:
-          readOnlyRootFilesystem: true
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          runAsUser: 10001
-          capabilities:
-            drop:
-              - ALL
-            add:
-              - NET_BIND_SERVICE
         command: [ "/bin/sh", "-c" ]
         args:
         - |
@@ -49,18 +36,8 @@ spec:
           mountPath: /mnt
       containers:
       - name: monitoring-console
-        image: ceyoniq.azurecr.io/release/nscale/monitoring-console:8.0.5400.2021071218.1061909966281
+        image: ceyoniq.azurecr.io/release/nscale/monitoring-console:8.1.1000.2021091318
         imagePullPolicy: Always
-        securityContext:
-          readOnlyRootFilesystem: true
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          runAsUser: 10001
-          capabilities:
-            drop:
-              - ALL
-            add:
-              - NET_BIND_SERVICE
         startupProbe:
           exec:
             command:

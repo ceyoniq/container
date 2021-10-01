@@ -16,7 +16,6 @@ spec:
       labels:
         app: webdav-connector
     spec:
-      serviceAccountName: default
       automountServiceAccountToken: false
       imagePullSecrets:
       - name: regcred
@@ -24,16 +23,6 @@ spec:
       - name: webdav-connector
         image: ceyoniq.azurecr.io/release/nscale/webdav-connector:8.0.5000.2021031902.777635089529
         imagePullPolicy: Always
-        securityContext:
-          readOnlyRootFilesystem: true
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          runAsUser: 10001
-          capabilities:
-            drop:
-              - ALL
-            add:
-              - NET_BIND_SERVICE
         livenessProbe:
           exec:
             command:

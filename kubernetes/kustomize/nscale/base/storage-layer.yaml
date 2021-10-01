@@ -15,28 +15,15 @@ spec:
       labels:
         app: storage-layer
     spec:
-      serviceAccountName: default
       automountServiceAccountToken: false
-      securityContext:
-        fsGroup: 0
       imagePullSecrets:
       - name: regcred
       initContainers:
       # The license file mount inside the conf volume prevents the volume to get initialized with the image data.
       # Therefore we need to copy the data from the image to the volume manually before startup.
       - name: storage-layer-conf
-        image: ceyoniq.azurecr.io/release/nscale/storage-layer:8.0.5500.2021082311.455874704774
+        image: ceyoniq.azurecr.io/release/nscale/storage-layer:8.1.1000.2021092318
         imagePullPolicy: Always
-        securityContext:
-          readOnlyRootFilesystem: true
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          runAsUser: 10001
-          capabilities:
-            drop:
-              - ALL
-            add:
-              - NET_BIND_SERVICE
         command: [ "/bin/sh", "-c" ]
         args:
         - |
@@ -49,18 +36,8 @@ spec:
           mountPath: /mnt
       containers:
       - name: storage-layer
-        image: ceyoniq.azurecr.io/release/nscale/storage-layer:8.0.5500.2021082311.455874704774
+        image: ceyoniq.azurecr.io/release/nscale/storage-layer:8.1.1000.2021092318
         imagePullPolicy: Always
-        securityContext:
-          readOnlyRootFilesystem: true
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          runAsUser: 10001
-          capabilities:
-            drop:
-              - ALL
-            add:
-              - NET_BIND_SERVICE
         livenessProbe:
           exec:
             command:

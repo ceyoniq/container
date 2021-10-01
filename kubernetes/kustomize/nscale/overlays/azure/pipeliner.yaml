@@ -1,0 +1,9 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pipeliner-data
+spec:
+  template:
+    spec:
+      securityContext:
+        fsGroup: 0

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pipeliner-data
+spec:
+  template:
+    spec:
+      securityContext:
+        fsGroup: 0
+      containers:
+      - name: pipeliner
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 10001
+          capabilities:
+            drop:
+              - ALL

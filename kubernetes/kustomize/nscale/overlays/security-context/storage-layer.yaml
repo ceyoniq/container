@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: storage-layer
+spec:
+  template:
+    spec:
+      securityContext:
+        fsGroup: 0
+      initContainers:
+      - name: storage-layer-conf
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 10001
+          capabilities:
+            drop:
+              - ALL
+      containers:
+      - name: storage-layer
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 10001
+          capabilities:
+            drop:
+              - ALL

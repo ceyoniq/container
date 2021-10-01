@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-layer-web
+spec:
+  template:
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: application-layer-web
+        securityContext:
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+

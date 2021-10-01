@@ -17,26 +17,13 @@ spec:
       labels:
         app: pipeliner
     spec:
-      serviceAccountName: default
       automountServiceAccountToken: false
-      securityContext:
-        fsGroup: 0
       imagePullSecrets:
       - name: regcred
       containers:
       - name: pipeliner
-        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.0.5500.2021081909.1091124784249
+        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.1.1002.2021093010
         imagePullPolicy: Always
-        securityContext:
-          readOnlyRootFilesystem: true
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          runAsUser: 10001
-          capabilities:
-            drop:
-              - ALL
-            add:
-              - NET_BIND_SERVICE
         startupProbe:
           exec:
             command:
