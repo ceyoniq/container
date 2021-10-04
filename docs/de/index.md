@@ -84,7 +84,7 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 | ceyoniq.azurecr.io/release/nscale/cmis-connector | <cmis-connector-tag>8.1.1000.2021090820</cmis-connector-tag> | [nscale CMIS-Connector](components/cmis-connector.md) |
 | ceyoniq.azurecr.io/release/nscale/webdav-connector | <webdav-connector-tag>8.0.5000.2021031902.777635089529</webdav-connector-tag> | [nscale WebDAV-Connector](components/webdav-connector.md) |
 | ceyoniq.azurecr.io/release/nscale/ilm-connector | <ilm-connector-tag>8.1.1000.2021090810</ilm-connector-tag> | [nscale ERP Connector ILM](components/ilm-connector.md) |
-| ceyoniq.azurecr.io/release/nscale/administrator | <administrator-tag>8.1.1001.2021093019</administrator-tag> | nscale Administrator |
+| ceyoniq.azurecr.io/release/nscale/administrator | <administrator-tag>8.1.1001.2021093019</administrator-tag> | [nscale Administrator](components/administrator.md) |
 
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
 
