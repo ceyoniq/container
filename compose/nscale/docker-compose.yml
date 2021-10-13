@@ -117,7 +117,7 @@ services:
       - APPLICATION_LAYER_PORT=8080
       - APPLICATION_LAYER_INSTANCE=nscalealinst1
       - APPLICATION_LAYER_SSL=false
-      - JAVA_OPTIONS=-Dorg.eclipse.rap.rwt.settingStoreFactory=settings-per-user
+      - JAVA_OPTIONS=-Dorg.eclipse.rap.rwt.settingStoreFactory=settings-per-user -Duser.language=de
     networks:
       - nscale
     depends_on:

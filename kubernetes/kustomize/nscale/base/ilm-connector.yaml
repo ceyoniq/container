@@ -21,7 +21,7 @@ spec:
       - name: regcred
       containers:
       - name: ilm-connector
-        image: ceyoniq.azurecr.io/release/nscale/ilm-connector:8.1.1000.2021090810
+        image: ceyoniq.azurecr.io/release/nscale/ilm-connector:8.1.1000.2021090810.133378200302
         imagePullPolicy: Always
         livenessProbe:
           exec:
