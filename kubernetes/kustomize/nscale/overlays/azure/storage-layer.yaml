@@ -7,3 +7,12 @@ spec:
     spec:
       securityContext:
         fsGroup: 0
+  volumeClaimTemplates:
+  - metadata:
+      name: storage-layer
+    spec:
+      storageClassName: default
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 8Gi

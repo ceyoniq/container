@@ -7,3 +7,12 @@ spec:
     spec:
       securityContext:
         fsGroup: 0
+  volumeClaimTemplates:
+  - metadata:
+      name: pipeliner-data
+    spec:
+      storageClassName: default
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 8Gi

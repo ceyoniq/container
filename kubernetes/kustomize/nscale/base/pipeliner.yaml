@@ -22,7 +22,7 @@ spec:
       - name: regcred
       containers:
       - name: pipeliner
-        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.1.1002.2021093010.133378200302
+        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.1.1100.2021102110.730294208355
         imagePullPolicy: Always
         startupProbe:
           exec:
@@ -75,7 +75,7 @@ spec:
           name: pipeliner-setup
   volumeClaimTemplates:
   - metadata:
-      name: pipeliner
+      name: pipeliner-data
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:

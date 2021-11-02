@@ -162,7 +162,7 @@ Passen Sie die Ingress-Regeln an, wenn Sie einen anderen Ingress-Controller verw
 Führen Sie zur Verwendung der Beispielkonfiguration folgendes Kommando im Ordner `kubernetes/kustomize/nscale/` aus:
 
 ```bash
-kubectl apply -n nscale -f ingress.yaml
+kubectl apply -n nscale -f ingress-nginx.yaml
 ```
 
 Informationen über die gesetzten Ingress-Regeln können Sie abrufen, indem Sie die folgenden Kommandos ausführen:  
