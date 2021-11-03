@@ -63,17 +63,16 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 |INSTANCE1_CORE_WORK_DIRECTORY=/mnt/fulltextcache | In dieser Umgebungsvariable können Sie den Ordner für den lokalen Volltext-Cache definieren.|
 |INITIALIZE_DOCUMENT_AREA=DA | Mit dieser Umgebungsvariable können Sie einen Dokumentenbereich mit dem Namen "DA" erstellen. |
 |INITIALIZE_DOCUMENT_AREA_DISPLAYNAME=DA | Mit dieser Umgebungsvariable können Sie den Displayname des neu erstellten Dokumentenbereichs überschreiben. |
-|KUBERNETES_NAMESPACE | Diese Umgebungsvariable ist für die Konfiguration des Clusters in Kubernetes notwendig, sie hat eine spezielle Konfiguration. Für weitere Details lesen Sie die [Cluster-Konfiguration in Kubernetes](#cluster-konfiguration-in-kubernetes). |
+|KUBERNETES_NAMESPACE | Diese Umgebungsvariable ist für die Konfiguration des Clusters in Kubernetes notwendig. Weitere Details finden Sie unter [Cluster-Konfiguration in Kubernetes](#cluster-konfiguration-in-kubernetes). |
 
 ## Logging in Kubernetes
 
-Um das Log Level im Kubernetes Betrieb zu ändern kann eine ConfigMap verwendet werden. Diese ConfigMap sollte die Log4j 
-Konfiguration aus dem Originalimage enthalten. Wird diese ConfigMap als Volume auf ein Verzeichnis gemappt
+Um das Log Level im Kubernetes Betrieb zu ändern kann eine ConfigMap verwendet werden. Diese ConfigMap sollte die Log4j-Konfiguration aus dem Originalimage enthalten. Wird diese ConfigMap als Volume auf ein Verzeichnis gemappt
 muss über die oben beschriebene Umgebungsvariable ```INSTANCE1_INSTANCE_LOGGER_CONF``` die neue Datei referenziert werden.
 Ändert sich die ConfigMap im Cluster wird diese automatisch verteilt und über log4j Mechanismen nach wenigen Minuten in den
-Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in einem Deployment.
+Serverprozess übernommen. Das gilt auch für mehrere Containerinstanzen in einem Deployment.
 
-*Achtung:* Die ConfigMap muss auf ein Verzeichnis gemappt werden. Die Verwendung von subPath im Volume Mount verhindert eine automatische Aktualiserung bei Änderungen der ConfigMap!
+*Achtung:* Die ConfigMap muss auf ein Verzeichnis gemappt werden. Die Verwendung von subPath im Volume Mount verhindert eine automatische Aktualisierung bei Änderungen der ConfigMap!
 
 ## Ports
 
@@ -146,8 +145,11 @@ So wird die Verteilung der Last eines größeren nscale Systems auf mehrere Serv
 Dafür ist es notwendig, dass Sie die folgenden Konfigurationen ausführen:
 
 - Berechtigungen zum Listen und Finden anderer Pods und Application Layer Instanzen in Kubernetes: ServiceAccount, Role und RoleBinding;
-- Kubernetes Namespace: nscale Server Application Layer kann nur Pods in dem Namespace suchen, in dem er ausgeführt wird;
+- Kubernetes Namespace: nscale Server Application Layer kann nur Pods in dem Namespace suchen, in dem er ausgeführt wird (Umgebungsvariable "KUBERNETES_NAMESPACE");
 - Label für den Cluster: nscale Server Application Layer sucht nur Pods mit dem Label `ceyoniq.com/application-layer-cluster-name=[cluster name]`.
+
+Wenn Sie die Clusterbildung für ein containerisiertes System aktiviert haben, wird automatisch der Protokollstapel "tcp Kubernetes" verwendet.
+Diese Konfiguration kann in nscale Administrator nicht bearbeitet werden.
 
 Eine Beispiel-Konfiguration finden Sie in [application-layer.yaml](../../../kubernetes/kustomize/nscale/base/application-layer.yaml)
 
@@ -196,7 +198,7 @@ Weitere Informationen dazu finden Sie in der Dokumentation von nscale Server App
 ## SAP Anbindung
 
 Für den SAP Java Connector für die RFC-Kommunikation im Application Layer werden zusätzliche Bibliotheken benötigt,
-die nicht im Standard Container ausgeliefert werden (siehe 4.3.1.2.1 "SAP Java Connector" im ERP Manual).
+die nicht im Standard Container ausgeliefert werden (siehe "SAP Java Connector" im ERP Manual).
 Wird die ERP Installation im Container durchgeführt sollte eine Ableitung des Application Layer Standard Containers benutzt werden.
 
 Bisher wurde die erweiterte SAP Funktion insbesondere auch Application Layer Cluster noch nicht getestet.

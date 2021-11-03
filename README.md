@@ -20,3 +20,5 @@ Weitere Informationen finden Sie in diesen Dokumentationen:
 * **[Quick Start Guide - Docker-Compose](docs/de/compose.md#quick-start-guide)**
 
 Darüber hinausgehende Informationen und Hilfe finden Sie in den Dokumentationen in unserem [Serviceportal](<https://serviceportal.ceyoniq.com/>) und bei unserem [Service und Support](docs/de/support.md).
+
+Die Änderungshistorie finden Sie in [changelog.md](changelog.md).
