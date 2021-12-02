@@ -4696,7 +4696,7 @@
       ]
     },
     "timezone": "browser",
-    "title": "nscale JVM Resources Usage",
+    "title": "JVM - Micrometer",
     "uid": "CJJxKT0Gk",
     "version": 1
   }

@@ -38,15 +38,15 @@ services:
     image: ${TRAEFIK_IMAGE}
     container_name: traefik
     command:
-      - "--api=false"       
+      - "--api=false"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
-      # - "--log.level=DEBUG" # Enable debugging
-      # - "--api.insecure=true"       
+      #- "--log.level=DEBUG" # Enable debugging
+      #- "--api.insecure=true"
     ports:
       - "${TRAEFIK_EXTERNAL_HTTP_PORT}:80"
-      # - "9090:8080" # Enable the Traefik Dashboard (set --api=true and --api.insecure=true)      
+      #- "9090:8080" # Enable the Traefik Dashboard (set --api=true and --api.insecure=true)
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:

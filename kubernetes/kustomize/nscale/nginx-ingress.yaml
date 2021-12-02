@@ -18,7 +18,7 @@ spec:
   #  secretName: tls-secret
   rules:
   #- host: example.org
-  - http:
+   - http:
       paths:
       - path: /nscalealinst1
         pathType: Prefix

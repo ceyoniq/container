@@ -1,9 +1,6 @@
 bases:
 - ../azure
 
-generatorOptions:
-  disableNameSuffixHash: true
-
 configMapGenerator:
 - name: nappl-keystore
   files:

@@ -164,7 +164,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "nscale Logs",
+  "title": "Loki - nscale logs overview",
   "uid": null,
   "version": 0
 }

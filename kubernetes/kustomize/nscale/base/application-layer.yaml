@@ -30,7 +30,7 @@ spec:
           do echo waiting for database; sleep 2; done;']
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.1.1100.2021102021.891911317771
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.2.1002.2021112921.104004363261
         imagePullPolicy: Always
         startupProbe:
           exec:
@@ -78,7 +78,7 @@ spec:
               fieldRef:
                 fieldPath: metadata.namespace
           - name: JAVA_OPTS
-            value: "-XX:MaxRAMPercentage=75.0"
+            value: -XX:MaxRAMPercentage=75.0
           - name: KUBERNETES_NAMESPACE
             valueFrom:
               fieldRef:

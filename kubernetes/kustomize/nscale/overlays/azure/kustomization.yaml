@@ -1,5 +1,5 @@
 bases:
-- ../security-context
+- ../security
 
 resources:
 - pvc-rwo.yaml

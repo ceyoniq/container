@@ -1,35 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: console
+  name: xta-connector
   labels:
-    app: console
+    app: xta-connector
 spec:
   selector:
     matchLabels:
-      app: console
+      app: xta-connector
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: console
+        app: xta-connector
     spec:
       automountServiceAccountToken: false
       imagePullSecrets:
       - name: regcred
       containers:
-      - name: console
-        image: ceyoniq.azurecr.io/release/nscale/console:8.2.1000.12425.518338839993
+      - name: xta-connector
+        image: ceyoniq.azurecr.io/release/nscale/xta-connector:8.2.1000.2021110322.771183778829
         imagePullPolicy: Always
-        startupProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./liveness-probe.sh
-          failureThreshold: 5
-          periodSeconds: 10
         livenessProbe:
           exec:
             command:
@@ -41,31 +34,39 @@ spec:
             - /bin/sh
             - ./readiness-probe.sh
         env:
-        - name: LOG_APPENDER
-          value: "Console"
-        - name: HostName
+        - name: XTA_AL_HOST
           value: "application-layer"
-        - name: Port
+        - name: XTA_AL_PORT
           value: "8080"
-        - name: NAPPL_SSL
-          value: "0"
-        - name: ALInstance
+        - name: XTA_AL_SSL
+          value: "false"
+        - name: XTA_AL_INSTANCE
           value: "nscalealinst1"
         - name: JAVA_OPTS
           value: "-XX:MaxRAMPercentage=75.0"
+        - name: XTA_AL_DOCAREA
+          value: "DA"
+        - name: XTA_AL_DOMAIN
+          value: "nscale"
+        - name: XTA_AL_USER
+          value: "admin"
+        - name: XTA_AL_PASSWORD
+          value: "admin"
+        - name: XTA_AL_FOLDERQUERY
+          value: "resourcetype=1 and displayname='XTA'"
         ports:
-        - containerPort: 8086
-          name: console
+        - containerPort: 8099
+          name: xta
         resources:
           limits:
-            cpu: "2000m"
-            memory: "1300Mi"
+            cpu: "1000m"
+            memory: "1000Mi"
           requests:
             cpu: "100m"
-            memory: "700Mi"
+            memory: "500Mi"
         volumeMounts:
         - name: temp
-          mountPath: /opt/ceyoniq/nscale-server/console/temp
+          mountPath: /opt/ceyoniq/nscale-xta-connector/temp
       volumes:
       - name: temp
         emptyDir: {}
@@ -73,13 +74,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: console
+  name: xta-connector
   labels:
-    service: console
+    service: xta-connector
 spec:
   ports:
-  - port: 8086
-    targetPort: 8086
-    name: console
+  - port: 8099
+    targetPort: 8099
+    name: xta
   selector:
-    app: console
+    app: xta-connector

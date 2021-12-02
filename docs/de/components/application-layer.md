@@ -93,7 +93,7 @@ Serverprozess übernommen. Das gilt auch für mehrere Containerinstanzen in eine
    -h democontainer \
    -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
    -p 8080:8080 \
-   ceyoniq.azurecr.io/release/nscale/application-layer:8.1.1100.2021102021.891911317771
+   ceyoniq.azurecr.io/release/nscale/application-layer:8.2.1002.2021112921.104004363261
 ```
 
 ## Microsoft Windows Schriftarten
@@ -127,7 +127,7 @@ nscale Application Layer Server erwartet die Schriftarten im folgenden Ordner:
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.1.1100.2021102021.891911317771
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.2.1002.2021112921.104004363261
 ```
 
 **Beispiel Docker-Compose:**

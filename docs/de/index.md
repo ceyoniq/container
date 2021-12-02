@@ -74,17 +74,18 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 
 | Image | Release Tag | nscale Komponente |
 |:---|:---|:---|
-| ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>8.1.1100.2021102021.891911317771</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
-| ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>8.1.1100.2021102714.39610108053</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
-| ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>8.1.1100.2021102018.430262711479</storage-layer-tag> | [nscale Server Storage Layer](components/storage-layer.md) |
-| ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>8.1.1101.2021102615.557859255860</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
-| ceyoniq.azurecr.io/release/nscale/console | <console-tag>8.1.1100.12395.734329728310</console-tag> | [nscale Console](components/console.md) |
-| ceyoniq.azurecr.io/release/nscale/monitoring-console | <monitoring-console-tag>8.1.1000.2021091318.133378200302</monitoring-console-tag> | [nscale Monitoring Console](components/monitoring-console.md) |
-| ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>8.1.1100.2021102110.730294208355</pipeliner-tag> | [nscale Pipeliner](components/pipeliner.md) |
+| ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>8.2.1002.2021112921.104004363261</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
+| ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>8.2.1000.2021112416.851529581296</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
+| ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>8.2.1000.2021111718.1061760032861</storage-layer-tag> | [nscale Server Storage Layer](components/storage-layer.md) |
+| ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>8.2.1000.2021111511.511297799092</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
+| ceyoniq.azurecr.io/release/nscale/console | <console-tag>8.2.1000.12425.518338839993</console-tag> | [nscale Console](components/console.md) |
+| ceyoniq.azurecr.io/release/nscale/monitoring-console | <monitoring-console-tag>8.2.1000.2021111109.1028114744797</monitoring-console-tag> | [nscale Monitoring Console](components/monitoring-console.md) |
+| ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>8.2.1002.2021113009.104004363261</pipeliner-tag> | [nscale Pipeliner](components/pipeliner.md) |
 | ceyoniq.azurecr.io/release/nscale/cmis-connector | <cmis-connector-tag>8.1.1000.2021090820.133378200302</cmis-connector-tag> | [nscale CMIS-Connector](components/cmis-connector.md) |
 | ceyoniq.azurecr.io/release/nscale/webdav-connector | <webdav-connector-tag>8.0.5000.2021031902.777635089529</webdav-connector-tag> | [nscale WebDAV-Connector](components/webdav-connector.md) |
 | ceyoniq.azurecr.io/release/nscale/ilm-connector | <ilm-connector-tag>8.1.1000.2021090810.133378200302</ilm-connector-tag> | [nscale ERP Connector ILM](components/ilm-connector.md) |
-| ceyoniq.azurecr.io/release/nscale/administrator | <administrator-tag>8.1.1001.2021093019</administrator-tag> | [nscale Administrator](components/administrator.md) |
+| ceyoniq.azurecr.io/release/nscale/xta-connector | <xta-connector-tag>8.2.1000.2021110322.771183778829</xta-connector-tag> | [nscale XTAConnector](components/xta-connector.md) |
+| ceyoniq.azurecr.io/release/nscale/administrator | <administrator-tag>8.2.1000.2021112919.235969994610</administrator-tag> | [nscale Administrator](components/administrator.md) |
 
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
 
@@ -104,6 +105,7 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 |nscale CMIS-Connector|Ja|Ja|Ja|Ja|
 |nscale WebDAV-Connector|Ja|Ja|Ja|Ja|
 |nscale ERP Connector ILM|Ja|Ja|Ja|Ja|
+|nscale XTA Connector|Ja|Ja|Ja|Ja|
 
 (*) Die Komponente kann über ein [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) in Kubernetes skaliert werden.  
 (**) Die Komponente kann über einen [Service](https://kubernetes.io/docs/concepts/services-networking/service/) in Kubernetes Loadbalancing durchführen.
