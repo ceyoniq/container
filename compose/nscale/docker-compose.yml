@@ -61,6 +61,7 @@ services:
       - nscale
     depends_on:
       - postgresql
+      - storage-layer
 
   application-layer-web:
     image: ${APPLICATION_LAYER_WEB_IMAGE}
@@ -94,7 +95,7 @@ services:
     environment:
       - MC_APPENDER=Console
       - MC_PASSWORD=admin
-      - JAVA_OPTS=-Xmx1g
+      - JAVA_OPTS="-Xmx1g -Dlog4j2.formatMsgNoLookups=true -Dcom.sun.jndi.rmi.object.trustURLCodebase=false -Dcom.sun.jndi.cosnaming.object.trustURLCodebase=false"
     networks:
       - nscale
 
@@ -106,7 +107,7 @@ services:
     environment:
       - RSX_APPENDER=Console
       - RSX_PASSWORD=admin
-      - JAVA_OPTS=-Xmx2g
+      - JAVA_OPTS="-Xmx2g -Dlog4j2.formatMsgNoLookups=true -Dcom.sun.jndi.rmi.object.trustURLCodebase=false -Dcom.sun.jndi.cosnaming.object.trustURLCodebase=false"
     networks:
       - nscale
 

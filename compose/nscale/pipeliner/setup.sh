@@ -5,10 +5,9 @@ readonly APPLICATION_LAYER_HOSTNAME=${APPLICATION_LAYER_HOSTNAME:-application-la
 echo -e $(date '+%d-%b-%Y %H:%M:%S.%3N')" \e[34mWait for application layer...\e[39m"
 
 while : ; do
-    ncat --recv-only ${APPLICATION_LAYER_HOSTNAME} 20626 2> /dev/null | grep -q 'server is running'
-    RESULT=$?
-    if [ $RESULT -eq 0 ]; then
-
+    status_code=$(curl --max-time 0.1 --head --location --silent --output /dev/null -w "%{http_code}" http://${APPLICATION_LAYER_HOSTNAME}:8080/jmx/status)
+    case $status_code in
+    200 )
         write_check_error=0
         if [ ! -w "/opt/ceyoniq/nscale-pipeliner/workdir/data/backup" ]; then 
             echo "/opt/ceyoniq/nscale-pipeliner/workdir/data/backup not writable with user id " `id -u`
@@ -35,12 +34,12 @@ while : ; do
             write_check_error=1
         fi 
 
-        if [ "0" -eq "$write_check_error" ]; then
-               break
-        fi
-    else 
+        exit $write_check_error
+    ;;
+    * )
         echo "Server is not running: ${APPLICATION_LAYER_HOSTNAME} ... retry in 5 seconds."
-    fi
-    sleep 5
+        sleep 5
+    ;;
+    esac
 done
 
