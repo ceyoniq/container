@@ -95,7 +95,7 @@ services:
     environment:
       - MC_APPENDER=Console
       - MC_PASSWORD=admin
-      - JAVA_OPTS="-Xmx1g -Dlog4j2.formatMsgNoLookups=true -Dcom.sun.jndi.rmi.object.trustURLCodebase=false -Dcom.sun.jndi.cosnaming.object.trustURLCodebase=false"
+      - JAVA_OPTS=-Xmx1g -Dlog4j2.formatMsgNoLookups=true -Dcom.sun.jndi.rmi.object.trustURLCodebase=false -Dcom.sun.jndi.cosnaming.object.trustURLCodebase=false
     networks:
       - nscale
 
@@ -107,7 +107,7 @@ services:
     environment:
       - RSX_APPENDER=Console
       - RSX_PASSWORD=admin
-      - JAVA_OPTS="-Xmx2g -Dlog4j2.formatMsgNoLookups=true -Dcom.sun.jndi.rmi.object.trustURLCodebase=false -Dcom.sun.jndi.cosnaming.object.trustURLCodebase=false"
+      - JAVA_OPTS=-Xmx2g -Dlog4j2.formatMsgNoLookups=true -Dcom.sun.jndi.rmi.object.trustURLCodebase=false -Dcom.sun.jndi.cosnaming.object.trustURLCodebase=false
     networks:
       - nscale
 
