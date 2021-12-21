@@ -65,7 +65,7 @@ docker run \
   -h democontainer \
   -v $(pwd)/work:/opt/ceyoniq/nscale-rendition-server/work \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-rendition-server/conf/license.xml \
-  ceyoniq.azurecr.io/release/nscale/rendition-server:8.2.1000.2021111511.511297799092
+  ceyoniq.azurecr.io/release/nscale/rendition-server:8.2.1002.2021121618.96414466018
 ```
 
 ## Microsoft Windows Schriftarten
