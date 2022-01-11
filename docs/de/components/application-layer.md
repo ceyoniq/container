@@ -124,10 +124,12 @@ nscale Application Layer Server erwartet die Schriftarten im folgenden Ordner:
 
 ```/usr/share/fonts/truetype/msttcorefonts```
 
+Entsprechend können auch andere proprietäre Fonts nachinstalliert werden.
+
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.2.1100.2021122014.799403605362
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:8.2.1100.2021122014.799403605362
 ```
 
 **Beispiel Docker-Compose:**
@@ -243,29 +245,35 @@ Die dafür benötigten Konfigurationsdateien werden über Befehle in der Applica
 
 ### LDAP
 
-Verwenden Sie die folgenden Befehle, um die LDAP-Konfigurationsdatei `LDAP.json` zu erzeugen:
+Um automatisiert ein LDAP Settings anzulegen gehen Sie wie folgt vor:
+
+1. Erstellen Sie ein vollständige LDAP Konfiguration im Administrator das Sie als Template verwenden möchten.
+2. Exportieren Sie dieses Konfiguration in eine Template Datei innerhalb des Containers  
+ `al cfg-get -type LdapSetting -name <name> -dialect JSON > ldap.tpl`
+3. Ersetzen Sie im Template das Passwort und den Benutzernamen durch Variablen:  
+  `"baseDN" : "%basename%"`
+  `"encodedPassword" : "%encodedPassword%"`
+4. Nutzen Sie eine Skriptsequenz wie diese in `application-layer-setup.sh`, um die Settings aus dem Template zu importieren. Die Template Datei muss im abgeleiteten Image vorhanden sein (oder in den Container gemappt werden).
 
 ```bash
-# use this commando to encode your pass
-# and save its output to use in the JSON file
-al dbpass %my-secret-pass%
-
-# add the LDAP configuration
-al cfg-add -type LdapSetting -file LDAP.json
+# encode password
+pwd=$(al dbpass ${LDAP_PASSWORD})
+# generate file from template
+sed "s/%encodedPassword%/${pwd}/;s/%basename%/${LDAP_BASENAME}/" ldap.tpl > ldap.json
+# import setttings
+al cfg-add -type LdapSetting -file ldap.json
+# remove temporary configuration
+rm ldap.json
 ```
 
-Unten sehen Sie ein Beispiel, wie die Datei `LDAP.json` aussehen könnte.
-Der Parameter `encodedPassword` ist die Ausgabe des Befehl `al dbpass`.
+Unten sehen Sie ein Beispiel einer Template Datei.
 
 ```json
 {
 "ldapServiceName" : "CT",
-"serverAddress" :
-
-{ "host" : "001ctads2.CT.com", "port" : 636 }
-,
+"serverAddress" : { "host" : "001ctads2.CT.com", "port" : 636 },
 "ssl" : true,
-"baseDN" : "dc=CT,dc=com",
+"baseDN" : "%basename%",
 "managerDN" : "print",
 "encodedPassword" : "%my-econcoded-pass%",
 "userBaseDN" : "ou=Benutzer",
@@ -322,29 +330,39 @@ Der Parameter `encodedPassword` ist die Ausgabe des Befehl `al dbpass`.
 "enableExtendedGroupAttributes" : true,
 "overwriteMultiValues" : false,
 "synchronizeCompetences" : true,
-"multiValueUpdatePolicies" : { },
-"lastModified" : 1602223431107
+"multiValueUpdatePolicies" : { }
 }
 ```
 
 ### SMTP
 
-Verwenden Sie den folgenden Befehl, um die SMTP-Konfigurationsdatei `SMTP.json` zu erzeugen:
+Um automatisiert ein SMTP Settings anzulegen gehen Sie wie folgt vor:
+
+1. Erstellen Sie ein vollständige Email Server Konfiguration im Administrator das Sie als Template verwenden möchten.
+2. Exportieren Sie dieses Konfiguration in eine Template Datei innerhalb des Containers  
+ `al cfg-get -type EmailServer -name <name> -dialect JSON > email.tpl`
+3. Ersetzen Sie im Template das Passwort und den Benutzernamen durch Variablen:  
+  `"userName" : "%username%"`
+  `"userPassword" : "%encodedPassword%"`
+4. Nutzen Sie eine Skriptsequenz wie diese in `application-layer-setup.sh`, um die Settings aus dem Template zu importieren. Die Template Datei muss im abgeleiteten Image vorhanden sein (oder in den Container gemappt werden).
 
 ```bash
-# add the SMTP configuration
-al cfg-add -type EmailServer -file SMTP.json
+# encode password
+pwd=$(al dbpass ${EMAIL_PASSWORD})
+# generate file from template
+sed "s/%encodedPassword%/${pwd}/;s/%username%/${EMAIL_BASENAME}/" email.tpl > email.json
+# import setttings
+al cfg-add -type EmailServer -file email.json
+# remove temporary configuration
+rm email.json
 ```
 
-Hier sehen Sie ein Beispiel, wie die Datei `SMTP.json` aussehen könnte.
+Hier sehen Sie ein Beispiel, wie die Datei `email.json` aussehen könnte.
 
 ```json
 {
 "name" : "default",
-"serverAddress" :
-
-{ "host" : "localhost", "port" : 465 }
-,
+"serverAddress" :{ "host" : "localhost", "port" : 465 },
 "userName" : "admin",
 "userPassword" : "28f64920fc",
 "defaultSenderMailAddress" : "ncloud@ceyoniq.com",
@@ -354,15 +372,12 @@ Hier sehen Sie ein Beispiel, wie die Datei `SMTP.json` aussehen könnte.
 "calendarRequests" : false,
 "default_" : true,
 "active" : true,
-"exchangeServerSetting" :
-
-{ "version" : null, "ewsEnabled" : false, "domainName" : null, "synchronizePrincipalInfoToContactFolders" : false }
-,
+"exchangeServerSetting" : {
+  "version" : null, "ewsEnabled" : false, "domainName" : null, "synchronizePrincipalInfoToContactFolders" : false },
 "encoding" : null,
 "sign" : false,
 "keyStore" : null,
 "keyStorePassword" : null,
-"keyStoreAlias" : null,
-"lastModified" : 1626699787582
+"keyStoreAlias" : null
 }
 ```

@@ -96,10 +96,12 @@ nscale Rendition Server erwartet die Schriftarten im folgenden Ordner:
 
 ```/usr/share/fonts/truetype/msttcorefonts```
 
+Entsprechend können auch andere proprietäre Fonts nachinstalliert werden.
+
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont ceyoniq.azurecr.io/release/nscale/application-layer:8.2.1100.2021122014.799403605362
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:8.2.1100.2021122014.799403605362
 ```
 
 **Beispiel Docker-Compose:**
