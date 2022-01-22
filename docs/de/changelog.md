@@ -10,8 +10,7 @@
 
 * Aktualisierung der Container Images.
 * Integration des XTA Connectors.
-* Fehlerbehebungen in der Dokumen
-
+* Fehlerbehebungen in der Dokumentation
 
 ## 8.1.1100 (November 2021)
 
