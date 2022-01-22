@@ -9,8 +9,7 @@
 ## 8.2.1000 (Dezember 2021)
 
 * Aktualisierung der Container Images.
-* Integration des XTA Connectors.
-* Fehlerbehebungen in der Dokumentation
+* Integration des XTA Connectors.Is
 
 ## 8.1.1100 (November 2021)
 
