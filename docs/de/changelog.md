@@ -1,5 +1,13 @@
 # Änderungshistorie
 
+## 8.2.1200 (Februar 2021)
+
+* Aktualisierung der Container Images.
+
+## 8.2.1100 (Januar 2021)
+
+* Aktualisierung der Container Images.
+
 ## Hotfix der Konfiguration (13 Dezember 2021)
 
 [*Schwachstelle Log4Shell führt zu extrem kritischer Bedrohungslage*](https://www.bsi.bund.de/DE/Service-Navi/Presse/Pressemitteilungen/Presse2021/211211_log4Shell_WarnstufeRot.html)
@@ -11,7 +19,6 @@
 * Aktualisierung der Container Images.
 * Integration des XTA Connectors.
 * Fehlerbehebungen in der Dokumen
-
 
 ## 8.1.1100 (November 2021)
 

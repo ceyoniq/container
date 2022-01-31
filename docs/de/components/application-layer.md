@@ -93,7 +93,7 @@ Serverprozess übernommen. Das gilt auch für mehrere Containerinstanzen in eine
    -h democontainer \
    -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
    -p 8080:8080 \
-   ceyoniq.azurecr.io/release/nscale/application-layer:8.2.1100.2021122014.799403605362
+   ceyoniq.azurecr.io/release/nscale/application-layer:8.2.1201.2022012021.619929976598
 ```
 
 ## Microsoft Windows Schriftarten
@@ -129,7 +129,7 @@ Entsprechend können auch andere proprietäre Fonts nachinstalliert werden.
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:8.2.1100.2021122014.799403605362
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:8.2.1201.2022012021.619929976598
 ```
 
 **Beispiel Docker-Compose:**
