@@ -69,7 +69,7 @@ kubectl create secret docker-registry regcred \
 kubectl apply -n nscale -k .
 ```
 
-5. Sie können prüfen, ob die jeweiligen `Pods` erfolgreich gestartet werden konnten.
+5. Sie können nun prüfen, ob die jeweiligen `Pods` erfolgreich gestartet werden konnten.
 
 ```bash
  kubectl get pods -n nscale -w

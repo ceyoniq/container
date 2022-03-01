@@ -22,7 +22,7 @@ spec:
       - name: regcred
       containers:
       - name: pipeliner
-        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.2.1201.2022012114.1072370435171
+        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.2.1302.2022021815.324947244569
         imagePullPolicy: Always
         startupProbe:
           exec:

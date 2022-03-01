@@ -74,13 +74,13 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 
 | Image | Release Tag | nscale Komponente |
 |:---|:---|:---|
-| ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>8.2.1201.2022012021.619929976598</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
-| ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>8.2.1200.2022012115.865592081624</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
+| ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>8.2.1302.2022021813.1032566034800</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
+| ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>8.2.1300.2022022515.724419112301</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
 | ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>8.2.1001.2021120609.828894369457</storage-layer-tag> | [nscale Server Storage Layer](components/storage-layer.md) |
-| ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>8.2.1200.2022011311.166992333318</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
+| ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>8.2.1300.2022021416.433316606368</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
 | ceyoniq.azurecr.io/release/nscale/console | <console-tag>8.2.1200.12456.15246741103</console-tag> | [nscale Console](components/console.md) |
 | ceyoniq.azurecr.io/release/nscale/monitoring-console | <monitoring-console-tag>8.2.1200.2022011410.413561265774</monitoring-console-tag> | [nscale Monitoring Console](components/monitoring-console.md) |
-| ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>8.2.1201.2022012114.1072370435171</pipeliner-tag> | [nscale Pipeliner](components/pipeliner.md) |
+| ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>8.2.1302.2022021815.324947244569</pipeliner-tag> | [nscale Pipeliner](components/pipeliner.md) |
 | ceyoniq.azurecr.io/release/nscale/cmis-connector | <cmis-connector-tag>8.1.1000.2021090820.133378200302</cmis-connector-tag> | [nscale CMIS-Connector](components/cmis-connector.md) |
 | ceyoniq.azurecr.io/release/nscale/webdav-connector | <webdav-connector-tag>8.0.5000.2021031902.777635089529</webdav-connector-tag> | [nscale WebDAV-Connector](components/webdav-connector.md) |
 | ceyoniq.azurecr.io/release/nscale/ilm-connector | <ilm-connector-tag>8.1.1000.2021090810.133378200302</ilm-connector-tag> | [nscale ERP Connector ILM](components/ilm-connector.md) |

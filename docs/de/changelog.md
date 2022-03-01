@@ -1,10 +1,13 @@
 # Änderungshistorie
 
-## 8.2.1200 (Februar 2021)
+## 8.2.1300 (Februar 2022)
+
+* Aktualisierung der Container Images.
+## 8.2.1200 (Februar 2022)
 
 * Aktualisierung der Container Images.
 
-## 8.2.1100 (Januar 2021)
+## 8.2.1100 (Januar 2022)
 
 * Aktualisierung der Container Images.
 
@@ -18,7 +21,7 @@
 
 * Aktualisierung der Container Images.
 * Integration des XTA Connectors.
-* Fehlerbehebungen in der Dokumen
+* Fehlerbehebungen in der Dokumentation.
 
 ## 8.1.1100 (November 2021)
 

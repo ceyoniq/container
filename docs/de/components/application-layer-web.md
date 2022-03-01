@@ -65,7 +65,7 @@ Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in eine
    -e log4jConfigLocation=../conf/nscale_stdout_log_conf.xml \
    -e nscale-port=8080 \
    -p 8090:8090 \
-   ceyoniq.azurecr.io/release/nscale/application-layer-web:8.2.1200.2022012115.865592081624
+   ceyoniq.azurecr.io/release/nscale/application-layer-web:8.2.1300.2022022515.724419112301
 ```
 
 ## Information für Entwickler
