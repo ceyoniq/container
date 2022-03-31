@@ -60,5 +60,5 @@ docker run -it \
 -e XTA_AL_PORT=8080 \
 -e XTA_AL_SSL=false \
 -e XTA_AL_DOMAIN=nscale \
-ceyoniq.azurecr.io/release/nscale/xta-connector:8.2.1000.2021110322.771183778829
+ceyoniq.azurecr.io/release/nscale/xta-connector:8.3.1000.2022031713.1019412929352
 ```

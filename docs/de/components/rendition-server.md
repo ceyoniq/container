@@ -65,7 +65,7 @@ docker run \
   -h democontainer \
   -v $(pwd)/work:/opt/ceyoniq/nscale-rendition-server/work \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-rendition-server/conf/license.xml \
-  ceyoniq.azurecr.io/release/nscale/rendition-server:8.2.1300.2022021416.433316606368
+  ceyoniq.azurecr.io/release/nscale/rendition-server:8.3.1003.2022032311.925763618408
 ```
 
 ## Microsoft Windows Schriftarten
@@ -101,7 +101,7 @@ Entsprechend können auch andere proprietäre Fonts nachinstalliert werden.
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:8.2.1302.2022021813.1032566034800
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:8.3.1003.2022032221.415785998516
 ```
 
 **Beispiel Docker-Compose:**

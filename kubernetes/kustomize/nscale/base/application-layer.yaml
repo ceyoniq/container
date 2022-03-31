@@ -30,7 +30,7 @@ spec:
           do echo waiting for database; sleep 2; done;']
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.2.1302.2022021813.1032566034800
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.3.1003.2022032221.415785998516
         imagePullPolicy: Always
         startupProbe:
           exec:
@@ -51,7 +51,7 @@ spec:
             - ./readiness-probe.sh
         env:
           - name: INSTANCE1_INSTANCE_LOGGER_CONF
-            value: "log4j/instance1-log-console.conf"
+            value: "log4j/instance1-log.xml"
           - name: INSTANCE1_CORE_DB_DIALECT
             value: "PostgreSQL"
           - name: INSTANCE1_CORE_DB_DRIVERCLASS

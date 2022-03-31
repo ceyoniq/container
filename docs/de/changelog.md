@@ -1,6 +1,11 @@
 # Änderungshistorie
 
-## 8.2.1300 (Februar 2022)
+## 8.3.1000 (April 2022)
+
+* Aktualisierung der Container Images.
+* Umstellung auf Log4j2 in allen nscale Komponenten.
+
+## 8.2.1300 (März 2022)
 
 * Aktualisierung der Container Images.
 ## 8.2.1200 (Februar 2022)

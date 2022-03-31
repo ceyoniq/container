@@ -22,7 +22,7 @@ spec:
       initContainers: []
       containers:
       - name: application-layer-web
-        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:8.2.1300.2022022515.724419112301
+        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:8.3.1001.2022032820.276310942016
         imagePullPolicy: Always
         startupProbe:
           exec:
