@@ -78,7 +78,7 @@ spec:
               fieldRef:
                 fieldPath: metadata.namespace
           - name: JAVA_OPTS
-            value: -XX:MaxRAMPercentage=75.0
+            value: -XX:MaxRAMPercentage=50.0
           - name: KUBERNETES_NAMESPACE
             valueFrom:
               fieldRef:

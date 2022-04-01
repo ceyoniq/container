@@ -51,7 +51,7 @@ spec:
           - name: nscale-ssl
             value: "false"
           - name: JAVA_OPTS
-            value: "-XX:MaxRAMPercentage=75.0"
+            value: "-XX:MaxRAMPercentage=50.0"
           - name: log4jConfigLocation
             value: ../conf/log4j/nscale_stdout_log_conf.xml
         ports:

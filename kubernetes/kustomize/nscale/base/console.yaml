@@ -52,7 +52,7 @@ spec:
         - name: ALInstance
           value: "nscalealinst1"
         - name: JAVA_OPTS
-          value: "-XX:MaxRAMPercentage=75.0"
+          value: "-XX:MaxRAMPercentage=50.0"
         ports:
         - containerPort: 8086
           name: console

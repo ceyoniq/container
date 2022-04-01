@@ -47,7 +47,7 @@ spec:
         - name: ILM_AL_PASSWORD
           value: "admin"
         - name: JAVA_OPTS
-          value: "-XX:MaxRAMPercentage=75.0"
+          value: "-XX:MaxRAMPercentage=50.0"
         ports:
         - containerPort: 8297
           name: ilm

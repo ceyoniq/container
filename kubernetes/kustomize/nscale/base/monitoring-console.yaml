@@ -63,7 +63,7 @@ spec:
         - name: MC_PASSWORD
           value: "admin"
         - name: JAVA_OPTS
-          value: -XX:MaxRAMPercentage=75.0 -Dlog4j2.formatMsgNoLookups=true -Dcom.sun.jndi.rmi.object.trustURLCodebase=false -Dcom.sun.jndi.cosnaming.object.trustURLCodebase=false
+          value: -XX:MaxRAMPercentage=50.0 -Dlog4j2.formatMsgNoLookups=true -Dcom.sun.jndi.rmi.object.trustURLCodebase=false -Dcom.sun.jndi.cosnaming.object.trustURLCodebase=false
         ports:
         - containerPort: 8387
           name: monitoring
