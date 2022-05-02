@@ -21,7 +21,7 @@ spec:
       - name: regcred
       containers:
       - name: xta-connector
-        image: ceyoniq.azurecr.io/release/nscale/xta-connector:8.3.1000.2022031713.1019412929352
+        image: ceyoniq.azurecr.io/release/nscale/xta-connector:8.3.1100.2022042111.0
         imagePullPolicy: Always
         livenessProbe:
           exec:

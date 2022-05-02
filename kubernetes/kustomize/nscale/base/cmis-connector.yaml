@@ -21,7 +21,7 @@ spec:
       - name: regcred
       containers:
       - name: cmis-connector
-        image: ceyoniq.azurecr.io/release/nscale/cmis-connector:8.3.1000.2022031613.481910245074
+        image: ceyoniq.azurecr.io/release/nscale/cmis-connector:8.3.1110.2022042721.0
         imagePullPolicy: Always
         livenessProbe:
           exec:

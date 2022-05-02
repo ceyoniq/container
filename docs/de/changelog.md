@@ -1,5 +1,10 @@
 # Änderungshistorie
 
+## 8.3.1100 (Mai 2022)
+
+* Aktualisierung der Container Images.
+* Kleine Erweiterungen in der Dokumentation zum Pipeliner und Administrator.
+
 ## 8.3.1000 (April 2022)
 
 * Aktualisierung der Container Images.
