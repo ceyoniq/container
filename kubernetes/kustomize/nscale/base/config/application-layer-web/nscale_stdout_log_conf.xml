@@ -1,92 +1,135 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 
-<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+<Configuration status="info" monitorInterval="60" name="nscaleWebLogConfig">
+        <Appenders>
+                <!-- ============================== -->
+                <!-- Append messages to the console -->
+                <!-- ============================== -->
+                <Console name="CONSOLE"
+                                 target="SYSTEM_OUT"
+                                 ignoreExceptions="false">
+                        <PatternLayout>
+                                <pattern>%d{HH:mm:ss,SSS dd-MM-yyyy} %-5p [%c] [%t] %m - [%C]%n</pattern>
+                        </PatternLayout>
+                </Console>
+        </Appenders>
 
-        <!-- ============================== -->
-        <!-- Append messages to the console -->
-        <!-- ============================== -->
-        <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
-                <param name="Threshold" value="all"/>
-                <param name="Target" value="System.out"/>
-                <layout class="org.apache.log4j.PatternLayout">
-                        <param name="ConversionPattern" value="%d{HH:mm:ss} %-5p [%c] [%t] %m - [%C]%n"/>
-                </layout>
-        </appender>
+        <Loggers>
+                <!-- ============================== -->
+                <!-- Root                           -->
+                <!-- ============================== -->
+                <Root level="error">
+                        <AppenderRef ref="CONSOLE"/>
+                </Root>
 
-        <!-- ============================== -->
-        <!-- Root                           -->
-        <!-- ============================== -->
-        <logger name="CTCMWebclient" additivity="false">
-                <level value="error"/>
-                <appender-ref ref="CONSOLE"/>
-        </logger>
+                <!-- ============================== -->
+                <!-- CTCMWebclient Root             -->
+                <!-- ============================== -->
+                <Logger name="CTCMWebclient"
+                                level="error"
+                                additivity="false">
+                        <AppenderRef ref="CONSOLE"/>
+                </Logger>
 
-        <!-- ============================== -->
-        <!-- Configuration Logger               -->
-        <!-- ============================== -->
-        <logger name="CTCMWebclient.CONFIG" additivity="false">
-                <level value="warn"/>
-                <appender-ref ref="CONSOLE"/>
-        </logger>
+                <!-- ============================== -->
+                <!-- Configuration Logger           -->
+                <!-- ============================== -->
+                <Logger name="CTCMWebclient.CONFIG"
+                                level="warn"
+                                additivity="false">
+                        <AppenderRef ref="CONSOLE"/>
+                </Logger>
 
-        <!-- ============================== -->
-        <!-- System Logger               -->
-        <!-- ============================== -->
-        <logger name="CTCMWebclient.SYSTEM" additivity="false">
-                <level value="error"/>
-                <appender-ref ref="CONSOLE"/>
-        </logger>
+                <!-- ============================== -->
+                <!-- System Logger                  -->
+                <!-- ============================== -->
+                <Logger name="CTCMWebclient.SYSTEM"
+                                level="error"
+                                additivity="false">
+                        <AppenderRef ref="CONSOLE"/>
+                </Logger>
 
-        <!-- ============================== -->
-        <!-- Layout Logger               -->
-        <!-- ============================== -->
-        <logger name="CTCMWebclient.LAYOUT" additivity="false">
-                <level value="error"/>
-                <appender-ref ref="CONSOLE"/>
-        </logger>
+                <!-- ============================== -->
+                <!-- Layout Logger                  -->
+                <!-- ============================== -->
+                <Logger name="CTCMWebclient.LAYOUT"
+                                level="error"
+                                additivity="false">
+                        <AppenderRef ref="CONSOLE"/>
+                </Logger>
 
-        <!-- ============================== -->
-        <!-- Login Logger               -->
-        <!-- ============================== -->
-        <logger name="CTCMWebclient.SYSTEM.LOGIN" additivity="false">
-                <level value="warn"/>
-                <appender-ref ref="CONSOLE"/>
-        </logger>
+                <!-- ============================== -->
+                <!-- Login Logger                   -->
+                <!-- ============================== -->
+                <Logger name="CTCMWebclient.SYSTEM.LOGIN"
+                                level="warn"
+                                additivity="false">
+                        <AppenderRef ref="CONSOLE"/>
+                </Logger>
 
-        <!-- ============================== -->
-        <!-- Logger for nscale Connector    -->
-        <!-- ============================== -->
-        <!--
-        <logger name="CTCMWebclient.NAPPL" additivity="false">
-                <level value="debug"/>
-                <appender-ref ref="CONSOLE"/>
-        </logger>
+                <!-- ============================== -->
+                <!-- Logger for nscale Connector    -->
+                <!-- ============================== -->
+                <!--
+                <Logger name="CTCMWebclient.NAPPL"
+                                level="debug"
+                                additivity="false">
+                        <AppenderRef ref="CONSOLE"/>
+                </Logger>
+                -->
+
+                <!-- ============================== -->
+                <!-- Request Logger for nscale      -->
+                <!-- ============================== -->
+                <Logger name="CTCMWebclient.NAPPL.REQUEST"
+                                level="warn"
+                                additivity="false">
+                        <AppenderRef ref="CONSOLE"/>
+                </Logger>
+
+                <!-- ============================== -->
+                <!-- Performance Logger for nscale  -->
+                <!-- ============================== -->
+                <!--
+                <Logger name="PERFORMANCE"
+                                level="debug"
+                                additivity="false">
+                        <AppenderRef ref="CONSOLE"/>
+                </Logger>
+                -->
+                <!--
+                <Logger name="PERFORMANCE.NAPPL"
+                                level="debug"
+                                additivity="false">
+                        <AppenderRef ref="CONSOLE"/>
+                </Logger>
+
+                <Logger name="PERFORMANCE.WEB"
+                                level="debug"
+                                additivity="false">
+                        <AppenderRef ref="CONSOLE"/>
+                </Logger>
         -->
 
-        <!-- ============================== -->
-        <!-- Request Logger for nscale      -->
-        <!-- ============================== -->
-        <logger name="CTCMWebclient.NAPPL.REQUEST" additivity="false">
-                <level value="warn"/>
-                <appender-ref ref="CONSOLE"/>
-        </logger>
+                <!-- ============================== -->
+                <!-- Apache Tapestry                -->
+                <!-- ============================== -->
+                <Logger name="org.apache.tapestry"
+                                level="error"
+                                additivity="false">
+                        <AppenderRef ref="CONSOLE"/>
+                </Logger>
 
-        <!-- ============================== -->
-        <!-- Apache Tapestry                -->
-        <!-- ============================== -->
-        <logger name="org.apache.tapestry" additivity="false">
-                <level value="error" />
-                <appender-ref ref="CONSOLE"/>
-        </logger>
-        <logger name="tapestry.render.com.ceyoniq.nscale.webclient.tap5.pages" additivity="false">
-                <level value="error" />
-                <appender-ref ref="CONSOLE"/>
-        </logger>
+                <Logger name="tapestry.render.com.ceyoniq.nscale.webclient.tap5.pages"
+                                level="error"
+                                additivity="false">
+                        <AppenderRef ref="CONSOLE"/>
+                </Logger>
 
-        <root>
-                <level value="error"/>
-                <appender-ref ref="CONSOLE"/>
-        </root>
-
-</log4j:configuration>
+                <Logger name="org.apache.tapestry5.modules.TapestryModule.RequestExceptionHandler"
+                                level="error"
+                                additivity="false">
+                        <AppenderRef ref="CONSOLE"/>
+                </Logger>
+        </Loggers>
+</Configuration>

@@ -28,6 +28,8 @@ spec:
             command:
             - /bin/sh
             - ./liveness-probe.sh
+          failureThreshold: 6
+          periodSeconds: 10
         readinessProbe:
           exec:
             command:
