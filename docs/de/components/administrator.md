@@ -9,6 +9,7 @@
   - [Umgebungsvariablen](#umgebungsvariablen)
   - [SSL Verschlüsselung](#ssl-verschlüsselung)
     - [Zertifikat mit openssl und keytool erstellen](#zertifikat-mit-openssl-und-keytool-erstellen)
+  - [Logging](#logging)
   - [Ports](#ports)
   - [Start mit Docker](#start-mit-docker)
 
@@ -58,6 +59,10 @@ Registriert wird das Zertifikat in `/var/lib/jetty/start.d/https.ini`. Dort steh
 verschlüsselte Passwort des Keystores. Die Verschlüsselung dieses Passworts wird von einer
 Jetty Bibliothek übernommen (`java -cp /usr/local/jetty/lib/jetty-util-*.jar org.eclipse.jetty.util.security.Password <password>`)
 
+## Logging
+
+Das Logging wird in der Datei `/var/lib/jetty/webapps/rapadm/WEB-INF/log4j2.xml` konfiguriert und kann an dieser Stelle in den Container gemountet werden.
+
 ## Ports
 
 - 8080 (unverschlüsselt)
@@ -73,5 +78,5 @@ docker run \
    -e JAVA_OPTIONS=-Dorg.eclipse.rap.rwt.settingStoreFactory=settings-per-user -Duser.language=de\
    -p 8181:8080 \
    -p 8182:8443 \
-   ceyoniq.azurecr.io/release/nscale/administrator:8.3.1200.2022051819.0
+   ceyoniq.azurecr.io/release/nscale/administrator:8.3.1300.2022062313.0
 ```

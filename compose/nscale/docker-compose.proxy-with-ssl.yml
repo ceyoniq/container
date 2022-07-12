@@ -26,6 +26,7 @@ services:
       - "traefik.http.routers.websec.entrypoints=websecure"
       - "traefik.http.routers.websec.tls=true"
       - "traefik.http.routers.websec.tls.certresolver=myresolver"
+      - "traefik.http.services.web.loadbalancer.server.port=8090"
 
   console:
     labels:

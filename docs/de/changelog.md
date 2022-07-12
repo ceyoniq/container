@@ -1,5 +1,9 @@
 # Änderungshistorie
 
+## 8.3.1300 (Juli 2022)
+
+* Aktualisierung der Container Images.
+
 ## 8.3.1200 (Juni 2022)
 
 * Aktualisierung der Container Images.
