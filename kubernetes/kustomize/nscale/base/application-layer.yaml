@@ -30,7 +30,7 @@ spec:
           do echo waiting for database; sleep 2; done;']
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.3.1300.2022062021.0
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.3.1401.2022072115.0
         imagePullPolicy: Always
         startupProbe:
           exec:
