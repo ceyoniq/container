@@ -60,7 +60,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 |INSTANCE1_CORE_DB_USERNAME=nscale | Mit dieser Umgebungsvariable können Sie den Usernamen hinterlegen, mit dem der Application Layer auf die Datenbank zugreift. Hier wurde der Name "nscale" gewählt. |
 |INSTANCE1_CORE_DB_PASSWORD=password | In dieser Umgebungsvariable können Sie das Passwort hinterlegen, mit dem der Application Layer auf die Datenbank zugreift. Ändern Sie das in diesem Beispiel verwendete Passwort unbedingt. |
 |INSTANCE1_CORE_DB_SCHEMA=public | In dieser Umgebungsvariable können Sie das Datenbankschema hinterlegen. Hier wurde das Schema public gewählt. |
-|INSTANCE1_CORE_WORK_DIRECTORY=/mnt/fulltextcache | In dieser Umgebungsvariable können Sie den Ordner für den lokalen Volltext-Cache definieren.|
+|INSTANCE1_CORE_WORK_DIRECTORY=/mnt/fulltextcache | In dieser Umgebungsvariable können Sie den Ordner für den lokalen Volltext-Cache definieren. Stellen Sie durch Verwendung eines Volumes sicher, das dieser Ordner schreibbar ist. Im Standardcontainer ist '/mnt' nicht schreibbar. |
 |INITIALIZE_DOCUMENT_AREA=DA | Mit dieser Umgebungsvariable können Sie einen Dokumentenbereich mit dem Namen "DA" erstellen. |
 |INITIALIZE_DOCUMENT_AREA_DISPLAYNAME=DA | Mit dieser Umgebungsvariable können Sie den Displayname des neu erstellten Dokumentenbereichs überschreiben. |
 |KUBERNETES_NAMESPACE | Diese Umgebungsvariable ist für die Konfiguration des Clusters in Kubernetes notwendig. Weitere Details finden Sie unter [Cluster-Konfiguration in Kubernetes](#cluster-konfiguration-in-kubernetes). |
@@ -93,7 +93,7 @@ Serverprozess übernommen. Das gilt auch für mehrere Containerinstanzen in eine
    -h democontainer \
    -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
    -p 8080:8080 \
-   ceyoniq.azurecr.io/release/nscale/application-layer:8.3.1401.2022072115.0
+   ceyoniq.azurecr.io/release/nscale/application-layer:8.3.1501.2022082421.0
 ```
 
 ## Microsoft Windows Schriftarten
@@ -129,7 +129,7 @@ Entsprechend können auch andere proprietäre Fonts nachinstalliert werden.
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:8.3.1401.2022072115.0
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:8.3.1501.2022082421.0
 ```
 
 **Beispiel Docker-Compose:**
@@ -164,13 +164,13 @@ In den Docker-Compose- und Kubernetes-Beispielen wurde der Volltext-Cache expliz
 Docker-Compose:  
 
 ```bash
-INSTANCE1_CORE_FULLTEST_INDEX_MIRROR_LOCALCACHE=off
+INSTANCE1_CORE_FULLTEXT_INDEX_MIRROR_LOCALCACHE=off
 ```
 
 Kubernetes:  
 
 ```yaml
-- name: INSTANCE1_CORE_FULLTEST_INDEX_MIRROR_LOCALCACHE
+- name: INSTANCE1_CORE_FULLTEXT_INDEX_MIRROR_LOCALCACHE
   value: "off" 
 ```
 

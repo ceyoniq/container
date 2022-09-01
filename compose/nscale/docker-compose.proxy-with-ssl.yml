@@ -16,17 +16,11 @@ services:
   application-layer-web:
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.websec_root.rule=Host(`${DOMAIN_NAME}`) && Path(`/`)"
-      - "traefik.http.routers.websec_root.entrypoints=websecure"
-      - "traefik.http.middlewares.websec_root.addprefix.prefix=/nscale_web"
-      - "traefik.http.routers.websec_root.middlewares=websec_root"
-      - "traefik.http.routers.websec_root.tls=true"
-      - "traefik.http.routers.websec_root.tls.certresolver=myresolver"
       - "traefik.http.routers.websec.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/nscale_web`)"
       - "traefik.http.routers.websec.entrypoints=websecure"
       - "traefik.http.routers.websec.tls=true"
       - "traefik.http.routers.websec.tls.certresolver=myresolver"
-      - "traefik.http.services.web.loadbalancer.server.port=8090"
+      - "traefik.http.services.websec.loadbalancer.server.port=8090"
 
   console:
     labels:

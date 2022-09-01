@@ -21,7 +21,7 @@ spec:
       - name: regcred
       containers:
       - name: console
-        image: ceyoniq.azurecr.io/release/nscale/console:8.3.1301.12586.0
+        image: ceyoniq.azurecr.io/release/nscale/console:8.3.1502.12639.0
         imagePullPolicy: Always
         startupProbe:
           exec:

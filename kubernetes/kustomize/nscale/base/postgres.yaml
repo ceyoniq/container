@@ -23,7 +23,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: postgresql
-        image: bitnami/postgresql:13
+        image: bitnami/postgresql:14
         imagePullPolicy: Always
         livenessProbe:
           exec:

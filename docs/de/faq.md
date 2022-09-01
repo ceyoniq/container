@@ -10,6 +10,7 @@
   - [Wie kann ich die Java Heap Size anpassen?](#wie-kann-ich-die-java-heap-size-anpassen)
   - [Wie kann ich die Microsoft Windows Schriftarten (Microsoft TrueType Fonts) verwenden?](#wie-kann-ich-die-microsoft-windows-schriftarten-microsoft-truetype-fonts-verwenden)
   - [Wie kann ich mit Kustomize Änderungen an der Kubernetes-Konfiguration vornehmen?](#wie-kann-ich-mit-kustomize-änderungen-an-der-kubernetes-konfiguration-vornehmen)
+  - [Wie kann ich den ContextPath der Web Anwendungen ändern?](#wie-kann-ich-den-contextpath-der-web-anwendungen-ändern)
 
 ## Was kann ich tun, wenn ein nscale Standard Container nicht startet?
 
@@ -236,3 +237,12 @@ kubectl apply -k . -n nscale
 ```bash
 kubectl describe pod/storage-layer-0 -n nscale
 ```
+
+## Wie kann ich den ContextPath der Web Anwendungen ändern?
+
+Leider ist es noch nicht möglich den ContextPath der Container über den Proxy zu ändern.
+Deshalb müssen die jeweiligen Komponenten einzeln konfiguriert werden wenn der ContextPath geändert werden soll.
+
+| Komponente | Erläuterung |
+| - | - |
+| application-layer-web | In der `nscale_web.xml` muss der Wert `Context@path` angepasst werden und entsprechend diesem Namen die WAR Datei umbenannt werden (u.U auf ROOT.war um keinen ContextPath zu verwenden.) |

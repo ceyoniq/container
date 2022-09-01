@@ -12,10 +12,6 @@ services:
   application-layer-web:
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.web_root.rule=Path(`/`)"
-      - "traefik.http.routers.web_root.entrypoints=web"
-      - "traefik.http.middlewares.web_root.addprefix.prefix=/nscale_web"
-      - "traefik.http.routers.web_root.middlewares=web_root"
       - "traefik.http.routers.web.rule=PathPrefix(`/nscale_web`)"
       - "traefik.http.routers.web.entrypoints=web"
       - "traefik.http.services.web.loadbalancer.server.port=8090"

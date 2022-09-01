@@ -23,14 +23,14 @@ spec:
       initContainers:
       # wait for database to be ready
       - name: check-db-ready
-        image: bitnami/postgresql:13
+        image: bitnami/postgresql:14
         imagePullPolicy: Always
         command: ['sh', '-c',
           'until pg_isready -U postgres -h postgresql -p 5432;
           do echo waiting for database; sleep 2; done;']
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.3.1401.2022072115.0
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.3.1501.2022082421.0
         imagePullPolicy: Always
         startupProbe:
           exec:
