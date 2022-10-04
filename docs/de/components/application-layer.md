@@ -65,6 +65,8 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 |INITIALIZE_DOCUMENT_AREA_DISPLAYNAME=DA | Mit dieser Umgebungsvariable können Sie den Displayname des neu erstellten Dokumentenbereichs überschreiben. |
 |KUBERNETES_NAMESPACE | Diese Umgebungsvariable ist für die Konfiguration des Clusters in Kubernetes notwendig. Weitere Details finden Sie unter [Cluster-Konfiguration in Kubernetes](#cluster-konfiguration-in-kubernetes). |
 
+Auch die Konfiguration in der engine.conf kann mit Hilfe von Umgebungsvariablen, wie im Administrationshandbuch beschrieben, überlagert werden. So kann z.B. der Standard HTTP Port durch die Umgebungsvariable SERVLET_CONNECTOR_1_PORT gesetzt werden.
+
 ## Logging in Kubernetes
 
 Um das Log Level im Kubernetes Betrieb zu ändern kann eine ConfigMap verwendet werden. Diese ConfigMap sollte die Log4j-Konfiguration aus dem Originalimage enthalten. Wird diese ConfigMap als Volume auf ein Verzeichnis gemappt
@@ -93,7 +95,7 @@ Serverprozess übernommen. Das gilt auch für mehrere Containerinstanzen in eine
    -h democontainer \
    -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
    -p 8080:8080 \
-   ceyoniq.azurecr.io/release/nscale/application-layer:8.3.1501.2022082421.0
+   ceyoniq.azurecr.io/release/nscale/application-layer:8.4.1002.2022092321.0
 ```
 
 ## Microsoft Windows Schriftarten
@@ -129,7 +131,7 @@ Entsprechend können auch andere proprietäre Fonts nachinstalliert werden.
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:8.3.1501.2022082421.0
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:8.4.1002.2022092321.0
 ```
 
 **Beispiel Docker-Compose:**

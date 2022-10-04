@@ -54,5 +54,5 @@ docker run -it \
 -e ILM_AL_PORT=8080 \
 -e ILM_AL_SSL=false \
 -e ILM_AL_DOMAIN=nscale \
-ceyoniq.azurecr.io/release/nscale/ilm-connector:8.3.1000.2022031614.336771790379
+ceyoniq.azurecr.io/release/nscale/ilm-connector:8.4.1001.2022091517.0
 ```

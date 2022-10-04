@@ -165,6 +165,8 @@ Führen Sie zur Verwendung der Beispielkonfiguration folgendes Kommando im Ordne
 kubectl apply -n nscale -f ingress-nginx.yaml
 ```
 
+Durch komplexere Ingress Regeln kann z.B. der Kontextpfad des Application Layers geändert werden (siehe `ingress-nginx-nappl.yaml` im selben Order).
+
 Informationen über die gesetzten Ingress-Regeln können Sie abrufen, indem Sie die folgenden Kommandos ausführen:  
 
 ```bash

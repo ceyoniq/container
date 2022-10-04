@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-nscale-nappl
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/rewrite-target: /nscalealinst1/$2
+spec:
+  tls:
+  - hosts:
+    - nscale.dev.ceyoniq-cloud.net
+    secretName: tls-secret
+  rules:
+  - host: nscale.dev.ceyoniq-cloud.net
+    http:
+      paths:
+      - path: /al(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: application-layer
+            port:
+              name: application

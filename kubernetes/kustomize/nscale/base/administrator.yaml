@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: administrator
-        image: ceyoniq.azurecr.io/release/nscale/administrator:8.3.1501.2022081815.0
+        image: ceyoniq.azurecr.io/release/nscale/administrator:8.4.1001.2022092316.0
         imagePullPolicy: Always
         env:
           - name: APPLICATION_LAYER_HOST
