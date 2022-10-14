@@ -3,7 +3,8 @@
 ## 8.4.1000 (Oktober 2022)
 
 * Aktualisierung der Container Images.
-* Änderung der Liveness und Readiness Probes in Kubernetes.
+* Änderung der Liveness und Readiness Probes in Kubernetes und Compose.
+* Verwendung einer gemeinsamen ConfigMap für die Lizenzdatei in allen nscale Kubernetes Pods.
 
 ## 8.3.1500 (September 2022)
 

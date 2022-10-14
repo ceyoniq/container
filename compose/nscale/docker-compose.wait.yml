@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+
+  is_ready:
+    image: busybox
+    depends_on:
+      application-layer-web:
+        condition: service_healthy
+      administrator:
+        condition: service_healthy
+      rendition-server:
+        condition: service_healthy
+      monitoring-console:
+        condition: service_healthy
+    command: /bin/sh -c "exit 0"

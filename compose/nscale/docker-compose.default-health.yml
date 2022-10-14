@@ -1,0 +1,60 @@
+version: "3"
+
+services:
+
+  postgresql:
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgresql"]
+      interval: 10s
+
+  storage-layer:
+    healthcheck:
+      test: ["CMD", "/opt/ceyoniq/nscale-server/storage-layer/bin/cstool", "srv", "-m1", "-c", "sock"]
+      start_period: 1s
+      interval: 10s
+
+  application-layer:
+    healthcheck:
+      test: ["CMD", "curl", "--head", "--location", "--silent", "http://localhost:8080/jmx/status"]
+      start_period: 50s
+      interval: 10s
+      retries: 3
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      storage-layer:
+        condition: service_healthy
+
+  application-layer-web:
+    healthcheck:
+      test: ["CMD", "curl", "--head", "--location", "--silent", "http://localhost:8090/nscale_web/systemConfiguration.xml"]
+      start_period: 20s
+      interval: 10s
+
+  console:
+    healthcheck:
+      test: ["CMD", "curl", "--location", "--silent", "http://localhost:8086/console/"]
+      start_period: 30s
+      interval: 10s
+      retries: 3
+
+  monitoring-console:
+    healthcheck:
+      test: ["CMD", "curl", "--location", "--silent", "http://localhost:8387/nscalemc/"]
+      start_period: 30s
+      interval: 10s
+      retries: 3
+
+  rendition-server:
+    healthcheck:
+      test: ["CMD", "curl", "--location", "--silent", "http://localhost:8192/rs/"]
+      start_period: 20s
+      interval: 10s
+      retries: 3
+
+  administrator:
+    healthcheck:
+      test: ["CMD", "curl", "--location", "--silent", "http://localhost:8080/rapadm/"]
+      start_period: 10s
+      interval: 10s
+      retries: 3
