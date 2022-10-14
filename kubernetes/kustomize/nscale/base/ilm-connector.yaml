@@ -23,18 +23,22 @@ spec:
       - name: ilm-connector
         image: ceyoniq.azurecr.io/release/nscale/ilm-connector:8.4.1001.2022091517.0
         imagePullPolicy: Always
-        livenessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./liveness-probe.sh
-          failureThreshold: 6
-          periodSeconds: 10
-        readinessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./readiness-probe.sh
+#        livenessProbe:
+#          httpGet:
+#            path: /sap_ilm
+#            port: 8297
+#            httpHeaders:
+#            - name: Authorization
+#              value: "Basic YW5vbjphbm9u"
+#          initialDelaySeconds: 20
+#        readinessProbe:
+#          httpGet:
+#            path: /sap_ilm
+#            port: 8297
+#            httpHeaders:
+#            - name: Authorization
+#              value: "Basic YW5vbjphbm9u"
+#          initialDelaySeconds: 20
         env:
         - name: ILM_AL_HOST
           value: "application-layer"

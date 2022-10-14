@@ -24,17 +24,15 @@ spec:
         image: ceyoniq.azurecr.io/release/nscale/xta-connector:8.4.1001.2022091517.0
         imagePullPolicy: Always
         livenessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./liveness-probe.sh
-          failureThreshold: 6
-          periodSeconds: 10
+          httpGet:
+            path: /xta/
+            port: 8099
+          initialDelaySeconds: 20
         readinessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./readiness-probe.sh
+          httpGet:
+            path: /xta/
+            port: 8099
+          initialDelaySeconds: 20
         env:
         - name: XTA_AL_HOST
           value: "application-layer"

@@ -24,22 +24,19 @@ spec:
         image: ceyoniq.azurecr.io/release/nscale/console:8.4.1001.12664.0
         imagePullPolicy: Always
         startupProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./liveness-probe.sh
+          httpGet:
+            path: /console/
+            port: 8086
+          initialDelaySeconds: 10
           failureThreshold: 5
-          periodSeconds: 10
         livenessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./liveness-probe.sh
+          httpGet:
+            path: /console/
+            port: 8086
         readinessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./readiness-probe.sh
+          httpGet:
+            path: /console/
+            port: 8086
         env:
         - name: LOG_APPENDER
           value: "Console"

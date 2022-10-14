@@ -25,22 +25,25 @@ spec:
         image: ceyoniq.azurecr.io/release/nscale/application-layer-web:8.4.1001.2022092713.0
         imagePullPolicy: Always
         startupProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./liveness-probe.sh
-          failureThreshold: 5
+          httpGet:
+            path: /nscale_web
+            port: 8090
+          initialDelaySeconds: 10
+          failureThreshold: 6
           periodSeconds: 10
+          timeoutSeconds: 1
         livenessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./liveness-probe.sh
+          httpGet:
+            path: /nscale_web
+            port: 8090
+          periodSeconds: 10
+          timeoutSeconds: 1
         readinessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./readiness-probe.sh
+          httpGet:
+            path: /nscale_web/systemConfiguration.xml
+            port: 8090
+          periodSeconds: 10
+          timeoutSeconds: 1
         env:
           - name: nscale-host
             value: application-layer

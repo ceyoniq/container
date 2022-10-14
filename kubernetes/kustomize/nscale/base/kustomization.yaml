@@ -16,19 +16,7 @@ secretGenerator:
   - postgresql-password=nscale
 
 configMapGenerator:
-- name: application-layer-license
-  files:
-  - license.xml=license.xml
-- name: monitoring-console-license
-  files:
-  - license.xml=license.xml
-- name: rendition-server-license
-  files:
-  - license.xml=license.xml
-- name: storage-layer-license
-  files:
-  - license.xml=license.xml
-- name: pipeliner-license
+- name: license
   files:
   - license.xml=license.xml
 - name: postgresql-init-script
@@ -43,6 +31,7 @@ configMapGenerator:
 - name: application-layer-log4j
   files:
   - config/application-layer/instance1-log-console.conf
+  - config/application-layer/instance1-log.xml
 - name: application-layer-web-log4j
   files:
   - config/application-layer-web/nscale_stdout_log_conf.xml

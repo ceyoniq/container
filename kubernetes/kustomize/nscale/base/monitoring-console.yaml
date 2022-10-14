@@ -39,22 +39,19 @@ spec:
         image: ceyoniq.azurecr.io/release/nscale/monitoring-console:8.4.1001.2022091718.0
         imagePullPolicy: Always
         startupProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./readiness-probe.sh
+          httpGet:
+            path: /nscalemc/
+            port: 8387
+          initialDelaySeconds: 10
           failureThreshold: 5
-          periodSeconds: 10
         livenessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./liveness-probe.sh
+          httpGet:
+            path: /nscalemc/
+            port: 8387
         readinessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./readiness-probe.sh
+          httpGet:
+            path: /nscalemc/
+            port: 8387
         env:
         - name: MC_APPENDER
           value: Console
@@ -83,7 +80,7 @@ spec:
       volumes:
       - name: license
         configMap:
-          name: monitoring-console-license
+          name: license
       - name: monitoring-console-workspace
         persistentVolumeClaim:
           claimName: monitoring-console-workspace

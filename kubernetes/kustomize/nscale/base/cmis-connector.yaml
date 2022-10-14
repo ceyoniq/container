@@ -24,17 +24,15 @@ spec:
         image: ceyoniq.azurecr.io/release/nscale/cmis-connector:8.4.1003.2022092717.0
         imagePullPolicy: Always
         livenessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./liveness-probe.sh
-          failureThreshold: 6
-          periodSeconds: 10
+          httpGet:
+            path: /cmis/
+            port: 8096
+          initialDelaySeconds: 20
         readinessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./readiness-probe.sh
+          httpGet:
+            path: /cmis/
+            port: 8096
+          initialDelaySeconds: 20
         env:
         - name: CMIS_AL_HOST
           value: "application-layer"

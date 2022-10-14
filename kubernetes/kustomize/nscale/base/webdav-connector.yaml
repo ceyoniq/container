@@ -23,18 +23,16 @@ spec:
       - name: webdav-connector
         image: ceyoniq.azurecr.io/release/nscale/webdav-connector:8.4.1001.2022091517.0
         imagePullPolicy: Always
-        livenessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./liveness-probe.sh
-          failureThreshold: 6
-          periodSeconds: 10
-        readinessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./readiness-probe.sh
+#        livenessProbe:
+#          httpGet:
+#            path: /dav/
+#            port: 8088
+#          initialDelaySeconds: 20
+#        readinessProbe:
+#          httpGet:
+#            path: /dav/
+#            port: 8088
+#          initialDelaySeconds: 20
         env:
         - name: WEBDAV_AL_HOST
           value: "application-layer"

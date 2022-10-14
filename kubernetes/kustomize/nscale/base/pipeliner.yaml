@@ -24,23 +24,6 @@ spec:
       - name: pipeliner
         image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.4.1002.2022092610.0
         imagePullPolicy: Always
-        startupProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./liveness-probe.sh
-          failureThreshold: 5
-          periodSeconds: 10
-        livenessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./liveness-probe.sh
-        readinessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - ./readiness-probe.sh
         resources:
           limits:
             cpu: "1000m"
@@ -63,7 +46,7 @@ spec:
       volumes:
       - name: license
         configMap:
-          name: pipeliner-license
+          name: license
       - name: pipeliner-data
         persistentVolumeClaim:
           claimName: pipeliner-data

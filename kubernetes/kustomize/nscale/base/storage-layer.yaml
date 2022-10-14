@@ -41,16 +41,28 @@ spec:
         livenessProbe:
           exec:
             command:
-            - /bin/sh
-            - ./bin/liveness-probe.sh
+            - /opt/ceyoniq/nscale-server/storage-layer/bin/cstool
+            - srv
+            - -m1
+            - -c
+            - sock
+          initialDelaySeconds: 1
+          failureThreshold: 2
         readinessProbe:
           exec:
             command:
-            - /bin/sh
-            - ./bin/readiness-probe.sh
+            - /opt/ceyoniq/nscale-server/storage-layer/bin/cstool
+            - srv
+            - -m1
+            - -c
+            - sock
+          initialDelaySeconds: 1
+          failureThreshold: 1
         env:
         - name: LOG_APPENDER
           value: "Console"
+        - name: NSTL_STORAGE-LAYER_LOGLEVEL
+          value: "4"
         ports:
         - containerPort: 3005
           name: storage
@@ -83,7 +95,7 @@ spec:
       volumes:
       - name: license
         configMap:
-          name: storage-layer-license
+          name: license
       - name: storage-layer
         persistentVolumeClaim:
           claimName: storage-layer
