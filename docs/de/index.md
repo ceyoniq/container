@@ -74,18 +74,18 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 
 | Image | Release Tag | nscale Komponente |
 |:---|:---|:---|
-| ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>8.4.1002.2022092321.0</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
-| ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>8.4.1001.2022092713.0</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
-| ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>8.4.1000.2022090818.0</storage-layer-tag> | [nscale Server Storage Layer](components/storage-layer.md) |
-| ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>8.4.1002.2022092418.0</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
+| ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>8.4.1100.2022101915.0</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
+| ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>8.4.1100.2022102415.0</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
+| ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>8.4.1100.2022102415.0</storage-layer-tag> | [nscale Server Storage Layer](components/storage-layer.md) |
+| ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>8.4.1100.2022101418.0</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
 | ceyoniq.azurecr.io/release/nscale/console | <console-tag>8.4.1001.12664.0</console-tag> | [nscale Console](components/console.md) |
 | ceyoniq.azurecr.io/release/nscale/monitoring-console | <monitoring-console-tag>8.4.1001.2022091718.0</monitoring-console-tag> | [nscale Monitoring Console](components/monitoring-console.md) |
-| ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>8.4.1002.2022092610.0</pipeliner-tag> | [nscale Pipeliner](components/pipeliner.md) |
-| ceyoniq.azurecr.io/release/nscale/cmis-connector | <cmis-connector-tag>8.4.1003.2022092717.0</cmis-connector-tag> | [nscale CMIS-Connector](components/cmis-connector.md) |
+| ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>8.4.1100.2022102112.0</pipeliner-tag> | [nscale Pipeliner](components/pipeliner.md) |
+| ceyoniq.azurecr.io/release/nscale/cmis-connector | <cmis-connector-tag>8.4.1100.2022102016.0</cmis-connector-tag> | [nscale CMIS-Connector](components/cmis-connector.md) |
 | ceyoniq.azurecr.io/release/nscale/webdav-connector | <webdav-connector-tag>8.4.1001.2022091517.0</webdav-connector-tag> | [nscale WebDAV-Connector](components/webdav-connector.md) |
 | ceyoniq.azurecr.io/release/nscale/ilm-connector | <ilm-connector-tag>8.4.1001.2022091517.0</ilm-connector-tag> | [nscale ERP Connector ILM](components/ilm-connector.md) |
 | ceyoniq.azurecr.io/release/nscale/xta-connector | <xta-connector-tag>8.4.1001.2022091517.0</xta-connector-tag> | [nscale XTAConnector](components/xta-connector.md) |
-| ceyoniq.azurecr.io/release/nscale/administrator | <administrator-tag>8.4.1001.2022092316.0</administrator-tag> | [nscale Administrator](components/administrator.md) |
+| ceyoniq.azurecr.io/release/nscale/administrator | <administrator-tag>8.4.1101.2022102512.0</administrator-tag> | [nscale Administrator](components/administrator.md) |
 
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
 

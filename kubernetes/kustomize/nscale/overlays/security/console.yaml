@@ -8,7 +8,7 @@ spec:
       containers:
       - name: console
         securityContext:
-          readOnlyRootFilesystem: true
+          readOnlyRootFilesystem: false
           allowPrivilegeEscalation: false
           runAsNonRoot: true
           runAsUser: 10001
