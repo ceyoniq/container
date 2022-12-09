@@ -43,18 +43,16 @@ services:
 
   application-layer:
     image: ${APPLICATION_LAYER_IMAGE}
-    #command: sleep 100000
     volumes:
       - ${APPLICATION_LAYER_LICENSE_FILE}:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml:ro
     environment:
-      - INSTANCE1_INSTANCE_LOGGER_CONF=instance1-log-console.conf
+      - INSTANCE1_INSTANCE_LOGGER_CONF=instance1-log.xml
       - INSTANCE1_CORE_DB_DIALECT=PostgreSQL
       - INSTANCE1_CORE_DB_DRIVERCLASS=org.postgresql.Driver
       - INSTANCE1_CORE_DB_URL=jdbc:postgresql://postgresql:5432/nscale?loggerLevel=OFF
       - INSTANCE1_CORE_DB_USERNAME=nscale
       - INSTANCE1_CORE_DB_PASSWORD=password # Do not use this password in production!
       - INSTANCE1_CORE_DB_SCHEMA=public
-      - INITIALIZE_DOCUMENT_AREA=DA
       - JAVA_OPTS=-Xmx2g
       - INSTANCE1_CORE_FULLTEST_INDEX_MIRROR_LOCALCACHE=off
     networks:
@@ -66,12 +64,12 @@ services:
   application-layer-web:
     image: ${APPLICATION_LAYER_WEB_IMAGE}
     environment:
-      - nscale-host=application-layer
-      - nscale-port=8080
-      - nscale-instance=nscalealinst1
-      - nscale-ssl=false
-      - log4jConfigLocation=../conf/nscale_stdout_log_conf.xml
-      - JAVA_OPTS=-Xmx2g 
+      - NSCALE_HOST=application-layer
+      - NSCALE_PORT=8080
+      - NSCALE_INSTANCE=nscalealinst1
+      - NSCALE_SSL=false
+      - LOG4JCONFIGLOCATION=../conf/nscale_stdout_log_conf.xml
+      - JAVA_OPTS=-Xmx2g
     networks:
       - nscale
 
@@ -79,10 +77,10 @@ services:
     image: ${CONSOLE_IMAGE}
     environment:
       - LOG_APPENDER=Console
-      - HostName=application-layer
-      - Port=8080
+      - HOSTNAME=application-layer
+      - PORT=8080
       - NAPPL_SSL=0
-      - ALInstance=nscalealinst1
+      - ALINSTANCE=nscalealinst1
     networks:
       - nscale
 

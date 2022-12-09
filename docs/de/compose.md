@@ -175,7 +175,7 @@ Dazu ist es notwendig, das Kommandozeilentool [LogCLI](https://grafana.com/docs/
 
 ```bash
 # Tool installieren
-wget https://github.com/grafana/loki/releases/download/v1.4.1/logcli-linux-amd64.zip
+wget https://github.com/grafana/loki/releases/latest/download/logcli-linux-amd64.zip
 unzip logcli-linux-amd64.zip
 sudo mv logcli-linux-amd64 /usr/local/bin/logcli
 rm logcli-linux-amd64.zip

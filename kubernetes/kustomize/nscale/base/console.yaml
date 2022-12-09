@@ -21,7 +21,7 @@ spec:
       - name: regcred
       containers:
       - name: console
-        image: ceyoniq.azurecr.io/release/nscale/console:8.4.1001.12664.0
+        image: ceyoniq.azurecr.io/release/nscale/console:8.4.1200.12884
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -40,13 +40,13 @@ spec:
         env:
         - name: LOG_APPENDER
           value: "Console"
-        - name: HostName
+        - name: HOSTNAME
           value: "application-layer"
-        - name: Port
+        - name: PORT
           value: "8080"
         - name: NAPPL_SSL
           value: "0"
-        - name: ALInstance
+        - name: ALINSTANCE
           value: "nscalealinst1"
         - name: JAVA_OPTS
           value: "-XX:MaxRAMPercentage=50.0"

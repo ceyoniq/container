@@ -3,9 +3,18 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Serviceportal](<https://serviceportal.ceyoniq.com/>).  
 Die aktuelle Liste der Container Image finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 8.4.1200 (Dezember 2022)
+
+* Aktualisierung der Container Images.
+* Der initiale Dokumentenbereich wird jetzt explizit in einem weiteren Container (bzw. Kubernetes Job) nach dem Start des Application Layers angelegt.
+  Bisher wurde diese Aktion innerhalb des Application Layer Containers ausgeführt.
+* Umgebungsvariablen für die nscale Console in Grossbuchstaben und '_'.
+* Änderung der Shutdown Grade Period für den application layer auf 100 Sekunden.
+  
 ## 8.4.1100 (November 2022)
 
 * Aktualisierung der Container Images.
+* Umgebungsvariablen für den application layer web in Grossbuchstaben und '_'.
   
 ## 8.4.1000 (Oktober 2022)
 

@@ -37,16 +37,16 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 
 |Umgebungsvariable | Effekt |
 |---|---|
-|nscale-host=application-layer | Hier können Sie den logischen Hostname des Application Layer Servers aus der Sicht des Application Layer Web angeben. |
-|nscale-port=8080 | In dieser Umgebungsvariable können Sie den Port angeben, über den auf den nscale Server Application Layer zugegriffen werden kann. Der Standardwert ist "8080". |
-|nscale-instance=nscalealinst1 | In dieser Umgebungsvariable können Sie eine nscale Instanz benennen. Der Standard ist "nscalealinst1". |
-|nscale-ssl=false |Sie können festlegen, ob SSL verwendet werden soll. Der Standardwert ist "false". |
-|log4jConfigLocation=../conf/nscale_stdout_log_conf.xml | In dieser Umgebungsvariable können Sie den Pfad zur Konfigurationsdatei für das Logging angeben. |
+|NSCALE_HOST=application-layer | Hier können Sie den logischen Hostname des Application Layer Servers aus der Sicht des Application Layer Web angeben. |
+|NSCALE_PORT=8080 | In dieser Umgebungsvariable können Sie den Port angeben, über den auf den nscale Server Application Layer zugegriffen werden kann. Der Standardwert ist "8080". |
+|NSCALE_INSTANCE=nscalealinst1 | In dieser Umgebungsvariable können Sie eine nscale Instanz benennen. Der Standard ist "nscalealinst1". |
+|NSCALE_SSL=false |Sie können festlegen, ob SSL verwendet werden soll. Der Standardwert ist "false". |
+|LOG4JCONFIGLOCATION=../conf/nscale_stdout_log_conf.xml | In dieser Umgebungsvariable können Sie den Pfad zur Konfigurationsdatei für das Logging angeben. |
 ## Logging in Kubernetes
 
 Um das Log Level im Kubernetes Betrieb zu ändern kann eine ConfigMap verwendet werden. Diese ConfigMap sollte die Log4j 
 Konfiguration aus dem Originalimage enthalten. Wird diese ConfigMap als Volume auf ein Verzeichnis gemappt
-muss über die oben beschriebene Umgebungsvariable ```log4jConfigLocation``` die neue Datei referenziert werden.
+muss über die oben beschriebene Umgebungsvariable ```LOG4JCONFIGLOCATION``` die neue Datei referenziert werden.
 Ändert sich die ConfigMap im Cluster wird diese automatisch verteilt und über log4j Mechanismen nach wenigen Minuten in den
 Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in einem Deployment.
 
@@ -61,11 +61,11 @@ Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in eine
 
 ```bash
  docker run \
-   -e nscale-host=application-layer \
-   -e log4jConfigLocation=../conf/nscale_stdout_log_conf.xml \
-   -e nscale-port=8080 \
+   -e NSCALE_HOST=application-layer \
+   -e LOG4JCONFIGLOCATION=../conf/nscale_stdout_log_conf.xml \
+   -e NSCALE_PORT=8080 \
    -p 8090:8090 \
-   ceyoniq.azurecr.io/release/nscale/application-layer-web:8.4.1100.2022102415.0
+   ceyoniq.azurecr.io/release/nscale/application-layer-web:8.4.1201.2022112815
 ```
 
 ## Information für Entwickler
