@@ -7,6 +7,7 @@
   - [Lizenzierung](#lizenzierung)
   - [Persistierung](#persistierung)
   - [Umgebungsvariablen](#umgebungsvariablen)
+  - [Logging in Kubernetes](#logging-in-kubernetes)
   - [Ports](#ports)
   - [Start mit Docker](#start-mit-docker)
 
@@ -53,5 +54,5 @@ docker run -it \
 -e CMIS_AL_PORT=8080 \
 -e CMIS_AL_SSL=false \
 -e CMIS_AL_INSTANCE=nscalealinst1 \
-ceyoniq.azurecr.io/release/nscale/cmis-connector:8.4.1300.2022121911
+ceyoniq.azurecr.io/release/nscale/cmis-connector:8.4.1400.2023011716
 ```

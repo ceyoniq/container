@@ -8,6 +8,7 @@
   - [Persistierung](#persistierung)
   - [Konfiguration](#konfiguration)
   - [Umgebungsvariablen](#umgebungsvariablen)
+  - [Logging in Kubernetes](#logging-in-kubernetes)
   - [Ports](#ports)
   - [Start mit Docker](#start-mit-docker)
   - [Passwörter](#passwörter)
@@ -73,7 +74,7 @@ docker run \
   -h democontainer \
   -v $(pwd)/workspace:/opt/ceyoniq/nscale-monitoring/workspace \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-monitoring/workspace/license.xml \
-  ceyoniq.azurecr.io/release/nscale/monitoring-console:8.4.1201.2022112418.0
+  ceyoniq.azurecr.io/release/nscale/monitoring-console:8.4.1400.2023011609
 ```
 
 ## Passwörter

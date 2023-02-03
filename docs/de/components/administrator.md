@@ -2,7 +2,7 @@
 
 ## Inhalt
 
-- [nscale Administrator](#nscale-console)
+- [nscale Administrator](#nscale-administrator)
   - [Inhalt](#inhalt)
   - [Lizenzierung](#lizenzierung)
   - [Persistierung](#persistierung)
@@ -78,5 +78,5 @@ docker run \
    -e JAVA_OPTIONS=-Dorg.eclipse.rap.rwt.settingStoreFactory=settings-per-user -Duser.language=de\
    -p 8181:8080 \
    -p 8182:8443 \
-   ceyoniq.azurecr.io/release/nscale/administrator:8.4.1200.2022111818
+   ceyoniq.azurecr.io/release/nscale/administrator:8.4.1400.2023011119
 ```
