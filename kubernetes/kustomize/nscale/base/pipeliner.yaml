@@ -22,14 +22,14 @@ spec:
       - name: regcred
       initContainers:
       - name: wait-for-application-layer
-        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.4.1402.2023013108
+        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.4.1500.2023022011
         imagePullPolicy: Always
         command: ['sh', '-c',
           'while [ $(curl -sw "%{http_code}" "http://application-layer:8080/index.html" -o /dev/null) -ne 200 ];
           do echo waiting for application layer; sleep 5; done;']
       containers:
       - name: pipeliner
-        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.4.1402.2023013108
+        image: ceyoniq.azurecr.io/release/nscale/pipeliner:8.4.1500.2023022011
         imagePullPolicy: Always
         resources:
           limits:

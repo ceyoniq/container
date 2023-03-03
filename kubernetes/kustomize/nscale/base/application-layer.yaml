@@ -34,7 +34,7 @@ spec:
           done
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.4.1402.2023013016
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.4.1501.2023022808
         imagePullPolicy: Always
         startupProbe:
           httpGet:

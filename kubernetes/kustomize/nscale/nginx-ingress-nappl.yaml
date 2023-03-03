@@ -10,10 +10,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - nscale.dev.ceyoniq-cloud.net
+    - nscale.dev.ceyoniq-cloud.com
     secretName: tls-secret
   rules:
-  - host: nscale.dev.ceyoniq-cloud.net
+  - host: nscale.dev.ceyoniq-cloud.com
     http:
       paths:
       - path: /al(/|$)(.*)
