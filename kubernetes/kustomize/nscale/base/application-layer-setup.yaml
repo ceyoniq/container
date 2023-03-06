@@ -23,7 +23,7 @@ spec:
           done
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.4.1501.2023022808
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:8.4.1500.2023021621
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
