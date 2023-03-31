@@ -74,18 +74,19 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 
 | Image | Release Tag | nscale Komponente |
 |:---|:---|:---|
-| ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>8.4.1500.2023021621</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
-| ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>8.4.1501.2023022808</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
-| ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>8.4.1501.2023022018</storage-layer-tag> | [nscale Server Storage Layer](components/storage-layer.md) |
-| ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>8.4.1400.2023011609</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
-| ceyoniq.azurecr.io/release/nscale/console | <console-tag>8.4.1401.12950</console-tag> | [nscale Console](components/console.md) |
-| ceyoniq.azurecr.io/release/nscale/monitoring-console | <monitoring-console-tag>8.4.1400.2023011609</monitoring-console-tag> | [nscale Monitoring Console](components/monitoring-console.md) |
-| ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>8.4.1500.2023022011</pipeliner-tag> | [nscale Pipeliner](components/pipeliner.md) |
-| ceyoniq.azurecr.io/release/nscale/cmis-connector | <cmis-connector-tag>8.4.1400.2023011716</cmis-connector-tag> | [nscale CMIS-Connector](components/cmis-connector.md) |
-| ceyoniq.azurecr.io/release/nscale/webdav-connector | <webdav-connector-tag>8.4.1001.2022091517</webdav-connector-tag> | [nscale WebDAV-Connector](components/webdav-connector.md) |
-| ceyoniq.azurecr.io/release/nscale/ilm-connector | <ilm-connector-tag>8.4.1001.2022091517</ilm-connector-tag> | [nscale ERP Connector ILM](components/ilm-connector.md) |
-| ceyoniq.azurecr.io/release/nscale/xta-connector | <xta-connector-tag>8.4.1001.2022122017</xta-connector-tag> | [nscale XTAConnector](components/xta-connector.md) |
-| ceyoniq.azurecr.io/release/nscale/administrator | <administrator-tag>8.4.1500.2023020819</administrator-tag> | [nscale Administrator](components/administrator.md) |
+| ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>9.0.1003.2023032413.0</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
+| ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>9.0.1001.2023032709.0</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
+| ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>9.0.1001.2023032909.0</storage-layer-tag> | [nscale Server Storage Layer](components/storage-layer.md) |
+| ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>9.0.1001.2023032008.0</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
+| ceyoniq.azurecr.io/release/nscale/console | <console-tag>9.0.1000.13025.0</console-tag> | [nscale Console](components/console.md) |
+| ceyoniq.azurecr.io/release/nscale/monitoring-console | <monitoring-console-tag>9.0.1001.2023031918.0</monitoring-console-tag> | [nscale Monitoring Console](components/monitoring-console.md) |
+| ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>9.0.1003.2023032414.0</pipeliner-tag> | [nscale Pipeliner](components/pipeliner.md) |
+| ceyoniq.azurecr.io/release/nscale/cmis-connector | <cmis-connector-tag>9.0.1001.2023032113.0</cmis-connector-tag> | [nscale CMIS-Connector](components/cmis-connector.md) |
+| ceyoniq.azurecr.io/release/nscale/webdav-connector | <webdav-connector-tag>9.0.1000.2023031316.0</webdav-connector-tag> | [nscale WebDAV-Connector](components/webdav-connector.md) |
+| ceyoniq.azurecr.io/release/nscale/ilm-connector | <ilm-connector-tag>9.0.1001.2023031312.0</ilm-connector-tag> | [nscale ERP Connector ILM](components/ilm-connector.md) |
+| ceyoniq.azurecr.io/release/nscale/xta-connector | <xta-connector-tag>9.0.1000.2023031316.0</xta-connector-tag> | [nscale XTAConnector](components/xta-connector.md) |
+| ceyoniq.azurecr.io/release/nscale/administrator | <administrator-tag>9.0.1001.2023032810.0</administrator-tag> | [nscale Administrator](components/administrator.md) |
+| ceyoniq.azurecr.io/release/nscale/process-automation-modeler | <process-automation-modeler-tag>9.0.1000.2022032811.0</process-automation-modeler-tag> | [nscale Process Automation Modeler](components/process-automation-modeler.md) |
 
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
 

@@ -11,6 +11,10 @@ x-logging: &loki-logging
   options:
     loki-url: "http://172.17.0.1:3100/loki/api/v1/push" # Why 172.17.0.1? -> https://docs.docker.com/network/network-tutorial-standalone/
     loki-retries: "1"
+    max-size: "200m"
+    max-file: 2
+    keep-file: true
+
 
 services:
   loki:

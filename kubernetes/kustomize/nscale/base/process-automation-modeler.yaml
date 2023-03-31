@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: process-automation-modeler
+  labels:
+    app: process-automation-modeler
+spec:
+  selector:
+    matchLabels:
+      app: process-automation-modeler
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: process-automation-modeler
+    spec:
+      automountServiceAccountToken: false
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: process-automation-modeler
+        image: ceyoniq.azurecr.io/release/nscale/process-automation-modeler:9.0.1000.2022032811.0
+        imagePullPolicy: Always
+        env:
+        - name: NAPPL_HOST
+          value: "application-layer"
+        - name: NAPPL_PORT
+          value: "8080"
+        - name: NAPPL_SSL
+          value: "false"
+        - name: NAPPL_INSTANCE
+          value: "nscalealinst1"
+        ports:
+        - containerPort: 8092
+          name: modeler
+        resources:
+          limits:
+            cpu: "1000m"
+            memory: "1000Mi"
+          requests:
+            cpu: "100m"
+            memory: "500Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: process-automation-modeler
+  labels:
+    service: process-automation-modeler
+spec:
+  ports:
+  - port: 8092
+    targetPort: 8092
+    name: modeler
+  selector:
+    app: process-automation-modeler

@@ -54,5 +54,5 @@ docker run -it \
 -e CMIS_AL_PORT=8080 \
 -e CMIS_AL_SSL=false \
 -e CMIS_AL_INSTANCE=nscalealinst1 \
-ceyoniq.azurecr.io/release/nscale/cmis-connector:8.4.1400.2023011716
+ceyoniq.azurecr.io/release/nscale/cmis-connector:9.0.1001.2023032113.0
 ```

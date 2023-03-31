@@ -74,7 +74,7 @@ docker run \
   -h democontainer \
   -v $(pwd)/workspace:/opt/ceyoniq/nscale-monitoring/workspace \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-monitoring/workspace/license.xml \
-  ceyoniq.azurecr.io/release/nscale/monitoring-console:8.4.1400.2023011609
+  ceyoniq.azurecr.io/release/nscale/monitoring-console:9.0.1001.2023031918.0
 ```
 
 ## Passwörter

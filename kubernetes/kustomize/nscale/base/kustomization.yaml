@@ -54,3 +54,5 @@ resources:
 #- ilm-connector.yaml
 #- webdav-connector.yaml
 #- xta-connector.yaml
+# Enable process automation modeler
+#- process-automation-modeler.yaml
