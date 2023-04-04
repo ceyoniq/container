@@ -1,6 +1,6 @@
 # nscale Standard Container
 
-![Ceyoniq Logo](../images/nscale8.png)
+![Ceyoniq Logo](../images/nscale9.png)
 
 nscale ist eine Informationsplattform und vereint sämtliche Vorteile eines Enterprise Information Management Systems. Der Nutzen von nscale ist vielfältig. Er beginnt bei einer einfachen und stabilen Dokumentenarchivierung und endet noch lange nicht beim Aufbau einer unternehmensweiten Informationsplattform zur Organisation von Daten und Inhalten. Denn ein Dokument ist oft wesentlich mehr als nur eine Datei. nscale unterstützt Sie nicht nur bei der Strukturierung, Archivierung und rechtssicheren, gesetzeskonformen Ablage: nscale macht Ihre Informationen wertvoll. Darin liegt der große Unterschied zu anderen Systemen.
 
@@ -101,6 +101,7 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 |nscale Server Storage Layer|Ja|Ja|Nein|Nein|
 |nscale Rendition Server|Ja|Ja|Ja|Ja|
 |nscale Pipeliner|Ja|Nein|Nein|Nein|
+|nscale Process Automation Modeler|Ja|Ja|Nein|Nein|
 |nscale Console|Nein|Ja|Ja|Ja|
 |nscale Monitoring Console|Ja|Ja|Nein|Nein|
 |nscale CMIS-Connector|Ja|Ja|Ja|Ja|

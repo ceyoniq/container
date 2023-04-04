@@ -125,6 +125,9 @@ Beachten Sie, dass der Rechner, auf dem Sie nscale installieren wollen, aus dem 
 **docker-compose.default-ports.yml**  
 Mit dieser Konfiguration werden alle nscale default Ports freigegeben. Diese Ports sind: 5432 (Postgres), 3005, 8080, 8443, 8090, 8091, 8086, 8087, 8387, 8388, 8192 und 8193.  
 
+**docker-compose.modeler.yml**  
+In dieser Konfiguration wird nscale Process Automation Modeler verwendet.
+
 **docker-compose.pipeliner.yml**  
 In dieser Konfiguration wird nscale Pipeliner verwendet.
 
