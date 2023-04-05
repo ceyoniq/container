@@ -92,6 +92,7 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 - [nscale/cmis-connector (nscale CMIS-Connector)](components/cmis-connector.md)
 - [nscale/webdav-connector (nscale WebDAV-Connector)](components/webdav-connector.md)
 - [nscale/ilm-connector (nscale ERP Connector ILM)](components/ilm-connector.md)
+- [nscale/process-automation-modeler (nscale Process Automation Modeler)](components/process-automation-modeler.md)
 
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
 > Weiter erfolgt der Einsatz von Software von Drittanbietern wie Loki, Grafana, Prometheus, etc. hier zum Zweck der Darstellung innerhalb einer Beispielkonfiguration.

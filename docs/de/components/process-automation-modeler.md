@@ -8,7 +8,6 @@
   - [Persistierung](#persistierung)
   - [Umgebungsvariablen](#umgebungsvariablen)
   - [SSL Verschlüsselung](#ssl-verschlüsselung)
-  - [Logging](#logging)
   - [Ports](#ports)
   - [Start mit Docker](#start-mit-docker)
 
@@ -37,11 +36,6 @@ Diese Komponente benötigt keine Persistierung. Das BPMN Modell wird im nscale A
 Diese Komponente unterstützt derzeit keine Verschlüsselung.
 
 Um den Zugriff auf den nscale Process Automation Modeler zu schützen sollte ein Proxy Server verwendet werden.
-
-## Logging
-
-Das Log Level wird
-Das Logging wird in der Datei `/var/lib/jetty/webapps/rapadm/WEB-INF/log4j2.xml` konfiguriert und kann an dieser Stelle in den Container gemountet werden.
 
 ## Ports
 
