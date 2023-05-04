@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: administrator
-        image: ceyoniq.azurecr.io/release/nscale/administrator:9.0.1001.2023032810.0
+        image: ceyoniq.azurecr.io/release/nscale/administrator:9.0.1100.2023042412.0
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
@@ -69,5 +69,6 @@ spec:
   - port: 8080
     name: administrator
     targetPort: 8080
+    appProtocol: http
   selector:
     app: administrator

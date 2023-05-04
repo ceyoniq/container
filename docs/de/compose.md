@@ -19,7 +19,7 @@ Der Betrieb von nscale Standard Container mit Docker-Compose hat folgende Vortei
   - [Quick Start Guide](#quick-start-guide)
   - [Grundlagen](#grundlagen)
   - [Container-Registry](#container-registry)
-  - [docker-compose Beispielszenarien](#docker-compose-beispielszenarien)
+  - [docker compose Beispielszenarien](#docker-compose-beispielszenarien)
   - [Zugriff mit nscale Administrator](#zugriff-mit-nscale-administrator)
   - [nscale Pipeliner](#nscale-pipeliner)
   - [Log Aggregation mit Loki](#log-aggregation-mit-loki)
@@ -54,7 +54,7 @@ docker login ceyoniq.azurecr.io
 4. Führen Sie im Ordner `compose/nscale` folgende Kommandos aus:
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 5. Fertig!  
@@ -108,10 +108,10 @@ Um sich bei der Ceyoniq Container Registry anmelden zu können, verwenden Sie Ih
 docker login ceyoniq.azurecr.io -u [username] -p [token]
 ```
 
-## docker-compose Beispielszenarien
+## docker compose Beispielszenarien
 
 Im Ordner `nscale` befinden sich die Basis-Docker-Compose-Datei (`docker-compose.yml`) und andere ergänzende Compose-Dateien.
-Wenn diese Dateien kombiniert werden, führt das Kommando `docker-compose up` die Dateien zusammen und führt ein Deployment durch.
+Wenn diese Dateien kombiniert werden, führt das Kommando `docker compose up` die Dateien zusammen und führt ein Deployment durch.
 In der Datei `docker-compose.example.env` finden Sie verschiedene Möglichkeiten, nscale zu betreiben.
 
 **docker-compose.proxy.yml**  
@@ -154,8 +154,8 @@ Wenn Sie die Konfigurationsdatei `docker-compose.default-ports.yml` verwenden, i
 Damit Sie nscale Pipeliner verwenden können, muss in der .env-Datei die Konfigurationsdatei `docker-compose.pipeliner.yml` verwendet werden.
 In der dort hinterlegten Standardkonfiguration kann nscale Pipeliner nicht starten, sondern muss zuerst konfiguriert werden.
 Wenn nscale Pipeliner nicht startet, können Sie mit Hilfe [dieser Anleitung](components/pipeliner.md) die Konfiguration von nscale Pipeliner anpassen.
-Wenn Sie das Kommando `docker-compose up -d` ausführen, können Sie nscale Pipeliner nach einer Konfigurationsänderung neu starten.
-Anschließend können Sie mit dem Kommando `docker-compose logs pipeliner` überprüfen, ob nscale Pipeliner erfolgreich gestartet wurde.
+Wenn Sie das Kommando `docker compose up -d` ausführen, können Sie nscale Pipeliner nach einer Konfigurationsänderung neu starten.
+Anschließend können Sie mit dem Kommando `docker compose logs pipeliner` überprüfen, ob nscale Pipeliner erfolgreich gestartet wurde.
 
 Weitere Informationen zum Pipeliner: [Pipeliner](components/pipeliner.md)
 

@@ -82,5 +82,6 @@ spec:
   - port: 8099
     targetPort: 8099
     name: xta
+    appProtocol: http
   selector:
     app: xta-connector

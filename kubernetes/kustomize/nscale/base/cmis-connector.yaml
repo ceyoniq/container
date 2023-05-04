@@ -72,5 +72,6 @@ spec:
   - port: 8096
     targetPort: 8096
     name: cmis
+    appProtocol: http
   selector:
     app: cmis-connector

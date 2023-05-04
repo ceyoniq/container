@@ -96,5 +96,6 @@ spec:
   - port: 8387
     targetPort: 8387
     name: monitoring
+    appProtocol: http
   selector:
     app: monitoring-console

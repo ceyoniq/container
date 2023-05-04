@@ -3,6 +3,13 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Serviceportal](<https://serviceportal.ceyoniq.com/>).  
 Die aktuelle Liste der Container Image finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 9.0.1100 (Mai 2023)
+
+* Aktualisierung der Container Images.
+* Refactoring der application-layer kubernetes kustomize Konfiguration.
+* Ersetzen von `docker-compose` durch `docker compose`.
+* Fixierung der docker-compose version auf 3.9.
+
 ## 9.0.1000 (April 2023)
 
 * Aktualisierung der Container Images.

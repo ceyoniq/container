@@ -79,5 +79,6 @@ spec:
   - port: 8192
     targetPort: 8192
     name: rendition
+    appProtocol: http
   selector:
     app: rendition-server

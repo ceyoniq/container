@@ -54,5 +54,6 @@ spec:
   - port: 8092
     targetPort: 8092
     name: modeler
+    appProtocol: http
   selector:
     app: process-automation-modeler

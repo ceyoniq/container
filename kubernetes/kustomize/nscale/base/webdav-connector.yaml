@@ -72,5 +72,6 @@ spec:
   - port: 8088
     targetPort: 8088
     name: webdav
+    appProtocol: http
   selector:
     app: webdav-connector

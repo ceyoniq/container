@@ -82,5 +82,6 @@ spec:
   - port: 8297
     targetPort: 8297
     name: ilm
+    appProtocol: http
   selector:
     app: ilm-connector
