@@ -1,0 +1,99 @@
+ARG baseImage=container-registry.ct.com/nscale/openjdk-17-runtime:latest
+
+# prepare jetty configuration
+#
+FROM registry.access.redhat.com/ubi9/openjdk-17:latest AS config
+WORKDIR /mnt
+USER root
+RUN microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes openssl
+RUN  openssl req -nodes -new -x509 -subj "/C=CN/ST=GD/L=SZ/O=Ceyoniq, Inc./CN=localhost" -keyout jetty.key -out jetty.cert \
+  && keytool -keystore keystore -storepass changeit -noprompt -import -alias jetty -file jetty.cert -trustcacerts \
+  && openssl pkcs12 -inkey jetty.key -in jetty.cert -export -out jetty.pkcs12 -password pass:transfer \
+  && keytool -storepass changeit -importkeystore -srckeystore jetty.pkcs12 -srcstoretype PKCS12 -destkeystore keystore -srcstorepass transfer
+
+RUN echo -e '\
+# ---------------------------------------\n\
+# Module: http\n\
+# ---------------------------------------\n\
+--module=http\n\
+\n\
+jetty.http.host=0.0.0.0\n\
+jetty.http.port=8080\n\
+' > http.ini
+
+# Note the passwords has been generated with
+# java -cp /usr/local/jetty/lib/jetty-util-*.jar org.eclipse.jetty.util.security.Password changeit
+
+RUN echo -e '\
+# ---------------------------------------\n\
+# Module: https\n\
+# Adds HTTPS protocol support to the TLS(SSL) Connector\n\
+# ---------------------------------------\n\
+--module=https\n\
+\n\
+jetty.ssl.host=0.0.0.0\n\
+jetty.ssl.port=8443\n\
+jetty.httpConfig.securePort=8443\n\
+jetty.sslContext.keyStorePath=etc/keystore\n\
+jetty.sslContext.trustStorePath=etc/keystore\n\
+jetty.sslContext.keyStorePassword=OBF:1vn21ugu1saj1v9i1v941sar1ugw1vo0\n\
+jetty.sslContext.keyManagerPassword=OBF:1vn21ugu1saj1v9i1v941sar1ugw1vo0\n\
+jetty.sslContext.trustStorePassword=OBF:1vn21ugu1saj1v9i1v941sar1ugw1vo0\n\
+' > https.ini
+
+FROM $baseImage
+
+# https://github.com/eclipse/jetty.docker/blob/734954b4f7602caa4f87a06837620b7f5225d583/9.4-jre11-slim/Dockerfile
+ENV JETTY_VERSION=9.4.46.v20220331
+ENV JETTY_HOME=/usr/local/jetty
+ENV JETTY_BASE=/var/lib/jetty
+ENV TMPDIR=/tmp/jetty
+ENV PATH=$JETTY_HOME/bin:$PATH
+ENV JETTY_TGZ_URL=https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/$JETTY_VERSION/jetty-home-$JETTY_VERSION.tar.gz
+
+USER root
+
+RUN \
+       microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes \
+	     gzip-1.12-1.el9 \
+		 tar-2:1.34-6.el9_1 \
+	&& microdnf clean all \
+    && mkdir -p $TMPDIR \
+	&& chmod 775 $TMPDIR \
+    # Fetch jetty release into JETTY_HOME
+	&& mkdir -p "$JETTY_HOME" \
+	&& cd $JETTY_HOME \
+	&& curl -SL "$JETTY_TGZ_URL" -o jetty.tar.gz \
+	&& curl -SL "$JETTY_TGZ_URL.asc" -o jetty.tar.gz.asc \
+	&& pwd \
+	&& ls -l \
+	&& type gzip \
+	#
+	# Unpack jetty
+	&& tar -xvf jetty.tar.gz --strip-components=1 \
+	&& sed -i '/jetty-logging/d' etc/jetty.conf \
+	#
+	# Create and configure the JETTY_HOME directory
+	&& mkdir -p "$JETTY_BASE" \
+	&& cd $JETTY_BASE \
+	&& java -jar "$JETTY_HOME/start.jar" --create-startd \
+		    --add-to-start="server,http,deploy,jsp,jstl,ext,resources,websocket" \
+	&& useradd jetty -g 0 \
+	&& chown -R default:root "$JETTY_HOME" "$JETTY_BASE" "$TMPDIR" /var/lib/jetty/ \
+	&& usermod -d $JETTY_BASE default \
+	#
+	# Cleanup
+	&& rm -rf /tmp/hsperfdata_root \
+	&& rm -fr $JETTY_HOME/jetty.tar.gz* \
+	&& rm -rf /tmp/hsperfdata_root \
+	#
+	# Basic smoke test
+	&& java -jar "$JETTY_HOME/start.jar" --list-config
+
+COPY --from=config /mnt/http.ini /var/lib/jetty/start.d/http.ini
+COPY --from=config /mnt/https.ini /var/lib/jetty/start.d/https.ini
+COPY --from=config /mnt/keystore /var/lib/jetty/etc/keystore
+
+USER default
+
+WORKDIR $JETTY_BASE
