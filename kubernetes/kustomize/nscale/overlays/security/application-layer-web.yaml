@@ -5,14 +5,16 @@ metadata:
 spec:
   template:
     spec:
-      automountServiceAccountToken: false
       containers:
       - name: application-layer-web
         securityContext:
           readOnlyRootFilesystem: false
           runAsNonRoot: true
           allowPrivilegeEscalation: false
+          runAsUser: 10001
           capabilities:
             drop:
               - ALL
+          seccompProfile:
+            type: RuntimeDefault
 

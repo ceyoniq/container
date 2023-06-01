@@ -2,4 +2,5 @@
   path: /spec/template/spec/volumes/1
   value:
     name: rendition-server-share
-    emptyDir: {}
+    emptyDir:
+      sizeLimit: 1Gi

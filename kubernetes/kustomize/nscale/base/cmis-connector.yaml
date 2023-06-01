@@ -21,13 +21,8 @@ spec:
       - name: regcred
       containers:
       - name: cmis-connector
-        image: ceyoniq.azurecr.io/release/nscale/cmis-connector:9.0.1001.2023032113.0
+        image: ceyoniq.azurecr.io/release/nscale/cmis-connector:ubi.9.0.1202.2023052608
         imagePullPolicy: Always
-        livenessProbe:
-          httpGet:
-            path: /cmis/
-            port: 8096
-          initialDelaySeconds: 20
         readinessProbe:
           httpGet:
             path: /cmis/
@@ -51,15 +46,18 @@ spec:
           limits:
             cpu: "1000m"
             memory: "1000Mi"
+            ephemeral-storage: "550Mi"
           requests:
             cpu: "100m"
             memory: "500Mi"
+            ephemeral-storage: "450Mi"
         volumeMounts:
         - name: temp
           mountPath: /opt/ceyoniq/nscale-cmis-connector/temp/
       volumes:
       - name: temp
-        emptyDir: {}
+        emptyDir:
+          sizeLimit: 50Mi
 ---
 apiVersion: v1
 kind: Service

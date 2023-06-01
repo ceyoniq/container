@@ -1,0 +1,27 @@
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: storage-layer
+spec:
+  podSelector:
+    matchLabels:
+      app: storage-layer
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: application-layer
+    ports:
+      - protocol: TCP
+        port: 3005
+  - from:
+    - podSelector:
+        matchLabels:
+          app: pipeliner
+    ports:
+      - protocol: TCP
+        port: 3005

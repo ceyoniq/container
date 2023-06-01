@@ -59,13 +59,13 @@ Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in eine
 ## Start mit Docker
 
 ```bash
-docker run \
+docker run --rm \
   -e RSX_APPENDER=Console \
   -p 8192:8192 \
   -h democontainer \
   -v $(pwd)/work:/opt/ceyoniq/nscale-rendition-server/work \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-rendition-server/conf/license.xml \
-  ceyoniq.azurecr.io/release/nscale/rendition-server:9.0.1001.2023032008.0
+  ceyoniq.azurecr.io/release/nscale/rendition-server:ubi.9.0.1200.2023051618
 ```
 
 ## Microsoft Windows Schriftarten
@@ -101,10 +101,10 @@ Entsprechend können auch andere proprietäre Fonts nachinstalliert werden.
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:9.0.1101.2023042721.0
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1200.2023052021
 ```
 
-**Beispiel Docker-Compose:**
+**Beispiel Docker Compose:**
 
 ```yaml
 volumes:

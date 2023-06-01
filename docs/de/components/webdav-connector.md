@@ -48,12 +48,11 @@ Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in eine
 ## Start mit Docker
 
 ```bash
-docker run -it \
---network nscale_nscale \
--p 8088:8088 \
--e WEBDAV_AL_HOST=application-layer \
--e WEBDAV_AL_PORT=8080 \
--e WEBDAV_AL_SSL=false \
--e WEBDAV_AL_DOMAIN=nscale \
-ceyoniq.azurecr.io/release/nscale/webdav-connector:9.0.1000.2023031316.0
+docker run --rm \
+  -p 8088:8088 \
+  -e WEBDAV_AL_HOST=application-layer \
+  -e WEBDAV_AL_PORT=8080 \
+  -e WEBDAV_AL_SSL=false \
+  -e WEBDAV_AL_DOMAIN=nscale \
+  ceyoniq.azurecr.io/release/nscale/webdav-connector:ubi.9.0.1200.2023051702
 ```

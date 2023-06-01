@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgresql
+  name: process-automation-modeler
 spec:
   template:
     spec:
-      securityContext:
-        fsGroup: 0
       containers:
-      - name: postgresql
+      - name: process-automation-modeler
         securityContext:
-          readOnlyRootFilesystem: false
+          readOnlyRootFilesystem: true
           allowPrivilegeEscalation: false
           runAsNonRoot: true
           runAsUser: 10001
           capabilities:
             drop:
               - ALL
+          seccompProfile:
+            type: RuntimeDefault

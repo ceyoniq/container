@@ -21,8 +21,22 @@ spec:
       - name: regcred
       containers:
       - name: process-automation-modeler
-        image: ceyoniq.azurecr.io/release/nscale/process-automation-modeler:9.0.1000.2022032811.0
+        image: ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.9.0.1000.2023040316
         imagePullPolicy: Always
+        startupProbe:
+          httpGet:
+            path: /index.html
+            port: 8082
+          initialDelaySeconds: 30
+          failureThreshold: 10
+          periodSeconds: 10
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /index.html
+            port: 8082
+          periodSeconds: 10
+          timeoutSeconds: 1
         env:
         - name: NAPPL_HOST
           value: "application-layer"
@@ -32,16 +46,20 @@ spec:
           value: "false"
         - name: NAPPL_INSTANCE
           value: "nscalealinst1"
+        - name: NAPPL_SSL_SELF_SIGNED
+          value: "false"
+        #- name: DEBUG
+        #  value: "*"
         ports:
-        - containerPort: 8092
+        - containerPort: 8082
           name: modeler
         resources:
           limits:
             cpu: "1000m"
-            memory: "1000Mi"
+            memory: "1500Mi"
           requests:
             cpu: "100m"
-            memory: "500Mi"
+            memory: "1000Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -51,8 +69,8 @@ metadata:
     service: process-automation-modeler
 spec:
   ports:
-  - port: 8092
-    targetPort: 8092
+  - port: 8082
+    targetPort: 8082
     name: modeler
     appProtocol: http
   selector:

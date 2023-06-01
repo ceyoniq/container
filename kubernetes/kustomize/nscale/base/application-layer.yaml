@@ -15,7 +15,7 @@ spec:
     metadata:
       labels:
         app: application-layer
-        ceyoniq.com/application-layer-cluster-name: "cluster1"
+        ceyoniq.com/application-layer-cluster-name: cluster1
     spec:
       serviceAccountName: kubeping-svc-account
       imagePullSecrets:
@@ -23,18 +23,27 @@ spec:
       initContainers:
       # wait for database to be ready
       - name: check-db-ready
-        image: bitnami/postgresql:14
+        image: docker.io/bitnami/postgresql:15
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
         - >
-          until pg_isready -U postgres -h postgresql -p 5432; do
+          until pg_isready -U postgres -h postgresql -p 5432 -t 1; do
             echo '.';
             sleep 2;
           done
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "200Mi"
+            ephemeral-storage: "350Mi"
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+            ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:9.0.1101.2023042721.0
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1200.2023052021
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -42,12 +51,6 @@ spec:
             port: 8080
           initialDelaySeconds: 30
           failureThreshold: 10
-          periodSeconds: 10
-          timeoutSeconds: 1
-        livenessProbe:
-          httpGet:
-            path: /index.html
-            port: 8080
           periodSeconds: 10
           timeoutSeconds: 1
         readinessProbe:
@@ -77,7 +80,7 @@ spec:
           - name: INSTANCE1_CLUSTER_CORE_NAME
             valueFrom:
               fieldRef:
-                fieldPath: metadata.name
+                fieldPath: metadata.namespace
           - name: INSTANCE1_CLUSTER_CORE_DESCRIPTION
             valueFrom:
               fieldRef:
@@ -97,9 +100,11 @@ spec:
           limits:
             cpu: "2000m"
             memory: "3000Mi"
+            ephemeral-storage: "900Mi"
           requests:
             cpu: "100m"
             memory: "1000Mi"
+            ephemeral-storage: "800Mi"
         volumeMounts:
         - name: license
           subPath: license.xml
@@ -110,8 +115,20 @@ spec:
           mountPath: /opt/ceyoniq/nscale-server/application-layer/logs
         - name: temp
           mountPath: /opt/ceyoniq/nscale-server/application-layer/temp
+        - name: podinfo
+          mountPath: /etc/podinfo
       terminationGracePeriodSeconds: 100
       volumes:
+      # https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/
+      - name: podinfo
+        downwardAPI:
+          items:
+            - path: "labels"
+              fieldRef:
+                fieldPath: metadata.labels
+            - path: "annotations"
+              fieldRef:
+                fieldPath: metadata.annotations
       - name: license
         configMap:
           name: license
@@ -119,9 +136,11 @@ spec:
         configMap:
           name: application-layer-log4j
       - name: logs
-        emptyDir: {}
+        emptyDir:
+          sizeLimit: 2Mi
       - name: temp
-        emptyDir: {}
+        emptyDir:
+          sizeLimit: 50Mi
 ---
 apiVersion: v1
 kind: Service
@@ -130,12 +149,12 @@ metadata:
   labels:
     app: application-layer
 spec:
+  clusterIP: None
   ports:
   - port: 8080
     targetPort: 8080
     name: application
     appProtocol: http
-  clusterIP: None
   selector:
     app: application-layer
 
@@ -155,7 +174,8 @@ spec:
       hostname: application-layer-setup
       initContainers:
       - name: wait-for-application-layer
-        image: curlimages/curl
+        image: docker.io/curlimages/curl:8.00.1
+        imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
         - >
@@ -163,19 +183,51 @@ spec:
             echo '.'
             sleep 5;
           done
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "200Mi"
+            ephemeral-storage: "350Mi"
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+            ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:9.0.1101.2023042721.0
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1200.2023052021
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
         - >
-          echo "initialize Document Area 'DA'"; 
+          echo "initialize Document Area 'DA'";
           al -host application-layer run-cfg-method -method lockSystem;
           al -host application-layer scenario-da -da DA -displayname DA -rs host=rendition-server -sl host=storage-layer;
           al -host application-layer run-cfg-method -method unlockSystem;
           echo "done";
+        resources:
+          limits:
+            cpu: "1000m"
+            memory: "1500Mi"
+            ephemeral-storage: "900Mi"
+          requests:
+            cpu: "100m"
+            memory: "1000Mi"
+            ephemeral-storage: "800Mi"
       imagePullSecrets:
         - name: regcred
       restartPolicy: Never
   backoffLimit: 1
+  #activeDeadlineSeconds: 180
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: application-layer
+  labels:
+    app: application-layer
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: application-layer

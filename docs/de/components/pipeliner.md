@@ -8,7 +8,7 @@
   - [Persistierung](#persistierung)
   - [Start mit Docker](#start-mit-docker)
   - [Konfiguration](#konfiguration)
-    - [Docker-Compose](#docker-compose)
+    - [Docker Compose](#docker-compose)
     - [Kubernetes](#kubernetes)
       - [Passwörter in der  `cold.xml` externalisieren](#passwörter-in-der--coldxml-externalisieren)
     - [Anpassen der `doc_mime_suff.tsv`](#anpassen-der-doc_mime_sufftsv)
@@ -36,12 +36,11 @@ Zum Beispiel können folgende Ordner persistiert werden:
 ## Start mit Docker
 
 ```bash
-docker run \
-  -h democontainer \
+docker run --rm \
   -v $(pwd)/cold.xml:/opt/ceyoniq/nscale-pipeliner/workdir/config/runtime/cold.xml \
   -v $(pwd)/data:/opt/ceyoniq/nscale-pipeliner/workdir/data \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-pipeliner/workdir/license.xml \
-  ceyoniq.azurecr.io/release/nscale/pipeliner:9.0.1101.2023042809.0
+  ceyoniq.azurecr.io/release/nscale/pipeliner:ubi.9.0.1200.2023052211
 ```
 
 ## Konfiguration
@@ -55,7 +54,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 Die spezielle Konfiguration richtet sich nach der Umgebung, in der sie verwendet wird.
 Beachten Sie, dass unter Umständen auch Rechte in nscale für den Betrieb von nscale Pipeliner angepasst werden müssen.
 
-### Docker-Compose
+### Docker Compose
 
 Mit dem Start von nscale Pipeliner wird das Spool-Verzeichnis im aktuellen Ordner angelegt. nscale Pipeliner verwendet das Spool-Verzeichnis, um Dateien kontinuierlich zu importieren.
 Unter `./workdir/data` werden später die Eingangsdaten abgeholt.
@@ -191,13 +190,13 @@ Diese Konfiguration kann angepasst werden.
 #### Vorbereitung
 
 Um Anpassungen an der `doc_mime_suff.tsv` vornehmen zu können, benötigen Sie diese Datei auf Ihrem Entwicklungssystem.
-Diese Datei können Sie dem Image `ceyoniq.azurecr.io/release/nscale/pipeliner:9.0.1101.2023042809.0
+Diese Datei können Sie dem Image `ceyoniq.azurecr.io/release/nscale/pipeliner:ubi.9.0.1200.2023052211
 
 Kopieren Sie die Datei `doc_mime_suff.tsv` lokal auf Ihr System:  
 
 ```bash
 # Erzeugen eines temporären Containers
-$ docker create ceyoniq.azurecr.io/release/nscale/pipeliner:9.0.1101.2023042809.0
+$ docker create ceyoniq.azurecr.io/release/nscale/pipeliner:ubi.9.0.1200.2023052211
 a0123456789 
 
 # Kopieren der Datei doc_mime_suff.tsv auf Ihr Entwicklungssystem
@@ -216,10 +215,10 @@ Um angepasste Dateien in dem jeweiligen Container verwenden zu können, müssen 
 Um die angepasste `doc_mime_suff.tsv` verwenden zu können, muss diese Datei als Bind-Mount verfügbar gemacht werden.  
 
 ```bash
-docker run -it ... -v ${PWD}/doc_mime_suff.tsv:/opt/ceyoniq/nscale-pipeliner/workdir/config/common/doc_mime_suff.tsv ceyoniq.azurecr.io/release/nscale/pipeliner:9.0.1101.2023042809.0
+docker run -it ... -v ${PWD}/doc_mime_suff.tsv:/opt/ceyoniq/nscale-pipeliner/workdir/config/common/doc_mime_suff.tsv ceyoniq.azurecr.io/release/nscale/pipeliner:ubi.9.0.1200.2023052211
 ```
 
-**Beispiel Docker-Compose:**
+**Beispiel Docker Compose:**
 
 Um die angepasste `doc_mime_suff.tsv` verwenden zu können, muss diese Datei als Bind-Mount verfügbar gemacht werden.  
 

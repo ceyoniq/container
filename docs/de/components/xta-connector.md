@@ -33,7 +33,12 @@ Diese Komponente benötigt keine Persistierung.
 |XTA_AL_INSTANCE=nscalealinst1|Application Layer Instance.|
 |XTA_AL_USER=|Application Layer Account name.|
 |XTA_AL_PASSWORD=|Application Layer Account password.|
-|XTA_AL_FOLDERQUERY=|Zielordner in nscale.|
+|XTA_READER=| Posteingang: empfangende Adresse, i.d.R. `*`.|
+|XTA_AL_FOLDERQUERY=| Posteingangsordner, NQL-Abfrage `resourcetype=1 and displayname='Posteingang'`.|
+|XTA_OUTGOING=false| Versenden von ausgehenden Nachrichten aktivieren.|
+|XTA_AL_FOLDERQUERY_OUTBOX=| Postausgangsordner, NQL-Abfrage `resourcetype=1 and displayname='Postausgang'`.|
+|XTA_AL_FOLDERQUERY_DEPOSIT=| Ordner für die Ablage versendeter Nachrichten, NQL-Abfrage `resourcetype=1 and displayname='Gesendet'`.|
+|XTA_URL=| URL des XTA-Servers, an den die Nachrichten gesendet werden sollen.|
 
 ## Logging in Kubernetes
 
@@ -53,12 +58,13 @@ Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in eine
 ## Start mit Docker
 
 ```bash
-docker run -it \
---network nscale_nscale \
--p 8099:8099 \
--e XTA_AL_HOST=application-layer \
--e XTA_AL_PORT=8080 \
--e XTA_AL_SSL=false \
--e XTA_AL_DOMAIN=nscale \
-ceyoniq.azurecr.io/release/nscale/xta-connector:9.0.1000.2023031316.0
+docker run --rm \
+  -p 8099:8099 \
+  -e XTA_AL_HOST=application-layer \
+  -e XTA_AL_PORT=8080 \
+  -e XTA_AL_SSL=false \
+  -e XTA_AL_DOMAIN=nscale \
+  -e XTA_READER='*' \
+  -e XTA_AL_FOLDERQUERY="resourcetype=1 and displayname='Postausgang'" \
+  ceyoniq.azurecr.io/release/nscale/xta-connector:ubi.9.0.1200.2023051716
 ```

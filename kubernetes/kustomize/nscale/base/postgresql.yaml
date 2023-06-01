@@ -33,21 +33,21 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: postgresql
-        image: bitnami/postgresql:14
+        image: docker.io/bitnami/postgresql:15
         imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
             - sh
             - -c
-            - exec pg_isready -U "postgres" -h 127.0.0.1 -p 5432
+            - exec pg_isready -U "postgres" -h 127.0.0.1 -p 5432 -t 1
         readinessProbe:
           exec:
             command:
             - sh
             - -c
             - |
-              pg_isready -U "postgres" -h 127.0.0.1 -p 5432
+              pg_isready -U "postgres" -h 127.0.0.1 -p 5432 -t 1
               [ -f /opt/bitnami/postgresql/tmp/.initialized ]
         env:
         - name: BITNAMI_DEBUG
@@ -75,9 +75,11 @@ spec:
           limits:
             cpu: "1000m"
             memory: "500Mi"
+            ephemeral-storage: "350Mi"
           requests:
             cpu: "100m"
             memory: "250Mi"
+            ephemeral-storage: "250Mi"
         volumeMounts:
         - name: custom-init-scripts
           mountPath: /docker-entrypoint-initdb.d/

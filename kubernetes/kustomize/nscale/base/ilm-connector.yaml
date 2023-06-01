@@ -21,16 +21,8 @@ spec:
       - name: regcred
       containers:
       - name: ilm-connector
-        image: ceyoniq.azurecr.io/release/nscale/ilm-connector:9.0.1001.2023031312.0
+        image: ceyoniq.azurecr.io/release/nscale/ilm-connector:ubi.9.0.1200.2023051702
         imagePullPolicy: Always
-#        livenessProbe:
-#          httpGet:
-#            path: /sap_ilm
-#            port: 8297
-#            httpHeaders:
-#            - name: Authorization
-#              value: "Basic YW5vbjphbm9u"
-#          initialDelaySeconds: 20
 #        readinessProbe:
 #          httpGet:
 #            path: /sap_ilm
@@ -61,15 +53,18 @@ spec:
           limits:
             cpu: "1000m"
             memory: "1000Mi"
+            ephemeral-storage: "500Mi"
           requests:
             cpu: "100m"
             memory: "500Mi"
+            ephemeral-storage: "400Mi"
         volumeMounts:
         - name: temp
           mountPath: /opt/ceyoniq/nscale-for-sap/erp-connector-ilm/temp
       volumes:
       - name: temp
-        emptyDir: {}
+        emptyDir:
+          sizeLimit: 50Mi
 ---
 apiVersion: v1
 kind: Service

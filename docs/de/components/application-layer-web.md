@@ -16,7 +16,7 @@
     - [Das Kontextmenü anpassen](#das-kontextmenü-anpassen)
     - [Die Datei `nscale_web.xml` anpassen](#die-datei-nscale_webxml-anpassen)
     - [Inbetriebnahme](#inbetriebnahme)
-      - [Beispiel Docker-Compose](#beispiel-docker-compose)
+      - [Beispiel Docker Compose](#beispiel-docker-compose)
 
 ## Lizenzierung
 
@@ -60,12 +60,12 @@ Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in eine
 ## Start mit Docker
 
 ```bash
- docker run \
-   -e NSCALE_HOST=application-layer \
-   -e LOG4JCONFIGLOCATION=../conf/nscale_stdout_log_conf.xml \
-   -e NSCALE_PORT=8080 \
-   -p 8090:8090 \
-   ceyoniq.azurecr.io/release/nscale/application-layer-web:9.0.1101.2023042710.0
+docker run --rm \
+  -e NSCALE_HOST=application-layer \
+  -e LOG4JCONFIGLOCATION=../conf/nscale_stdout_log_conf.xml \
+  -e NSCALE_PORT=8080 \
+  -p 8090:8090 \
+  ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.9.0.1200.2023052511
 ```
 
 ## Information für Entwickler
@@ -87,7 +87,7 @@ Kopieren Sie die Datei `nscale_web.xml` lokal auf Ihr System:
 
 ```bash
 # Erzeugen eines temporären Containers
-$ docker create ceyoniq.azurecr.io/release/nscale/application-layer-web:[version]  # Passen Sie bitte diese Version an
+$ docker create ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.9.0.1200.2023052511[version]  # Passen Sie bitte diese Version an
 a0123456789                                             # Diese ID wird auf Ihrem System eine andere sein
 
 # Kopieren der Datei nscale_web.xml auf Ihr Entwicklungssystem
@@ -157,9 +157,9 @@ Damit nscale Server Application Layer Web Ihre Konfiguration verarbeiten kann, m
 Alle Dateien müssen im Container in dem Ordner `/opt/ceyoniq/nscale-server/application-layer-web/conf/` verfügbar gemacht werden.
 Dies kann abhängig von der gewählten Technologie durch ein `bind-mount`, ein `volume` oder ein zuvor erstelltes Custom Container-Image erfolgen.
 
-#### Beispiel Docker-Compose
+#### Beispiel Docker Compose
 
-Wenn Sie Docker-Compose verwenden, können Sie zum Beispiel die Dateien als `bind-mount` konfigurieren.  
+Wenn Sie Docker Compose verwenden, können Sie zum Beispiel die Dateien als `bind-mount` konfigurieren.  
 
 ```yaml
   application-layer-web:

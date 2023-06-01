@@ -49,10 +49,10 @@ Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in eine
 
 ```bash
 docker run -it \
--p 8096:8096 \
--e CMIS_AL_HOST=application-layer \
--e CMIS_AL_PORT=8080 \
--e CMIS_AL_SSL=false \
--e CMIS_AL_INSTANCE=nscalealinst1 \
-ceyoniq.azurecr.io/release/nscale/cmis-connector:9.0.1001.2023032113.0
+  -p 8096:8096 \
+  -e CMIS_AL_HOST=application-layer \
+  -e CMIS_AL_PORT=8080 \
+  -e CMIS_AL_SSL=false \
+  -e CMIS_AL_INSTANCE=nscalealinst1 \
+  ceyoniq.azurecr.io/release/nscale/cmis-connector:ubi.9.0.1202.2023052608
 ```

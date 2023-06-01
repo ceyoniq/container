@@ -6,7 +6,7 @@
   - [Inhalt](#inhalt)
   - [Was kann ich tun, wenn ein nscale Standard Container nicht startet?](#was-kann-ich-tun-wenn-ein-nscale-standard-container-nicht-startet)
   - [Wie kann ich die Zeitzone ändern?](#wie-kann-ich-die-zeitzone-ändern)
-  - [Wie kann ich Java Startoptionen (JAVA_OPTS) setzen?](#wie-kann-ich-java-startoptionen-java_opts-setzen)
+  - [Wie kann ich Java Startoptionen (JAVA\_OPTS) setzen?](#wie-kann-ich-java-startoptionen-java_opts-setzen)
   - [Wie kann ich die Java Heap Size anpassen?](#wie-kann-ich-die-java-heap-size-anpassen)
   - [Wie kann ich die Microsoft Windows Schriftarten (Microsoft TrueType Fonts) verwenden?](#wie-kann-ich-die-microsoft-windows-schriftarten-microsoft-truetype-fonts-verwenden)
   - [Wie kann ich mit Kustomize Änderungen an der Kubernetes-Konfiguration vornehmen?](#wie-kann-ich-mit-kustomize-änderungen-an-der-kubernetes-konfiguration-vornehmen)
@@ -35,10 +35,10 @@ Die jeweilige nscale Standard Container Applikation wird über ein `run.sh`-Scri
 docker run -it nscale/[container-image]:[container-version] [optionen] bash
 ```
 
-**Beispiel Docker-Compose:**
+**Beispiel Docker Compose:**
 
-Ändern Sie Ihre `docker-compose.yaml` so ab, dass ein `sleep infinity` ausgeführt wird.  
-Anschließend haben Sie die Möglichkeit, sich mit `docker-compose exec [service name] bash` auf den Container aufzuschalten.
+Ändern Sie Ihre `docker compose.yaml` so ab, dass ein `sleep infinity` ausgeführt wird.  
+Anschließend haben Sie die Möglichkeit, sich mit `docker compose exec [service name] bash` auf den Container aufzuschalten.
 
 ```yaml
 command: ["sleep", "infinity"]
@@ -70,7 +70,7 @@ Sie können die Zeitzone für den jeweiligen Container mit der Umgebungsvariable
 docker run -e TZ=Europe/Berlin [image]
 ```
 
-**Beispiel Docker-Compose:**
+**Beispiel Docker Compose:**
 
 ```yaml
 environment:
@@ -109,7 +109,7 @@ Folgende nscale Standard Container beinhalten Java-Applikationen:
 docker run -e JAVA_OPTS=-Dcom.sun.jndi.ldap.object.disableEndpointIdentification=true [image]
 ```
 
-**Beispiel Docker-Compose:**
+**Beispiel Docker Compose:**
 
 ```yaml
 environment:
@@ -139,7 +139,7 @@ docker run -e JAVA_OPTS=-Xmx3g [image]
 
 In diesem Beispiel wurde die Java Heap Size so gewählt, dass 3 Gigabyte im Container verwendet werden.
 
-**Beispiel Docker-Compose:**
+**Beispiel Docker Compose:**
 
 ```yaml
 environment:
@@ -152,7 +152,7 @@ In diesem Beispiel wurde die Java Heap Size so gewählt, dass 3 Gigabyte im Cont
 
 ```yaml
 - name: JAVA_OPTS
-  value: "-XX:MaxRAMPercentage=85.0"
+  value: "-XX:MaxRAMPercentage=50.0"
 ```
 
 In diesem Beispiel wurde die Java Heap Size so gewählt, dass 85% des im Container verfügbaren Speichers verwendet wird.

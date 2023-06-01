@@ -65,8 +65,6 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 |INITIALIZE_DOCUMENT_AREA_DISPLAYNAME=DA | Mit dieser Umgebungsvariable können Sie den Displayname des neu erstellten Dokumentenbereichs überschreiben. |
 |KUBERNETES_NAMESPACE | Diese Umgebungsvariable ist für die Konfiguration des Clusters in Kubernetes notwendig. Weitere Details finden Sie unter [Cluster-Konfiguration in Kubernetes](#cluster-konfiguration-in-kubernetes). |
 
-Auch die Konfiguration in der engine.conf kann mit Hilfe von Umgebungsvariablen, wie im Administrationshandbuch beschrieben, überlagert werden. So kann z.B. der Standard HTTP Port durch die Umgebungsvariable SERVLET_CONNECTOR_1_PORT gesetzt werden.
-
 ## Logging in Kubernetes
 
 Um das Log Level im Kubernetes Betrieb zu ändern kann eine ConfigMap verwendet werden. Diese ConfigMap sollte die Log4j-Konfiguration aus dem Originalimage enthalten. Wird diese ConfigMap als Volume auf ein Verzeichnis gemappt
@@ -84,18 +82,18 @@ Serverprozess übernommen. Das gilt auch für mehrere Containerinstanzen in eine
 ## Start mit Docker
 
 ```bash
- docker run \
-   -e INSTANCE1_INSTANCE_LOGGER_CONF=instance1-log-console.conf \
-   -e INSTANCE1_CORE_DB_DIALECT=PostgreSQL \
-   -e INSTANCE1_CORE_DB_DRIVERCLASS=org.postgresql.Driver \
-   -e INSTANCE1_CORE_DB_URL=jdbc:postgresql://postgresql:5432/nscale?loggerLevel=OFF \
-   -e INSTANCE1_CORE_DB_USERNAME=nscale \
-   -e INSTANCE1_CORE_DB_PASSWORD=password \
-   -e  INSTANCE1_CORE_DB_SCHEMA=public \
-   -h democontainer \
-   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
-   -p 8080:8080 \
-   ceyoniq.azurecr.io/release/nscale/application-layer:9.0.1101.2023042721.0
+docker run --rm \
+  -e INSTANCE1_INSTANCE_LOGGER_CONF=instance1-log-console.conf \
+  -e INSTANCE1_CORE_DB_DIALECT=PostgreSQL \
+  -e INSTANCE1_CORE_DB_DRIVERCLASS=org.postgresql.Driver \
+  -e INSTANCE1_CORE_DB_URL=jdbc:postgresql://postgresql:5432/nscale?loggerLevel=OFF \
+  -e INSTANCE1_CORE_DB_USERNAME=nscale \
+  -e INSTANCE1_CORE_DB_PASSWORD=password \
+  -e  INSTANCE1_CORE_DB_SCHEMA=public \
+  -h democontainer \
+  -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
+  -p 8080:8080 \
+  ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1200.2023052021
 ```
 
 ## Microsoft Windows Schriftarten
@@ -131,10 +129,10 @@ Entsprechend können auch andere proprietäre Fonts nachinstalliert werden.
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:9.0.1101.2023042721.0
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1200.2023052021
 ```
 
-**Beispiel Docker-Compose:**
+**Beispiel Docker Compose:**
 
 ```yaml
 volumes:
@@ -161,9 +159,9 @@ Eine Beispiel-Konfiguration finden Sie in [application-layer.yaml](../../../kube
 
 Wenn Sie nscale Server Application Layer Standard Container starten, ist der Volltext-Cache aktiviert.  
 Der Volltext-Cache kann unter Umständen viel Speicher benötigen.  
-In den Docker-Compose- und Kubernetes-Beispielen wurde der Volltext-Cache explizit deaktiviert.
+In den Docker Compose- und Kubernetes-Beispielen wurde der Volltext-Cache explizit deaktiviert.
 
-Docker-Compose:  
+Docker Compose:  
 
 ```bash
 INSTANCE1_CORE_FULLTEXT_INDEX_MIRROR_LOCALCACHE=off
@@ -217,7 +215,7 @@ Beachten Sie bei diesem Vorgehen, dass Änderungen an Dateien im Container nicht
 
 Im Cluster muss die Datei in allen Instanzen ausgetauscht werden.
 
-**Beispiel Docker-Compose:**
+**Beispiel Docker Compose:**
 
 ```bash
 docker compose exec application-layer bash

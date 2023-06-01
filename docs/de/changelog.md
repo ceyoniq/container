@@ -1,7 +1,32 @@
 # Änderungshistorie
 
-Die Releasenotes der Softwarekomponenten finden Sie in unserem [Serviceportal](<https://serviceportal.ceyoniq.com/>).  
-Die aktuelle Liste der Container Image finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
+Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
+Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
+
+## 9.0.1200 (Juni 2023)
+
+Mit dem nscale 9 Release gibt es einige Änderungen in unseren nscale Standard Containern. Wir haben uns insbesondere auf den Aspekt der Sicherheit fokussiert.
+
+Deshalb haben wir entschieden, bis auf Weiteres nur noch Images auf der Basis der 
+[Red Hat Universal Base Image Distribution](https://catalog.redhat.com/software/base-images) bereitzustellen, weil diese Images aktiv von [Red Hat]( https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image) für den produktiven Container Betrieb gepflegt und bereitgestellt werden.
+Details zu den aktuellen Basisimages und installierten Tools finden Sie [hier](../../images/base/index.md).
+
+Bisher wurden die nscale Standard Container sowohl auf der Basis von Ubuntu also auch UBI angeboten. **Die Ubuntu Images werden ab diesem Monatsrelease nicht mehr angeboten!**
+
+Neben einigen kleineren Verbesserungen in der Kubernetes-Konfiguration haben wir zudem neben dem bereits vorhandenen [Security Context]( https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)  auch [Network Policies]( https://kubernetes.io/docs/concepts/services-networking/network-policies/) für unsere Container in einer Beispiel-Konfiguration hinterlegt.
+Bei unseren Kubernetes Beispielen konzentrieren wir uns weiterhin auf den Microsoft managed Azure Kubernetes Cluster (AKS). Da wir uns an den Standard halten funktioniert das Deployment aber auch auf allen anderen Kubernetes Clustern.
+
+* Aktualisierung aller nscale Standard Container Images auf der Basis der [Red Hat Universal Base Image Distribution](./index.md#basisimage) Distribution.
+* Postgresql Upgrade auf 15. **Wir unterstützen in der Beispielkonfiguration *KEINE* automatische Migration von 14 auf 15!**
+* [Static Scanning Reports](./kubernetes.md##security-scan-report) unserer Kubernetes Konfiguration mit [kube score](https://kube-score.com/).
+* Kubernetes Kustomize Overlay mit Network Policies.
+* Umbenennung von postgres.yaml auf postgresql.yaml.
+* Einführung von [Pod Disruption Budget](https://kubernetes.io/docs/tasks/run-application/configure-pdb/) für die Skalierung der Komponenten.
+* Update der `docker compose` Version auf 3.9 (<https://docs.docker.com/compose/migrate/>); Die Konfiguration wird nur mit dem aktuellen `docker compose` getestet.
+* Kubernetes Liveness Probes, die identisch zur Readiness Probe waren wurden gelöscht (<https://github.com/zegl/kube-score/blob/master/README_PROBES.md#livenessprobe>)
+* Size Limits auf emptyDir Volumes <https://kubernetes.io/docs/concepts/storage/volumes/#emptydir>.
+* ephemeral-storage limits https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes.
+* Verwendung der Downward API im application layer um ein Cluster aufzubauen (https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/).
 
 ## 9.0.1100 (Mai 2023)
 

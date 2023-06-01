@@ -17,6 +17,8 @@ spec:
           capabilities:
             drop:
               - ALL
+          seccompProfile:
+            type: RuntimeDefault
       containers:
       - name: monitoring-console
         securityContext:
@@ -27,3 +29,5 @@ spec:
           capabilities:
             drop:
               - ALL
+          seccompProfile:
+            type: RuntimeDefault

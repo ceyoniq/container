@@ -5,4 +5,5 @@
   path: /spec/template/spec/volumes/1
   value:
     name: storage-layer
-    emptyDir: {}
+    emptyDir:
+      sizeLimit: 1Gi

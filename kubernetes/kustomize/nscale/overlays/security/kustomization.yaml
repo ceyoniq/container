@@ -1,18 +1,21 @@
 bases:
-- ../../base
+- ../network
 
 patchesStrategicMerge:
-- postgres.yaml
+- postgresql.yaml
 - application-layer.yaml
-- application-layer-web.yaml
-- monitoring-console.yaml
-- rendition-server.yaml
-- console.yaml
 - storage-layer.yaml
+- application-layer-web.yaml
+- rendition-server.yaml
 - administrator.yaml
+- monitoring-console.yaml
+- console.yaml
+# Enable process automation modeler
+#- process-automation-modeler.yaml
 # Enable pipeliner
 #- pipeliner.yaml
 # Enable nscale connectors if required
 #- cmis-connector.yaml
 #- ilm-connector.yaml
 #- webdav-connector.yaml
+#- xta-connector.yaml
