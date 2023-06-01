@@ -1,0 +1,207 @@
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: application-layer
+spec:
+  podSelector:
+    matchLabels:
+      app: application-layer
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    # access from system namespace (ingress)
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+  - from:
+    # access from ingress controller (if not in kube-system)
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: ingress-basic
+  - from:
+    # access from administrator in the same namespace
+    - podSelector:
+        matchLabels:
+          app: administrator
+    ports:
+      - protocol: TCP
+        port: 8080
+  - from:
+    # access from application-layer in the same namespace to setup a cluster
+    - podSelector:
+        matchLabels:
+          app: application-layer
+    ports:
+      - protocol: TCP
+        port: 7800
+      - protocol: TCP
+        port: 32000
+        endPort: 65535
+  - from:
+    # access from application-layer-setup container in the same namespace
+    - podSelector:
+        matchLabels:
+          app: application-layer-setup
+    ports:
+      - protocol: TCP
+        port: 8080
+  - from:
+    # access from application-layer-web in the same namespace
+    - podSelector:
+        matchLabels:
+          app: application-layer-web
+    ports:
+      - protocol: TCP
+        port: 8080
+  - from:
+    # access from monitoring-console in the same namespace
+    - podSelector:
+        matchLabels:
+          app: monitoring-console
+    ports:
+      - protocol: TCP
+        port: 8080
+  - from:
+    # access from console in the same namespace
+    - podSelector:
+        matchLabels:
+          app: console
+    ports:
+      - protocol: TCP
+        port: 8080
+  - from:
+    # access from pipeliner in the same namespace
+    - podSelector:
+        matchLabels:
+          app: pipeliner
+    ports:
+      - protocol: TCP
+        port: 8080
+      - protocol: TCP
+        port: 7800
+      - protocol: TCP
+        port: 32000
+        endPort: 65535
+  - from:
+    # access from cmis-connector in the same namespace
+    - podSelector:
+        matchLabels:
+          app: cmis-connector
+    ports:
+      - protocol: TCP
+        port: 8080
+  - from:
+    # access from ilm-connector in the same namespace
+    - podSelector:
+        matchLabels:
+          app: ilm-connector
+    ports:
+      - protocol: TCP
+        port: 8080
+  - from:
+    # access from webdav-connector in the same namespace
+    - podSelector:
+        matchLabels:
+          app: webdav-connector
+    ports:
+      - protocol: TCP
+        port: 8080
+  - from:
+    # access from xta-connector in the same namespace
+    - podSelector:
+        matchLabels:
+          app: xta-connector
+    ports:
+      - protocol: TCP
+        port: 8080
+  - from:
+    # access from process-automation-modeler in the same namespace
+    - podSelector:
+        matchLabels:
+          app: process-automation-modeler
+    ports:
+      - protocol: TCP
+        port: 8080
+  egress:
+  - to:
+    - ipBlock:
+        # allow complete internet for demo
+        cidr: "0.0.0.0/0"
+    # NOTE: open necessary IPs for Kubernetes API Server (10.0.0.1), LDAP and SMTP server.
+    # Kubernetes API Server
+    #- ipBlock:
+    #    cidr: 10.0.0.1/32
+    # LDAP Server
+    #- ipBlock:
+    #    cidr: 10.1.1.1/32
+    # SMTP Server
+    #- ipBlock:
+    #    cidr: 10.1.1.2/32
+
+  - to:
+    - podSelector:
+        matchLabels:
+          app: postgresql
+    ports:
+      - protocol: TCP
+        port: 5432
+  - to:
+    # access to application-layer in the same namespace to setup a cluster
+    - podSelector:
+        matchLabels:
+          app: application-layer
+    ports:
+      - protocol: TCP
+        port: 7800
+      - protocol: TCP
+        port: 32000
+        endPort: 65535
+  - to:
+    - podSelector:
+        matchLabels:
+          app: pipeliner
+    ports:
+      - protocol: TCP
+        port: 7800
+      - protocol: TCP
+        port: 32000
+        endPort: 65535
+  - to:
+    # access to rendition-server in the same namespace
+    - podSelector:
+        matchLabels:
+          app: storage-layer
+    ports:
+      - protocol: TCP
+        port: 3005
+  - to:
+    # access to rendition-server in the same namespace
+    - podSelector:
+        matchLabels:
+          app: rendition-server
+    ports:
+      - protocol: TCP
+        port: 8192
+
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: application-layer-setup
+spec:
+  podSelector:
+    matchLabels:
+      app: application-layer-setup
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: application-layer
+    ports:
+      - protocol: TCP
+        port: 8080

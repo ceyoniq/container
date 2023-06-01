@@ -21,7 +21,7 @@ spec:
       - name: regcred
       containers:
       - name: rendition-server
-        image: ceyoniq.azurecr.io/release/nscale/rendition-server:9.0.1001.2023032008.0
+        image: ceyoniq.azurecr.io/release/nscale/rendition-server:ubi.9.0.1200.2023051618
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -29,10 +29,6 @@ spec:
             port: 8192
           initialDelaySeconds: 10
           failureThreshold: 5
-        livenessProbe:
-          httpGet:
-            path: /rs/
-            port: 8192
         readinessProbe:
           httpGet:
             path: /rs/
@@ -48,9 +44,11 @@ spec:
           limits:
             cpu: "2000m"
             memory: "2000Mi"
+            ephemeral-storage: "1300Mi"
           requests:
             cpu: "100m"
             memory: "100Mi"
+            ephemeral-storage: "1000Mi"
         volumeMounts:
         - name: license
           mountPath: /opt/ceyoniq/nscale-rendition-server/conf/license.xml
@@ -77,7 +75,6 @@ metadata:
 spec:
   ports:
   - port: 8192
-    targetPort: 8192
     name: rendition
     appProtocol: http
   selector:

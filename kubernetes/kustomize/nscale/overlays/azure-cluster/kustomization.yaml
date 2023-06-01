@@ -26,3 +26,8 @@ secretGenerator:
 patchesStrategicMerge:
 - storage-layer.yaml
 - application-layer.yaml
+- security-context.yaml
+
+resources:
+- application-layer-setup2.yaml
+- network-policy.yaml

@@ -82,14 +82,14 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 ## Start mit Docker
 
 ```bash
-docker run \
+docker run --rm \
   -e LOG_APPENDER=Console \
   -p 3005:3005 \
   -v $(pwd)/arc:/opt/ceyoniq/nscale-server/storage-layer/arc \
   -v $(pwd)/da:/opt/ceyoniq/nscale-server/storage-layer/da \
   -v $(pwd)/etc:/opt/ceyoniq/nscale-server/storage-layer/etc \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/storage-layer/etc/license.xml \
-  ceyoniq.azurecr.io/release/nscale/storage-layer:9.0.1101.2023042708.0
+  ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.9.0.1200.2023052408
 ```
 
 ## Skalierung
@@ -103,13 +103,13 @@ Weitere Informationen zur Konfiguration von nscale Server Storage Layer finden S
 
 ### Verwenden eines HardDisk-Device
 
-Mit einem HardDisk-Device haben Sie die Möglichkeit, in Docker-Compose ein `Volume` zu verwenden und in Kubernetes `PersistentVolumeClaim` und `PersistentVolume` einzusetzen.  
+Mit einem HardDisk-Device haben Sie die Möglichkeit, in Docker Compose ein `Volume` zu verwenden und in Kubernetes `PersistentVolumeClaim` und `PersistentVolume` einzusetzen.  
 In diesem Beispiel werden Dateien für den neuen Archivtyp `DEMOARCHIVETYPE` in den Ordner `/mnt` migriert.
 `/mnt` muss als `Volume` verfügbar sein.
 
 > Bitte beachten Sie, dass hier der Ordner `/mnt` gewählt wurde, um dieses Beispiel möglichst einfach zu halten.
 
-**Beispiel Docker-Compose:**
+**Beispiel Docker Compose:**
 
 ```yaml
 volumes:
@@ -154,7 +154,7 @@ env:
 
 **Konfiguration über die `storagelayer.conf`:**
 
-Wenn Sie nscale Server Storage Layer nicht über Umgebungsvariablen steuern möchten, können Sie weiterhin die `storagelayer.conf` verwenden. Kopieren Sie dazu die `storagelayer.conf` aus dem nscale Server Storage Layer Standard Container und verwenden Sie diese Datei als Kubernetes `ConfigMap` oder als Docker-Compose `Bind-Mount`.
+Wenn Sie nscale Server Storage Layer nicht über Umgebungsvariablen steuern möchten, können Sie weiterhin die `storagelayer.conf` verwenden. Kopieren Sie dazu die `storagelayer.conf` aus dem nscale Server Storage Layer Standard Container und verwenden Sie diese Datei als Kubernetes `ConfigMap` oder als Docker Compose `Bind-Mount`.
 
 Erweitern Sie Ihre Konfiguration in der `storagelayer.conf` um folgende Eigenschaften:
 
@@ -181,7 +181,7 @@ Erweitern Sie Ihre Konfiguration in der `storagelayer.conf` um folgende Eigensch
 
 Objektspeicher ist eine hierarchiefreie Methode zum Speichern von Daten, die normalerweise in der Cloud verwendet wird.
 
-**Beispiel Docker-Compose:**
+**Beispiel Docker Compose:**
 
 ```yaml
 volumes:
@@ -248,7 +248,7 @@ env:
 
 Weitere Informationen zu `ACCOUNTING` und `MONITORING` finden Sie in der nscale Server Storage Layer Dokumentation in unserem [Serviceportal](<https://serviceportal.ceyoniq.com/>).
 
-**Beispiel Docker-Compose:**
+**Beispiel Docker Compose:**
 
 ```yaml
 volumes:

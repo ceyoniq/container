@@ -21,13 +21,8 @@ spec:
       - name: regcred
       containers:
       - name: xta-connector
-        image: ceyoniq.azurecr.io/release/nscale/xta-connector:9.0.1000.2023031316.0
+        image: ceyoniq.azurecr.io/release/nscale/xta-connector:ubi.9.0.1200.2023051716
         imagePullPolicy: Always
-        livenessProbe:
-          httpGet:
-            path: /xta/
-            port: 8099
-          initialDelaySeconds: 20
         readinessProbe:
           httpGet:
             path: /xta/
@@ -61,15 +56,18 @@ spec:
           limits:
             cpu: "1000m"
             memory: "1000Mi"
+            ephemeral-storage: "550Mi"
           requests:
             cpu: "100m"
             memory: "500Mi"
+            ephemeral-storage: "450Mi"
         volumeMounts:
         - name: temp
           mountPath: /opt/ceyoniq/nscale-xta-connector/temp
       volumes:
       - name: temp
-        emptyDir: {}
+        emptyDir:
+          sizeLimit: 50Mi
 ---
 apiVersion: v1
 kind: Service

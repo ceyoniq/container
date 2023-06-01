@@ -1,9 +1,9 @@
-# nscale Standard Container mit Docker-Compose
+# nscale Standard Container mit Docker Compose
 
-In dieser Dokumentation finden Sie Informationen dazu, wie Sie nscale mit Docker-Compose betreiben können.  
-Weitere Information zu Docker-Compose finden Sie unter <https://docs.docker.com/compose>.
+In dieser Dokumentation finden Sie Informationen wie Sie nscale mit Docker Compose betreiben können können.  
+Weitere Information zu Docker Compose finden Sie unter <https://docs.docker.com/compose/reference/>.
 
-Der Betrieb von nscale Standard Container mit Docker-Compose hat folgende Vorteile:
+Der Betrieb von nscale Standard Container mit Docker Compose hat folgende Vorteile:
 
 - sehr einfache Installation im Single-Server-Betrieb
 - ideal für die Entwicklung mit nscale
@@ -14,7 +14,7 @@ Der Betrieb von nscale Standard Container mit Docker-Compose hat folgende Vortei
 
 ## Inhalt
 
-- [nscale Standard Container mit Docker-Compose](#nscale-standard-container-mit-docker-compose)
+- [nscale Standard Container mit Docker Compose](#nscale-standard-container-mit-docker-compose)
   - [Inhalt](#inhalt)
   - [Quick Start Guide](#quick-start-guide)
   - [Grundlagen](#grundlagen)
@@ -34,10 +34,10 @@ Der Betrieb von nscale Standard Container mit Docker-Compose hat folgende Vortei
 > Wenn Sie mit Windows arbeiten, müssen Sie unter Umständen die Dateipfade aus diesem Beispiel ändern.  
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der nscale Standard Container ist.
 
-Stellen Sie vor dem Start der nscale Standard Container mit Docker-Compose sicher, dass Sie die folgenden Voraussetzungen erfüllt haben:
+Stellen Sie vor dem Start der nscale Standard Container mit Docker Compose sicher, dass Sie die folgenden Voraussetzungen erfüllt haben:
 
 - Sie haben eine lauffähige Docker-Installation (ab Version 20.10.2)
-- Sie haben Docker-Compose (ab Version 1.27.4) installiert
+- Sie haben Docker Compose (ab Version 2.10) installiert
 - Sie besitzen eine gültige **Lizenzdatei**
 - Sie haben Login-Daten für die Container-Registry **ceyoniq.azurecr.io**
 
@@ -77,22 +77,24 @@ Compose ist ein Werkzeug zur Definition und Ausführung von Multi-Container-Dock
 Mit Compose verwenden Sie eine YAML-Datei, um die Dienste Ihrer Anwendung zu konfigurieren.
 Sie können dann mit einem einzigen Befehl alle Dienste aus Ihrer Konfiguration starten.
 
-Weitere Informationen zu Docker-Compose finden Sie hier:
-<https://docs.docker.com/compose>
+Weitere Informationen zu Docker Compose finden Sie hier:
+<https://docs.docker.com/compose/reference/>
 
 Weitere Information zu den nscale Standard Containern finden Sie hier:
 
 - [nscale/application-layer (nscale Server Application Layer)](components/application-layer.md)
 - [nscale/application-layer-web (nscale Server Application Layer Web)](components/application-layer-web.md)
+- [nscale/pipeliner (nscale Pipeliner)](components/pipeliner.md)
 - [nscale/storage-layer (nscale Server Storage Layer)](components/storage-layer.md)
 - [nscale/rendition-server (nscale Rendition Server)](components/rendition-server.md)
-- [nscale/console (nscale Console)](components/console.md)
+- [nscale/administrator (nscale Administrator)](components/administrator.md)
 - [nscale/monitoring-console (nscale Monitoring Console)](components/monitoring-console.md)
-- [nscale/pipeliner (nscale Pipeliner)](components/pipeliner.md)
+- [nscale/console (nscale Console)](components/console.md)
+- [nscale/process-automation-modeler (nscale Process Automation Modeler)](components/process-automation-modeler.md)
 - [nscale/cmis-connector (nscale CMIS-Connector)](components/cmis-connector.md)
 - [nscale/webdav-connector (nscale WebDAV-Connector)](components/webdav-connector.md)
 - [nscale/ilm-connector (nscale ERP Connector ILM)](components/ilm-connector.md)
-- [nscale/process-automation-modeler (nscale Process Automation Modeler)](components/process-automation-modeler.md)
+- [nscale/xta-connector (nscale XTA Connector)](components/xta-connector.md)
 
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
 > Weiter erfolgt der Einsatz von Software von Drittanbietern wie Loki, Grafana, Prometheus, etc. hier zum Zweck der Darstellung innerhalb einer Beispielkonfiguration.
@@ -110,9 +112,17 @@ docker login ceyoniq.azurecr.io -u [username] -p [token]
 
 ## docker compose Beispielszenarien
 
-Im Ordner `nscale` befinden sich die Basis-Docker-Compose-Datei (`docker-compose.yml`) und andere ergänzende Compose-Dateien.
+Im Ordner `nscale` befinden sich die Basis-Docker Compose-Datei (`docker-compose.yml`) und andere ergänzende Compose-Dateien.
 Wenn diese Dateien kombiniert werden, führt das Kommando `docker compose up` die Dateien zusammen und führt ein Deployment durch.
 In der Datei `docker-compose.example.env` finden Sie verschiedene Möglichkeiten, nscale zu betreiben.
+
+*Hinweis:* Mit dem Überlagern der `COMPOSE_PROJECT_NAME` Variable können Sie parallel mehrere Installation auf der Grundlage einer geteilten Konfiguration betreiben.
+
+**docker-compose.setup.yml**  
+Initialisierung von nscale mit einem default Dokumenten Bereich.
+
+**docker-compose.health.yml**  
+Health Check für die Standard nscale Container.
 
 **docker-compose.proxy.yml**  
 Diese Konfiguration bietet eine Unterstützung von Traefik (<https://docs.traefik.io>) als Reverse Proxy.  
@@ -132,6 +142,9 @@ In dieser Konfiguration wird nscale Process Automation Modeler verwendet.
 **docker-compose.pipeliner.yml**  
 In dieser Konfiguration wird nscale Pipeliner verwendet.
 
+**docker-compose.connectors.yml**  
+In dieser Konfiguration werden die nscale Konnektoren eingebunden.
+
 **docker-compose.analytics.yml**  
 Diese Konfiguration bietet Grafana, Prometheus und Loki  Unterstützung.  
 Für Loki werden Treiber für Docker benötigt, eine Liste dieser Treiber finden Sie unter [Log Aggregation](#log-aggregation-mit-loki).
@@ -143,7 +156,7 @@ Außerdem haben Sie die Möglichkeit, eigene YAML-Dateien zu erstellen und so ei
 
 > Sie benötigen nscale Administrator ab Version 8.0.5000.
 
-Für den Zugriff mit nscale Administrator auf Ihre nscale-Installation innerhalb Docker-Compose steht Ihnen der **kein RMS**-Modus (RMS = nscale Remote Management Service) zur Verfügung.
+Für den Zugriff mit nscale Administrator auf Ihre nscale-Installation innerhalb Docker Compose steht Ihnen der **kein RMS**-Modus (RMS = nscale Remote Management Service) zur Verfügung.
 Erzeugen Sie eine neue Komponenten-Gruppe in nscale Administrator, um den **kein RMS**-Modus zu verwenden und auf die jeweiligen nscale-Komponenten zugreifen zu können.
 
 Wenn Sie die Konfigurationsdatei `docker-compose.proxy.yml` verwenden, ist nscale Server Application Layer auf `localhost` zu erreichen.  
@@ -228,7 +241,7 @@ Der erste Endpunkt liefert Informationen zur nscale Monitoring Console, während
 
 ## Limitierungen
 
-Bitte beachten Sie, dass eine Clusterbildung mit Docker-Compose nicht möglich ist.
+Bitte beachten Sie, dass eine Clusterbildung mit Docker Compose nicht möglich ist.
 Wenn Sie mehrere Maschinen einsetzen wollen, um nscale zu betreiben, empfehlen wir Ihnen den Einsatz in Kubernetes.  
 
 Informationen zu weiteren Limitierungen finden Sie hier:  

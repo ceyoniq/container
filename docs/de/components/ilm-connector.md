@@ -48,12 +48,11 @@ Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in eine
 ## Start mit Docker
 
 ```bash
-docker run -it \
---network nscale_nscale \
--p 8297:8297 \
--e ILM_AL_HOST=application-layer \
--e ILM_AL_PORT=8080 \
--e ILM_AL_SSL=false \
--e ILM_AL_DOMAIN=nscale \
-ceyoniq.azurecr.io/release/nscale/ilm-connector:9.0.1001.2023031312.0
+docker run --rm \
+  -p 8297:8297 \
+  -e ILM_AL_HOST=application-layer \
+  -e ILM_AL_PORT=8080 \
+  -e ILM_AL_SSL=false \
+  -e ILM_AL_DOMAIN=nscale \
+  ceyoniq.azurecr.io/release/nscale/ilm-connector:ubi.9.0.1200.2023051702
 ```

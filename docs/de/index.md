@@ -1,11 +1,5 @@
 # nscale Standard Container
 
-![Ceyoniq Logo](../images/nscale9.png)
-
-nscale ist eine Informationsplattform und vereint sämtliche Vorteile eines Enterprise Information Management Systems. Der Nutzen von nscale ist vielfältig. Er beginnt bei einer einfachen und stabilen Dokumentenarchivierung und endet noch lange nicht beim Aufbau einer unternehmensweiten Informationsplattform zur Organisation von Daten und Inhalten. Denn ein Dokument ist oft wesentlich mehr als nur eine Datei. nscale unterstützt Sie nicht nur bei der Strukturierung, Archivierung und rechtssicheren, gesetzeskonformen Ablage: nscale macht Ihre Informationen wertvoll. Darin liegt der große Unterschied zu anderen Systemen.
-
-Für mehr Informationen besuchen Sie unsere Website unter <https://www.ceyoniq.com/>.
-
 ## Inhalt
 
 - [nscale Standard Container](#nscale-standard-container)
@@ -15,10 +9,12 @@ Für mehr Informationen besuchen Sie unsere Website unter <https://www.ceyoniq.c
   - [Lizenzierung](#lizenzierung)
   - [Container-Registry](#container-registry)
   - [nscale Standard Container-Images](#nscale-standard-container-images)
+  - [Basisimage](#basisimage)
+    - [Add Microsoft Fonts](#add-microsoft-fonts)
   - [Produktmerkmale](#produktmerkmale)
   - [Betrieb](#betrieb)
   - [Betrieb mit Docker](#betrieb-mit-docker)
-  - [Betrieb mit Docker-Compose](#betrieb-mit-docker-compose)
+  - [Betrieb mit Docker Compose](#betrieb-mit-docker-compose)
   - [Betrieb mit Kubernetes](#betrieb-mit-kubernetes)
   - [Limitierungen](#limitierungen)
   - [FAQ](#faq)
@@ -29,7 +25,7 @@ Für mehr Informationen besuchen Sie unsere Website unter <https://www.ceyoniq.c
 
 Bei diesem Dokument handelt es sich um die Dokumentation verschiedener nscale-Komponenten im Container-Betrieb.
 Dieses Dokument richtet sich ausdrücklich an Personen, die sich mit dem Betrieb bzw. der Administration von nscale beschäftigen.
-Sie sollten außerdem Erfahrungen im Umgang mit dem Betrieb von Software bzw. Applikationen in OCI-kompatiblen Containern, sowie Grundwissen zum Aufbau und Zusammenspiel eines nscale-Systems haben.
+Sie sollten außerdem Erfahrungen im Umgang mit dem Betrieb von Software bzw. Applikationen in OCI-kompatiblen Containern sowie Grundwissen zum Aufbau und Zusammenspiel eines nscale-Systems haben.
 
 > Weitere Informationen zum Betrieb von nscale finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com>.
 
@@ -37,34 +33,29 @@ Sie sollten außerdem Erfahrungen im Umgang mit dem Betrieb von Software bzw. Ap
 
 Für den Betrieb von nscale Standard Container muss Ihr System die folgenden Mindestvoraussetzungen erfüllen:
 
-- min. 4 GB RAM
+- min. 6 GB RAM
 - weitere Software bzw. Hardwarevoraussetzungen finden Sie im Installationshandbuch der jeweiligen Komponenten.
 Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <https://serviceportal.ceyoniq.com/>.
 
 Außerdem müssen Sie ggf. einige Programme von Drittanbietern installieren, um nscale Standard Container starten, betreiben und überwachen zu können. Diese sind:
 
-- **Docker** ab Version 20.10.2
+- **Docker** ab Version 20.10
   - oder eine vergleichbare Container-Laufzeitumgebung für OCI-kompatible Container
-- **Docker-Compose** ab Version 1.27.4
-- **Kubernetes** ab Version 1.19.3
+- **Docker Compose** ab Version 2.10
+- **Kubernetes** ab Version 1.25
 
 Alle nscale Standard Container sind **Linux**-Container.  
-
-Für Test- und Entwicklungssysteme können Sie unter anderem [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/) oder [Docker Desktop for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac) verwenden.
 
 Weitere Informationen zu Docker finden Sie unter <https://www.docker.com/>.  
 Weitere Informationen zu Kubernetes finden Sie unter <https://kubernetes.io/>.
 
 ## Lizenzierung
 
-Der Betrieb von nscale Standard Container benötigt eine nscale Standard Container-Lizenz. Lizenzen, die nicht für den Container-Betrieb von nscale ausgestellt wurden, können nicht verwendet werden.
-Lizenzen können beim Vertrieb der Ceyoniq Technology GmbH erworben werden.  
-Sollten Sie trotz Verwendung einer gültigen Container-Lizenz Probleme haben, wenden Sie sich bitte an den [Ceyoniq Service](support.md).
+Der Betrieb von nscale Standard Container benötigt eine nscale Standard Container-Lizenz. Diese Lizenz wird auf Anfrage vom [Ceyoniq Service](support.md) für Sie erstellt.
 
 ## Container-Registry
 
-Um auf die nscale Standard Container zugreifen zu können, benötigen Sie einen Zugang für die Ceyoniq Container Registry **ceyoniq.azurecr.io**.  
-Weitere Informationen erhalten Sie vom [Ceyoniq Service](support.md).
+Um auf die nscale Standard Container zuzugreifen, benötigen Sie zudem einen Zugang für die Ceyoniq Container Registry **ceyoniq.azurecr.io**. Auch diese Zugangsdaten erhalten Sie über den [Ceyoniq Service](support.md).
 
 ## nscale Standard Container-Images
 
@@ -72,25 +63,115 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 
 > Der Eintrag in der Spalte **nscale Komponente** führt Sie jeweils zu weiteren Informationen.
 
-| Image | Release Tag | nscale Komponente |
-|:---|:---|:---|
-| ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>9.0.1101.2023042721.0</application-layer-tag> | [nscale Server Application Layer](components/application-layer.md) |
-| ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>9.0.1101.2023042710.0</application-layer-web-tag> | [nscale Server Application Layer Web](components/application-layer-web.md) |
-| ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>9.0.1101.2023042708.0</storage-layer-tag> | [nscale Server Storage Layer](components/storage-layer.md) |
-| ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>9.0.1001.2023032008.0</rendition-server-tag> | [nscale Rendition Server](components/rendition-server.md) |
-| ceyoniq.azurecr.io/release/nscale/console | <console-tag>9.0.1100.13054.0</console-tag> | [nscale Console](components/console.md) |
-| ceyoniq.azurecr.io/release/nscale/monitoring-console | <monitoring-console-tag>9.0.1001.2023031918.0</monitoring-console-tag> | [nscale Monitoring Console](components/monitoring-console.md) |
-| ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>9.0.1101.2023042809.0</pipeliner-tag> | [nscale Pipeliner](components/pipeliner.md) |
-| ceyoniq.azurecr.io/release/nscale/cmis-connector | <cmis-connector-tag>9.0.1001.2023032113.0</cmis-connector-tag> | [nscale CMIS-Connector](components/cmis-connector.md) |
-| ceyoniq.azurecr.io/release/nscale/webdav-connector | <webdav-connector-tag>9.0.1000.2023031316.0</webdav-connector-tag> | [nscale WebDAV-Connector](components/webdav-connector.md) |
-| ceyoniq.azurecr.io/release/nscale/ilm-connector | <ilm-connector-tag>9.0.1001.2023031312.0</ilm-connector-tag> | [nscale ERP Connector ILM](components/ilm-connector.md) |
-| ceyoniq.azurecr.io/release/nscale/xta-connector | <xta-connector-tag>9.0.1000.2023031316.0</xta-connector-tag> | [nscale XTAConnector](components/xta-connector.md) |
-| ceyoniq.azurecr.io/release/nscale/administrator | <administrator-tag>9.0.1100.2023042412.0</administrator-tag> | [nscale Administrator](components/administrator.md) |
-| ceyoniq.azurecr.io/release/nscale/process-automation-modeler | <process-automation-modeler-tag>9.0.1000.2022032811.0</process-automation-modeler-tag> | [nscale Process Automation Modeler](components/process-automation-modeler.md) |
+| Komponente | Image | Akutelles Release Tag | Basis Image |
+|:---|:---|:---|:---|
+| [nscale Server Application Layer](components/application-layer.md) | ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>ubi.9.0.1200.2023052021</application-layer-tag> | [openjdk-fonts](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk-fonts) |
+| [nscale Server Application Layer Web](components/application-layer-web.md) | ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>ubi.9.0.1200.2023052511</application-layer-web-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale Pipeliner](components/pipeliner.md) | ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>ubi.9.0.1200.2023052211</pipeliner-tag>  | [pipeliner](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-pipeliner) |
+| [nscale Server Storage Layer](components/storage-layer.md) | ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>ubi.9.0.1200.2023052408</storage-layer-tag> | [storage-layer](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-storage-layer) |
+| [nscale Rendition Server](components/rendition-server.md) | ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>ubi.9.0.1200.2023051618</rendition-server-tag> | [rendition-server](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-rendition-server) |
+| [nscale Administrator](components/administrator.md) | ceyoniq.azurecr.io/release/nscale/administrator | <administrator-tag>ubi.9.0.1200.2023052416</administrator-tag> | [administrator](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-administrator) |
+| [nscale Monitoring Console](components/monitoring-console.md) | ceyoniq.azurecr.io/release/nscale/monitoring-console | <monitoring-console-tag>ubi.9.0.1200.2023051908</monitoring-console-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale Console](components/console.md) | ceyoniq.azurecr.io/release/nscale/console | <console-tag>ubi.9.0.1200.13068</console-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale Process Automation Modeler](components/process-automation-modeler.md) | ceyoniq.azurecr.io/release/nscale/process-automation-modeler | <process-automation-modeler-tag>ubi.9.0.1000.2023040316</process-automation-modeler-tag> | [nodejs](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-nodejs) |
+| [nscale CMIS-Connector](components/cmis-connector.md) | ceyoniq.azurecr.io/release/nscale/cmis-connector | <cmis-connector-tag>ubi.9.0.1202.2023052608</cmis-connector-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale WebDAV-Connector](components/webdav-connector.md)| ceyoniq.azurecr.io/release/nscale/webdav-connector | <webdav-connector-tag>ubi.9.0.1200.2023051702</webdav-connector-tag>  | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale ERP Connector ILM](components/ilm-connector.md) | ceyoniq.azurecr.io/release/nscale/ilm-connector | <ilm-connector-tag>ubi.9.0.1200.2023051702</ilm-connector-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale XTAConnector](components/xta-connector.md) | ceyoniq.azurecr.io/release/nscale/xta-connector | <xta-connector-tag>ubi.9.0.1200.2023051716</xta-connector-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
 
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
 
 ![Komponenten als Container](../images/nscaleStandardContainerOverview.png)
+
+## Basisimage
+
+Alle nscale Standard Images werden auf Basis der aktuellen [Red Hat UBI 9 minimal](https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image) Images erstellt.  
+Das Open Source Fedora-Projekt ist die Upstream Community-Distribution von "Red Hat® Enterprise Linux" auf dem unsere Images aufbauen.
+Entsprechend können die Images abgeleitet und mit Enterprise Red Hat oder Fedora Tools erweitert werden.
+
+Wir installieren in unseren Images zusätzliche Werkzeuge aus dem "Red Hat Universal Base Image" Upstream.
+Im Speziellem gibt es Ausnahmen davon im Rendition Server und Application Layer Images,
+in denen freie TrueType Google Fonts ([Croscore fonts](https://en.wikipedia.org/wiki/Croscore_fonts)) anstatt der default Dejavu Fonts installiert sind.
+
+* [Google Arimo Font](https://fonts.google.com/specimen/Arimo)
+* [Google Cousine Font](https://fonts.google.com/specimen/Cousine)
+* [Google Tinos Font](https://fonts.google.com/specimen/Tinos)
+
+Daneben sind im Rendition Server Image unter `/opt` [Tesseract-OCR](https://github.com/tesseract-ocr/tesseract)
+und [ImageMagick](https://github.com/ImageMagick/ImageMagick) nachinstalliert.
+Diese Binaries wurden aus den Quellen auf der Basis der UBI Images kompiliert.
+
+Die Details zu den aktuell installierten Zusatzpaketen können Sie den entsprechend versionierten Dockerfiles in dem Ordner [images/base/](../../images/base/index.md) entnehmen.
+
+Unsere Images können um weitere Tools etwa aus den
+[Extra Packages for Enterprise Linux (EPEL) 9](https://docs.fedoraproject.org/en-US/epel/#_el9) ergänzt werden.
+
+```bash
+# install full package manager
+microdnf install -y dnf
+# register epel source
+dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+# enable Code Ready Builder
+/usr/bin/crb enable
+
+# list available repositories
+microdnf repolist
+dnf repository-packages epel list 
+
+# install p7zip from EPEL
+dnf --disablerepo=* --enablerepo=epel search p7zip
+microdnf --disablerepo=* --enablerepo=epel install -y p7zip
+```
+
+Wenn eine Red Hat Subscription vorhanden ist kann diese auch verwendet werden
+um eine Reihe weiterer offiziell unterstützter Repositories einzubinden ([Get Started with Red Hat Subscription Management](https://access.redhat.com/articles/433903)).
+
+```bash
+# install subscription manager on ubi minimal image
+microdnf install --assumeyes subscription-manager
+export SMDEV_CONTAINER_OFF=1
+# register account: This command will download the entitlement and consumer certificates in /etc/pki
+# NOTE: Do no put the cleartext password into a dockerfile instruction file!
+subscription-manager register --username=<username> --password=<password>
+
+# list repositories
+subscription-manager list --available --all
+# list available repositories
+microdnf repolist
+
+# install leptonica / tesseract from RHEL repositories
+microdnf install --assumeyes leptonica tesseract
+# install tesseract language packages
+export TESSDATA_PREFIX=/usr/share/tesseract/tessdata
+curl -L https://github.com/tesseract-ocr/tessdata_fast/raw/main/deu.traineddata -o ${TESSDATA_PREFIX}/deu.traineddata
+curl -L https://github.com/tesseract-ocr/tessdata_fast/raw/main/eng.traineddata -o ${TESSDATA_PREFIX}/eng.traineddata 
+
+# install ImageMagick from EPEL (see https://access.redhat.com/solutions/4437561)
+subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms
+dnf install --assumeyes https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+microdnf install --assumeyes ImageMagick
+
+microdnf clean all
+```
+
+### Add Microsoft Fonts
+
+Die Microsoft Fonts können aus lizenzrechtlichen Gründen nicht im Basisimage vorinstalliert werden.
+Stattdessen können diese gegebenenfalls in einem abgeleiteten Image nachinstalliert werden.
+
+```bash
+# install full package manager
+microdnf install --assumeyes dnf
+# register epel source
+dnf install --assumeyes https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+
+# remove preinstalled Croscore fonts
+rpm -e --nodeps google-cousine-fonts google-arimo-fonts google-tinos-fonts dejavu-sans-fonts
+# install Microsoft Fonts instead
+rpm --install --nodeps https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+
+microdnf clean all
+```
 
 ## Produktmerkmale
 
@@ -104,10 +185,10 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 |nscale Process Automation Modeler|Ja|Ja|Nein|Nein|
 |nscale Console|Nein|Ja|Ja|Ja|
 |nscale Monitoring Console|Ja|Ja|Nein|Nein|
-|nscale CMIS-Connector|Ja|Ja|Ja|Ja|
-|nscale WebDAV-Connector|Ja|Ja|Ja|Ja|
-|nscale ERP Connector ILM|Ja|Ja|Ja|Ja|
-|nscale XTA Connector|Ja|Ja|Ja|Ja|
+|nscale CMIS-Connector|Ja|Ja|Nein|Nein|
+|nscale WebDAV-Connector|Ja|Ja|Nein|Nein|
+|nscale ERP Connector ILM|Ja|Ja|Nein|Nein|
+|nscale XTA Connector|Ja|Ja|Nein|Nein|
 
 (*) Die Komponente kann über ein [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) in Kubernetes skaliert werden.  
 (**) Die Komponente kann über einen [Service](https://kubernetes.io/docs/concepts/services-networking/service/) in Kubernetes Loadbalancing durchführen.
@@ -119,27 +200,27 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 ## Betrieb mit Docker
 
 Sie können die jeweiligen nscale Standard Container mit Docker oder einer kompatiblen Laufzeitumgebung für OCI-Container betreiben.
-Wir empfehlen den Einsatz von Docker-Compose oder Kubernetes.  
+Wir empfehlen den Einsatz von Docker Compose oder Kubernetes.  
 Weitere Informationen zum Betrieb der nscale Standard Container mit Docker finden Sie in den jeweiligen Dokumentationen der Komponenten in diesem Repository.
 
 [Liste aller nscale Server Standard Container](#nscale-standard-container-images)
 
-## Betrieb mit Docker-Compose
+## Betrieb mit Docker Compose
 
-Der Betrieb mit Docker-Compose ist eine Möglichkeit, nscale Standard Container zu betreiben.  
-Bei Docker-Compose handelt es sich um ein Tool, mit dem Sie aus mehreren Containern bestehende Applikationen definieren und betreiben können.
+Der Betrieb mit Docker Compose ist eine Möglichkeit, nscale Standard Container zu betreiben.  
+Bei Docker Compose handelt es sich um ein Tool, mit dem Sie aus mehreren Containern bestehende Applikationen definieren und betreiben können.
 
-Weitere Informationen zu Docker-Compose finden Sie  unter <https://docs.docker.com/compose>.  
+Weitere Informationen zu Docker Compose finden Sie  unter <https://docs.docker.com/compose>.  
 
-Der Betrieb von nscale Standard Container mit Docker-Compose hat folgende Vorteile:
+Der Betrieb von nscale Standard Container mit Docker Compose hat folgende Vorteile:
 
 - sehr einfache Installation im Single-Server-Betrieb
 - ideal für die Entwicklung mit nscale
 - schnelles Erzeugen eines Demo- und Test-Systems
 
-Eine genaue Beschreibung der Konfiguration von nscale im Betrieb mit Docker-Compose finden Sie unter:  
+Eine genaue Beschreibung der Konfiguration von nscale im Betrieb mit Docker Compose finden Sie unter:  
 
-[nscale Standard Container in Docker-Compose](compose.md)
+[nscale Standard Container in Docker Compose](compose.md)
 
 ## Betrieb mit Kubernetes
 

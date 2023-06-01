@@ -1,5 +1,5 @@
 bases:
-- ../../base
+- ../security
 
 patchesJson6902:
 - target:

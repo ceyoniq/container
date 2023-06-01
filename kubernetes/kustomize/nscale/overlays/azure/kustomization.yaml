@@ -6,9 +6,6 @@ resources:
 - pvc-rwx.yaml
 
 patchesStrategicMerge:
-- postgres.yaml
-- monitoring-console.yaml
-- rendition-server.yaml
 - storage-layer.yaml
 # Enable pipeliner
 #- pipeliner.yaml

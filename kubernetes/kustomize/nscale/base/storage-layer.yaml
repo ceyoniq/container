@@ -22,7 +22,7 @@ spec:
       # The license file mount inside the conf volume prevents the volume to get initialized with the image data.
       # Therefore we need to copy the data from the image to the volume manually before startup.
       - name: storage-layer-conf
-        image: ceyoniq.azurecr.io/release/nscale/storage-layer:9.0.1101.2023042708.0
+        image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.9.0.1200.2023052408
         imagePullPolicy: Always
         command: [ "/bin/sh", "-c" ]
         args:
@@ -34,20 +34,19 @@ spec:
         - name: storage-layer
           subPath: etc
           mountPath: /mnt
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "200Mi"
+            ephemeral-storage: "350Mi"
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+            ephemeral-storage: "250Mi"
       containers:
       - name: storage-layer
-        image: ceyoniq.azurecr.io/release/nscale/storage-layer:9.0.1101.2023042708.0
+        image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.9.0.1200.2023052408
         imagePullPolicy: Always
-        livenessProbe:
-          exec:
-            command:
-            - /opt/ceyoniq/nscale-server/storage-layer/bin/cstool
-            - srv
-            - -m1
-            - -c
-            - sock
-          initialDelaySeconds: 1
-          failureThreshold: 2
         readinessProbe:
           exec:
             command:
@@ -61,6 +60,8 @@ spec:
         env:
         - name: LOG_APPENDER
           value: "Console"
+        #- name: NSTL_STORAGE-LAYER_LOGLEVEL
+        #  value: "4"
         ports:
         - containerPort: 3005
           name: storage
@@ -68,9 +69,11 @@ spec:
           limits:
             cpu: "2000m"
             memory: "1000Mi"
+            ephemeral-storage: "350Mi"
           requests:
             cpu: "100m"
             memory: "100Mi"
+            ephemeral-storage: "250Mi"
         volumeMounts:
         - name: license
           subPath: license.xml
@@ -113,6 +116,7 @@ metadata:
   labels:
     app: storage-layer
 spec:
+  clusterIP: None
   ports:
   - port: 3005
     targetPort: 3005
@@ -120,3 +124,16 @@ spec:
     appProtocol: tcp
   selector:
     app: storage-layer
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: storage-layer
+  labels:
+    app: storage-layer
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: storage-layer

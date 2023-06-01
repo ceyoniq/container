@@ -1,0 +1,94 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: application-layer-setup2
+  labels:
+    app: application-layer-setup2
+spec:
+  template:
+    metadata:
+      labels:
+        app: application-layer-setup2
+    spec:
+      hostname: application-layer-setup2
+      initContainers:
+      - name: wait-for-application-layer-and-da
+        image: docker.io/curlimages/curl:8.00.1
+        imagePullPolicy: Always
+        command: ["/bin/sh", "-c"]
+        args:
+        - >
+          while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://application-layer:8080/index.html)" != "200" ]]; do
+            echo '.'
+            sleep 5;
+          done;
+
+          while true; do
+              existing_areas=$(al -host application-layer query-cfg-type -type DocumentArea -keys -dialect yaml)
+              [[ $existing_areas == [] ]] || break
+              echo "Wait for document area to be initialized... retry in 3 seconds."
+              sleep 3
+          done
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "200Mi"
+            ephemeral-storage: "350Mi"
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+            ephemeral-storage: "300Mi"
+      containers:
+      - name: application-layer-setup
+        image: ceyoniq.azurecr.io/release/nscale/application-layer
+        imagePullPolicy: Always
+        command: ["/bin/bash", "-c"]
+        args:
+        - >
+          echo $(date)": initialize Storage Layer Cluster Setting pointing to Headless Service";
+          al -host application-layer run-cfg-method -method lockSystem;
+
+          al -host application-layer cfg-del -name StorageLayer -type StorageLayerItemSetting;
+
+          echo
+          '{
+            "serverId" : "StorageLayer0",
+            "host" : "storage-layer-0.storage-layer",
+            "port" : 3005,
+            "user" : "admin",
+            "password" : "28f64920fc",
+            "active" : true
+          }'
+          > /tmp/input.json;
+          al -host application-layer cfg-add -type StorageLayerItemSetting -file /tmp/input.json;
+
+          echo
+          '{
+            "serverId" : "StorageLayer1",
+            "host" : "storage-layer-1.storage-layer",
+            "port" : 3005,
+            "user" : "admin",
+            "password" : "28f64920fc",
+            "active" : true
+          }'
+          > /tmp/input.json;
+          al -host application-layer cfg-add -type StorageLayerItemSetting -file /tmp/input.json;
+
+          rm /tmp/input.json;
+
+          al -host application-layer run-cfg-method -method unlockSystem;
+          echo $(date)": done";
+        resources:
+          limits:
+            cpu: "1000m"
+            memory: "1500Mi"
+            ephemeral-storage: "900Mi"
+          requests:
+            cpu: "100m"
+            memory: "1000Mi"
+            ephemeral-storage: "800Mi"
+      imagePullSecrets:
+        - name: regcred
+      restartPolicy: Never
+  backoffLimit: 1
+  #activeDeadlineSeconds: 180

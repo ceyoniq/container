@@ -22,15 +22,48 @@ spec:
       - name: regcred
       initContainers:
       - name: wait-for-application-layer
-        image: ceyoniq.azurecr.io/release/nscale/pipeliner:9.0.1101.2023042809.0
+        image: docker.io/curlimages/curl:8.00.1
         imagePullPolicy: Always
-        command: ['sh', '-c',
-          'while [ $(curl -sw "%{http_code}" "http://application-layer:8080/index.html" -o /dev/null) -ne 200 ];
-          do echo waiting for application layer; sleep 5; done;']
+        command: ["/bin/sh", "-c"]
+        args:
+        - >
+          while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://application-layer:8080/index.html)" != "200" ]]; do
+            echo '.'
+            sleep 5;
+          done
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "200Mi"
+            ephemeral-storage: "350Mi"
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+            ephemeral-storage: "300Mi"
       containers:
       - name: pipeliner
-        image: ceyoniq.azurecr.io/release/nscale/pipeliner:9.0.1101.2023042809.0
+        image: ceyoniq.azurecr.io/release/nscale/pipeliner:ubi.9.0.1200.2023052211
         imagePullPolicy: Always
+        startupProbe:
+          exec:
+            command:
+            - "java"
+            - "-jar"
+            - "/opt/ceyoniq/nscale-pipeliner/javalibs/PipelinerCheck.jar"
+            - "localhost"
+            - "4173"
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          exec:
+            command:
+            - "java"
+            - "-jar"
+            - "/opt/ceyoniq/nscale-pipeliner/javalibs/PipelinerCheck.jar"
+            - "localhost"
+            - "4173"
+          periodSeconds: 30
+          timeoutSeconds: 3
         resources:
           limits:
             cpu: "1000m"
@@ -45,11 +78,11 @@ spec:
         - name: config
           subPath: cold.xml
           mountPath: /opt/ceyoniq/nscale-pipeliner/workdir/config/runtime/cold.xml
-        - name: pipeliner-data
-          mountPath: /opt/ceyoniq/nscale-pipeliner/workdir/data
         - name: pipeliner-setup
           subPath: setup.sh
           mountPath: /setup.sh
+        - name: pipeliner-data
+          mountPath: /opt/ceyoniq/nscale-pipeliner/workdir/data
       volumes:
       - name: license
         configMap:

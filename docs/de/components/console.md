@@ -51,11 +51,11 @@ Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in eine
 ## Start mit Docker
 
 ```bash
-docker run \
-   -e HOSTNAME=application-layer \
-   -e PORT=8080 \
-   -e ALINSTANCE=nscalealinst1 \
-   -p 8086:8086 \
-   -e LOG_APPENDER=Console \
-   ceyoniq.azurecr.io/release/nscale/console:9.0.1100.13054.0
+docker run --rm \
+  -e HOSTNAME=application-layer \
+  -e PORT=8080 \
+  -e ALINSTANCE=nscalealinst1 \
+  -p 8086:8086 \
+  -e LOG_APPENDER=Console \
+  ceyoniq.azurecr.io/release/nscale/console:ubi.9.0.1200.13068
 ```

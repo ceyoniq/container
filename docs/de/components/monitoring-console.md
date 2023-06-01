@@ -68,13 +68,13 @@ Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in eine
 ## Start mit Docker
 
 ```bash
-docker run \
+docker run --rm \
   -e MC_APPENDER=Console \
   -p 8387:8387 \
   -h democontainer \
   -v $(pwd)/workspace:/opt/ceyoniq/nscale-monitoring/workspace \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-monitoring/workspace/license.xml \
-  ceyoniq.azurecr.io/release/nscale/monitoring-console:9.0.1001.2023031918.0
+  ceyoniq.azurecr.io/release/nscale/monitoring-console:ubi.9.0.1200.2023051908
 ```
 
 ## Passwörter

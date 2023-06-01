@@ -5,4 +5,5 @@
   path: /spec/template/spec/volumes/1
   value:
     name: pipeliner-data
-    emptyDir: {}
+    emptyDir:
+      sizeLimit: 1Gi

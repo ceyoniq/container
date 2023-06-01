@@ -1,4 +1,4 @@
-version: "3.5"
+version: "3.9"
 
 services:
   cmis-connector:
@@ -27,7 +27,8 @@ services:
       - XTA_AL_DOMAIN=nscale
       - XTA_AL_USER=admin
       - XTA_AL_PASSWORD=admin
-      - XTA_AL_FOLDERQUERY="resourcetype=1 and displayname='XTA'"
+      - XTA_AL_FOLDERQUERY="resourcetype=1 and displayname='Postausgang'"
+      - XTA_READER='*'
     ports:
       - "8099:8099" # HTTP
       - "8199:8199" # HTTPS

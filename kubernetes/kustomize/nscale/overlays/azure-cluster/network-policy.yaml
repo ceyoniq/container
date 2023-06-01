@@ -1,0 +1,39 @@
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: application-layer-cluster
+spec:
+  podSelector:
+    matchLabels:
+      app: application-layer
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: application-layer-setup2
+    ports:
+      - protocol: TCP
+        port: 8080
+
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: application-layer-setup2
+spec:
+  podSelector:
+    matchLabels:
+      app: application-layer-setup2
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: application-layer
+    ports:
+      - protocol: TCP
+        port: 8080

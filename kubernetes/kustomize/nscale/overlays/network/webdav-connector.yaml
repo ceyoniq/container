@@ -1,0 +1,19 @@
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: webdav-connector
+spec:
+  podSelector:
+    matchLabels:
+      app: webdav-connector
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: application-layer
+    ports:
+      - protocol: TCP
+        port: 8080

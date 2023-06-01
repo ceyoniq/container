@@ -22,7 +22,7 @@ spec:
       initContainers: []
       containers:
       - name: application-layer-web
-        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:9.0.1101.2023042710.0
+        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.9.0.1200.2023052511
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -62,11 +62,13 @@ spec:
           name: web
         resources:
           limits:
-            cpu: "2000m"
-            memory: "1300Mi"
+            cpu: "2500m"
+            memory: "2000Mi"
+            ephemeral-storage: "850Mi"
           requests:
             cpu: "100m"
             memory: "700Mi"
+            ephemeral-storage: "750Mi"
         volumeMounts:
         - name: log4j
           mountPath: /opt/ceyoniq/nscale-server/application-layer-web/conf/log4j
@@ -90,3 +92,16 @@ spec:
     appProtocol: http
   selector:
     app: application-layer-web
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: application-layer-web
+  labels:
+    app: application-layer-web
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: application-layer-web

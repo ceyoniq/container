@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-nscale-modeler
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+spec:
+#  tls:
+#  - hosts:
+#    - nscale-modeler.dev.ceyoniq-cloud.com
+#    secretName: tls-secret-modeler
+  rules:
+  - host: nscale-modeler.dev.ceyoniq-cloud.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: process-automation-modeler
+            port:
+              name: modeler

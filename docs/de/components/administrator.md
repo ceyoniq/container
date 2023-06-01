@@ -1,8 +1,8 @@
-# nscale Administrator
+# nscale Console
 
 ## Inhalt
 
-- [nscale Administrator](#nscale-administrator)
+- [nscale Console](#nscale-console)
   - [Inhalt](#inhalt)
   - [Lizenzierung](#lizenzierung)
   - [Persistierung](#persistierung)
@@ -71,12 +71,12 @@ Das Logging wird in der Datei `/var/lib/jetty/webapps/rapadm/WEB-INF/log4j2.xml`
 ## Start mit Docker
 
 ```bash
-docker run \
-   -e HostName=application-layer \
-   -e Port=8080 \
-   -e ALInstance=nscalealinst1 \
-   -e JAVA_OPTIONS=-Dorg.eclipse.rap.rwt.settingStoreFactory=settings-per-user -Duser.language=de\
-   -p 8181:8080 \
-   -p 8182:8443 \
-   ceyoniq.azurecr.io/release/nscale/administrator:9.0.1100.2023042412.0
+docker run --rm \
+  -e HostName=application-layer \
+  -e Port=8080 \
+  -e ALInstance=nscalealinst1 \
+  -e JAVA_OPTIONS="-Dorg.eclipse.rap.rwt.settingStoreFactory=settings-per-user -Duser.language=de" \
+  -p 8181:8080 \
+  -p 8182:8443 \
+  ceyoniq.azurecr.io/release/nscale/administrator:ubi.9.0.1200.2023052416
 ```

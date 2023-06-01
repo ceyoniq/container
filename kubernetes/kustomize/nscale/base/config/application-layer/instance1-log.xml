@@ -587,6 +587,7 @@
 		<!-- log HQL and SQL ASTs during query parsing -->
         <!-- Logger name="org.hibernate.hql.ast.AST" level="trace" /-->
 
+
 		<!-- log everything (a lot of information, but very useful for troubleshooting) -->
         <!-- Logger name="org.hibernate" level="trace" /-->
 
@@ -598,8 +599,6 @@
         <!-- Logger name="org.jgroups.protocols.pbcast.GMS" level="trace" /-->
         <!-- Logger name="org.jgroups.protocols.pbcast.STABLE" level="info" /-->
         <!-- Logger name="org.jgroups.protocols.pbcast.NAKACK" level="info" /-->
-
-
 
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<!--    internal logger (do not edit)                                -->

@@ -21,13 +21,17 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
   - [Grundlagen](#grundlagen)
   - [Container-Registry](#container-registry)
   - [Ingress](#ingress)
-  - [Persistierung](#persistierung)
+  - [Scenarien](#scenarien)
+    - [Security Context](#security-context)
+    - [Network Policy](#network-policy)
     - [EmptyDir](#emptydir)
     - [Default](#default)
     - [Azure](#azure)
+    - [Azure Cluster](#azure-cluster)
   - [Zugriff mit nscale Administrator](#zugriff-mit-nscale-administrator)
   - [Logging](#logging)
   - [Metriken](#metriken)
+  - [Security Scan Report](#security-scan-report)
   - [Limitierungen](#limitierungen)
   - [FAQ](#faq)
 
@@ -39,7 +43,7 @@ Der Betrieb von nscale Standard Container mit Kubernetes hat folgende Vorteile:
 
 Stellen Sie vor dem Start der nscale Standard Container mit Kubernetes sicher, dass Sie die folgenden Voraussetzungen erfüllt haben:
 
-- Sie haben einen Kubernetes-Cluster (ab Version 1.19.3), den Sie mit `kubectl` erreichen können
+- Sie haben einen Kubernetes-Cluster (ab Version 1.25), den Sie mit `kubectl` erreichen können
 - Sie haben einen [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/) eingerichtet
 - Sie besitzen eine gültige **Lizenzdatei**
 - Sie haben Login-Daten für die Container-Registry **ceyoniq.azurecr.io**
@@ -99,7 +103,7 @@ Password: admin
 
 ## Grundlagen
 
->Dies ist eine **Beispielkonfiguration**. Für Produktivsysteme müssen Sie andere angepasste Varianten konfigurieren.
+> Dies ist eine **Beispielkonfiguration**. Für Produktivsysteme müssen Sie andere angepasste Varianten konfigurieren.
 
 In diesem Beispiel wird Kustomize verwendet.
 Durch Kustomize können Sie leicht Anpassungen von Kubernetes-Deployments zur Erzeugung mehrerer Varianten (z. B. für unterschiedliche Umgebungen) vornehmen.
@@ -120,15 +124,17 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 
 - [nscale/application-layer (nscale Server Application Layer)](components/application-layer.md)
 - [nscale/application-layer-web (nscale Server Application Layer Web)](components/application-layer-web.md)
+- [nscale/pipeliner (nscale Pipeliner)](components/pipeliner.md)
 - [nscale/storage-layer (nscale Server Storage Layer)](components/storage-layer.md)
 - [nscale/rendition-server (nscale Rendition Server)](components/rendition-server.md)
-- [nscale/console (nscale Console)](components/console.md)
+- [nscale/administrator (nscale Administrator)](components/administrator.md)
 - [nscale/monitoring-console (nscale Monitoring Console)](components/monitoring-console.md)
-- [nscale/pipeliner (nscale Pipeliner)](components/pipeliner.md)
+- [nscale/console (nscale Console)](components/console.md)
+- [nscale/process-automation-modeler (nscale Process Automation Modeler)](components/process-automation-modeler.md)
 - [nscale/cmis-connector (nscale CMIS-Connector)](components/cmis-connector.md)
 - [nscale/webdav-connector (nscale WebDAV-Connector)](components/webdav-connector.md)
 - [nscale/ilm-connector (nscale ERP Connector ILM)](components/ilm-connector.md)
-- [nscale/process-automation-modeler (nscale Process Automation Modeler)](components/process-automation-modeler.md)
+- [nscale/xta-connector (nscale XTA Connector)](components/xta-connector.md)
 
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
 > Weiter erfolgt der Einsatz von Software von Drittanbietern wie Loki, Grafana, Prometheus, etc. hier zum Zweck der Darstellung innerhalb einer Beispielkonfiguration.
@@ -166,8 +172,6 @@ Führen Sie zur Verwendung der Beispielkonfiguration folgendes Kommando im Ordne
 kubectl apply -n nscale -f ingress-nginx.yaml
 ```
 
-Durch komplexere Ingress Regeln kann z.B. der Kontextpfad des Application Layers geändert werden (siehe `ingress-nginx-nappl.yaml` im selben Order).
-
 Informationen über die gesetzten Ingress-Regeln können Sie abrufen, indem Sie die folgenden Kommandos ausführen:  
 
 ```bash
@@ -182,12 +186,24 @@ Sie können nun über die IP-Adresse oder den Hostname auf Ihr nscale-System zug
 
 > Weitere Informationen zur Ingress Konfiguration finden Sie in der Dokumentation Ihres Cloud-Betreibers.
 
-## Persistierung
+## Scenarien
 
-In diesem Beispiel sehen Sie, wie Sie Daten innerhalb von Kubernetes speichern können.  
-Je nach Kubernetes-Umgebung können sich die Persistierungsmöglichkeiten bei Ihnen unterscheiden.
+In diesen Beispielen sehen Sie, wie Sie unterschiedliche Konfiguration anwenden und u.a. Daten innerhalb von Kubernetes speichern können. Je nach Kubernetes-Umgebung können sich die Persistierungsmöglichkeiten bei Ihnen unterscheiden.
 
-Alle Beispiele müssen im Ordner `kubernetes/kustomize/nscale` ausgeführt werden.
+Alle Beispiele werden im Ordner `kubernetes/kustomize/nscale` ausgeführt.
+
+### Security Context
+
+Überlagerung der Pod Basiskonfigurationen mit einem `SecurityContext`.  
+*Hinweis*: Insbesondere die Verwendung von `securityContext.fsGroup: 0` kann je nach Cluster Setup zu Rechte Problemen in den Persistent Volumes führen (z.B. in OpenShift).
+
+### Network Policy
+
+Überlagerung der Pod Basiskonfigurationen mit der `NetworkPolicy`.  
+*Hinweis*:
+
+* Die ingress Konfiguration für das Gateway / Ingress Controller muss u.U. angepasst werden (im Beispiel der Namespace `ingress-basic`).
+* Der Application Layer braucht egress Konfigurationen für die Kubernetes API und optional Zugriff auf LDAP oder SMTP Server sowie gegebenenfalls weitere externe Systeme. Im Beispiel wird der der voller Internetzugriff gewährt. Das sollte in Produktivumgebungen geändert werden.
 
 ### EmptyDir
 
@@ -268,6 +284,15 @@ Löschen aller Ressourcen (PVs und PVCs werden **gelöscht**)
 kubectl delete -k overlays/azure/ -n nscale
 ```
 
+### Azure Cluster
+
+In dieser Konfiguration werden folgende nscale Komponenten horizontal skaliert (ohne Autoscaler).
+* nscale Server Application Layer
+* nscale Server Application Layer Web
+* nscale Storage Layer
+
+*Hinweis:* Die entsprechende Konfiguration insbesondere für den nscale Storage Layer ist sehr kompliziert. Wenden Sie sich im Zweifel an unseren [Ceyoniq Support](./support.md#ceyoniq-support).
+
 ## Zugriff mit nscale Administrator
 
 > Sie benötigen nscale Administrator ab Version 8.0.5000.
@@ -315,6 +340,26 @@ Der erste Endpunkt liefert Informationen zu nscale Monitoring Console, während 
 
 - /nscalemc/rest/metrics
 - /nscalemc/rest/metrics/nscale
+
+## Security Scan Report
+
+Den aktuellen Scaning Report können Sie über [hier](./kube-score.md) einsehen. Beachten Sie die folgenden Hinweise:
+
+`Container Security Context User Group ID`
+
+Wir unterstützen [Red Hat OpenShift](https://www.redhat.com/de/technologies/cloud-computing/openshift). 
+Dafür müssen wir unsere Container entsprechend vorbereiten in dem wir dem `nscale` Benutzer die `root` Gruppen Rechte geben
+(siehe [Adapting Docker and Kubernetes containers to run on Red Hat OpenShift Container Platform](https://developers.redhat.com/blog/2020/10/26/adapting-docker-and-kubernetes-containers-to-run-on-red-hat-openshift-container-platform)).
+
+`Container is missing a livenessProbe`
+
+Wir halten uns an die Empfehlung von `kube-score` und haben identische Liveness und Readiness Probles gelöscht
+([Readiness and Liveness Probes](https://github.com/zegl/kube-score/blob/master/README_PROBES.md#livenessprobe)).
+
+`The pod has a container with a writable root filesystem`
+
+Noch sind wir leider nicht in der Lage in allen unseren nscale Standard Containern das Filesystem auf `readonly` zu setzen.
+Wir arbeiten noch an der Umsetzung dieser sicherheitsrelevanten Anforderung.
 
 ## Limitierungen
 

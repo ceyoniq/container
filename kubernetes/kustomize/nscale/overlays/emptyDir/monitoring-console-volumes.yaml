@@ -2,4 +2,5 @@
   path: /spec/template/spec/volumes/1
   value:
     name: monitoring-console-workspace
-    emptyDir: {}
+    emptyDir:
+      sizeLimit: 1Gi

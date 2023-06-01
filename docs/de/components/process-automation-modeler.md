@@ -44,10 +44,10 @@ Um den Zugriff auf den nscale Process Automation Modeler zu schützen sollte ein
 ## Start mit Docker
 
 ```bash
-docker run \
-   -e NAPPL_HOST=application-layer \
-   -e NAPPL_PORT=8080 \
-   -e NAPPL_INSTANCE=nscalealinst1 \
-   -p 8082:8082 \
-   ceyoniq.azurecr.io/release/nscale/process-automation-modeler:9.0.1000.2022032811.0
+docker run --rm \
+  -e NAPPL_HOST=application-layer \
+  -e NAPPL_PORT=8080 \
+  -e NAPPL_INSTANCE=nscalealinst1 \
+  -p 8082:8082 \
+  ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.9.0.1000.2023040316
 ```
