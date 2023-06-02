@@ -5,6 +5,7 @@
 - [FAQ](#faq)
   - [Inhalt](#inhalt)
   - [Was kann ich tun, wenn ein nscale Standard Container nicht startet?](#was-kann-ich-tun-wenn-ein-nscale-standard-container-nicht-startet)
+  - [Wie kann ich Netzwerk Problem im Cluster debuggen?](#wie-kann-ich-netzwerk-problem-im-cluster-debuggen)
   - [Wie kann ich die Zeitzone ändern?](#wie-kann-ich-die-zeitzone-ändern)
   - [Wie kann ich Java Startoptionen (JAVA\_OPTS) setzen?](#wie-kann-ich-java-startoptionen-java_opts-setzen)
   - [Wie kann ich die Java Heap Size anpassen?](#wie-kann-ich-die-java-heap-size-anpassen)
@@ -58,6 +59,13 @@ containers:
         - "sleep"
         - "infinity"
 ```
+## Wie kann ich Netzwerk Problem im Cluster debuggen?
+
+Unsere nscale Standard Container dürfen aus Gründen der Sicherheit keine Linux Tools zum Debuggen der Laufzeitumgebung enthalten.
+Für diesen Zweck bieten sich Open Source Images wie z.B. [netshoot](https://github.com/nicolaka/netshoot) an.
+
+Zum Debugging im Kubernetes Cluster empfiehlt sich die Verwendung von `debug` Container.
+([Debugging with an ephemeral debug container](https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#ephemeral-container)).
 
 ## Wie kann ich die Zeitzone ändern?
 
