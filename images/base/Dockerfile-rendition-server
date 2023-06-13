@@ -12,7 +12,7 @@ RUN yum update --disablerepo=* --enablerepo=ubi-* --assumeyes && \
 WORKDIR /tmp
 
 RUN \
-  curl -L https://github.com/ImageMagick/ImageMagick/archive/7.1.1-8.tar.gz | tar -xz && \
+  curl -L https://github.com/ImageMagick/ImageMagick/archive/7.1.1-11.tar.gz | tar -xz && \
   cd ImageMagick-* && \
   ./configure --prefix=/opt && \
   make && \
@@ -66,10 +66,10 @@ USER root
 RUN \
      microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes \
        jbigkit-libs-2.1-23.el9 \
-       libtiff-4.4.0-5.el9_1 \
+       libtiff-4.4.0-7.el9 \
        libwebp-1.2.0-6.el9_1 \
        giflib-5.2.1-9.el9 \
-       libgomp-11.3.1-2.1.el9 \
+       libgomp-11.3.1-4.3.el9 \
        libpng-2:1.6.37-12.el9 \
 	&& microdnf clean all \
   # patch installation directory

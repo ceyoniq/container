@@ -94,3 +94,5 @@
 | [Dockerfile-installer](./Dockerfile-installer) |  Basis Image für nscale Installer Images |
 | [Dockerfile-pipeliner](./Dockerfile-pipeliner) | Basis Image für den nscale Pipeliner |
 | [Dockerfile-storage-layer](./Dockerfile-storage-layer) | Basis Image für den nscale Storage Layer |
+| [Dockerfile-fedora](./Dockerfile-fedora) | Beispiel einer Basis Image Ableitung mit Fedora Paketen |
+| [Dockerfile-rhel](./Dockerfile-rhel) | Beispiel einer Basis Image Ableitung mit Red Hat Subscription Manager |

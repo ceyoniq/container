@@ -4,7 +4,7 @@ FROM $baseImage
 USER root
 RUN \
      microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes \
-        jq-1.6-12.el9 \
+        jq-1.6-14.el9 \
         findutils-4.8.0-5.el9 \
   && microdnf clean all
 USER default

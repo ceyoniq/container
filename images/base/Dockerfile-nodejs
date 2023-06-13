@@ -1,5 +1,5 @@
 # https://catalog.redhat.com/software/containers/ubi9/nodejs-16-minimal/61a6059abfd4a5234d59621f
-ARG baseImage=registry.access.redhat.com/ubi9/nodejs-16-minimal:1-107
+ARG baseImage=registry.access.redhat.com/ubi9/nodejs-16-minimal:1-116
 
 FROM $baseImage
 

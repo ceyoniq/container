@@ -5,12 +5,12 @@ USER root
 RUN \
      microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes \
        libxslt-1.1.34-9.el9 \
-       glibc-langpack-en-2.34-40.el9_1.1 \
+       glibc-langpack-en-2.34-60.el9 \
   && microdnf clean all
 
-ARG rpm_packages_url="https://dl.rockylinux.org/pub/rocky/9/BaseOS/x86_64/os/Packages"
 RUN \
-     rpm -i ${rpm_packages_url}/g/$(rpm -q glibc | sed "s/glibc-\(.*\)/glibc-langpack-de-\1/").rpm \
-  && rpm -i ${rpm_packages_url}/l/$(rpm -q glibc | sed "s/glibc-\(.*\)/libnsl-\1/").rpm
+     rpm_packages_url=$(rpm --eval 'https://dl.rockylinux.org/pub/rocky/9/BaseOS/%{_arch}/os/Packages') \
+  && rpm --install ${rpm_packages_url}/g/$(rpm -q glibc | sed "s/glibc-\(.*\)/glibc-langpack-de-\1/").rpm \
+  && rpm --install ${rpm_packages_url}/l/$(rpm -q glibc | sed "s/glibc-\(.*\)/libnsl-\1/").rpm
 
 USER default

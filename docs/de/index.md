@@ -108,19 +108,40 @@ Unsere Images können um weitere Tools etwa aus den
 
 ```bash
 # install full package manager
-microdnf install -y dnf
+microdnf install -y dnf dnf-plugins-core
+
+# register standard fedora stream
+cat > /etc/yum.repos.d/fedora.repo << EOF
+[fedora]
+name=Fedora $releasever - \$basearch
+#baseurl=http://download.example/pub/fedora/linux/releases/\$releasever/Everything/\$basearch/os/
+metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-\$releasever&arch=\$basearch
+enabled=0
+countme=1
+metadata_expire=6h
+repo_gpgcheck=0
+type=rpm
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-\$releasever-\$basearch
+skip_if_unavailable=False
+EOF
+# add and enable source
+dnf config-manager --add-repo /etc/yum.repos.d/fedora.repo
+dnf config-manager --set-enabled fedora
+
 # register epel source
 dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+
+# list available repositories
+dnf repolist
+dnf repository-packages fedora list
+dnf repository-packages epel list
 # enable Code Ready Builder
 /usr/bin/crb enable
 
-# list available repositories
-microdnf repolist
-dnf repository-packages epel list 
-
 # install p7zip from EPEL
 dnf --disablerepo=* --enablerepo=epel search p7zip
-microdnf --disablerepo=* --enablerepo=epel install -y p7zip
+dnf --disablerepo=* --enablerepo=epel install -y p7zip
 ```
 
 Wenn eine Red Hat Subscription vorhanden ist kann diese auch verwendet werden

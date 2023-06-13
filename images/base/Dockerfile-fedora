@@ -1,0 +1,58 @@
+# https://catalog.redhat.com/software/containers/ubi9/ubi-minimal/615bd9b4075b022acc111bf5
+ARG baseImage=registry.access.redhat.com/ubi9/ubi-minimal:9.2-484
+FROM $baseImage
+
+# install full package manager
+RUN \
+     microdnf update --assumeyes \
+  && microdnf install --assumeyes dnf dnf-plugins-core
+
+COPY fedora.repo /etc/yum.repos.d/fedora.repo
+COPY rawhide.repo /etc/yum.repos.d/rawhide.repo
+
+# see https://access.redhat.com/solutions/5616681
+RUN \
+  # install fedora gpg keys first manually
+    distro=redhat-release \
+    basearch=$(rpm -q --qf "%{arch}" -f /etc/${distro}) \
+    fedoraver=39-0.1 \
+  && rpm -i https://dl.fedoraproject.org/pub/fedora/linux/development/rawhide/Everything/${basearch}/os/Packages/f/fedora-gpg-keys-${fedoraver}.noarch.rpm  \
+  # add and enable fedora upstream source
+  && dnf config-manager --add-repo /etc/yum.repos.d/fedora.repo \
+  && dnf config-manager --set-enabled fedora \
+  && dnf config-manager --add-repo /etc/yum.repos.d/rawhide.repo \
+  && dnf config-manager --set-enabled rawhide \
+  # add epel upstream
+  && dnf install --assumeyes https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm \
+  && /usr/bin/crb enable \
+  && microdnf repolist
+
+# install ImageMagick from fedora upstream
+RUN \
+     microdnf --disablerepo=* --enablerepo=rawhide repoquery ImageMagick \
+  #&& dnf repository-packages fedora list \
+  && (microdnf --disablerepo=* --enablerepo=rawhide --enablerepo=ubi-9-baseos-rpms --assumeyes install ImageMagick || true) \
+  && /usr/bin/magick -version
+
+# install wget from ubi upstream
+RUN \
+     microdnf --disablerepo=* --enablerepo=ubi-9-appstream-rpms --enablerepo=ubi-9-baseos-rpms repoquery wget \
+  #&& dnf repository-packages epel list \
+  && (microdnf --assumeyes --disablerepo=* --enablerepo=ubi-9-appstream-rpms --enablerepo=ubi-9-baseos-rpms install wget || true) \
+  && /usr/bin/wget --version
+
+# override fonts with Microsoft Fonts
+RUN \
+  # install expand Tool
+     (microdnf install --assumeyes \
+       cabextract \
+       fonts-filesystem \
+       fontconfig || true) \
+  # remove preinstalled Croscore fonts
+  #&& rpm -e --nodeps google-cousine-fonts google-arimo-fonts google-tinos-fonts \
+  && rpm -e --nodeps dejavu-sans-fonts \
+  # install Microsoft Fonts instead
+  && rpm --install --nodeps https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+
+RUN \
+    microdnf clean all
