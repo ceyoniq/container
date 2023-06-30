@@ -53,7 +53,7 @@ services:
       - INSTANCE1_CORE_DB_USERNAME=nscale
       - INSTANCE1_CORE_DB_PASSWORD=password # Do not use this password in production!
       - INSTANCE1_CORE_DB_SCHEMA=public
-      - JAVA_OPTS=-Xmx2g
+      - JAVA_OPTS=-Xmx2g -Duser.country=DE -Duser.language=de
       - INSTANCE1_CORE_FULLTEST_INDEX_MIRROR_LOCALCACHE=off
     networks:
       - nscale
@@ -69,7 +69,7 @@ services:
       - NSCALE_INSTANCE=nscalealinst1
       - NSCALE_SSL=false
       - LOG4JCONFIGLOCATION=../conf/nscale_stdout_log_conf.xml
-      - JAVA_OPTS=-Xmx2g
+      - JAVA_OPTS=-Xmx2g -Duser.country=DE -Duser.language=de
     networks:
       - nscale
 
@@ -105,7 +105,7 @@ services:
     environment:
       - RSX_APPENDER=Console
       - RSX_PASSWORD=admin
-      - JAVA_OPTS=-Xmx2g -Dlog4j2.formatMsgNoLookups=true -Dcom.sun.jndi.rmi.object.trustURLCodebase=false -Dcom.sun.jndi.cosnaming.object.trustURLCodebase=false
+      - JAVA_OPTS=-Xmx2g -Dlog4j2.formatMsgNoLookups=true -Dcom.sun.jndi.rmi.object.trustURLCodebase=false -Dcom.sun.jndi.cosnaming.object.trustURLCodebase=false -Duser.country=DE -Duser.language=de
     networks:
       - nscale
 

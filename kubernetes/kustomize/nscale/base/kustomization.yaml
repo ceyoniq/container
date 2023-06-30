@@ -4,7 +4,7 @@ kind: Kustomization
 commonLabels:
   nscale.ceyoniq.com/version: "9"
   app.kubernetes.io/part-of: nscale
-  version: v9.0.1202
+  version: v9.0.1301
 
 generatorOptions:
   disableNameSuffixHash: true

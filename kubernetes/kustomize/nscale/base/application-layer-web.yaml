@@ -22,7 +22,7 @@ spec:
       initContainers: []
       containers:
       - name: application-layer-web
-        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.9.0.1200.2023052511
+        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.9.0.1300.2023062720
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -54,7 +54,7 @@ spec:
           - name: NSCALE_SSL
             value: "false"
           - name: JAVA_OPTS
-            value: "-XX:MaxRAMPercentage=50.0"
+            value: -XX:MaxRAMPercentage=50.0 -Duser.country=DE -Duser.language=de
           - name: LOG4JCONFIGLOCATION
             value: ../conf/log4j/nscale_stdout_log_conf.xml
         ports:

@@ -21,7 +21,7 @@ spec:
       - name: regcred
       containers:
       - name: rendition-server
-        image: ceyoniq.azurecr.io/release/nscale/rendition-server:ubi.9.0.1200.2023051618
+        image: ceyoniq.azurecr.io/release/nscale/rendition-server:ubi.9.0.1200.2023062910
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -39,7 +39,7 @@ spec:
         - name: RSX_PASSWORD
           value: "admin"
         - name: JAVA_OPTS
-          value: -XX:MaxRAMPercentage=50.0 -Dlog4j2.formatMsgNoLookups=true -Dcom.sun.jndi.rmi.object.trustURLCodebase=false -Dcom.sun.jndi.cosnaming.object.trustURLCodebase=false
+          value: -XX:MaxRAMPercentage=50.0 -Dlog4j2.formatMsgNoLookups=true -Dcom.sun.jndi.rmi.object.trustURLCodebase=false -Dcom.sun.jndi.cosnaming.object.trustURLCodebase=false -Duser.country=DE -Duser.language=de
         resources:
           limits:
             cpu: "2000m"

@@ -93,7 +93,7 @@ docker run --rm \
   -h democontainer \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
   -p 8080:8080 \
-  ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1200.2023052021
+  ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1301.2023062921
 ```
 
 ## Microsoft Windows Schriftarten
@@ -129,7 +129,7 @@ Entsprechend können auch andere proprietäre Fonts nachinstalliert werden.
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1200.2023052021
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1301.2023062921
 ```
 
 **Beispiel Docker Compose:**

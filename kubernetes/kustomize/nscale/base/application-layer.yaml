@@ -43,7 +43,7 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1200.2023052021
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1301.2023062921
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -86,7 +86,7 @@ spec:
               fieldRef:
                 fieldPath: metadata.namespace
           - name: JAVA_OPTS
-            value: -XX:MaxRAMPercentage=50.0
+            value: -XX:MaxRAMPercentage=50.0 -Duser.country=DE -Duser.language=de
           - name: KUBERNETES_NAMESPACE
             valueFrom:
               fieldRef:
@@ -194,7 +194,7 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1200.2023052021
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1301.2023062921
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:

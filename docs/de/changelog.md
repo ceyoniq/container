@@ -3,6 +3,11 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 9.0.1300 (Juli 2023)
+
+* Aktualisierung der Container Images.
+* Zusätzliche Umgebungsvariablen für JVM Language Einstellungen über JAVA_OPTS Umgebungsvariable.
+
 ## 9.0.1200 (Juni 2023)
 
 Mit dem nscale 9 Release gibt es einige Änderungen in unseren nscale Standard Containern. Wir haben uns insbesondere auf den Aspekt der Sicherheit fokussiert.
