@@ -1,8 +1,8 @@
-ARG baseImage=container-registry.ct.com/nscale/openjdk-17-runtime:latest
+ARG baseImage=container-registry.ct.com/nscale/base/openjdk-17-runtime:latest
 FROM $baseImage
 
-ARG crocore_version=1.31.0-15
-ARG crocore_package=38
+ARG crocore_version=1.31.0
+ARG crocore_package=10.el9
 USER root
 RUN \
     microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes \
@@ -11,11 +11,11 @@ RUN \
 	&& microdnf clean all \
   # https://fedoraproject.org/wiki/Google_Croscore_fonts
   && rpm --install --noverify \
-   https://download-ib01.fedoraproject.org/pub/fedora/linux/releases/$crocore_package/Everything/x86_64/os/Packages/g/google-arimo-fonts-$crocore_version.fc$crocore_package.noarch.rpm \
+    https://kojipkgs.fedoraproject.org/packages/google-croscore-fonts/$crocore_version/$crocore_package/noarch/google-arimo-fonts-$crocore_version-$crocore_package.noarch.rpm \
   && rpm --install --noverify \
-   https://download-ib01.fedoraproject.org/pub/fedora/linux/releases/$crocore_package/Everything/x86_64/os/Packages/g/google-cousine-fonts-$crocore_version.fc$crocore_package.noarch.rpm \
+    https://kojipkgs.fedoraproject.org/packages/google-croscore-fonts/$crocore_version/$crocore_package/noarch/google-cousine-fonts-$crocore_version-$crocore_package.noarch.rpm \
   && rpm --install --noverify \
-   https://download-ib01.fedoraproject.org/pub/fedora/linux/releases/$crocore_package/Everything/x86_64/os/Packages/g/google-tinos-fonts-$crocore_version.fc$crocore_package.noarch.rpm \
+    https://kojipkgs.fedoraproject.org/packages/google-croscore-fonts/$crocore_version/$crocore_package/noarch/google-tinos-fonts-$crocore_version-$crocore_package.noarch.rpm \
   # remove default dejaVue fonts
   && rpm -e --nodeps dejavu-sans-fonts \
   # https://wiki.archlinux.org/title/font_configuration

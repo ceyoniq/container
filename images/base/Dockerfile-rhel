@@ -1,4 +1,4 @@
-ARG baseImage=container-registry.ct.com/nscale/base:latest
+ARG baseImage=container-registry.ct.com/nscale/base/minimal:latest
 FROM $baseImage
 
 ARG username=

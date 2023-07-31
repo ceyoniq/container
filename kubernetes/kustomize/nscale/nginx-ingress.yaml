@@ -12,6 +12,7 @@ metadata:
     nginx.ingress.kubernetes.io/app-root: /nscale_web
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
 spec:
+  ingressClassName: nginx
   tls:
   - hosts:
     - nscale.dev.ceyoniq-cloud.com
@@ -28,7 +29,7 @@ spec:
             port:
               name: application
       - path: /index.html
-        pathType: Prefix
+        pathType: ImplementationSpecific
         backend:
           service:
             name: application-layer
@@ -42,7 +43,7 @@ spec:
             port:
               name: application
       - path: /engine.properties
-        pathType: Prefix
+        pathType: ImplementationSpecific
         backend:
           service:
             name: application-layer

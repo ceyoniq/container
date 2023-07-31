@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: pipeliner
-  replicas: 1
+  replicas: 0
   updateStrategy:
     type: OnDelete
   template:
@@ -42,7 +42,7 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: pipeliner
-        image: ceyoniq.azurecr.io/release/nscale/pipeliner:ubi.9.0.1301.2023062918
+        image: ceyoniq.azurecr.io/release/nscale/pipeliner:ubi.9.0.1400.2023072518
         imagePullPolicy: Always
         startupProbe:
           exec:

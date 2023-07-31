@@ -21,7 +21,7 @@ spec:
       - name: regcred
       containers:
       - name: rendition-server
-        image: ceyoniq.azurecr.io/release/nscale/rendition-server:ubi.9.0.1200.2023062910
+        image: ceyoniq.azurecr.io/release/nscale/rendition-server:ubi.9.0.1400.2023072111
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -46,8 +46,8 @@ spec:
             memory: "2000Mi"
             ephemeral-storage: "1300Mi"
           requests:
-            cpu: "100m"
-            memory: "100Mi"
+            cpu: "300m"
+            memory: "1000Mi"
             ephemeral-storage: "1000Mi"
         volumeMounts:
         - name: license

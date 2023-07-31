@@ -1,34 +1,38 @@
-bases:
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
 - ../security
 
-patchesJson6902:
-- target:
+patches:
+- path: postgresql-volumes.yaml
+  target:
     group: apps
-    version: v1
     kind: Deployment
     name: postgresql
-  path: postgresql-volumes.yaml
-- target:
-    group: apps
     version: v1
+- path: monitoring-console-volumes.yaml
+  target:
+    group: apps
     kind: Deployment
     name: monitoring-console
-  path: monitoring-console-volumes.yaml
-- target:
-    group: apps
     version: v1
+- path: rendition-server-volumes.yaml
+  target:
+    group: apps
     kind: Deployment
     name: rendition-server
-  path: rendition-server-volumes.yaml
-- target:
-    group: apps
     version: v1
+- path: storage-layer-volumes.yaml
+  target:
+    group: apps
     kind: StatefulSet
     name: storage-layer
-  path: storage-layer-volumes.yaml
-#- target:
-#    group: apps
-#    version: v1
-#    kind: StatefulSet
-#    name: pipeliner
-#  path: pipeliner-volumes.yaml
+    version: v1
+- path: pipeliner-volumes.yaml
+  target:
+    group: apps
+    kind: StatefulSet
+    name: pipeliner
+    version: v1

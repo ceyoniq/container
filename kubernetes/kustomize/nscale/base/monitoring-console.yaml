@@ -23,7 +23,7 @@ spec:
       # The license file mount inside the workspace volume prevents the volume to get initialized with the image data.
       # Therefore we need to copy the data from the image to the volume manually before startup.
       - name: monitoring-console-conf
-        image: ceyoniq.azurecr.io/release/nscale/monitoring-console:ubi.9.0.1300.2023062212
+        image: ceyoniq.azurecr.io/release/nscale/monitoring-console:ubi.9.0.1400.2023072110
         imagePullPolicy: Always
         command: [ "/bin/sh", "-c" ]
         args:
@@ -45,7 +45,7 @@ spec:
             ephemeral-storage: "400Mi"
       containers:
       - name: monitoring-console
-        image: ceyoniq.azurecr.io/release/nscale/monitoring-console:ubi.9.0.1300.2023062212
+        image: ceyoniq.azurecr.io/release/nscale/monitoring-console:ubi.9.0.1400.2023072110
         imagePullPolicy: Always
         startupProbe:
           httpGet:

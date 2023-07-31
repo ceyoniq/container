@@ -43,7 +43,7 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1301.2023062921
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1400.2023072021
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -194,7 +194,7 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1301.2023062921
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1400.2023072021
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:

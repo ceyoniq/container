@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -53,12 +52,3 @@ spec:
       - name: certs
         configMap:
           name: storage-layer-certs
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: storage-layer
-spec:
-  ports:
-  - port: 3006
-    name: storage-layer-ssl

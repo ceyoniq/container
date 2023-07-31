@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: ilm-connector
-  replicas: 1
+  replicas: 0
   strategy:
     type: RollingUpdate
   template:

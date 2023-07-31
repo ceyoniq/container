@@ -16,11 +16,10 @@ spec:
     - namespaceSelector:
         matchLabels:
           kubernetes.io/metadata.name: kube-system
-  - from:
     # access from ingress controller (if not in kube-system)
     - namespaceSelector:
         matchLabels:
-          kubernetes.io/metadata.name: ingress-basic
+          name: ingress-nginx
   egress:
   - to:
     - podSelector:

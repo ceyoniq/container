@@ -1,11 +1,11 @@
-bases:
-- ../security
 
 resources:
+- ../security
 - pvc-rwo.yaml
 - pvc-rwx.yaml
+- pipeliner.yaml
 
-patchesStrategicMerge:
-- storage-layer.yaml
-# Enable pipeliner
-#- pipeliner.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+patches:
+- path: storage-layer.yaml

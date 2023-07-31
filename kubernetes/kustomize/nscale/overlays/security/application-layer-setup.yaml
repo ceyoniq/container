@@ -1,12 +1,12 @@
-apiVersion: apps/v1
-kind: StatefulSet
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: application-layer
+  name: application-layer-setup
 spec:
   template:
     spec:
       initContainers:
-      - name: check-db-ready
+      - name: wait-for-application-layer
         securityContext:
           readOnlyRootFilesystem: true
           allowPrivilegeEscalation: false

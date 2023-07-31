@@ -3,6 +3,12 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 9.0.1400 (August 2023)
+
+* Aktualisierung der Container Images.
+* Im default Kubernetes Setup werden der Pipeliner sowie die Konnektoren mit replica=0 deployed. Zuvor müssten die Deployments manuell einkommentiert werden.
+* Aktualisierung der kustomize Syntax (https://kubectl.docs.kubernetes.io/references/kustomize/).
+
 ## 9.0.1300 (Juli 2023)
 
 * Aktualisierung der Container Images.
