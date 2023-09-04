@@ -21,12 +21,12 @@ spec:
       - name: regcred
       containers:
       - name: process-automation-modeler
-        image: ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.9.0.1000.2023040316
+        image: ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.9.0.1500.6997
         imagePullPolicy: Always
         startupProbe:
           httpGet:
             path: /index.html
-            port: 8082
+            port: 8092
           initialDelaySeconds: 30
           failureThreshold: 10
           periodSeconds: 10
@@ -34,7 +34,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /index.html
-            port: 8082
+            port: 8092
           periodSeconds: 10
           timeoutSeconds: 1
         env:
@@ -51,7 +51,7 @@ spec:
         #- name: DEBUG
         #  value: "*"
         ports:
-        - containerPort: 8082
+        - containerPort: 8092
           name: modeler
         resources:
           limits:
@@ -69,8 +69,8 @@ metadata:
     service: process-automation-modeler
 spec:
   ports:
-  - port: 8082
-    targetPort: 8082
+  - port: 8092
+    targetPort: 8092
     name: modeler
     appProtocol: http
   selector:

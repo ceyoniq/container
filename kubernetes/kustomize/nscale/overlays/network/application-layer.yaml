@@ -19,7 +19,7 @@ spec:
     # access from ingress controller (if not in kube-system)
     - namespaceSelector:
         matchLabels:
-          name: ingress-nginx
+          kubernetes.io/metadata.name: ingress-nginx
   - from:
     # access from administrator in the same namespace
     - podSelector:

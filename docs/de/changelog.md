@@ -3,6 +3,16 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 9.0.1500 (September 2023)
+
+* Aktualisierung der Container Images.
+* Der Fulltext Job im Appication Layer ist im Default wieder eingeschaltet.
+* Der Process Auomation Modeler verwendet als default Port 8092.
+* Die Kubernetes Update Strategie im Application Layer StatefulSet ist im default 'OnDelete' anstatt 'RollingUpdate'. 
+  Das Datenbank Update für die Migration auf eine aktuellere Version muss im Application Layer auf einer singulären Instanz durchgeführt werden. 
+  Deshalb sollte ein Update unter manueller Kontrolle ausgeführt werden. 
+* Hinweise zur Anbindung an eine Azure Postgresql Datenbank.
+
 ## 9.0.1400 (August 2023)
 
 * Aktualisierung der Container Images.

@@ -5,7 +5,7 @@ services:
   process-automation-modeler:
     image: ${PROCESS_AUTOMATION_MODELER_IMAGE}
     ports:
-      - 8082:8082 # HTTP
+      - 8092:8092 # HTTP
     environment:
       - NAPPL_HOST=application-layer
       - NAPPL_PORT=8080

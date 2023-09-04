@@ -1,5 +1,20 @@
 # nscale Server Application Layer
 
+
+Hallo Abdulhamit,
+
+offenbar ist Microsoft das Problem mit den veralteten Zertifikaten des Azure Postgresql Servers bekannt aber noch nicht gefixt;
+https://learn.microsoft.com/en-us/answers/questions/1199915/certificates-do-not-conform-to-algorithm.
+
+Es gibt aber einen Workaround, den ich ausprobiert habe.
+
+Dazu braucht man das Root CA der Postgresql DB von Microsoft (https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-connect-tls-ssl#applications-that-require-certificate-verification-for-tlsssl-connectivity).
+Diese Zertifikat muss in den Container kopiert (wget https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem) und entsprechend die JDBC URL angepasst werden:
+jdbc:postgresql://xxx.postgres.database.azure.com:5432/nscale?loggerLevel=OFF&sslmode=verify-full&sslrootcert=/DigiCertGlobalRootCA.crt.pem&ssl_min_protocol_version=TLSv1.3
+Wir können auch ein Dockerfile dazu erstellen.
+
+Vorsicht: Im Cluster müssen alle nappl Instanzen dieselbe Version haben sonst könnte die DB kaputt gehen.
+
 ## Inhalt
 
 - [nscale Server Application Layer](#nscale-server-application-layer)
@@ -93,7 +108,20 @@ docker run --rm \
   -h democontainer \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
   -p 8080:8080 \
-  ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1400.2023072021
+  ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1501.2023082720
+```
+## Microsoft Azure PostgreSQL flexible server
+
+Es gibt ein [bekanntes Zertifikatsproblem](https://learn.microsoft.com/en-us/answers/questions/1199915/certificates-do-not-conform-to-algorithm) bei der Verbindung zu einer Azure Postgresql Datenbank über SSL.
+
+Bis Microsoft ein Security Update der Azure DB vorgenommen hat gibt es einen Workaround. 
+Dazu muss das [Datenbank Root Zertifikat von Microsoft](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-connect-tls-ssl#applications-that-require-certificate-verification-for-tlsssl-connectivity) im Container verfügbar sein. Damit kann das Zertifikat in der JDBC URL explizit referenziert werden:
+
+```bash
+# download certificate from digicert
+wget /opt/ceyoniq/nscale-server/application-layer/conf/DigiCertGlobalRootCA.crt.pem https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem
+# Update JDBC with explizit ssl verification mode
+jdbc:postgresql://xxx.postgres.database.azure.com:5432/nscale?loggerLevel=OFF&sslmode=verify-full&sslrootcert=/opt/ceyoniq/nscale-server/application-layer/conf/DigiCertGlobalRootCA.crt.pem&ssl_min_protocol_version=TLSv1.3
 ```
 
 ## Microsoft Windows Schriftarten
@@ -129,7 +157,7 @@ Entsprechend können auch andere proprietäre Fonts nachinstalliert werden.
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1400.2023072021
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1501.2023082720
 ```
 
 **Beispiel Docker Compose:**

@@ -10,6 +10,8 @@ spec:
     matchLabels:
       app: application-layer
   replicas: 1
+  updateStrategy:
+    type: OnDelete
   volumeClaimTemplates: []
   template:
     metadata:
@@ -43,7 +45,7 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1400.2023072021
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1501.2023082720
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -91,8 +93,6 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.namespace
-          - name: INSTANCE1_CORE_FULLTEST_INDEX_MIRROR_LOCALCACHE
-            value: "off"
         ports:
         - containerPort: 8080
           name: application
@@ -179,6 +179,7 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
         - >
+          sleep 10;
           while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://application-layer:8080/index.html)" != "200" ]]; do
             echo '.'
             sleep 5;
@@ -194,7 +195,7 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1400.2023072021
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1501.2023082720
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:

@@ -42,7 +42,7 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: pipeliner
-        image: ceyoniq.azurecr.io/release/nscale/pipeliner:ubi.9.0.1400.2023072518
+        image: ceyoniq.azurecr.io/release/nscale/pipeliner:ubi.9.0.1501.2023082809
         imagePullPolicy: Always
         startupProbe:
           exec:
