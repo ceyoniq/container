@@ -21,7 +21,7 @@ spec:
       - name: regcred
       containers:
       - name: console
-        image: ceyoniq.azurecr.io/release/nscale/console:ubi.9.0.1401.13101
+        image: ceyoniq.azurecr.io/release/nscale/console:ubi.9.1.1001.13140
         imagePullPolicy: Always
         startupProbe:
           httpGet:

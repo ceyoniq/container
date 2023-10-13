@@ -1,4 +1,4 @@
-ARG baseImage=container-registry.ct.com/nscale/base/minimal:latest
+ARG baseImage=registry.source.ceyoniq.com/ceyoniq/fe/nbox/container/base/minimal
 FROM $baseImage
 
 RUN \

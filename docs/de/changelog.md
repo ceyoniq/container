@@ -3,6 +3,13 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 9.1.1000
+
+* Aktualisierung der Container Images.
+* Neue Konfiguration des Application Layer Clusters über die Umgebungsvariablen `INSTANCE1_CLUSTER_CORE_STACKTYPE` und `INSTANCE1_JGROUPS_DNS_QUERY`. Damit entfällt die Notwendigkeit eines Service Accounts zum Zugriff auf die Kubernetes API.  
+* Fixes der Probes des nscale Process Automation Modelers.
+* Fixes der Ports für die Verbindung des nscale Administrators auf die Monitoring Console, Rendition Server und Storage Layers.
+
 ## 9.0.1500 (September 2023)
 
 * Aktualisierung der Container Images.

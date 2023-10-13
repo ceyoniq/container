@@ -25,3 +25,12 @@ spec:
     ports:
       - protocol: TCP
         port: 3005
+  - from:
+    # access from administrator in the same namespace
+    - podSelector:
+        matchLabels:
+          app: administrator
+    ports:
+      - protocol: TCP
+        port: 3005
+

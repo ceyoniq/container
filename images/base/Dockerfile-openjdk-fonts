@@ -1,4 +1,4 @@
-ARG baseImage=container-registry.ct.com/nscale/base/openjdk-17-runtime:latest
+ARG baseImage=registry.source.ceyoniq.com/ceyoniq/fe/nbox/container/base/openjdk-17-runtime:latest
 FROM $baseImage
 
 ARG crocore_version=1.31.0
@@ -20,4 +20,5 @@ RUN \
   && rpm -e --nodeps dejavu-sans-fonts \
   # https://wiki.archlinux.org/title/font_configuration
   && fc-cache -v
+
 USER default

@@ -1,4 +1,4 @@
-ARG baseImage=container-registry.ct.com/nscale/base/openjdk-17-runtime:latest
+ARG baseImage=registry.source.ceyoniq.com/ceyoniq/fe/nbox/container/base/openjdk-17-runtime:latest
 FROM $baseImage
 
 USER root

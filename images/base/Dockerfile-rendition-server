@@ -1,4 +1,4 @@
-ARG baseImage=container-registry.ct.com/nscale/base/openjdk-17-runtime:latest
+ARG baseImage=registry.source.ceyoniq.com/ceyoniq/fe/nbox/container/base/openjdk-17-runtime:latest
 ##################################################
 # Compile Rendition Tools
 FROM registry.access.redhat.com/ubi9/perl-532 AS dependencies
@@ -12,7 +12,7 @@ RUN yum update --disablerepo=* --enablerepo=ubi-* --assumeyes && \
 WORKDIR /tmp
 
 RUN \
-  curl -L https://github.com/ImageMagick/ImageMagick/archive/7.1.1-11.tar.gz | tar -xz && \
+  curl -L https://github.com/ImageMagick/ImageMagick/archive/7.1.1-15.tar.gz | tar -xz && \
   cd ImageMagick-* && \
   ./configure --prefix=/opt && \
   make && \
@@ -27,7 +27,7 @@ RUN \
   make install
 
 RUN \
-  curl -L https://github.com/tesseract-ocr/tesseract/archive/5.3.1.tar.gz | tar -xz && \
+  curl -L https://github.com/tesseract-ocr/tesseract/archive/5.3.2.tar.gz | tar -xz && \
   cd tesseract-* && \
   ./autogen.sh && \
   ./configure LDFLAGS="-L/opt/lib"  LEPTONICA_LIBS="-lleptonica" LEPTONICA_CFLAGS="-I/opt/include/leptonica/" --disable-legacy --prefix=/opt && \
@@ -47,7 +47,7 @@ RUN \
   cat logo.txt && \
   grep DELIUS logo.txt
 
-# TODO use v1.9.1
+# TODO use v1.11
 RUN \
   curl -L https://github.com/kyz/libmspack/archive/v1.5.tar.gz | tar -xz && \
   cd libmspack-1.5/cabextract/trunk && \
@@ -67,7 +67,7 @@ RUN \
      microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes \
        jbigkit-libs-2.1-23.el9 \
        libtiff-4.4.0-8.el9_2 \
-       libwebp-1.2.0-6.el9_1 \
+       libwebp-1.2.0-7.el9_2 \
        giflib-5.2.1-9.el9 \
        libgomp-11.3.1-4.3.el9 \
        libpng-2:1.6.37-12.el9 \

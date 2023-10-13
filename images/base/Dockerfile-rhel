@@ -1,4 +1,4 @@
-ARG baseImage=container-registry.ct.com/nscale/base/minimal:latest
+ARG baseImage=registry.source.ceyoniq.com/ceyoniq/fe/nbox/container/base/minimal:latest
 FROM $baseImage
 
 ARG username=
@@ -8,7 +8,7 @@ ENV SMDEV_CONTAINER_OFF=1
 ENV TESSDATA_PREFIX=/usr/share/tesseract/tessdata
 RUN \
   # install subscription manager on ubi minimal image
-     microdnf install --assumeyes subscription-manager \
+     microdnf install --assumeyes findutils subscription-manager \
   # register account: This command will download the entitlement and consumer certificates in /etc/pki
   # NOTE: Do no put the cleartext password into a dockerfile instruction file!
   && subscription-manager register --username=$username --password=$password \

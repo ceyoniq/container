@@ -11,7 +11,7 @@ labels:
   pairs:
     app.kubernetes.io/part-of: nscale
     nscale.ceyoniq.com/version: "9"
-    version: v9.0.1502
+    version: v9.1.1001
 
 secretGenerator:
 - literals:
@@ -40,7 +40,6 @@ configMapGenerator:
   name: application-layer-web-log4j
 
 resources:
-- rbac.yaml
 - postgresql.yaml
 - application-layer.yaml
 - storage-layer.yaml

@@ -65,19 +65,19 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 
 | Komponente | Image | Akutelles Release Tag | Basis Image |
 |:---|:---|:---|:---|
-| [nscale Server Application Layer](components/application-layer.md) | ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>ubi.9.0.1501.2023082720</application-layer-tag> | [openjdk-fonts](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk-fonts) |
-| [nscale Server Application Layer Web](components/application-layer-web.md) | ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>ubi.9.0.1500.2023081820</application-layer-web-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
-| [nscale Pipeliner](components/pipeliner.md) | ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>ubi.9.0.1501.2023082809</pipeliner-tag>  | [pipeliner](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-pipeliner) |
-| [nscale Server Storage Layer](components/storage-layer.md) | ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>ubi.9.0.1500.2023081714</storage-layer-tag> | [storage-layer](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-storage-layer) |
-| [nscale Rendition Server](components/rendition-server.md) | ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>ubi.9.0.1502.2023082818</rendition-server-tag> | [rendition-server](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-rendition-server) |
-| [nscale Administrator](components/administrator.md) | ceyoniq.azurecr.io/release/nscale/administrator | <administrator-tag>ubi.9.0.1500.2023081509</administrator-tag> | [administrator](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-administrator) |
-| [nscale Monitoring Console](components/monitoring-console.md) | ceyoniq.azurecr.io/release/nscale/monitoring-console | <monitoring-console-tag>ubi.9.0.1400.2023072110</monitoring-console-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
-| [nscale Console](components/console.md) | ceyoniq.azurecr.io/release/nscale/console | <console-tag>ubi.9.0.1401.13101</console-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
-| [nscale Process Automation Modeler](components/process-automation-modeler.md) | ceyoniq.azurecr.io/release/nscale/process-automation-modeler | <process-automation-modeler-tag>ubi.9.0.1500.6997</process-automation-modeler-tag> | [nodejs](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-nodejs) |
-| [nscale CMIS-Connector](components/cmis-connector.md) | ceyoniq.azurecr.io/release/nscale/cmis-connector | <cmis-connector-tag>ubi.9.0.1202.2023052608</cmis-connector-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
-| [nscale WebDAV-Connector](components/webdav-connector.md)| ceyoniq.azurecr.io/release/nscale/webdav-connector | <webdav-connector-tag>ubi.9.0.1200.2023051702</webdav-connector-tag>  | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
-| [nscale ERP Connector ILM](components/ilm-connector.md) | ceyoniq.azurecr.io/release/nscale/ilm-connector | <ilm-connector-tag>ubi.9.0.1200.2023051702</ilm-connector-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
-| [nscale XTAConnector](components/xta-connector.md) | ceyoniq.azurecr.io/release/nscale/xta-connector | <xta-connector-tag>ubi.9.0.1200.2023051716</xta-connector-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale Server Application Layer](components/application-layer.md) | ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>ubi.9.1.1001.2023100414</application-layer-tag> | [openjdk-fonts](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk-fonts) |
+| [nscale Server Application Layer Web](components/application-layer-web.md) | ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>ubi.9.1.1000.2023092715</application-layer-web-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale Pipeliner](components/pipeliner.md) | ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>ubi.9.1.1001.2023100415</pipeliner-tag>  | [pipeliner](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-pipeliner) |
+| [nscale Server Storage Layer](components/storage-layer.md) | ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>ubi.9.1.1000.2023091413</storage-layer-tag> | [storage-layer](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-storage-layer) |
+| [nscale Rendition Server](components/rendition-server.md) | ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>ubi.9.1.1001.2023092516</rendition-server-tag> | [rendition-server](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-rendition-server) |
+| [nscale Administrator](components/administrator.md) | ceyoniq.azurecr.io/release/nscale/administrator | <administrator-tag>ubi.9.1.1000.2023092914</administrator-tag> | [administrator](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-administrator) |
+| [nscale Monitoring Console](components/monitoring-console.md) | ceyoniq.azurecr.io/release/nscale/monitoring-console | <monitoring-console-tag>ubi.9.1.1000.2023091818</monitoring-console-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale Console](components/console.md) | ceyoniq.azurecr.io/release/nscale/console | <console-tag>ubi.9.1.1001.13140</console-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale Process Automation Modeler](components/process-automation-modeler.md) | ceyoniq.azurecr.io/release/nscale/process-automation-modeler | <process-automation-modeler-tag>ubi.9.1.1001.9308</process-automation-modeler-tag> | [nodejs](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-nodejs) |
+| [nscale CMIS-Connector](components/cmis-connector.md) | ceyoniq.azurecr.io/release/nscale/cmis-connector | <cmis-connector-tag>ubi.9.1.1001.2023092613</cmis-connector-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale WebDAV-Connector](components/webdav-connector.md)| ceyoniq.azurecr.io/release/nscale/webdav-connector | <webdav-connector-tag>ubi.9.1.1000.2023083002</webdav-connector-tag>  | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale ERP Connector ILM](components/ilm-connector.md) | ceyoniq.azurecr.io/release/nscale/ilm-connector | <ilm-connector-tag>ubi.9.1.1000.2023090410</ilm-connector-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale XTAConnector](components/xta-connector.md) | ceyoniq.azurecr.io/release/nscale/xta-connector | <xta-connector-tag>ubi.9.1.1000.2023083115</xta-connector-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
 
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
 
@@ -135,13 +135,10 @@ dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarc
 # list available repositories
 dnf repolist
 dnf repository-packages fedora list
-dnf repository-packages epel list
-# enable Code Ready Builder
-/usr/bin/crb enable
 
 # install p7zip from EPEL
-dnf --disablerepo=* --enablerepo=epel search p7zip
-dnf --disablerepo=* --enablerepo=epel install -y p7zip
+dnf --disablerepo=* --enablerepo=fedora search p7zip
+dnf --disablerepo=* --enablerepo=fedora install -y p7zip
 ```
 
 Wenn eine Red Hat Subscription vorhanden ist kann diese auch verwendet werden
@@ -149,6 +146,7 @@ um eine Reihe weiterer offiziell unterstützter Repositories einzubinden ([Get S
 
 ```bash
 # install subscription manager on ubi minimal image
+microdnf install --assumeyes findutils
 microdnf install --assumeyes subscription-manager
 export SMDEV_CONTAINER_OFF=1
 # register account: This command will download the entitlement and consumer certificates in /etc/pki

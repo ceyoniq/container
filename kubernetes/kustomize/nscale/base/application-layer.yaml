@@ -19,7 +19,7 @@ spec:
         app: application-layer
         ceyoniq.com/application-layer-cluster-name: cluster1
     spec:
-      serviceAccountName: kubeping-svc-account
+      automountServiceAccountToken: false
       imagePullSecrets:
       - name: regcred
       initContainers:
@@ -45,7 +45,7 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1501.2023082720
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1001.2023100414
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -79,6 +79,14 @@ spec:
                 key: postgresql-password
           - name: INSTANCE1_CORE_DB_SCHEMA
             value: "public"
+          - name: INSTANCE1_CLUSTER_CORE_STACKTYPE
+            value: "KUBERNETES"
+          - name: INSTANCE1_JGROUPS_DNS_QUERY
+            value: "application-layer"
+          - name: INSTANCE1_CLUSTER_CORE_CLUSTER_ID
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
           - name: INSTANCE1_CLUSTER_CORE_NAME
             valueFrom:
               fieldRef:
@@ -195,7 +203,7 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.0.1501.2023082720
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1001.2023100414
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:

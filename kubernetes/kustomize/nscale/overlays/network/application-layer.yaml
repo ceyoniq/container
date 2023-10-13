@@ -36,6 +36,7 @@ spec:
     ports:
       - protocol: TCP
         port: 7800
+        endPort: 7802
       - protocol: TCP
         port: 32000
         endPort: 65535
@@ -81,6 +82,7 @@ spec:
         port: 8080
       - protocol: TCP
         port: 7800
+        endPort: 7802
       - protocol: TCP
         port: 32000
         endPort: 65535
@@ -155,6 +157,7 @@ spec:
     ports:
       - protocol: TCP
         port: 7800
+        endPort: 7802
       - protocol: TCP
         port: 32000
         endPort: 65535
@@ -165,6 +168,7 @@ spec:
     ports:
       - protocol: TCP
         port: 7800
+        endPort: 7802
       - protocol: TCP
         port: 32000
         endPort: 65535

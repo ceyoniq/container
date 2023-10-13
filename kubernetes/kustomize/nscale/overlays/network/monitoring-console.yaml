@@ -20,6 +20,14 @@ spec:
     - namespaceSelector:
         matchLabels:
           kubernetes.io/metadata.name: ingress-nginx
+  - from:
+    # access from administrator in the same namespace
+    - podSelector:
+        matchLabels:
+          app: administrator
+    ports:
+      - protocol: TCP
+        port: 8387
   egress:
   - to:
     - podSelector:
