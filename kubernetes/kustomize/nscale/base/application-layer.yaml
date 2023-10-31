@@ -45,7 +45,7 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1001.2023100414
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1100.2023102621
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -203,15 +203,15 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1001.2023100414
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1100.2023102621
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
-        - >
+        - > 
           echo "initialize Document Area 'DA'";
-          al -host application-layer run-cfg-method -method lockSystem;
-          al -host application-layer scenario-da -da DA -displayname DA -rs host=rendition-server -sl host=storage-layer;
-          al -host application-layer run-cfg-method -method unlockSystem;
+          al -host application-layer run-cfg-method -method lockSystem || exit 1;
+          al -host application-layer scenario-da -da DA -displayname DA -rs host=rendition-server -sl host=storage-layer || exit 1;
+          al -host application-layer run-cfg-method -method unlockSystem || exit 1;
           echo "done";
         resources:
           limits:

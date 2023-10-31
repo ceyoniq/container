@@ -65,19 +65,19 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 
 | Komponente | Image | Akutelles Release Tag | Basis Image |
 |:---|:---|:---|:---|
-| [nscale Server Application Layer](components/application-layer.md) | ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>ubi.9.1.1001.2023100414</application-layer-tag> | [openjdk-fonts](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk-fonts) |
-| [nscale Server Application Layer Web](components/application-layer-web.md) | ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>ubi.9.1.1000.2023092715</application-layer-web-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
-| [nscale Pipeliner](components/pipeliner.md) | ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>ubi.9.1.1001.2023100415</pipeliner-tag>  | [pipeliner](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-pipeliner) |
-| [nscale Server Storage Layer](components/storage-layer.md) | ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>ubi.9.1.1000.2023091413</storage-layer-tag> | [storage-layer](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-storage-layer) |
+| [nscale Server Application Layer](components/application-layer.md) | ceyoniq.azurecr.io/release/nscale/application-layer | <application-layer-tag>ubi.9.1.1100.2023102621</application-layer-tag> | [openjdk-fonts](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk-fonts) |
+| [nscale Server Application Layer Web](components/application-layer-web.md) | ceyoniq.azurecr.io/release/nscale/application-layer-web | <application-layer-web-tag>ubi.9.1.1101.2023103014</application-layer-web-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale Pipeliner](components/pipeliner.md) | ceyoniq.azurecr.io/release/nscale/pipeliner | <pipeliner-tag>ubi.9.1.1100.2023102712</pipeliner-tag>  | [pipeliner](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-pipeliner) |
+| [nscale Server Storage Layer](components/storage-layer.md) | ceyoniq.azurecr.io/release/nscale/storage-layer | <storage-layer-tag>ubi.9.1.1100.2023102618</storage-layer-tag> | [storage-layer](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-storage-layer) |
 | [nscale Rendition Server](components/rendition-server.md) | ceyoniq.azurecr.io/release/nscale/rendition-server | <rendition-server-tag>ubi.9.1.1001.2023092516</rendition-server-tag> | [rendition-server](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-rendition-server) |
-| [nscale Administrator](components/administrator.md) | ceyoniq.azurecr.io/release/nscale/administrator | <administrator-tag>ubi.9.1.1000.2023092914</administrator-tag> | [administrator](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-administrator) |
+| [nscale Administrator](components/administrator.md) | ceyoniq.azurecr.io/release/nscale/administrator | <administrator-tag>ubi.9.1.1100.2023102316</administrator-tag> | [administrator](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-administrator) |
 | [nscale Monitoring Console](components/monitoring-console.md) | ceyoniq.azurecr.io/release/nscale/monitoring-console | <monitoring-console-tag>ubi.9.1.1000.2023091818</monitoring-console-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
-| [nscale Console](components/console.md) | ceyoniq.azurecr.io/release/nscale/console | <console-tag>ubi.9.1.1001.13140</console-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
-| [nscale Process Automation Modeler](components/process-automation-modeler.md) | ceyoniq.azurecr.io/release/nscale/process-automation-modeler | <process-automation-modeler-tag>ubi.9.1.1001.9308</process-automation-modeler-tag> | [nodejs](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-nodejs) |
-| [nscale CMIS-Connector](components/cmis-connector.md) | ceyoniq.azurecr.io/release/nscale/cmis-connector | <cmis-connector-tag>ubi.9.1.1001.2023092613</cmis-connector-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
-| [nscale WebDAV-Connector](components/webdav-connector.md)| ceyoniq.azurecr.io/release/nscale/webdav-connector | <webdav-connector-tag>ubi.9.1.1000.2023083002</webdav-connector-tag>  | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
-| [nscale ERP Connector ILM](components/ilm-connector.md) | ceyoniq.azurecr.io/release/nscale/ilm-connector | <ilm-connector-tag>ubi.9.1.1000.2023090410</ilm-connector-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
-| [nscale XTAConnector](components/xta-connector.md) | ceyoniq.azurecr.io/release/nscale/xta-connector | <xta-connector-tag>ubi.9.1.1000.2023083115</xta-connector-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale Console](components/console.md) | ceyoniq.azurecr.io/release/nscale/console | <console-tag>ubi.9.1.1101.13162</console-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale Process Automation Modeler](components/process-automation-modeler.md) | ceyoniq.azurecr.io/release/nscale/process-automation-modeler | <process-automation-modeler-tag>ubi.9.1.1100.12028</process-automation-modeler-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk)  |
+| [nscale CMIS-Connector](components/cmis-connector.md) | ceyoniq.azurecr.io/release/nscale/cmis-connector | <cmis-connector-tag>ubi.9.1.1100.2023102421</cmis-connector-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale WebDAV-Connector](components/webdav-connector.md)| ceyoniq.azurecr.io/release/nscale/webdav-connector | <webdav-connector-tag>ubi.9.1.1100.2023102502</webdav-connector-tag>  | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale ERP Connector ILM](components/ilm-connector.md) | ceyoniq.azurecr.io/release/nscale/ilm-connector | <ilm-connector-tag>ubi.9.1.1100.2023102502</ilm-connector-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
+| [nscale XTAConnector](components/xta-connector.md) | ceyoniq.azurecr.io/release/nscale/xta-connector | <xta-connector-tag>ubi.9.1.1100.2023102509</xta-connector-tag> | [openjdk](https://raw.githubusercontent.com/ceyoniq/container/main/images/base/Dockerfile-openjdk) |
 
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.
 
@@ -91,11 +91,11 @@ Entsprechend können die Images abgeleitet und mit Enterprise Red Hat oder Fedor
 
 Wir installieren in unseren Images zusätzliche Werkzeuge aus dem "Red Hat Universal Base Image" Upstream.
 Im Speziellem gibt es Ausnahmen davon im Rendition Server und Application Layer Images,
-in denen freie TrueType Google Fonts ([Croscore fonts](https://en.wikipedia.org/wiki/Croscore_fonts)) anstatt der default Dejavu Fonts installiert sind.
+in denen freie TrueType Fonts ([Liberation Fonts](https://en.wikipedia.org/wiki/Liberation_fonts)) anstatt der default Dejavu Fonts installiert sind.
 
-* [Google Arimo Font](https://fonts.google.com/specimen/Arimo)
-* [Google Cousine Font](https://fonts.google.com/specimen/Cousine)
-* [Google Tinos Font](https://fonts.google.com/specimen/Tinos)
+* [Liberation Mono Fonts](https://www.dafont.com/de/liberation-mono.font)
+* [Liberation Sans Fonts](https://www.dafont.com/de/liberation-sans.font)
+* [Liberation Serif Fonts](https://www.dafont.com/de/liberation-serif.font)
 
 Daneben sind im Rendition Server Image unter `/opt` [Tesseract-OCR](https://github.com/tesseract-ocr/tesseract)
 und [ImageMagick](https://github.com/ImageMagick/ImageMagick) nachinstalliert.

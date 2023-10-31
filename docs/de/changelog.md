@@ -3,6 +3,12 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 9.1.1100
+
+* Aktualisierung der Container Images.
+* Wechsel der freien True Type Fonts im Basis Image von den Google ([Croscore fonts](https://en.wikipedia.org/wiki/Croscore_fonts)) auf die erweiterten [Liberation Fonts](https://en.wikipedia.org/wiki/Liberation_fonts).
+* Erweiterte Fehlerbehandlung im Setup Job zum Erstellen des initialen Dokumentenbereichs in Kubernetes.
+
 ## 9.1.1000
 
 * Aktualisierung der Container Images.

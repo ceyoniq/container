@@ -88,11 +88,11 @@
 |--|:--|
 | [Dockerfile-openjdk](./Dockerfile-openjdk) |  Basis Image für Java 11 und 17 Runtime Images |
 | [Dockerfile](./Dockerfile) |  Basis Image für nscale Images ohne Java Runtime (nscale Storage Layer) |
-| [Dockerfile-nodejs](./Dockerfile-nodejs) |  Basis Image für den nscale Process Modeler |
 | [Dockerfile-openjdk-fonts](./Dockerfile-openjdk-fonts) | Basis Image für den nscale Application Layer und nscale Rendition Server |
 | [Dockerfile-administrator](./Dockerfile-administrator) |  Basis Image für den nscale Administrator |
 | [Dockerfile-installer](./Dockerfile-installer) |  Basis Image für nscale Installer Images |
 | [Dockerfile-pipeliner](./Dockerfile-pipeliner) | Basis Image für den nscale Pipeliner |
 | [Dockerfile-storage-layer](./Dockerfile-storage-layer) | Basis Image für den nscale Storage Layer |
+| [Dockerfile-rendition-server](./Dockerfile-rendition-server) | Basis Image für den nscale Rendition Server |
 | [Dockerfile-fedora](./Dockerfile-fedora) | Beispiel einer Basis Image Ableitung mit Fedora Paketen |
 | [Dockerfile-rhel](./Dockerfile-rhel) | Beispiel einer Basis Image Ableitung mit Red Hat Subscription Manager |

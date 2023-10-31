@@ -1,5 +1,5 @@
 # https://catalog.redhat.com/software/containers/ubi9/ubi-minimal/615bd9b4075b022acc111bf5
-ARG baseImage=registry.access.redhat.com/ubi9/ubi-minimal:9.2-717
+ARG baseImage=registry.access.redhat.com/ubi9/ubi-minimal:9.2-750.1696515534
 
 FROM $baseImage
 
