@@ -45,7 +45,7 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1100.2023102621
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1201.2023112921
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -62,6 +62,10 @@ spec:
           periodSeconds: 10
           timeoutSeconds: 1
         env:
+          - name: INSTANCE1_CLUSTER_CORE_STACKTYPE
+            value: "KUBERNETES"
+          - name: INSTANCE1_JGROUPS_DNS_QUERY
+            value: "application-layer"
           - name: INSTANCE1_INSTANCE_LOGGER_CONF
             value: "log4j/instance1-log.xml"
           - name: INSTANCE1_CORE_DB_DIALECT
@@ -70,15 +74,15 @@ spec:
             value: "org.postgresql.Driver"
           - name: INSTANCE1_CORE_DB_URL
             value: "jdbc:postgresql://postgresql:5432/nscale?loggerLevel=OFF"
+          - name: INSTANCE1_CORE_DB_SCHEMA
+            value: "nscale"
           - name: INSTANCE1_CORE_DB_USERNAME
             value: "nscale"
           - name: INSTANCE1_CORE_DB_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: postgresql
-                key: postgresql-password
-          - name: INSTANCE1_CORE_DB_SCHEMA
-            value: "public"
+                key: nscale-password
           - name: INSTANCE1_CLUSTER_CORE_STACKTYPE
             value: "KUBERNETES"
           - name: INSTANCE1_JGROUPS_DNS_QUERY
@@ -95,7 +99,7 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.namespace
-          - name: JAVA_OPTS
+          - name: JAVA_OPTS          
             value: -XX:MaxRAMPercentage=50.0 -Duser.country=DE -Duser.language=de
           - name: KUBERNETES_NAMESPACE
             valueFrom:
@@ -148,7 +152,7 @@ spec:
           sizeLimit: 2Mi
       - name: temp
         emptyDir:
-          sizeLimit: 50Mi
+          sizeLimit: 1Gi
 ---
 apiVersion: v1
 kind: Service
@@ -182,16 +186,15 @@ spec:
       hostname: application-layer-setup
       initContainers:
       - name: wait-for-application-layer
-        image: docker.io/curlimages/curl:8.00.1
+        image: docker.io/curlimages/curl:8.4.0
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
         - >
-          sleep 10;
           while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://application-layer:8080/index.html)" != "200" ]]; do
             echo '.'
             sleep 5;
-          done
+          done;
         resources:
           limits:
             cpu: "200m"
@@ -203,7 +206,7 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1100.2023102621
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1201.2023112921
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
@@ -235,6 +238,10 @@ metadata:
   name: application-layer
   labels:
     app: application-layer
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: '/nscalealinst1/metrics'
+    prometheus.io/port: '8080'
 spec:
   minAvailable: 1
   selector:

@@ -11,11 +11,12 @@ labels:
   pairs:
     app.kubernetes.io/part-of: nscale
     nscale.ceyoniq.com/version: "9"
-    version: v9.1.1101
+    version: v9.1.1201
 
 secretGenerator:
 - literals:
-  - postgresql-password=nscale
+  - postgresql-password=password
+  - nscale-password=password
   name: postgresql
 
 configMapGenerator:
@@ -32,7 +33,6 @@ configMapGenerator:
   - config/pipeliner/setup.sh
   name: pipeliner-setup
 - files:
-  - config/application-layer/instance1-log-console.conf
   - config/application-layer/instance1-log.xml
   name: application-layer-log4j
 - files:

@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: application-layer-setup
+spec:
+  template:
+    spec:
+      initContainers:
+      - name: wait-for-application-layer
+        securityContext:
+          runAsUser: 10001
+      containers:
+      - name: application-layer
+        securityContext:
+          runAsUser: 10001

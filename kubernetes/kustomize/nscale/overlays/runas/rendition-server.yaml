@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rendition-server
+spec:
+  template:
+    spec:
+      securityContext:
+        fsGroup: 0
+      containers:
+      - name: rendition-server
+        securityContext:
+          runAsUser: 10001

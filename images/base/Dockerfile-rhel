@@ -8,7 +8,7 @@ ENV SMDEV_CONTAINER_OFF=1
 ENV TESSDATA_PREFIX=/usr/share/tesseract/tessdata
 RUN \
   # install subscription manager on ubi minimal image
-     microdnf install --assumeyes findutils subscription-manager \
+     microdnf install --assumeyes dnf findutils subscription-manager \
   # register account: This command will download the entitlement and consumer certificates in /etc/pki
   # NOTE: Do no put the cleartext password into a dockerfile instruction file!
   && subscription-manager register --username=$username --password=$password \
@@ -17,7 +17,7 @@ RUN \
   # list available repositories
   && microdnf repolist \
   # install leptonica / tesseract from RHEL repositories
-  && microdnf install --assumeyes  leptonica tesseract \
+  && microdnf install --assumeyes leptonica tesseract \
   # install tesseract language packages
   && curl -L https://github.com/tesseract-ocr/tessdata_fast/raw/main/deu.traineddata -o ${TESSDATA_PREFIX}/deu.traineddata \
   && curl -L https://github.com/tesseract-ocr/tessdata_fast/raw/main/eng.traineddata -o ${TESSDATA_PREFIX}/eng.traineddata  \

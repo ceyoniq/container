@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xta-connector
+spec:
+  template:
+    spec:
+      containers:
+      - name: xta-connector
+        securityContext:
+          runAsUser: 10001

@@ -9,8 +9,9 @@ PGPASSWORD="$POSTGRESQL_PASSWORD" psql -v ON_ERROR_STOP=1 --username "$POSTGRESQ
 
   \connect ${NSCALE_DATABASE};
 
-  GRANT CREATE ON SCHEMA public TO ${NSCALE_USERNAME:-nscale};
-  GRANT USAGE ON SCHEMA public TO ${NSCALE_USERNAME:-nscale};
+  CREATE SCHEMA IF NOT EXISTS ${NSCALE_SCHEMA:-nscale};
+  GRANT CREATE ON SCHEMA ${NSCALE_SCHEMA:-nscale} TO ${NSCALE_USERNAME:-nscale};
+  GRANT USAGE ON SCHEMA ${NSCALE_SCHEMA:-nscale} TO ${NSCALE_USERNAME:-nscale};
 
   -- https://www.postgresql.org/docs/13/fuzzystrmatch.html
   CREATE EXTENSION fuzzystrmatch;

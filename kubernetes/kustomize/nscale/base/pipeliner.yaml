@@ -22,7 +22,7 @@ spec:
       - name: regcred
       initContainers:
       - name: wait-for-application-layer
-        image: docker.io/curlimages/curl:8.00.1
+        image: docker.io/curlimages/curl:8.4.0
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
@@ -42,7 +42,7 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: pipeliner
-        image: ceyoniq.azurecr.io/release/nscale/pipeliner:ubi.9.1.1100.2023102712
+        image: ceyoniq.azurecr.io/release/nscale/pipeliner:ubi.9.1.1201.2023113011
         imagePullPolicy: Always
         startupProbe:
           exec:

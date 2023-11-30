@@ -1,20 +1,5 @@
 # nscale Server Application Layer
 
-
-Hallo Abdulhamit,
-
-offenbar ist Microsoft das Problem mit den veralteten Zertifikaten des Azure Postgresql Servers bekannt aber noch nicht gefixt;
-https://learn.microsoft.com/en-us/answers/questions/1199915/certificates-do-not-conform-to-algorithm.
-
-Es gibt aber einen Workaround, den ich ausprobiert habe.
-
-Dazu braucht man das Root CA der Postgresql DB von Microsoft (https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-connect-tls-ssl#applications-that-require-certificate-verification-for-tlsssl-connectivity).
-Diese Zertifikat muss in den Container kopiert (wget https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem) und entsprechend die JDBC URL angepasst werden:
-jdbc:postgresql://xxx.postgres.database.azure.com:5432/nscale?loggerLevel=OFF&sslmode=verify-full&sslrootcert=/DigiCertGlobalRootCA.crt.pem&ssl_min_protocol_version=TLSv1.3
-Wir können auch ein Dockerfile dazu erstellen.
-
-Vorsicht: Im Cluster müssen alle nappl Instanzen dieselbe Version haben sonst könnte die DB kaputt gehen.
-
 ## Inhalt
 
 - [nscale Server Application Layer](#nscale-server-application-layer)
@@ -74,7 +59,7 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 |INSTANCE1_CORE_DB_URL=jdbc:postgresql://postgresql:5432/nscale?loggerLevel=OFF | Mit dieser Umgebungsvariable können Sie die URL Ihrer Datenbank hinterlegen. Passen Sie diesen Pfad ggf. an. |
 |INSTANCE1_CORE_DB_USERNAME=nscale | Mit dieser Umgebungsvariable können Sie den Usernamen hinterlegen, mit dem der Application Layer auf die Datenbank zugreift. Hier wurde der Name "nscale" gewählt. |
 |INSTANCE1_CORE_DB_PASSWORD=password | In dieser Umgebungsvariable können Sie das Passwort hinterlegen, mit dem der Application Layer auf die Datenbank zugreift. Ändern Sie das in diesem Beispiel verwendete Passwort unbedingt. |
-|INSTANCE1_CORE_DB_SCHEMA=public | In dieser Umgebungsvariable können Sie das Datenbankschema hinterlegen. Hier wurde das Schema public gewählt. |
+|INSTANCE1_CORE_DB_SCHEMA=nscale | In dieser Umgebungsvariable können Sie das Datenbankschema hinterlegen. Hier wurde das Schema public gewählt. |
 |INSTANCE1_CORE_WORK_DIRECTORY=/mnt/fulltextcache | In dieser Umgebungsvariable können Sie den Ordner für den lokalen Volltext-Cache definieren. Stellen Sie durch Verwendung eines Volumes sicher, das dieser Ordner schreibbar ist. Im Standardcontainer ist '/mnt' nicht schreibbar. |
 |INITIALIZE_DOCUMENT_AREA=DA | Mit dieser Umgebungsvariable können Sie einen Dokumentenbereich mit dem Namen "DA" erstellen. |
 |INITIALIZE_DOCUMENT_AREA_DISPLAYNAME=DA | Mit dieser Umgebungsvariable können Sie den Displayname des neu erstellten Dokumentenbereichs überschreiben. |
@@ -104,11 +89,11 @@ docker run --rm \
   -e INSTANCE1_CORE_DB_URL=jdbc:postgresql://postgresql:5432/nscale?loggerLevel=OFF \
   -e INSTANCE1_CORE_DB_USERNAME=nscale \
   -e INSTANCE1_CORE_DB_PASSWORD=password \
-  -e  INSTANCE1_CORE_DB_SCHEMA=public \
+  -e  INSTANCE1_CORE_DB_SCHEMA=nscale \
   -h democontainer \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
   -p 8080:8080 \
-  ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1100.2023102621
+  ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1201.2023112921
 ```
 ## Microsoft Azure PostgreSQL flexible server
 
@@ -157,7 +142,7 @@ Entsprechend können auch andere proprietäre Fonts nachinstalliert werden.
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1100.2023102621
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1201.2023112921
 ```
 
 **Beispiel Docker Compose:**

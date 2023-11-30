@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: process-automation-modeler
+spec:
+  template:
+    spec:
+      containers:
+      - name: process-automation-modeler
+        securityContext:
+          runAsUser: 10001

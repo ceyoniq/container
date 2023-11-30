@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitoring-console
+spec:
+  template:
+    spec:
+      securityContext:
+        fsGroup: 0
+      initContainers:
+      - name: monitoring-console-conf
+        securityContext:
+          runAsUser: 10001
+      containers:
+      - name: monitoring-console
+        securityContext:
+          runAsUser: 10001

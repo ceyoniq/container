@@ -21,7 +21,7 @@ spec:
       - name: regcred
       containers:
       - name: process-automation-modeler
-        image: ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.9.1.1100.12028
+        image: ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.9.1.1200.15094
         imagePullPolicy: Always
         startupProbe:
           httpGet:

@@ -21,8 +21,9 @@ services:
     environment:
       - POSTGRESQL_USERNAME=postgres
       - POSTGRESQL_PASSWORD=password # environment variable when running the image for the first time
-      - NSCALE_USERNAME=nscale
       - NSCALE_DATABASE=nscale
+      - NSCALE_SCHEMA=nscale
+      - NSCALE_USERNAME=nscale
       - NSCALE_PASSWORD=password
     networks:
       - nscale
@@ -50,9 +51,9 @@ services:
       - INSTANCE1_CORE_DB_DIALECT=PostgreSQL
       - INSTANCE1_CORE_DB_DRIVERCLASS=org.postgresql.Driver
       - INSTANCE1_CORE_DB_URL=jdbc:postgresql://postgresql:5432/nscale?loggerLevel=OFF
+      - INSTANCE1_CORE_DB_SCHEMA=nscale
       - INSTANCE1_CORE_DB_USERNAME=nscale
       - INSTANCE1_CORE_DB_PASSWORD=password # Do not use this password in production!
-      - INSTANCE1_CORE_DB_SCHEMA=public
       - JAVA_OPTS=-Xmx2g -Duser.country=DE -Duser.language=de
       - INSTANCE1_CORE_FULLTEST_INDEX_MIRROR_LOCALCACHE=off
     networks:

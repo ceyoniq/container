@@ -13,7 +13,7 @@ spec:
       hostname: application-layer-setup2
       initContainers:
       - name: wait-for-application-layer-and-da
-        image: docker.io/curlimages/curl:8.00.1
+        image: ceyoniq.azurecr.io/release/nscale/application-layer
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:

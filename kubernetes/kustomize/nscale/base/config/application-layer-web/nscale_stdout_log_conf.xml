@@ -48,7 +48,13 @@
                                 additivity="false">
                         <AppenderRef ref="CONSOLE"/>
                 </Logger>
-
+                <!--
+                <Logger name="CTCMWebclient.SYSTEM.CONNECTION"
+                                level="debug"
+                                additivity="false">
+                        <AppenderRef ref="CONSOLE"/>
+                </Logger>
+                -->
                 <!-- ============================== -->
                 <!-- Layout Logger                  -->
                 <!-- ============================== -->
@@ -92,7 +98,7 @@
                 <!-- ============================== -->
                 <!--
                 <Logger name="PERFORMANCE"
-                                level="debug"
+                                level="info"
                                 additivity="false">
                         <AppenderRef ref="CONSOLE"/>
                 </Logger>
@@ -103,13 +109,14 @@
                                 additivity="false">
                         <AppenderRef ref="CONSOLE"/>
                 </Logger>
-
+                -->
+                <!--
                 <Logger name="PERFORMANCE.WEB"
                                 level="debug"
                                 additivity="false">
                         <AppenderRef ref="CONSOLE"/>
                 </Logger>
-        -->
+                -->
 
                 <!-- ============================== -->
                 <!-- Apache Tapestry                -->
@@ -119,7 +126,13 @@
                                 additivity="false">
                         <AppenderRef ref="CONSOLE"/>
                 </Logger>
-
+                <!--
+                <Logger name="org.apache.tapestry5.TapestryFilter"
+                                level="debug"
+                                additivity="false">
+                        <AppenderRef ref="CONSOLE"/>
+                </Logger>
+                -->
                 <Logger name="tapestry.render.com.ceyoniq.nscale.webclient.tap5.pages"
                                 level="error"
                                 additivity="false">

@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: console
+spec:
+  template:
+    spec:
+      containers:
+      - name: console
+        securityContext:
+          runAsUser: 10001

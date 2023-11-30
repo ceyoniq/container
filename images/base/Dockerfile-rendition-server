@@ -66,12 +66,12 @@ USER root
 RUN \
      microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes \
        jbigkit-libs-2.1-23.el9 \
-       libtiff-4.4.0-8.el9_2 \
-       libwebp-1.2.0-7.el9_2 \
+       libtiff-4.4.0-10.el9 \
+       libwebp-1.2.0-8.el9_3 \
        giflib-5.2.1-9.el9 \
-       libgomp-11.3.1-4.3.el9 \
+       libgomp-11.4.1-2.1.el9 \
        libpng-2:1.6.37-12.el9 \
-       libX11-1.7.0-7.el9 \
+       libX11-1.7.0-8.el9 \
 	&& microdnf clean all \
   # patch installation directory
   #ln -s /opt/ceyoniq/tools/bin/wkhtmltopdf /usr/bin/wkhtmltopdf \

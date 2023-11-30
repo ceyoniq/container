@@ -21,7 +21,7 @@ spec:
       - name: regcred
       containers:
       - name: rendition-server
-        image: ceyoniq.azurecr.io/release/nscale/rendition-server:ubi.9.1.1001.2023092516
+        image: ceyoniq.azurecr.io/release/nscale/rendition-server:ubi.9.1.1200.2023112209
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -72,6 +72,10 @@ metadata:
   name: rendition-server
   labels:
     service: rendition-server
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: '/rs/rest/metrics'
+    prometheus.io/port: '8192'
 spec:
   ports:
   - port: 8192

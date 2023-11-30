@@ -49,5 +49,5 @@ docker run --rm \
   -e NAPPL_PORT=8080 \
   -e NAPPL_INSTANCE=nscalealinst1 \
   -p 8092:8092 \
-  ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.9.1.1100.12028
+  ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.9.1.1200.15094
 ```

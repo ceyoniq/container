@@ -26,4 +26,11 @@ spec:
     ports:
       - protocol: TCP
         port: 8192
-
+  - from:
+    # access from monitoring namespace
+    - podSelector:
+        matchLabels:
+          app: monitoring-console
+    ports:
+      - protocol: TCP
+        port: 8192

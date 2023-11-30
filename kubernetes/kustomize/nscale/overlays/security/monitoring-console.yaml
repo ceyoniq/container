@@ -5,15 +5,12 @@ metadata:
 spec:
   template:
     spec:
-      securityContext:
-        fsGroup: 0
       initContainers:
       - name: monitoring-console-conf
         securityContext:
           readOnlyRootFilesystem: true
           allowPrivilegeEscalation: false
           runAsNonRoot: true
-          runAsUser: 10001
           capabilities:
             drop:
               - ALL
@@ -25,7 +22,6 @@ spec:
           readOnlyRootFilesystem: true
           allowPrivilegeEscalation: false
           runAsNonRoot: true
-          runAsUser: 10001
           capabilities:
             drop:
               - ALL

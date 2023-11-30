@@ -67,7 +67,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: postgresql
-              key: postgresql-password
+              key: nscale-password
         ports:
         - name: postgresql
           containerPort: 5432

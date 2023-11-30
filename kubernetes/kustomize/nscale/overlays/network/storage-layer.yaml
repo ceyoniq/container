@@ -33,4 +33,11 @@ spec:
     ports:
       - protocol: TCP
         port: 3005
-
+  - from:
+    # access from administrator in the same namespace
+    - podSelector:
+        matchLabels:
+          app: monitoring-console
+    ports:
+      - protocol: TCP
+        port: 3005

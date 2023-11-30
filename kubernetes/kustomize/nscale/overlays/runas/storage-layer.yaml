@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: storage-layer
+spec:
+  template:
+    spec:
+      securityContext:
+        fsGroup: 0
+      initContainers:
+      - name: storage-layer-conf
+        securityContext:
+          runAsUser: 10001
+      containers:
+      - name: storage-layer
+        securityContext:
+          runAsUser: 10001

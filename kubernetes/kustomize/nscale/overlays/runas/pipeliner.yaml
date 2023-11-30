@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pipeliner
+spec:
+  template:
+    spec:
+      securityContext:
+        fsGroup: 0
+      containers:
+      - name: pipeliner
+        securityContext:
+          runAsUser: 10001
