@@ -1,7 +1,7 @@
 # https://catalog.redhat.com/software/containers/ubi9/openjdk-11-runtime/61ee7d1c33f211c45407a91c
 # https://catalog.redhat.com/software/containers/ubi9/openjdk-17-runtime/61ee7d45384a3eb331996bee
-#ARG baseImage=registry.access.redhat.com/ubi9/openjdk-11-runtime:1.16-3
-ARG baseImage=registry.access.redhat.com/ubi9/openjdk-17-runtime:1.16-3
+#ARG baseImage=registry.access.redhat.com/ubi9/openjdk-11-runtime:1.17-1 
+ARG baseImage=registry.access.redhat.com/ubi9/openjdk-17-runtime:1.17-1
 
 FROM $baseImage
 

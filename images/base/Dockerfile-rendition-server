@@ -27,7 +27,7 @@ RUN \
   make install
 
 RUN \
-  curl -L https://github.com/tesseract-ocr/tesseract/archive/5.3.2.tar.gz | tar -xz && \
+  curl -L https://github.com/tesseract-ocr/tesseract/archive/5.3.3.tar.gz | tar -xz && \
   cd tesseract-* && \
   ./autogen.sh && \
   ./configure LDFLAGS="-L/opt/lib"  LEPTONICA_LIBS="-lleptonica" LEPTONICA_CFLAGS="-I/opt/include/leptonica/" --disable-legacy --prefix=/opt && \
