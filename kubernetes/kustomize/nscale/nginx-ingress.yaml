@@ -77,3 +77,10 @@ spec:
             name: administrator
             port:
               name: administrator
+      - path: /modeler
+        pathType: Prefix
+        backend:
+          service:
+            name: process-automation-modeler
+            port:
+              name: modeler

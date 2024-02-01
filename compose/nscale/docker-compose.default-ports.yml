@@ -37,3 +37,7 @@ services:
   administrator:
     ports:
       - "8181:8080" # HTTP
+
+  process-automation-modeler:
+    ports:
+      - 8092:8092 # HTTP

@@ -3,6 +3,13 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 9.1.1400 (Februar 2024)
+
+* Aktualisierung der Container Images.
+* Neue LivenessProbe für den application layer zur Erkennung des Panic Status im Server.
+* Änderung der Console Probes zur Vermeidung unnötiger wiederkehrender Logmeldungen.
+* Übernahme des Process Automation Modelers in die nscale core Komponenten mit Unterstütung des Kontextpfads.
+
 ## 9.1.1300 (Januar 2024)
 
 * Aktualisierung der Container Images.

@@ -38,6 +38,14 @@ services:
       - "traefik.http.routers.adminsec.tls=true"
       - "traefik.http.routers.adminsec.tls.certresolver=myresolver"
 
+  process-automation-modeler:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.modelersec.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/modeler`)"
+      - "traefik.http.routers.modelersec.entrypoints=websecure"
+      - "traefik.http.routers.modelersec.tls=true"
+      - "traefik.http.routers.modelersec.tls.certresolver=myresolver"
+
   traefik:
     image: ${TRAEFIK_IMAGE}
     command:

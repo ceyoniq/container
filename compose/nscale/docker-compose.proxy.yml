@@ -30,6 +30,13 @@ services:
       - "traefik.http.routers.administrator.entrypoints=web"
       - "traefik.http.services.administrator.loadbalancer.server.port=8080"
 
+  process-automation-modeler:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.modeler.rule=PathPrefix(`/modeler`)"
+      - "traefik.http.routers.modeler.entrypoints=web"
+      - "traefik.http.services.modeler.loadbalancer.server.port=8092"
+
   traefik:
     image: ${TRAEFIK_IMAGE}
     container_name: traefik

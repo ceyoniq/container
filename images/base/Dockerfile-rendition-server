@@ -12,14 +12,14 @@ RUN yum update --disablerepo=* --enablerepo=ubi-* --assumeyes && \
 WORKDIR /tmp
 
 RUN \
-  curl -L https://github.com/ImageMagick/ImageMagick/archive/7.1.1-15.tar.gz | tar -xz && \
+  curl -L https://github.com/ImageMagick/ImageMagick/archive/7.1.1-25.tar.gz | tar -xz && \
   cd ImageMagick-* && \
   ./configure --prefix=/opt && \
   make && \
   make install
 
 RUN \
-  curl -L https://github.com/DanBloomberg/leptonica/archive/1.83.1.tar.gz | tar -xz && \
+  curl -L https://github.com/DanBloomberg/leptonica/archive/1.84.1.tar.gz | tar -xz && \
   cd leptonica-* && \
   ./autogen.sh && \
   ./configure --prefix=/opt && \

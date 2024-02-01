@@ -25,13 +25,13 @@ spec:
         imagePullPolicy: Always
         startupProbe:
           httpGet:
-            path: /console/
+            path: /console/systemConfiguration.xml
             port: 8086
           initialDelaySeconds: 10
           failureThreshold: 5
         readinessProbe:
           httpGet:
-            path: /console/
+            path: /console/systemConfiguration.xml
             port: 8086
         env:
         - name: LOG_APPENDER

@@ -119,3 +119,17 @@ services:
       - APPLICATION_LAYER_SSL=false
     networks:
       - nscale
+
+  process-automation-modeler:
+    image: ${PROCESS_AUTOMATION_MODELER_IMAGE}
+    environment:
+      - NSCALE_HOST=application-layer
+      - NSCALE_PORT=8080
+      - NSCALE_INSTANCE=nscalealinst1
+      - NSCALE_SSL=false
+      - LOG4JCONFIGLOCATION=../conf/nscale_stdout_log_conf.xml
+      - JAVA_OPTS=-Xmx2g -Duser.country=DE -Duser.language=de
+    networks:
+      - nscale
+    depends_on:
+      - application-layer

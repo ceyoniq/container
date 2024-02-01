@@ -45,7 +45,7 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1300.2023121921
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1401.2024012409
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -61,6 +61,14 @@ spec:
             port: 8080
           periodSeconds: 10
           timeoutSeconds: 1
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /nscalealinst1/metrics
+            port: 8080
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 3
         env:
           - name: INSTANCE1_CLUSTER_CORE_STACKTYPE
             value: "KUBERNETES"
@@ -101,6 +109,8 @@ spec:
                 fieldPath: metadata.namespace
           - name: JAVA_OPTS          
             value: -XX:MaxRAMPercentage=50.0 -Duser.country=DE -Duser.language=de
+          - name: METRICS_ALLOW_REMOTE_REQUESTS
+            value: "true"
           - name: KUBERNETES_NAMESPACE
             valueFrom:
               fieldRef:
@@ -206,14 +216,14 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1300.2023121921
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1401.2024012409
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
         - > 
           echo "initialize Document Area 'DA'";
           al -host application-layer run-cfg-method -method lockSystem || exit 1;
-          al -host application-layer scenario-da -da DA -displayname DA -rs host=rendition-server -sl host=storage-layer || exit 1;
+          al -host application-layer scenario-da -da DA -displayname DA -rs host=rendition-server -sl host=storage-layer;
           al -host application-layer run-cfg-method -method unlockSystem || exit 1;
           echo "done";
         resources:

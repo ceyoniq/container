@@ -25,11 +25,10 @@ Diese Komponente benötigt keine Persistierung. Das BPMN Modell wird im nscale A
 
 |Umgebungsvariable | Effekt |
 |---|---|
-|NAPPL_HOST=application-layer |Sie müssen den Namen oder die IP-Adresse des Containers angeben, über den der nscale Server Application Layer erreichbar ist, um eine Verbindung aufzubauen.|
-|NAPPL_PORT=8080 | Sie können den Port des Application Layer Servers angeben, um eine Verbindung aufzubauen. Der Standardwert ist "8080".|
-|NAPPL_INSTANCE=nscalealinst1 |Sie können die Application Layer Instanz für den Anmeldeversuch am nscale Server Application Layer auswählen. Dies ist nur nötig, wenn Sie mehrere nscale Server Application Layer Instanzen installiert haben.|
-|NAPPL_SSL=false | Sie können festelgen, ob SSL verwendet werden soll, um eine Verbindung aufzubauen. Der Standardwert ist "false". |
-|DEBUG=false | Zusätzliche logging Ausgaben auf der Console. Der Standardwert ist "false". |
+|NSCALE_HOST=application-layer |Sie müssen den Namen oder die IP-Adresse des Containers angeben, über den der nscale Server Application Layer erreichbar ist, um eine Verbindung aufzubauen.|
+|NSCALE_PORT=8080 | Sie können den Port des Application Layer Servers angeben, um eine Verbindung aufzubauen. Der Standardwert ist "8080".|
+|NSCALE_INSTANCE=nscalealinst1 |Sie können die Application Layer Instanz für den Anmeldeversuch am nscale Server Application Layer auswählen. Dies ist nur nötig, wenn Sie mehrere nscale Server Application Layer Instanzen installiert haben.|
+|NSCALE_SSL=false | Sie können festelgen, ob SSL verwendet werden soll, um eine Verbindung aufzubauen. Der Standardwert ist "false". |
 
 ## SSL Verschlüsselung
 
@@ -45,9 +44,9 @@ Um den Zugriff auf den nscale Process Automation Modeler zu schützen sollte ein
 
 ```bash
 docker run --rm \
-  -e NAPPL_HOST=application-layer \
-  -e NAPPL_PORT=8080 \
-  -e NAPPL_INSTANCE=nscalealinst1 \
+  -e NSCALE_HOST=application-layer \
+  -e NSCALE_PORT=8080 \
+  -e NSCALE_INSTANCE=nscalealinst1 \
   -p 8092:8092 \
-  ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.9.1.1200.15094
+  ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.9.1.1400.20803
 ```

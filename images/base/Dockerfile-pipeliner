@@ -12,7 +12,7 @@ RUN \
      arch=$(rpm -q --qf "%{ARCH}" glibc) \
   && release=$(rpm -q --qf "%{RELEASE}" glibc | cut -d '_' -f 1) \
   && version=$(rpm -q --qf "%{VERSION}" glibc) \
-  && rpm --install --nodeps https://kojihub.stream.centos.org/kojifiles/packages/glibc/${version}/${release}/${arch}/glibc-langpack-de-${version}-${release}.${arch}.rpm \
-  && rpm --install --nodeps https://kojihub.stream.centos.org/kojifiles/packages/glibc/${version}/${release}/${arch}/libnsl-${version}-${release}.${arch}.rpm
+  && rpm --install --nodeps https://kojihub.stream.centos.org/kojifiles/packages/glibc/${version}/${release}.7/${arch}/glibc-langpack-de-${version}-${release}.7.${arch}.rpm \
+  && rpm --install --nodeps https://kojihub.stream.centos.org/kojifiles/packages/glibc/${version}/${release}.7/${arch}/libnsl-${version}-${release}.7.${arch}.rpm
   
 USER default
