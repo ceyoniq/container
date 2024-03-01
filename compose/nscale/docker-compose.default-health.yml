@@ -33,7 +33,7 @@ services:
 
   console:
     healthcheck:
-      test: ["CMD", "curl", "--location", "--silent", "http://localhost:8086/console/"]
+      test: ["CMD", "curl", "--location", "--silent", "http://localhost:8086/console/systemConfiguration.xml"]
       start_period: 30s
       interval: 10s
       retries: 3

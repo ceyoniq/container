@@ -11,7 +11,7 @@ labels:
   pairs:
     app.kubernetes.io/part-of: nscale
     nscale.ceyoniq.com/version: "9"
-    version: v9.1.1401
+    version: v9.1.1501
 
 secretGenerator:
 - literals:

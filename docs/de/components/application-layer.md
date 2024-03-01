@@ -93,7 +93,7 @@ docker run --rm \
   -h democontainer \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
   -p 8080:8080 \
-  ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1401.2024012409
+  ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1501.2024021621
 ```
 ## Microsoft Azure PostgreSQL flexible server
 
@@ -142,7 +142,7 @@ Entsprechend können auch andere proprietäre Fonts nachinstalliert werden.
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1401.2024012409
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.1.1501.2024021621
 ```
 
 **Beispiel Docker Compose:**

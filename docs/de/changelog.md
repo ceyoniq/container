@@ -3,6 +3,17 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 9.1.1500 (März 2024)
+
+* Der nscale Application Layer Web verwendet das Cookie `JSESSIONID` für seine interne Verwaltung.  
+Mehrere Instanzen im selben Deployment tauschen allerdings nicht ihre Web Sessions untereinander aus wie etwa der nscale Application Layer. Deshalb ist es wichtig, dass der LoadBalancer dafür Sorge trägt, dass Anfragen aus derselben Session immer auf derselben Instanz bearbeiten werden. Dafür verwendet der Ingress Load Balancer in der Regel ein eigenes Cookie.  
+
+Eine weitere Besonderheit ist die Verwendung des nscale External Connector Webs für die Funktion des `Direct Edit` im nscale Application Layer Web. Dieser Konnektor unterstützt nur spezielle Cookie Bezeichner. Deshalb muss der Ingress Cookie Name auf `XtConLoadBalancerSession` festgelegt werden damit auch Anfragen vom nscale External Connector Web immer auf derselben nscale Application Layer Web Instanz bearbeitet werden.
+* Postgresql Upgrade auf 16. **Wir unterstützen in der Beispielkonfiguration *KEINE* automatische Migration von 15 auf 16!**
+* Fehlerbehebung in der SSL traffik Konfiguration für den nscale Process Automation Modeler.
+* Aktualisierung des Health-Check der nscale Console in der docker-compose.default-health.yml 
+  entsprechend der URL in der Kubernetes Konfiguration.
+
 ## 9.1.1400 (Februar 2024)
 
 * Aktualisierung der Container Images.

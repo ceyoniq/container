@@ -45,6 +45,7 @@ services:
       - "traefik.http.routers.modelersec.entrypoints=websecure"
       - "traefik.http.routers.modelersec.tls=true"
       - "traefik.http.routers.modelersec.tls.certresolver=myresolver"
+      - "traefik.http.services.modelersec.loadbalancer.server.port=8092"
 
   traefik:
     image: ${TRAEFIK_IMAGE}

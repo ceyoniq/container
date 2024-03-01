@@ -6,9 +6,8 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: letsencrypt
     nginx.ingress.kubernetes.io/affinity: "cookie"
-    nginx.ingress.kubernetes.io/session-cookie-name: "JSESSIONID"
-    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
-    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-name: "XtConLoadBalancerSession"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "28800"
     nginx.ingress.kubernetes.io/app-root: /nscale_web
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
 spec:
