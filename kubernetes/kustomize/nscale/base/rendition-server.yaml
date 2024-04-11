@@ -21,7 +21,7 @@ spec:
       - name: regcred
       containers:
       - name: rendition-server
-        image: ceyoniq.azurecr.io/release/nscale/rendition-server:ubi.9.1.1300.2023121418
+        image: ceyoniq.azurecr.io/release/nscale/rendition-server:ubi.9.2.1001.2024032018
         imagePullPolicy: Always
         startupProbe:
           httpGet:

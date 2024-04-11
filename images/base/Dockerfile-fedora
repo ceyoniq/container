@@ -4,7 +4,7 @@ FROM $baseImage
 # install full package manager
 RUN \
      microdnf update --assumeyes \
-  && microdnf install --assumeyes dnf dnf-plugins-core
+  && microdnf install --assumeyes dnf libmodulemd dnf-plugins-core
 
 COPY fedora.repo /etc/yum.repos.d/fedora.repo
 COPY rawhide.repo /etc/yum.repos.d/rawhide.repo
@@ -22,12 +22,6 @@ RUN \
   && /usr/bin/crb enable \
   && microdnf repolist
 
-# install ImageMagick from fedora upstream
-RUN \
-     dnf --disablerepo=* --enablerepo=rawhide repoquery ImageMagick \
-  && dnf --disablerepo=* --enablerepo=rawhide --enablerepo=ubi-9-baseos-rpms --assumeyes --nogpgcheck install ImageMagick \
-  && /usr/bin/magick -version
-
 # install wget from ubi upstream
 RUN \
      dnf --disablerepo=* --enablerepo=ubi-9-appstream-rpms --enablerepo=ubi-9-baseos-rpms repoquery wget \
@@ -44,5 +38,11 @@ RUN \
   # install Microsoft Fonts instead
   && rpm --install --nodeps https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
+# install ImageMagick from fedora upstream
 RUN \
-    microdnf clean all
+     dnf --disablerepo=* --enablerepo=rawhide repoquery ImageMagick \
+  && dnf --disablerepo=* --enablerepo=rawhide --enablerepo=ubi-9-baseos-rpms --assumeyes --nogpgcheck install ImageMagick \
+  && /usr/bin/magick -version
+
+#RUN \
+#    microdnf clean all

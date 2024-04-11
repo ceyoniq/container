@@ -21,7 +21,7 @@ spec:
       - name: regcred
       containers:
       - name: webdav-connector
-        image: ceyoniq.azurecr.io/release/nscale/webdav-connector:ubi.9.1.1100.2023102502
+        image: ceyoniq.azurecr.io/release/nscale/webdav-connector:ubi.9.2.1000.2024032702
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:

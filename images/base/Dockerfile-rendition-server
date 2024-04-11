@@ -12,7 +12,7 @@ RUN yum update --disablerepo=* --enablerepo=ubi-* --assumeyes && \
 WORKDIR /tmp
 
 RUN \
-  curl -L https://github.com/ImageMagick/ImageMagick/archive/7.1.1-25.tar.gz | tar -xz && \
+  curl -L https://github.com/ImageMagick/ImageMagick/archive/7.1.1-29.tar.gz | tar -xz && \
   cd ImageMagick-* && \
   ./configure --prefix=/opt && \
   make && \
@@ -27,7 +27,7 @@ RUN \
   make install
 
 RUN \
-  curl -L https://github.com/tesseract-ocr/tesseract/archive/5.3.3.tar.gz | tar -xz && \
+  curl -L https://github.com/tesseract-ocr/tesseract/archive/5.3.4.tar.gz | tar -xz && \
   cd tesseract-* && \
   ./autogen.sh && \
   ./configure LDFLAGS="-L/opt/lib"  LEPTONICA_LIBS="-lleptonica" LEPTONICA_CFLAGS="-I/opt/include/leptonica/" --disable-legacy --prefix=/opt && \

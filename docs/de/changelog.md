@@ -3,6 +3,12 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 9.2.1000 (April 2024)
+
+* Aktualisierung der Container Images.
+* Zusätzliche Attribute in der Nginx Ingress Konfiguration, die das Verhalten des Application Layer Webs im Cluster stabilisieren.
+* Update der Monitoring Images im Docker Compose Setup.
+
 ## 9.1.1500 (März 2024)
 
 * Der nscale Application Layer Web verwendet das Cookie `JSESSIONID` für seine interne Verwaltung.  

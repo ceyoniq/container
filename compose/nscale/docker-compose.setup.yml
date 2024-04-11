@@ -12,6 +12,7 @@ services:
     entrypoint: ["/bin/sh", "-c"]
     command:
     - |
+       sleep 3;
        echo "initialize Document Area 'DA'";
        al -host application-layer run-cfg-method -method lockSystem;
        al -host application-layer scenario-da -da DA -displayname DA -rs host=rendition-server -sl host=storage-layer;

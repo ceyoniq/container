@@ -13,7 +13,7 @@ x-logging: &loki-logging
     loki-retries: "1"
     max-size: "200m"
     max-file: 2
-    keep-file: true
+    keep-file: "true"
 
 
 services:

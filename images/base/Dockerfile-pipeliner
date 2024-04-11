@@ -5,7 +5,7 @@ USER root
 RUN \
      microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes \
        libxslt-1.1.34-9.el9 \
-       glibc-langpack-en-2.34-83.el9_3.7 \
+       glibc-langpack-en-2.34-83.el9_3.12 \
   && microdnf clean all
 
 RUN \
