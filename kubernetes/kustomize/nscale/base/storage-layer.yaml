@@ -22,7 +22,7 @@ spec:
       # The license file mount inside the conf volume prevents the volume to get initialized with the image data.
       # Therefore we need to copy the data from the image to the volume manually before startup.
       - name: storage-layer-conf
-        image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.9.2.1002.2024031908
+        image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.9.2.1100.2024042618
         imagePullPolicy: Always
         command: [ "/bin/sh", "-c" ]
         args:
@@ -45,7 +45,7 @@ spec:
             ephemeral-storage: "250Mi"
       containers:
       - name: storage-layer
-        image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.9.2.1002.2024031908
+        image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.9.2.1100.2024042618
         imagePullPolicy: Always
         readinessProbe:
           exec:
