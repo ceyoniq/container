@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: application-layer
+spec:
+  template:
+    spec:
+      initContainers:
+      - name: wait-for-database
+        securityContext:
+          runAsUser: 10001
+      containers:
+      - name: application-layer
+        securityContext:
+          runAsUser: 10001

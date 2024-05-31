@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitoring-console
+spec:
+  template:
+    spec:
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: monitoring-console
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: ScheduleAnyway 

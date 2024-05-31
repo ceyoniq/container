@@ -17,11 +17,9 @@ spec:
         app: rendition-server
     spec:
       automountServiceAccountToken: false
-      imagePullSecrets:
-      - name: regcred
       containers:
       - name: rendition-server
-        image: ceyoniq.azurecr.io/release/nscale/rendition-server:ubi.9.2.1101.2024042915
+        image: ceyoniq.azurecr.io/release/nscale/rendition-server:ubi.9.2.1201.2024052809
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -40,15 +38,6 @@ spec:
           value: "admin"
         - name: JAVA_OPTS
           value: -XX:MaxRAMPercentage=50.0 -Dlog4j2.formatMsgNoLookups=true -Dcom.sun.jndi.rmi.object.trustURLCodebase=false -Dcom.sun.jndi.cosnaming.object.trustURLCodebase=false -Duser.country=DE -Duser.language=de
-        resources:
-          limits:
-            cpu: "2000m"
-            memory: "2000Mi"
-            ephemeral-storage: "1300Mi"
-          requests:
-            cpu: "300m"
-            memory: "1000Mi"
-            ephemeral-storage: "1000Mi"
         volumeMounts:
         - name: license
           mountPath: /opt/ceyoniq/nscale-rendition-server/conf/license.xml

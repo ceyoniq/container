@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- denyall.yaml
+- allowdns.yaml
+- postgresql.yaml
+- application-layer.yaml
+- application-layer-setup.yaml
+- storage-layer.yaml
+- application-layer-web.yaml
+- rendition-server.yaml
+- administrator.yaml
+- monitoring-console.yaml
+- console.yaml
+- process-automation-modeler.yaml
+- pipeliner.yaml
+- cmis-connector.yaml
+- ilm-connector.yaml
+- webdav-connector.yaml
+- xta-connector.yaml

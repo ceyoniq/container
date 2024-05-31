@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pipeliner
+spec:
+  template:
+    metadata:                                                                                                                                     
+      annotations:                                                                                                                                                                         
+        traffic.sidecar.istio.io/excludeOutboundPorts: "443"
+    spec:
+      serviceAccountName: kubeapi-svc-account
+      initContainers:
+      - name: wait-for-application-layer
+        image: docker.io/bitnami/kubectl:1.30.1
+        imagePullPolicy: Always
+        args:
+        - wait 
+        - pod 
+        - --for=condition=ready 
+        - --selector 
+        - 'app=application-layer'
+        - --timeout=150s

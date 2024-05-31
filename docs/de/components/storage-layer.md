@@ -89,7 +89,7 @@ docker run --rm \
   -v $(pwd)/da:/opt/ceyoniq/nscale-server/storage-layer/da \
   -v $(pwd)/etc:/opt/ceyoniq/nscale-server/storage-layer/etc \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/storage-layer/etc/license.xml \
-  ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.9.2.1100.2024042618
+  ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.9.2.1200.2024052711
 ```
 
 ## Skalierung

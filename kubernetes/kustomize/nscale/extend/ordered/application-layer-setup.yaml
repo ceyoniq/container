@@ -1,0 +1,81 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: application-layer-setup
+  labels:
+    app: application-layer-setup
+spec:
+  template:
+    metadata:
+      annotations:                                                                                                                                                                         
+        traffic.sidecar.istio.io/excludeOutboundPorts: "443"
+      labels:
+        app: application-layer-setup
+    spec:
+      serviceAccountName: kubeapi-svc-account
+      imagePullSecrets:
+      - name: regcred
+      initContainers:
+      - name: wait-for-application-layer
+        image: docker.io/bitnami/kubectl:1.30.1
+        imagePullPolicy: Always
+        args:
+        - wait 
+        - pod 
+        - --for=condition=ready 
+        - --selector 
+        - 'app=application-layer'
+        - --timeout=150s
+        securityContext:
+          runAsUser: 10001
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          capabilities:
+            drop:
+              - ALL
+          seccompProfile:
+            type: RuntimeDefault
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "200Mi"
+            ephemeral-storage: "350Mi"
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+            ephemeral-storage: "300Mi"
+      containers:
+      - name: application-layer
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1005.31542
+        imagePullPolicy: Always
+        command: ["/bin/sh", "-c"]
+        args:
+        - > 
+          echo "initialize Document Area 'DA'";
+          java -jar ./al-cmdclient-*.jar -host application-layer run-cfg-method -method lockSystem || exit 1;
+          java -jar ./al-cmdclient-*.jar -host application-layer scenario-da -da DA -displayname DA -rs host=rendition-server -sl host=storage-layer;
+          java -jar ./al-cmdclient-*.jar -host application-layer run-cfg-method -method unlockSystem || exit 1;
+          echo "done";
+        securityContext:
+          runAsUser: 10001
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          capabilities:
+            drop:
+              - ALL
+          seccompProfile:
+            type: RuntimeDefault
+        resources:
+          limits:
+            cpu: "1000m"
+            memory: "1500Mi"
+            ephemeral-storage: "900Mi"
+          requests:
+            cpu: "100m"
+            memory: "1000Mi"
+            ephemeral-storage: "800Mi"
+      restartPolicy: Never
+  backoffLimit: 3
+  #activeDeadlineSeconds: 180

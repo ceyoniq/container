@@ -1,0 +1,46 @@
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: pipeliner
+spec:
+  podSelector:
+    matchLabels:
+      app: pipeliner
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: application-layer
+    ports:
+      - protocol: TCP
+        port: 8080
+      - protocol: TCP
+        port: 7800
+      - protocol: TCP
+        port: 32000
+        endPort: 65535
+  - to:
+    - podSelector:
+        matchLabels:
+          app: storage-layer
+    ports:
+      - protocol: TCP
+        port: 3005
+  - to:
+    - podSelector:
+        matchLabels:
+          app: postgresql
+    ports:
+      - protocol: TCP
+        port: 5432
+  - to:
+    - ipBlock:
+        # allow complete internet for demo
+        cidr: "0.0.0.0/0"
+    # NOTE: open necessary IPs for Kubernetes API Server (10.0.0.1), LDAP and SMTP server.
+    # Kubernetes API Server
+    #- ipBlock:
+    #    cidr: 10.0.0.1/32

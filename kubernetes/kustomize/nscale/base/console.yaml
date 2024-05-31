@@ -17,8 +17,6 @@ spec:
         app: console
     spec:
       automountServiceAccountToken: false
-      imagePullSecrets:
-      - name: regcred
       containers:
       - name: console
         image: ceyoniq.azurecr.io/release/nscale/console:ubi.9.2.1000.13230
@@ -49,15 +47,6 @@ spec:
         ports:
         - containerPort: 8086
           name: console
-        resources:
-          limits:
-            cpu: "2000m"
-            memory: "1300Mi"
-            ephemeral-storage: "800Mi"
-          requests:
-            cpu: "100m"
-            memory: "700Mi"
-            ephemeral-storage: "700Mi"
         volumeMounts:
         - name: temp
           mountPath: /opt/ceyoniq/nscale-server/console/temp

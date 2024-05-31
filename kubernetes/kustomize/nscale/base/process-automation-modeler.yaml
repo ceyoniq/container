@@ -17,8 +17,6 @@ spec:
         app: process-automation-modeler
     spec:
       automountServiceAccountToken: false
-      imagePullSecrets:
-      - name: regcred
       containers:
       - name: process-automation-modeler
         image: ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.9.2.1000.28862
@@ -27,7 +25,7 @@ spec:
           httpGet:
             path: /modeler
             port: 8092
-          initialDelaySeconds: 30
+          initialDelaySeconds: 10
           failureThreshold: 10
           periodSeconds: 10
           timeoutSeconds: 1
@@ -51,13 +49,6 @@ spec:
         ports:
         - containerPort: 8092
           name: modeler
-        resources:
-          limits:
-            cpu: "1000m"
-            memory: "1500Mi"
-          requests:
-            cpu: "100m"
-            memory: "1000Mi"
 ---
 apiVersion: v1
 kind: Service

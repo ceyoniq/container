@@ -13,7 +13,7 @@ spec:
       hostname: application-layer-setup2
       initContainers:
       - name: wait-for-application-layer-and-da
-        image: ceyoniq.azurecr.io/release/nscale/application-layer
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.latest
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
@@ -24,7 +24,7 @@ spec:
           done;
 
           while true; do
-              existing_areas=$(al -host application-layer query-cfg-type -type DocumentArea -keys -dialect yaml)
+              existing_areas=$(java -jar ./al-cmdclient-*.jar -host application-layer query-cfg-type -type DocumentArea -keys -dialect yaml)
               [[ $existing_areas == [] ]] || break
               echo "Wait for document area to be initialized... retry in 3 seconds."
               sleep 3
@@ -40,15 +40,15 @@ spec:
             ephemeral-storage: "300Mi"
       containers:
       - name: application-layer-setup
-        image: ceyoniq.azurecr.io/release/nscale/application-layer
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.latest
         imagePullPolicy: Always
         command: ["/bin/bash", "-c"]
         args:
         - >
           echo $(date)": initialize Storage Layer Cluster Setting pointing to Headless Service";
-          al -host application-layer run-cfg-method -method lockSystem;
+          java -jar ./al-cmdclient-*.jar -host application-layer run-cfg-method -method lockSystem;
 
-          al -host application-layer cfg-del -name StorageLayer -type StorageLayerItemSetting;
+          java -jar ./al-cmdclient-*.jar -host application-layer cfg-del -name StorageLayer -type StorageLayerItemSetting;
 
           echo
           '{
@@ -60,7 +60,7 @@ spec:
             "active" : true
           }'
           > /tmp/input.json;
-          al -host application-layer cfg-add -type StorageLayerItemSetting -file /tmp/input.json;
+          java -jar ./al-cmdclient-*.jar -host application-layer cfg-add -type StorageLayerItemSetting -file /tmp/input.json;
 
           echo
           '{
@@ -72,11 +72,11 @@ spec:
             "active" : true
           }'
           > /tmp/input.json;
-          al -host application-layer cfg-add -type StorageLayerItemSetting -file /tmp/input.json;
+          java -jar ./al-cmdclient-*.jar -host application-layer cfg-add -type StorageLayerItemSetting -file /tmp/input.json;
 
           rm /tmp/input.json;
 
-          al -host application-layer run-cfg-method -method unlockSystem;
+          java -jar ./al-cmdclient-*.jar -host application-layer run-cfg-method -method unlockSystem;
           echo $(date)": done";
         resources:
           limits:

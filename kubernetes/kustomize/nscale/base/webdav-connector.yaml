@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: webdav-connector
-  replicas: 0
+  replicas: 1
   strategy:
     type: RollingUpdate
   template:
@@ -17,8 +17,6 @@ spec:
         app: webdav-connector
     spec:
       automountServiceAccountToken: false
-      imagePullSecrets:
-      - name: regcred
       containers:
       - name: webdav-connector
         image: ceyoniq.azurecr.io/release/nscale/webdav-connector:ubi.9.2.1000.2024032702
@@ -42,15 +40,6 @@ spec:
         ports:
         - containerPort: 8088
           name: webdav
-        resources:
-          limits:
-            cpu: "1000m"
-            memory: "1000Mi"
-            ephemeral-storage: "500Mi"
-          requests:
-            cpu: "100m"
-            memory: "500Mi"
-            ephemeral-storage: "400Mi"
         volumeMounts:
         - name: temp
           mountPath: /opt/ceyoniq/nscale-webdav/temp

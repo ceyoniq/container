@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: storage-layer
+spec:
+  template:
+    spec:
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: storage-layer
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: ScheduleAnyway 

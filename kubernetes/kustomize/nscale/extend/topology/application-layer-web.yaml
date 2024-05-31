@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-layer-web
+spec:
+  template:
+    spec:
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: application-layer-web
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: ScheduleAnyway 

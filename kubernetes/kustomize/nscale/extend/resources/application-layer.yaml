@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: application-layer
+spec:
+  template:
+    spec:
+      initContainers:
+      - name: wait-for-database
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "200Mi"
+            ephemeral-storage: "350Mi"
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+            ephemeral-storage: "300Mi"
+      containers:
+      - name: application-layer
+        resources:
+          limits:
+            cpu: "3000m"
+            memory: "3000Mi"
+            ephemeral-storage: "900Mi"
+          requests:
+            cpu: "500m"
+            memory: "1000Mi"
+            ephemeral-storage: "800Mi"

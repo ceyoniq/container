@@ -19,7 +19,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: administrator
-        image: ceyoniq.azurecr.io/release/nscale/administrator:ubi.9.2.1100.2024042213
+        image: ceyoniq.azurecr.io/release/nscale/administrator:ubi.9.2.1201
         imagePullPolicy: Always
         readinessProbe:
           httpGet:
@@ -42,17 +42,6 @@ spec:
         ports:
         - containerPort: 8080
           name: administrator
-        resources:
-          limits:
-            cpu: "2000m"
-            memory: "1300Mi"
-            ephemeral-storage: "800Mi"
-          requests:
-            cpu: "100m"
-            memory: "700Mi"
-            ephemeral-storage: "700Mi"
-      imagePullSecrets:
-      - name: regcred
 ---
 apiVersion: v1
 kind: Service

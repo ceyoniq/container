@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: cmis-connector
-  replicas: 0
+  replicas: 1
   strategy: 
     type: RollingUpdate
   template:
@@ -17,8 +17,6 @@ spec:
         app: cmis-connector
     spec:
       automountServiceAccountToken: false
-      imagePullSecrets:
-      - name: regcred
       containers:
       - name: cmis-connector
         image: ceyoniq.azurecr.io/release/nscale/cmis-connector:ubi.9.2.1100.2024042309
@@ -42,15 +40,6 @@ spec:
         ports:
         - containerPort: 8096
           name: cmis
-        resources:
-          limits:
-            cpu: "1000m"
-            memory: "1000Mi"
-            ephemeral-storage: "550Mi"
-          requests:
-            cpu: "100m"
-            memory: "500Mi"
-            ephemeral-storage: "450Mi"
         volumeMounts:
         - name: temp
           mountPath: /opt/ceyoniq/nscale-cmis-connector/temp/

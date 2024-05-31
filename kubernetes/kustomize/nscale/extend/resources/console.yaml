@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: console
+spec:
+  template:
+    spec:
+      containers:
+      - name: console
+        resources:
+          limits:
+            cpu: "2000m"
+            memory: "1300Mi"
+            ephemeral-storage: "800Mi"
+          requests:
+            cpu: "100m"
+            memory: "700Mi"
+            ephemeral-storage: "700Mi"

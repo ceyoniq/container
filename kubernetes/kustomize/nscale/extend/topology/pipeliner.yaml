@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pipeliner
+spec:
+  template:
+    spec:
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: pipeliner
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: ScheduleAnyway 

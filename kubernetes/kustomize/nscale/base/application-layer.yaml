@@ -20,32 +20,9 @@ spec:
         ceyoniq.com/application-layer-cluster-name: cluster1
     spec:
       automountServiceAccountToken: false
-      imagePullSecrets:
-      - name: regcred
-      initContainers:
-      # wait for database to be ready
-      - name: check-db-ready
-        image: docker.io/bitnami/postgresql:16
-        imagePullPolicy: Always
-        command: ["/bin/sh", "-c"]
-        args:
-        - >
-          until pg_isready -U postgres -h postgresql -p 5432 -t 1; do
-            echo '.';
-            sleep 2;
-          done
-        resources:
-          limits:
-            cpu: "200m"
-            memory: "200Mi"
-            ephemeral-storage: "350Mi"
-          requests:
-            cpu: "100m"
-            memory: "100Mi"
-            ephemeral-storage: "300Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1101.33642
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1200.2024052713
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -55,6 +32,14 @@ spec:
           failureThreshold: 10
           periodSeconds: 10
           timeoutSeconds: 1
+        livenessProbe:
+          httpGet:
+            path: /nscalealinst1/rest/configuration/sysinfo.json
+            port: 8080
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 5
         readinessProbe:
           httpGet:
             path: /jmx/status
@@ -62,18 +47,7 @@ spec:
           periodSeconds: 10
           timeoutSeconds: 1
           failureThreshold: 3
-        livenessProbe:
-          httpGet:
-            path: /nscalealinst1/metrics
-            port: 8080
-          periodSeconds: 10
-          timeoutSeconds: 1
-          failureThreshold: 3
         env:
-          - name: INSTANCE1_CLUSTER_CORE_STACKTYPE
-            value: "KUBERNETES"
-          - name: INSTANCE1_JGROUPS_DNS_QUERY
-            value: "application-layer"
           - name: INSTANCE1_INSTANCE_LOGGER_CONF
             value: "log4j/instance1-log.xml"
           - name: INSTANCE1_CORE_DB_DIALECT
@@ -118,15 +92,6 @@ spec:
         ports:
         - containerPort: 8080
           name: application
-        resources:
-          limits:
-            cpu: "2000m"
-            memory: "3000Mi"
-            ephemeral-storage: "900Mi"
-          requests:
-            cpu: "100m"
-            memory: "1000Mi"
-            ephemeral-storage: "800Mi"
         volumeMounts:
         - name: license
           subPath: license.xml
@@ -179,67 +144,6 @@ spec:
     appProtocol: http
   selector:
     app: application-layer
-
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: application-layer-setup
-  labels:
-    app: application-layer-setup
-spec:
-  template:
-    metadata:
-      labels:
-        app: application-layer-setup
-    spec:
-      hostname: application-layer-setup
-      initContainers:
-      - name: wait-for-application-layer
-        image: docker.io/curlimages/curl:8.4.0
-        imagePullPolicy: Always
-        command: ["/bin/sh", "-c"]
-        args:
-        - >
-          while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://application-layer:8080/index.html)" != "200" ]]; do
-            echo '.'
-            sleep 5;
-          done;
-        resources:
-          limits:
-            cpu: "200m"
-            memory: "200Mi"
-            ephemeral-storage: "350Mi"
-          requests:
-            cpu: "100m"
-            memory: "100Mi"
-            ephemeral-storage: "300Mi"
-      containers:
-      - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1101.33642
-        imagePullPolicy: Always
-        command: ["/bin/sh", "-c"]
-        args:
-        - > 
-          echo "initialize Document Area 'DA'";
-          al -host application-layer run-cfg-method -method lockSystem || exit 1;
-          al -host application-layer scenario-da -da DA -displayname DA -rs host=rendition-server -sl host=storage-layer;
-          al -host application-layer run-cfg-method -method unlockSystem || exit 1;
-          echo "done";
-        resources:
-          limits:
-            cpu: "1000m"
-            memory: "1500Mi"
-            ephemeral-storage: "900Mi"
-          requests:
-            cpu: "100m"
-            memory: "1000Mi"
-            ephemeral-storage: "800Mi"
-      imagePullSecrets:
-        - name: regcred
-      restartPolicy: Never
-  backoffLimit: 1
-  #activeDeadlineSeconds: 180
 
 ---
 apiVersion: policy/v1

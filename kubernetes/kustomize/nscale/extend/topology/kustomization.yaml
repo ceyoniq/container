@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../base
+
+patches:
+- path: storage-layer.yaml
+- path: application-layer.yaml
+- path: application-layer-web.yaml
+- path: rendition-server.yaml
+- path: administrator.yaml
+- path: monitoring-console.yaml
+- path: process-automation-modeler.yaml
+- path: console.yaml
+- path: pipeliner.yaml
+- path: cmis-connector.yaml
+- path: ilm-connector.yaml
+- path: webdav-connector.yaml
+- path: xta-connector.yaml

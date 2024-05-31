@@ -1,1 +1,252 @@
-Please context the Ceyoniq Support.
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><license>
+  <info>
+    <property key="CreationDate">2023-09-13 00:00:00</property>
+    <property key="Customer">nscale container - only for internal use - Ceyoniq GmbH</property>
+    <property key="DeliveryNumber">null</property>
+    <property key="ExpirationDate">2024-07-01</property>
+    <property key="TestLicense">1</property>
+    <property key="Container">1</property>
+    <property key="Version">9.3</property>
+    <property key="FullyQualifiedHostName">0</property>
+    <property key="DomainOnly">1</property>
+  </info>
+  <component hostname="*" name="ApplicationLayer">
+    <!-- features -->
+    <property key="BAM">1</property>
+    <property key="DMS">1</property>
+    <property key="Fulltext">1</property>
+    <property key="PDFA">1</property>
+    <property key="ReplicationService">1</property>
+    <property key="SCMExport">1</property>
+    <property key="SCMImport">1</property>
+    <property key="WF">1</property>
+    <property key="XSAP">1</property>
+    <property key="LongTermArchive">1</property>
+    <property key="TeamSpaces">1</property>
+    <property key="VirtualizedProcesses">1</property>
+    <property key="OCR">1</property>
+    <property key="Partitions">1</property>
+    <property key="REST">1</property>
+    <property key="GraphQL">1</property>
+    <property key="BPMN">1</property>
+    <property key="BPMNModeling">1</property>
+    <property key="Procilon">100</property>
+    <property key="ErpCmis">1</property>
+    <!-- user licences -->
+    <property key="NamedUsers">15</property>
+    <property key="ConcurrentUsers">150</property>
+    <property key="TotalUsers">465</property>
+    <property key="nscale Server REST">100</property>
+    <property key="nscale Server GraphQL">100</property>
+    <!-- licences for client type -->
+    <property key="nscale Desktop Windows">50</property>
+    <property key="nscale Desktop Windows OI">50</property>
+    <property key="nscale Desktop Web">50</property>
+    <property key="nscale Layout Designer">3</property>
+    <property key="nscale Web">50</property>
+    <property key="nscale Web SDK">50</property>
+    <property key="nscale Cockpit">50</property>
+    <property key="nscale Cockpit OI">50</property>
+    <property key="nscale for SAP">15</property>
+    <property key="nscale SDK">50</property>
+    <property key="nscale Release Script for Ascent Capture">50</property>
+    <property key="nscale E-Mail Appliance">50</property>
+    <property key="nscale PFA Desktop">50</property>
+    <property key="nscale Imaging">50</property>
+    <property key="nscale Layout Designer">50</property>
+    <property key="nscale Offline Archiv">50</property>
+    <property key="nscale Android Client">50</property>
+    <property key="nscale iPad Client">50</property>
+    <property key="nscale iPhone Client">50</property>
+    <property key="nscale CMIS">50</property>
+    <property key="nscale ERP CMIS">10</property>
+    <property key="nscale Desktop Filesystem">50</property>
+    <property key="nscale IMAP Client">50</property>
+    <property key="nscale WebDAV Service">50</property>
+    <property key="nscale OADP">50</property>
+    <property key="nscale for Sharepoint">50</property>
+    <property key="nscale Office Integrator">50</property>
+    <property key="nscale OSC Provider">50</property>
+    <property key="nscale Xternal Connector IMAF">10</property>
+    <property key="nscale Desktop Filesystem IMAF">10</property>
+    <property key="nscale Textmodules">50</property>
+    <property key="nscale Process Automation Modeler">50</property>
+    <property key="NCON">Navigator,Partition,Configuration</property>
+    <property key="nscale Console">10</property>
+    <property key="SmartLayouts">enterprise</property>
+    <property key="PXMLImportExport">ImportXSLT,Import,ExportXSLT,Export</property>
+    <property key="eGov">WorkflowProcessHandling,CrossInstanceWorkflowProcessHandling</property>
+    <property key="NSIGN">GovernikusSignerIE,GovernikusDATABoreumIE</property>
+    <property key="Delivery">enterprise</property>
+    <!-- OEM -->
+    <property key="OEM#001">10</property>
+    <property key="OEM#002">10</property>
+    <property key="OEM#003">10</property>
+    <property key="OEM#004">10</property>
+    <property key="OEM#005">10</property>
+    <property key="nscale Xternal Connector Desktop">10</property>
+    <property key="OEM#007">10</property>
+    <property key="nscale Explorer IMAF">10</property>
+    <property key="OEM#009">10</property>
+    <property key="nscale Xternal Connector IMAF">10</property>
+    <property key="OEM#011">10</property>
+    <property key="OEM#012">10</property>
+    <property key="OEM#013">10</property>
+    <property key="OEM#014">10</property>
+    <property key="OEM#015">10</property>
+    <property key="OEM#016">10</property>
+    <property key="OEM#017">10</property>
+    <property key="OEM#018">10</property>
+    <property key="OEM#019">10</property>
+    <property key="nscale Cockpit / Xternal Connector">10</property>
+    <property key="nscale Office XC">10</property>
+    <property key="OEM#022">10</property>
+    <property key="OEM#023">10</property>
+    <property key="OEM#024">10</property>
+    <property key="OEM#025">10</property>
+    <property key="OEM#026">10</property>
+    <property key="OEM#027">10</property>
+    <property key="OEM#028">10</property>
+    <property key="OEM#029">10</property>
+    <property key="OEM#030">10</property>
+    <property key="nscale ERP Connector ILM">10</property>    
+    <property key="OEM#032">10</property>
+    <property key="OEM#033">10</property>
+    <property key="OEM#034">10</property>
+    <property key="OEM#035">10</property>
+    <property key="OEM#036">10</property>
+    <property key="OEM#037">10</property>
+    <property key="OEM#038">10</property>
+    <property key="OEM#039">10</property>
+    <property key="OEM#040">10</property>
+    <property key="OEM#041">10</property>
+    <property key="OEM#042">10</property>
+    <property key="OEM#043">10</property>
+    <property key="OEM#044">10</property>
+    <property key="OEM#045">10</property>
+    <property key="OEM#046">10</property>
+    <property key="OEM#047">10</property>
+    <property key="OEM#048">10</property>
+    <property key="OEM#049">10</property>
+    <property key="OEM#050">10</property>
+    <property key="OEM#051">10</property>
+    <property key="OEM#052">10</property>
+    <property key="OEM#053">10</property>
+    <property key="OEM#054">10</property>
+    <property key="OEM#055">10</property>
+    <property key="OEM#056">10</property>
+    <property key="OEM#057">10</property>
+    <property key="OEM#058">10</property>
+    <property key="OEM#059">10</property>
+    <property key="OEM#060">10</property>
+    <property key="OEM#061">10</property>
+    <property key="OEM#062">10</property>
+    <property key="OEM#063">10</property>
+    <property key="OEM#064">10</property>
+    <property key="OEM#065">10</property>
+    <property key="OEM#066">10</property>
+    <property key="OEM#067">10</property>
+    <property key="OEM#068">10</property>
+    <property key="OEM#069">10</property>
+    <property key="OEM#070">10</property>
+    <property key="OEM#071">10</property>
+    <property key="OEM#072">10</property>
+    <property key="OEM#073">10</property>
+    <property key="nscale XTA Connector">10</property>
+    <property key="OEM#075">10</property>
+    <property key="OEM#076">10</property>
+    <property key="OEM#077">10</property>
+    <property key="OEM#078">10</property>
+    <property key="OEM#079">10</property>
+    <property key="OEM#080">10</property>
+    <property key="OEM#081">10</property>
+    <property key="OEM#082">10</property>
+    <property key="OEM#083">10</property>
+    <property key="OEM#084">10</property>
+    <property key="OEM#085">10</property>
+    <property key="OEM#086">10</property>
+    <property key="OEM#087">10</property>
+    <property key="OEM#088">10</property>
+    <property key="OEM#089">10</property>
+    <property key="OEM#090">10</property>
+    <property key="OEM#091">10</property>
+    <property key="OEM#092">10</property>
+  </component>
+  <component hostname="*" name="StorageLayer">
+    <property key="Caching">1</property>
+    <property key="CenteraDevices">0</property>
+    <property key="Compression">1</property>
+    <property key="ConcurrentUsers">65000</property>
+    <property key="DataVolume">0</property>
+    <property key="DistributedService">1</property>
+    <property key="DoNotCountForwardVolume">0</property>
+    <property key="HarddiskDevices">2</property>
+    <property key="Mirroring">1</property>
+    <property key="NamedSeats">65000</property>
+    <property key="NamedUsers">65000</property>
+    <property key="S3Devices">0</property>
+    <property key="ServerId">858065946</property>
+    <property key="SingleInstance">0</property>
+    <property key="TivoliDevices">0</property>
+    <property key="S3Devices">3</property>
+    <property key="AzureDevices">3</property>
+    <property key="TivoliDevices">0</property>
+    <property key="TotalUsers">65000</property>
+  </component>
+  <component hostname="*" name="RenditionServer">
+    <property key="OOI">0</property>
+  </component>
+  <component hostname="*" name="Monitoring">
+    <property key="ConfigFree">true</property>
+  </component>
+  <component hostname="*" name="Pipeliner">
+    <property key="OnlyImport">0</property>
+    <property key="OnlyPXMLforApplicationLayer">0</property>
+    <property key="Retrieval">1</property>
+  </component>
+  <properties name="ApplicationLayer" type="mapping">
+    <property key="OEM#006">nscale Xternal Connector Desktop</property>
+    <property key="OEM#008">nscale Explorer IMAF</property>
+    <property key="OEM#010">nscale Xternal Connector IMAF</property>
+    <property key="OEM#020">nscale Cockpit / Xternal Connector</property>
+    <property key="OEM#021">nscale Office XC</property>
+    <property key="OEM#031">nscale ERP Connector ILM</property>
+  </properties>
+  <properties name="ApplicationLayer" type="sublicense">
+    <property key="OSC">nscale OSC Provider</property>
+    <property key="eGov">eGov</property>
+    <property key="SmartLayouts">nscale SmartLayout Options</property>
+    <property key="PXMLImportExport">PXMLImportExport</property>
+    <property key="NSIGN">nscale Sign</property>  
+    <property key="Delivery">Delivery</property>    
+  </properties>
+  <properties name="ApplicationLayer" type="additional">
+    <property key="APP#NSTORE#DEFAULT">1</property>
+    <property key="APP#NSTORE#MINI">1</property>
+    <property key="APP#NSTORE#SMART">1</property>
+    <property key="APP#RESOURCES#CM">10000</property>
+    <property key="APP#RESOURCES#DOK">10000</property>
+    <property key="APP#RESOURCES#FM">10000</property>
+    <property key="APP#RESOURCES#GOV">10000</property>
+    <property key="APP#RESOURCES#HR">10000</property>
+    <property key="APP#RESOURCES#IM">10000</property>
+    <property key="APP#RESOURCES#MAN">10000</property>
+    <property key="APP#RESOURCES#PM">10000</property>
+    <property key="APP#RESOURCES#RE">10000</property>
+    <property key="APP#RESOURCES#SD">10000</property>
+    <property key="APP#RESOURCES#TE">10000</property>
+    <property key="APP#RESOURCES#TS">10000</property>
+    <property key="APP#RESOURCES#HM">10000</property>
+    <property key="APP#RESOURCES#IN">10000</property>
+    <property key="APP#NSTORE#CMPERMS">1</property>
+    <property key="APP#NSTORE#HRPERMS">1</property>
+    <property key="APP#NSTORE#PMPERMS">1</property>
+    <property key="APP#NSTORE#SDPERMS">1</property>
+  </properties>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>37LFfwIPHMY8RkmntSCLLFSw8lw=</DigestValue></Reference></SignedInfo><SignatureValue>cL13Y67bts3eiPpcgZTUJropBcFiTo9ImcixFdLdFhMvayhpUBegwg==</SignatureValue><KeyInfo><KeyValue><DSAKeyValue><P>/X9TgR11EilS30qcLuzk5/YRt1I870QAwx4/gLZRJmlFXUAiUftZPY1Y+r/F9bow9subVWzXgTuA&#13;
+HTRv8mZgt2uZUKWkn5/oBHsQIsJPu6nX/rfGG/g7V+fGqKYVDwT7g/bTxR7DAjVUE1oWkTL2dfOu&#13;
+K2HXKu/yIgMZndFIAcc=</P><Q>l2BQjxUjC8yykrmCouuEC/BYHPU=</Q><G>9+GghdabPd7LvKtcNrhXuXmUr7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3&#13;
+zwkyjMim4TwWeotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImog9/hWuWfBpKL&#13;
+Zl6Ae1UlZAFMO/7PSSo=</G><Y>HVNjcX1LvRE9+AQx+YDlErA1+mLKoalcjciOSaxQAtQ3dVeamna3bPnVPeeaaIDdjSycY4+PaqNp&#13;
+uBS9HfP2EBBOlKfPa82Wd6zffrafONKlibyVd17qBE9pttcOCUsMAmSn+J+quyrJIAQJ4YKYwLh+&#13;
+WuQlo+mpEn+Uyu8A8ew=</Y></DSAKeyValue></KeyValue></KeyInfo></Signature></license>

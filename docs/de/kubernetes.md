@@ -192,9 +192,35 @@ In diesen Beispielen sehen Sie, wie Sie unterschiedliche Konfiguration anwenden 
 
 Alle Beispiele werden im Ordner `kubernetes/kustomize/nscale` ausgeführt.
 
+![Kustomize Structure](../images/Kustomize.png)
+
+### Pod Resources
+
+Überlagerung der Pod Basiskonfigurationen in `resources`.  
+
+* Definition der Pod Resource Request und Limits für unsere Standard Container.
+
 ### Security Context
 
-Überlagerung der Pod Basiskonfigurationen mit einem `SecurityContext`.  
+Überlagerung der Pod Basiskonfigurationen in `security`.  
+*Hinweis*: Insbesondere die Verwendung von `securityContext.fsGroup: 0` kann je nach Cluster Setup zu Rechte Problemen in den Persistent Volumes führen (z.B. in OpenShift).
+
+### Initial Setup
+
+Überlagerung der Pod Basiskonfigurationen in `ordered`.  
+
+* Verwendung von Init Containern, um auf den vollständigen Start von anderen Komponenten abzuwarten.
+* Anlegen eines initialen Dokumentenbereichs
+
+### private Image Repository
+
+Überlagerung der Pod Basiskonfigurationen mit  `privateregistry`.  
+
+* Referenz auf die Credentials für die Container Registry.
+
+### User ID
+
+Überlagerung der Pod Basiskonfigurationen in `runas`.  
 *Hinweis*: Insbesondere die Verwendung von `securityContext.fsGroup: 0` kann je nach Cluster Setup zu Rechte Problemen in den Persistent Volumes führen (z.B. in OpenShift).
 
 ### Network Policy

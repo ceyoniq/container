@@ -3,6 +3,16 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 9.2.1200 (Juni 2024)
+
+* Aktualisierung der Container Images.
+* Die ``version`` Angabe in den docker compose Konfiguration wurde entfernt,
+ weil sie in aktuellen Docker Installationen [nicht mehr nötig ist](https://docs.docker.com/compose/compose-file/04-version-and-name/).
+* Die kustomize Verzeichnisstruktur wurde umstrukturiert,
+  [um die Modularität und Übersichtlichkeit der Konfiguration zu verbessern](./kubernetes.md#scenarien). Diese Umstellung umfasst zudem folgende inhaltliche Erweiterungen
+  * Aufnahme von ``topologySpreadConstraints`` für die nscale Komponenten.
+  * Neuer ``LivenessProbe`` für den Application Layer, um einem ``Panic`` Status des Servers zuverlässig zu erkennen und einen Neustart des Pods auszulösen.
+  
 ## 9.2.1100 (Mai 2024)
 
 * Aktualisierung der Container Images.

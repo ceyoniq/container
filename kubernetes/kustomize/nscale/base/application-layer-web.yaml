@@ -17,12 +17,10 @@ spec:
         app: application-layer-web
     spec:
       automountServiceAccountToken: false
-      imagePullSecrets:
-      - name: regcred
       initContainers: []
       containers:
       - name: application-layer-web
-        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.9.2.1100.2024042511
+        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.9.2.1200.2024052311
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -54,15 +52,6 @@ spec:
         ports:
         - containerPort: 8090
           name: web
-        resources:
-          limits:
-            cpu: "2500m"
-            memory: "2000Mi"
-            ephemeral-storage: "850Mi"
-          requests:
-            cpu: "100m"
-            memory: "700Mi"
-            ephemeral-storage: "750Mi"
         volumeMounts:
         - name: log4j
           mountPath: /opt/ceyoniq/nscale-server/application-layer-web/conf/log4j

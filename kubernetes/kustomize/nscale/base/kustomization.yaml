@@ -10,8 +10,9 @@ labels:
 - includeSelectors: true
   pairs:
     app.kubernetes.io/part-of: nscale
-    nscale.ceyoniq.com/version: "9"
-    version: v9.2.1101
+- includeSelectors: false
+  pairs:
+    version: v9.2.1201
 
 secretGenerator:
 - literals:
@@ -54,3 +55,13 @@ resources:
 - ilm-connector.yaml
 - webdav-connector.yaml
 - xta-connector.yaml
+
+replicas:
+- name: cmis-connector
+  count: 0
+- name: ilm-connector
+  count: 0
+- name: webdav-connector
+  count: 0
+- name: xta-connector
+  count: 0

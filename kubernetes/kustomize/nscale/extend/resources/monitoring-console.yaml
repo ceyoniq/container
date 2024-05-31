@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitoring-console
+spec:
+  template:
+    spec:
+      initContainers:
+      - name: monitoring-console-conf
+        resources:
+          limits:
+            cpu: "600m"
+            memory: "800Mi"
+            ephemeral-storage: "500Mi"
+          requests:
+            cpu: "400m"
+            memory: "600Mi"
+            ephemeral-storage: "400Mi"
+      containers:
+      - name: monitoring-console
+        resources:
+          limits:
+            cpu: "1000m"
+            memory: "1500Mi"
+            ephemeral-storage: "500Mi"
+          requests:
+            cpu: "100m"
+            memory: "1000Mi"
+            ephemeral-storage: "400Mi"

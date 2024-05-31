@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-layer-web
+spec:
+  template:
+    spec:
+      containers:
+      - name: application-layer-web
+        resources:
+          limits:
+            cpu: "2500m"
+            memory: "2000Mi"
+            ephemeral-storage: "850Mi"
+          requests:
+            cpu: "100m"
+            memory: "700Mi"
+            ephemeral-storage: "750Mi"

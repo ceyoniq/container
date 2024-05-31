@@ -1,13 +1,4 @@
 ---
-apiVersion: scheduling.k8s.io/v1
-kind: PriorityClass
-metadata:
-  name: db-priority
-value: 1000000
-globalDefault: false
-description: "This priority class should be used for database service pods only."
-
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -29,7 +20,6 @@ spec:
         app: postgresql
         role: master
     spec:
-      priorityClassName: db-priority
       automountServiceAccountToken: false
       containers:
       - name: postgresql
@@ -50,6 +40,8 @@ spec:
               pg_isready -U "postgres" -h 127.0.0.1 -p 5432 -t 1
               [ -f /opt/bitnami/postgresql/tmp/.initialized ]
         env:
+#        - name: POSTGRESQL_EXTRA_FLAGS
+#          value: "-c log_statement=all"
         - name: BITNAMI_DEBUG
           value: "false"
         - name: POSTGRESQL_USERNAME
@@ -71,15 +63,6 @@ spec:
         ports:
         - name: postgresql
           containerPort: 5432
-        resources:
-          limits:
-            cpu: "1000m"
-            memory: "500Mi"
-            ephemeral-storage: "350Mi"
-          requests:
-            cpu: "100m"
-            memory: "250Mi"
-            ephemeral-storage: "250Mi"
         volumeMounts:
         - name: custom-init-scripts
           mountPath: /docker-entrypoint-initdb.d/

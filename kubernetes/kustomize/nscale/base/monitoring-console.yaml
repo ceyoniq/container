@@ -17,13 +17,11 @@ spec:
         app: monitoring-console
     spec:
       automountServiceAccountToken: false
-      imagePullSecrets:
-      - name: regcred
       initContainers:
       # The license file mount inside the workspace volume prevents the volume to get initialized with the image data.
       # Therefore we need to copy the data from the image to the volume manually before startup.
       - name: monitoring-console-conf
-        image: ceyoniq.azurecr.io/release/nscale/monitoring-console:ubi.9.2.1001.2024032018
+        image: ceyoniq.azurecr.io/release/nscale/monitoring-console:ubi.9.2.1200.2024052410
         imagePullPolicy: Always
         command: [ "/bin/sh", "-c" ]
         args:
@@ -34,18 +32,9 @@ spec:
         volumeMounts:
         - name: monitoring-console-workspace
           mountPath: /mnt
-        resources:
-          limits:
-            cpu: "600m"
-            memory: "800Mi"
-            ephemeral-storage: "500Mi"
-          requests:
-            cpu: "400m"
-            memory: "600Mi"
-            ephemeral-storage: "400Mi"
       containers:
       - name: monitoring-console
-        image: ceyoniq.azurecr.io/release/nscale/monitoring-console:ubi.9.2.1001.2024032018
+        image: ceyoniq.azurecr.io/release/nscale/monitoring-console:ubi.9.2.1200.2024052410
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -69,15 +58,6 @@ spec:
         ports:
         - containerPort: 8387
           name: monitoring
-        resources:
-          limits:
-            cpu: "1000m"
-            memory: "1500Mi"
-            ephemeral-storage: "500Mi"
-          requests:
-            cpu: "100m"
-            memory: "1000Mi"
-            ephemeral-storage: "400Mi"
         volumeMounts:
         - name: monitoring-console-workspace
           mountPath: /opt/ceyoniq/nscale-monitoring/workspace

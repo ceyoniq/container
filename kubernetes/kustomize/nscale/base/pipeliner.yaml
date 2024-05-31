@@ -18,31 +18,9 @@ spec:
         app: pipeliner
     spec:
       automountServiceAccountToken: false
-      imagePullSecrets:
-      - name: regcred
-      initContainers:
-      - name: wait-for-application-layer
-        image: docker.io/curlimages/curl:8.4.0
-        imagePullPolicy: Always
-        command: ["/bin/sh", "-c"]
-        args:
-        - >
-          while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://application-layer:8080/index.html)" != "200" ]]; do
-            echo '.'
-            sleep 5;
-          done
-        resources:
-          limits:
-            cpu: "200m"
-            memory: "200Mi"
-            ephemeral-storage: "350Mi"
-          requests:
-            cpu: "100m"
-            memory: "100Mi"
-            ephemeral-storage: "300Mi"
       containers:
       - name: pipeliner
-        image: ceyoniq.azurecr.io/release/nscale/pipeliner:ubi.9.2.1101.2024042910
+        image: ceyoniq.azurecr.io/release/nscale/pipeliner:ubi.9.2.1200.2024052715
         imagePullPolicy: Always
         startupProbe:
           exec:
@@ -64,13 +42,6 @@ spec:
             - "4173"
           periodSeconds: 30
           timeoutSeconds: 3
-        resources:
-          limits:
-            cpu: "1000m"
-            memory: "2000Mi"
-          requests:
-            cpu: "100m"
-            memory: "100Mi"
         volumeMounts:
         - name: license
           subPath: license.xml
@@ -110,6 +81,7 @@ kind: Service
 metadata:
   name: pipeliner
 spec:
+  clusterIP: None
   ports:
   - port: 4173
     targetPort: 4173

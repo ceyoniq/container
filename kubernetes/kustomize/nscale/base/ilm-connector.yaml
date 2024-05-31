@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: ilm-connector
-  replicas: 0
+  replicas: 1
   strategy:
     type: RollingUpdate
   template:
@@ -17,8 +17,6 @@ spec:
         app: ilm-connector
     spec:
       automountServiceAccountToken: false
-      imagePullSecrets:
-      - name: regcred
       containers:
       - name: ilm-connector
         image: ceyoniq.azurecr.io/release/nscale/ilm-connector:ubi.9.2.1100.2024042917
@@ -49,15 +47,6 @@ spec:
         ports:
         - containerPort: 8297
           name: ilm
-        resources:
-          limits:
-            cpu: "1000m"
-            memory: "1000Mi"
-            ephemeral-storage: "500Mi"
-          requests:
-            cpu: "100m"
-            memory: "500Mi"
-            ephemeral-storage: "400Mi"
         volumeMounts:
         - name: temp
           mountPath: /opt/ceyoniq/nscale-for-sap/erp-connector-ilm/temp
