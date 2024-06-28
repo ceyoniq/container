@@ -10,10 +10,9 @@ services:
         condition: service_healthy
     entrypoint: ["/bin/sh", "-c"]
     command:
-    - |
-       sleep 3;
-       echo "initialize Document Area 'DA'";
+    - |  
+       echo "initialize Document Area $${DOCUMENT_AREA:-DA}";
        java -jar ./al-cmdclient-*.jar -host application-layer run-cfg-method -method lockSystem;
-       java -jar ./al-cmdclient-*.jar -host application-layer scenario-da -da DA -displayname DA -rs host=rendition-server -sl host=storage-layer;
+       java -jar ./al-cmdclient-*.jar -host application-layer scenario-da -da $${DOCUMENT_AREA:-DA} -displayname $${DOCUMENT_AREA:-DA} -rs host=rendition-server -sl host=storage-layer;
        java -jar ./al-cmdclient-*.jar -host application-layer run-cfg-method -method unlockSystem;
        echo "done";

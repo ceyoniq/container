@@ -39,6 +39,7 @@ Diese Komponente benötigt keine Persistierung.
 |XTA_AL_FOLDERQUERY_OUTBOX=| Postausgangsordner, NQL-Abfrage `resourcetype=1 and displayname='Postausgang'`.|
 |XTA_AL_FOLDERQUERY_DEPOSIT=| Ordner für die Ablage versendeter Nachrichten, NQL-Abfrage `resourcetype=1 and displayname='Gesendet'`.|
 |XTA_URL=| URL des XTA-Servers, an den die Nachrichten gesendet werden sollen.|
+|XTA_INCOMING=true/false| Eingehenden Nachrichten sind aktiviert oder deaktiviert.|
 
 ## Logging in Kubernetes
 
@@ -59,7 +60,7 @@ Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in eine
 
 ```bash
 docker run --rm \
-  -p 8099:8099 \
+  --network=host \
   -e XTA_AL_HOST=application-layer \
   -e XTA_AL_PORT=8080 \
   -e XTA_AL_SSL=false \

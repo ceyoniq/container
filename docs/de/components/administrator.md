@@ -72,11 +72,10 @@ Das Logging wird in der Datei `/var/lib/jetty/webapps/rapadm/WEB-INF/log4j2.xml`
 
 ```bash
 docker run --rm \
+  --network=host \
   -e HostName=application-layer \
   -e Port=8080 \
   -e ALInstance=nscalealinst1 \
   -e JAVA_OPTIONS="-Dorg.eclipse.rap.rwt.settingStoreFactory=settings-per-user -Duser.language=de" \
-  -p 8181:8080 \
-  -p 8182:8443 \
-  ceyoniq.azurecr.io/release/nscale/administrator:ubi.9.2.1201
+  ceyoniq.azurecr.io/release/nscale/administrator:ubi.9.2.1300.2024062409
 ```

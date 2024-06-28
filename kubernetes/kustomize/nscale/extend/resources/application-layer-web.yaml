@@ -13,6 +13,6 @@ spec:
             memory: "2000Mi"
             ephemeral-storage: "850Mi"
           requests:
-            cpu: "100m"
-            memory: "700Mi"
+            cpu: "1000m"
+            memory: "1000Mi"
             ephemeral-storage: "750Mi"

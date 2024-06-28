@@ -2,198 +2,198 @@
 <!-- application-layer log format {1.0} -->
 <Configuration name="instance1" monitorInterval="30">
 
-	<Properties>
-		<!-- For console logging set environment AL_APPENDER to 'stdout'  -->
-		<property name="alAppender">$${env:AL_APPENDER:-file}</property>
-	</Properties>
+    <Properties>
+        <!-- For console logging set environment AL_APPENDER to 'stdout'  -->
+        <property name="alAppender">$${env:AL_APPENDER:-file}</property>
+    </Properties>
 
-	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<!--        Loggers                                                    -->
-	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!--        Loggers                                                    -->
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-	<Loggers>
+    <Loggers>
 
-		<!-- root logger -->
+        <!-- root logger -->
 
-		<Root level="error">
-			<AppenderRef ref="${alAppender}" />
-		</Root>
+        <Root level="error">
+            <AppenderRef ref="${alAppender}" />
+        </Root>
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- ### BUSINESS LOGIC ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- ### custom ++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- ### BUSINESS LOGIC ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- ### global ++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
-		<Logger name="com.ceyoniq.nscale.al.core" level="info" />
-		<Logger name="com.ceyoniq.nscale.al.adapter" level="info" />
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- ### custom ++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- ### services ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		
-		<!-- Logger name="com.ceyoniq.nscale.al.core.AdministrativeService" level="debug" /-->
-		<!-- Logger name="com.ceyoniq.nscale.al.core.authentication.AuthenticationService" level="debug" /-->
-		<!-- Logger name="com.ceyoniq.nscale.al.core.AuthorityManagementService" level="debug" /-->
-		<!-- Logger name="com.ceyoniq.nscale.al.core.BusinessProcessService" level="debug" /-->
-		<!-- Logger name="com.ceyoniq.nscale.al.core.CollaborationService" level="debug" /-->
-		<!-- Logger name="com.ceyoniq.nscale.al.core.ConfigurationService" level="debug" /-->
-		<!-- Logger name="com.ceyoniq.nscale.al.core.MasterdataService" level="debug" /-->
-		<!-- Logger name="com.ceyoniq.nscale.al.core.MessagingService" level="debug" /-->
-		<!-- Logger name="com.ceyoniq.nscale.al.core.MonitoringService" level="debug" /-->
-		<!-- Logger name="com.ceyoniq.nscale.al.core.RepositoryService" level="debug" /-->
-		<!-- Logger name="com.ceyoniq.nscale.al.core.UserManagementService" level="debug" /-->
-		<!-- Logger name="com.ceyoniq.nscale.al.core.TransactionService" level="debug" /-->
-		<!-- Logger name="com.ceyoniq.nscale.al.core.WorkflowService" level="debug" /-->
-		<!-- Logger name="com.ceyoniq.nscale.al.adapter.xsap.XsapContentService" level="debug" /-->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- ### global ++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+        <Logger name="com.ceyoniq.nscale.al.core" level="info" />
+        <Logger name="com.ceyoniq.nscale.al.adapter" level="info" />
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- ### jobs ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- ### services ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-		<!-- all jobs -->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.AdministrativeService" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.authentication.AuthenticationService" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.AuthorityManagementService" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.BusinessProcessService" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.CollaborationService" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.ConfigurationService" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.MasterdataService" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.MessagingService" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.MonitoringService" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.RepositoryService" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.UserManagementService" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.TransactionService" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.WorkflowService" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.adapter.xsap.XsapContentService" level="debug" /-->
+
+
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- ### jobs ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+        <!-- all jobs -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.persist" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.internal" level="debug" /-->
 
-		<!-- archive job -->
+        <!-- archive job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.ArchiveJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.ResourceArchivator" level="debug" /-->
 
-		<!-- auditlog job -->
+        <!-- auditlog job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.AuditLogJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.AuditLogArchivator" level="debug" /-->
 
-		<!-- bam job -->
+        <!-- bam job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.BAMJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.BAMExecutor" level="debug" /-->
 
-		<!-- cache cleanup job -->
+        <!-- cache cleanup job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.CacheCleanupJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextCacheCleanup" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.SessionCacheCleanupExecutor" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.CompassTasksExecutor" level="debug" /-->
 
-		<!-- content delete job -->
+        <!-- content delete job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.ContentDeleteJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.ContentDeleteExecutor" level="debug" /-->
 
-		<!-- custom job -->
+        <!-- custom job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.CustomJob" level="debug" /-->
 
-		<!-- file server synchronize job -->
+        <!-- file server synchronize job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FileServerSynchronizeJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FileServerSyncExecutor" level="debug" /-->
 
-		<!--  ft identity job -->
+        <!--  ft identity job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextIdentityJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextIdentityProcessor" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.PrincipalEntityFulltextStateErrorMarker" level="debug" /-->
 
-		<!-- ft index mirror job -->
+        <!-- ft index mirror job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextIndexMirrorJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextIndexMirror" level="debug" /-->
 
-		<!-- ft optimizer job -->
+        <!-- ft optimizer job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextOptimizerJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextOptimizer" level="debug" /-->
 
-		<!-- ft resource index create job -->
+        <!-- ft resource index create job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextResourceIndexCreatorJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextResourceIndexCreator" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.ResourceFulltextStateErrorMarker" level="debug" /-->
 
-		<!-- ft resource index remove job -->
+        <!-- ft resource index remove job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextResourceIndexRemoverJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextResourceIndexRemover" level="debug" /-->
 
-		<!-- ft wf index create job -->
+        <!-- ft wf index create job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextWorkflowInstanceIndexCreatorJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextWorkflowInstanceIndexCreator" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.WorkflowInstanceFulltextStateErrorMarker" level="debug" /-->
 
-		<!-- ft wf index remove job -->
+        <!-- ft wf index remove job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextWorkflowInstanceIndexRemoverJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextWorkflowInstanceIndexRemover" level="debug" /-->
 
-		<!-- infrequent system job -->
+        <!-- infrequent system job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.InfrequentSystemJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.ActivationExecutor" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.ConfigurationOrphansDeleter" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.DbIndexCreator" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.ResourcesCountExecutor" level="debug" /-->
 
-		<!-- ldap synchronize job -->
+        <!-- ldap synchronize job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.LdapSynchronizeJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.LdapSynchronizeExecutor" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.LdapSynchronizePersister" level="debug" /-->
 
-		<!-- physical delete job -->
+        <!-- physical delete job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.PhysicalDeleteJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.DeleteResourcesExecutor" level="debug" /-->
 
-		<!-- retention period job -->
+        <!-- retention period job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.RetentionPeriodJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.RetentionPeriodExecutor" level="debug" /-->
 
-		<!-- system control job -->
+        <!-- system control job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.SystemControlJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.WorkflowCleanupExecutor" level="debug" /-->
 
-		<!-- rendition creator job -->
+        <!-- rendition creator job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.RenditionCreatorJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.ThumbnailCreatorExecutor" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.PreviewCreatorExecutor" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.PdfRenditionCreatorExecutor" level="debug" /-->
 
-		<!-- workflow command executor job -->
+        <!-- workflow command executor job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.WorkflowCommandExecutorJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.WorkflowCommandExecutor" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.WorkflowCommandExceptionHandler" level="debug" /-->
 
-		<!-- workflow scheduler job -->
+        <!-- workflow scheduler job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.WorkflowSchedulerJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.WorkflowSchedulerExecutor" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ rendition service +++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ rendition service +++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs" level="debug" /-->
 
-		<!-- ImageToPDF -->
+        <!-- ImageToPDF -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.RenditionUtils" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.ImageToPDFBuiltInConnectorHandler" level="debug" /-->
 
-		<!-- ColdToPDF -->
+        <!-- ColdToPDF -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.AbstractBuiltInRsConnectorHandler" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.ColdToPDFBuiltInConnectorHandler" level="debug" /-->
 
-		<!-- ColdToTif -->
+        <!-- ColdToTif -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.AbstractBuiltInRsConnectorHandler" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.ColdToTIFBuiltInConnectorHandler" level="debug" /-->
 
-		<!-- OfficeToPDFA -->
+        <!-- OfficeToPDFA -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.AbstractOfficeBuiltInRsConnectorHandler" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.OfficeToPDFABuiltInConnectorHandler" level="debug" /-->
 
-		<!-- OfficeToPDF -->
+        <!-- OfficeToPDF -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.AbstractOfficeBuiltInRsConnectorHandler" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.OfficeToPDFBuiltInConnectorHandler" level="debug" /-->
 
-		<!-- OfficeToTIF -->
+        <!-- OfficeToTIF -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.AbstractOfficeBuiltInRsConnectorHandler" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.OfficeToTIFBuiltInConnectorHandler" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ authentication ++++++++++++++++++++++++++++++++++++++++++++ -->
-		
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ authentication ++++++++++++++++++++++++++++++++++++++++++++ -->
+
         <!-- Logger name="com.ceyoniq.nscale.al.core.authentication.impl.AuthenticationServiceImpl" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.security.PrincipalAuthenticationProvider" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.security.DaoDbAuthenticator" level="debug" /-->
@@ -209,38 +209,38 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.identity.persist.IdentityDao" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- ### authorization +++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- ### authorization +++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.security.AclAuthorizationVoter" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ search ++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ search ++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-		<!-- repository -->
+        <!-- repository -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.repository.persist.RepositoryDao" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.search.impl.SearchBean" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.search.impl.SearchCallable" level="debug" /-->
 
-		<!-- workflow -->
+        <!-- workflow -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.wf.persist.WorkflowDao" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.search.impl.SearchBean" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.search.impl.SearchCallable" level="debug" /-->
 
-		<!-- masterdata -->
+        <!-- masterdata -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.masterdata.persist.MasterdataDao" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.search.impl.SearchBean" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.search.impl.SearchCallable" level="debug" /-->
 
-		<!-- fulltext -->
+        <!-- fulltext -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.fulltext.persist.FulltextDao" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.search.impl.SearchBean" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.search.impl.SearchCallable" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ fulltext ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ fulltext ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.ft" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.ft.PDFTextHighlighter" level="debug" /-->
@@ -250,8 +250,8 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.search.impl.SearchCallable" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ fulltext index jobs +++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ fulltext index jobs +++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextResourceIndexCreatorJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextResourceIndexCreator" level="debug" /-->
@@ -263,8 +263,8 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.internal" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ repository ++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ repository ++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.repository" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.repository.impl" level="debug" /-->
@@ -273,8 +273,8 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.search.impl.SearchCallable" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ workflow ++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ workflow ++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.wf" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.wf.impl" level="debug" /-->
@@ -284,8 +284,8 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.search.impl.SearchCallable" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ plugins ++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ plugins ++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.PluginsClassLoader" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.PluginsFactory" level="debug" /-->
@@ -315,8 +315,8 @@
         <!-- Logger name="com.ceyoniq.nscale.job.PxmlImportJob" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ ldap ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ ldap ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.LdapSynchronizeJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.LdapSynchronizeExecutor" level="debug" /-->
@@ -325,8 +325,8 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.security.DaoLdapAuthenticator" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ cluster ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ cluster ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.cluster.ChannelFactoryDynamicBean" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.cluster.ChannelHolderDynamicBean" level="debug" /-->
@@ -341,8 +341,8 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.JobRunningStateControllerInterceptor" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ export/import ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ export/import ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.cfg.impl.ConfigurationServiceImpl" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.authority.impl.AuthorityManagementServiceImpl" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.identity.impl.UserManagementServiceImpl" level="debug" /-->
@@ -353,8 +353,8 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.repository.persist.RepositoryDao" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ sap ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ sap ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
         <!-- Logger name="com.ceyoniq.nscale.al.adapter.xsap" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.sap" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.sap.barcode" level="debug" /-->
@@ -365,15 +365,15 @@
         <!-- Logger name="com.ceyoniq.nscale.sap.importer" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- ### xsap ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- ### xsap ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.adapter.xsap" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.sap" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- ### lza +++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- ### lza +++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.lta" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.lta.LongTermArchiveJob" level="debug" /-->
@@ -382,14 +382,14 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.lta.GovLzaConnector" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- ### upgrade +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- ### upgrade +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.UpgradeManagerBean" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ messaging ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ messaging ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- service -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.msg.impl.MessagingServiceImpl" level="debug" /-->
@@ -436,35 +436,35 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.monitor.event.CallbackResourceEventListener" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ SQL +++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ SQL +++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="org.hibernate.SQL" level="trace" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.util.SqlStatementExecuter" level="debug" /-->
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ sql + parameters  +++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ sql + parameters  +++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="org.hibernate.SQL" level="trace" /-->
         <!-- Logger name="org.hibernate.type" level="trace" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.util.SqlStatementExecuter" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- ###  CONTAINER LOGIC, FRAMEWORKS ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- ###  CONTAINER LOGIC, FRAMEWORKS ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-		
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ REST ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		
+
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ REST ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
         <!-- Logger name="com.ceyoniq.nscale.al.adapter.rest" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.adapter.filter" level="debug" /-->
         <!-- Logger name="org.glassfish.jersey" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ Cache +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ Cache +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.treecache.TreeCacheDynamicBean" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.treecache.TreeCacheFacade" level="debug" /-->
@@ -472,8 +472,8 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.treecache.TreeCacheProvider" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ tree cache ++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ tree cache ++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="org.jboss.cache" level="trace" /-->
         <!-- Logger name="org.jboss.cache.CacheImpl" level="trace" /-->
@@ -502,22 +502,22 @@
         <!-- Logger name="org.jboss.cache.interceptors.InvocationContextInterceptor" level="trace" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ hessian    ++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ hessian    ++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.adapter.hessian.AdaptorHessianSkeleton" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.adapter.HessianServiceExporter" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ burlap     ++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ burlap     ++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.adapter.burlap.AdaptorBurlapSkeleton" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.adapter.burlap.BurlapServiceExporter" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ internal   ++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ internal   ++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.hibernate.CachedPojoEntityTuplizer" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.cfg.CfgManagerProviderDynamicBean" level="debug" /-->
@@ -530,115 +530,115 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.cfg.persist.ConfigurationContainerPersistInitialiser" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ spring   ++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ spring   ++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="org.springframework" level="debug" /-->
         <!-- Logger name="org.springframework.ldap" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ http client   +++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ http client   +++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="org.apache.http.client" level="info" /-->
         <!-- Logger name="org.apache.http.impl.client" level="info" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ jotm   ++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ jotm   ++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="org.objectweb.jotm" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ jdbc  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ jdbc  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.jdbc.SimpleStatementWrapper" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.jdbc.SimplePreparedStatementWrapper" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.util.SqlStatementExecuter" level="debug" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ hibernate   +++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ hibernate   +++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-		<!-- log all SQL DML statements as they are executed --> 
+        <!-- log all SQL DML statements as they are executed -->
         <!-- Logger name="org.hibernate.SQL" level="trace" /-->
 
-		<!-- log all JDBC parameters -->
+        <!-- log all JDBC parameters -->
         <!-- Logger name="org.hibernate.type" level="trace" /-->
 
-		<!-- log all SQL DDL statements as they are executed -->
+        <!-- log all SQL DDL statements as they are executed -->
         <!-- Logger name="org.hibernate.tool.hbm2ddl" level="trace" /-->
 
-		<!-- log the state of all entities (max 20 entities) associated with the session at flush time -->
+        <!-- log the state of all entities (max 20 entities) associated with the session at flush time -->
         <!-- Logger name="org.hibernate.pretty" level="trace" /-->
 
-		<!-- log all second-level cache activity -->
+        <!-- log all second-level cache activity -->
         <!-- Logger name="org.hibernate.cache" level="debug" /-->
         <!-- Logger name="org.hibernate.cache.UpdateTimestampsCache" level="debug" /-->
         <!-- Logger name="org.hibernate.cache.StandardQueryCache" level="debug" /-->
 
-		<!-- log transaction related activity -->
+        <!-- log transaction related activity -->
         <!-- Logger name="org.hibernate.transaction" level="trace" /-->
 
-		<!-- log all JDBC resource acquisition -->
+        <!-- log all JDBC resource acquisition -->
         <!-- Logger name="org.hibernate.jdbc" level="trace" /-->
 
-		<!-- log HQL and SQL ASTs during query parsing -->
+        <!-- log HQL and SQL ASTs during query parsing -->
         <!-- Logger name="org.hibernate.hql.ast.AST" level="trace" /-->
 
 
-		<!-- log everything (a lot of information, but very useful for troubleshooting) -->
+        <!-- log everything (a lot of information, but very useful for troubleshooting) -->
         <!-- Logger name="org.hibernate" level="trace" /-->
 
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +++ jgroups +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ jgroups +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="org.jgroups" level="debug" /-->
         <!-- Logger name="org.jgroups.protocols.pbcast.GMS" level="trace" /-->
         <!-- Logger name="org.jgroups.protocols.pbcast.STABLE" level="info" /-->
         <!-- Logger name="org.jgroups.protocols.pbcast.NAKACK" level="info" /-->
 
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!--    internal logger (do not edit)                                -->
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!--    internal logger (do not edit)                                -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-		<!-- license audit -->
-		
-		<Logger name="com.ceyoniq.nscale.al.core.engine.cfg.SessionValidator" level="info" additivity="false">
-			<AppenderRef ref="license" />
-		</Logger>
-		
-		<!-- job -->
-		
-		<Logger name="com.ceyoniq.nscale.al.core.engine.job.JobValidatorLogger" level="info" additivity="false">
-			<AppenderRef ref="jobValidator" />
-		</Logger>
-		
-		<!-- heap dump logger -->
+        <!-- license audit -->
 
-		<Logger name="com.ceyoniq.nscale.al.core.monitor.impl.HeapDumpLogger" level="info" additivity="false">
-			<AppenderRef ref="dump" />
-		</Logger>
-		
-		<!-- stack trace logger -->
+        <Logger name="com.ceyoniq.nscale.al.core.engine.cfg.SessionValidator" level="info" additivity="false">
+            <AppenderRef ref="license" />
+        </Logger>
 
-		<Logger name="com.ceyoniq.nscale.al.core.monitor.impl.StackTraceLogger" level="info" additivity="false">
-			<AppenderRef ref="dump" />
-		</Logger>
-		
-		<!-- monitoring logger -->
+        <!-- job -->
 
-		<Logger name="com.ceyoniq.nscale.al.core.job.MonitoringExecutor" level="info" additivity="false">
-			<AppenderRef ref="monitoring" />
-		</Logger>
-		
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!--    xsap logger                                                  -->
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <Logger name="com.ceyoniq.nscale.al.core.engine.job.JobValidatorLogger" level="info" additivity="false">
+            <AppenderRef ref="jobValidator" />
+        </Logger>
 
-	    <!-- 
+        <!-- heap dump logger -->
+
+        <Logger name="com.ceyoniq.nscale.al.core.monitor.impl.HeapDumpLogger" level="info" additivity="false">
+            <AppenderRef ref="dump" />
+        </Logger>
+
+        <!-- stack trace logger -->
+
+        <Logger name="com.ceyoniq.nscale.al.core.monitor.impl.StackTraceLogger" level="info" additivity="false">
+            <AppenderRef ref="dump" />
+        </Logger>
+
+        <!-- monitoring logger -->
+
+        <Logger name="com.ceyoniq.nscale.al.core.job.MonitoringExecutor" level="info" additivity="false">
+            <AppenderRef ref="monitoring" />
+        </Logger>
+
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!--    xsap logger                                                  -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+        <!--
         <Logger name="com.ceyoniq.nscale.sap.barcode" level="debug" additivity="false">
             <AppenderRef ref="barcodeAppender"/>
         </Logger>
@@ -659,68 +659,68 @@
         </Logger>
         -->
 
-	</Loggers>
+    </Loggers>
 
 
-	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<!--        Appenders                                                  -->
-	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!--        Appenders                                                  -->
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-	<Appenders>
-		<Console name="stdout" target="SYSTEM_OUT">
-			<PatternLayout pattern="%d %-5p [%t] %c - %m%n" />
-		</Console>
+    <Appenders>
+        <Console name="stdout" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %-5p [%t] %c - %m%n" />
+        </Console>
 
-		<RollingFile name="file" fileName="../logs/nscalealinst1.log"
-			         filePattern="../logs/nscalealinst1.log_%d{yyyy-MM-dd}.log">
-			<PatternLayout pattern="%d %-5p [%t] %c - %m%n" />
-			<Policies>
-				<TimeBasedTriggeringPolicy modulate="true" />
-			</Policies>
-			<DefaultRolloverStrategy max="2147483647" />
-		</RollingFile>
-		
-		<RollingFile name="monitoring" fileName="../logs/slowrequests.log"
-			         filePattern="../logs/slowrequests.log_%d{yyyy-MM-dd}.log">
-			<PatternLayout pattern="%m%n" />
-			<Policies>
-				<TimeBasedTriggeringPolicy modulate="true" />
-			</Policies>
-			<DefaultRolloverStrategy max="2147483647" />
-		</RollingFile>
+        <RollingFile name="file" fileName="../logs/nscalealinst1.log"
+                     filePattern="../logs/nscalealinst1.log_%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d %-5p [%t] %c - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" />
+            </Policies>
+            <DefaultRolloverStrategy max="2147483647" />
+        </RollingFile>
 
-		<RollingFile name="license" fileName="../logs/licenseaudit1.log"
-			         filePattern="../logs/licenseaudit1.log_%d{yyyy-MM}.log">
-			<PatternLayout pattern="%d %-5p - %m%n" />
-			<Policies>
-				<TimeBasedTriggeringPolicy modulate="true" />
-			</Policies>
-			<DefaultRolloverStrategy max="2147483647" />
-		</RollingFile>
-		
-		<RollingFile name="jobValidator" fileName="../logs/job1.log"
-			         filePattern="../logs/job1.log_%d{yyyy-MM}.log">
-			<PatternLayout pattern="%d %-5p - %m%n" />
-			<Policies>
-				<TimeBasedTriggeringPolicy modulate="true" />
-			</Policies>
-			<DefaultRolloverStrategy max="2147483647" />
-		</RollingFile>
-		
-		<RollingFile name="dump" fileName="../logs/dump1.log"
-			         filePattern="../logs/dump1.log_%d{yyyy-MM-dd}.log">
-			<PatternLayout pattern="%m%n" />
-			<Policies>
-				<TimeBasedTriggeringPolicy modulate="true" />
-			</Policies>
-			<DefaultRolloverStrategy max="2147483647" />
-		</RollingFile>
-		
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!--    xsap appender                                                -->
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <RollingFile name="monitoring" fileName="../logs/slowrequests.log"
+                     filePattern="../logs/slowrequests.log_%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" />
+            </Policies>
+            <DefaultRolloverStrategy max="2147483647" />
+        </RollingFile>
 
-	    <!-- 
+        <RollingFile name="license" fileName="../logs/licenseaudit1.log"
+                     filePattern="../logs/licenseaudit1.log_%d{yyyy-MM}.log">
+            <PatternLayout pattern="%d %-5p - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" />
+            </Policies>
+            <DefaultRolloverStrategy max="2147483647" />
+        </RollingFile>
+
+        <RollingFile name="jobValidator" fileName="../logs/job1.log"
+                     filePattern="../logs/job1.log_%d{yyyy-MM}.log">
+            <PatternLayout pattern="%d %-5p - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" />
+            </Policies>
+            <DefaultRolloverStrategy max="2147483647" />
+        </RollingFile>
+
+        <RollingFile name="dump" fileName="../logs/dump1.log"
+                     filePattern="../logs/dump1.log_%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" />
+            </Policies>
+            <DefaultRolloverStrategy max="2147483647" />
+        </RollingFile>
+
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!--    xsap appender                                                -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+        <!--
         <RollingFile name="barcodeAppender" fileName="../logs/sapbarcode.log" filePattern="../logs/sapbarcode.log_%d{yyyy-MM-dd}.log">
             <PatternLayout pattern="%d %-5p [%t] %c - %m%n"/>
             <Policies>
@@ -770,6 +770,6 @@
         </RollingFile>
          -->
 
-	</Appenders>
+    </Appenders>
 
 </Configuration>

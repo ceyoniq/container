@@ -52,6 +52,7 @@ Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in eine
 
 ```bash
 docker run --rm \
+  --network=host \
   -e HOSTNAME=application-layer \
   -e PORT=8080 \
   -e ALINSTANCE=nscalealinst1 \

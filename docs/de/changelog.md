@@ -3,6 +3,13 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 9.2.1300 (Juli 2024)
+
+* Aktualisierung der Container Images.
+* Aktualiserung der Kommentare zu den `kube-score` Ergebnissen.
+* Aufnahme von `Horizontal Pod Autoscaler` Definitionen für den nscale Application Layer, nscale Application Layer Web und nscale Rendition Server.
+* In den Beispielen zum separaten Starten der nscale Komponenten wird jetzt das Netzwerk des Host Rechners verwendet.
+
 ## 9.2.1200 (Juni 2024)
 
 * Aktualisierung der Container Images.

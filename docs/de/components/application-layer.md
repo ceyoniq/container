@@ -83,6 +83,7 @@ Serverprozess übernommen. Das gilt auch für mehrere Containerinstanzen in eine
 
 ```bash
 docker run --rm \
+  --network=host \
   -e INSTANCE1_INSTANCE_LOGGER_CONF=instance1-log-console.conf \
   -e INSTANCE1_CORE_DB_DIALECT=PostgreSQL \
   -e INSTANCE1_CORE_DB_DRIVERCLASS=org.postgresql.Driver \
@@ -92,8 +93,7 @@ docker run --rm \
   -e  INSTANCE1_CORE_DB_SCHEMA=nscale \
   -h democontainer \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/application-layer/conf/license.xml \
-  -p 8080:8080 \
-  ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1200.2024052713
+  ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1302.42399
 ```
 ## Microsoft Azure PostgreSQL flexible server
 
@@ -142,7 +142,7 @@ Entsprechend können auch andere proprietäre Fonts nachinstalliert werden.
 **Beispiel Docker:**
 
 ```bash
-docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1200.2024052713
+docker run ... -v ${PWD}/fonts:/usr/share/fonts/truetype/msttcorefont:ro ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1302.42399
 ```
 
 **Beispiel Docker Compose:**

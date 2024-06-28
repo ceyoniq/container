@@ -83,13 +83,13 @@ Die gesamte nscale-Dokumentation finden Sie in unserem Serviceportal unter <http
 
 ```bash
 docker run --rm \
+  --network=host \
   -e LOG_APPENDER=Console \
-  -p 3005:3005 \
   -v $(pwd)/arc:/opt/ceyoniq/nscale-server/storage-layer/arc \
   -v $(pwd)/da:/opt/ceyoniq/nscale-server/storage-layer/da \
   -v $(pwd)/etc:/opt/ceyoniq/nscale-server/storage-layer/etc \
   -v $(pwd)/license.xml:/opt/ceyoniq/nscale-server/storage-layer/etc/license.xml \
-  ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.9.2.1200.2024052711
+  ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.9.2.1302.2024062518
 ```
 
 ## Skalierung

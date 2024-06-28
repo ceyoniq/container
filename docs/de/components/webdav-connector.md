@@ -49,7 +49,7 @@ Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in eine
 
 ```bash
 docker run --rm \
-  -p 8088:8088 \
+  --network=host \
   -e WEBDAV_AL_HOST=application-layer \
   -e WEBDAV_AL_PORT=8080 \
   -e WEBDAV_AL_SSL=false \

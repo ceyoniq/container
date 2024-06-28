@@ -20,7 +20,7 @@ spec:
       initContainers: []
       containers:
       - name: application-layer-web
-        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.9.2.1200.2024052311
+        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.9.2.1300.2024062420
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -88,3 +88,17 @@ spec:
   selector:
     matchLabels:
       app: application-layer-web
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: application-layer-web
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: application-layer-web
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 60

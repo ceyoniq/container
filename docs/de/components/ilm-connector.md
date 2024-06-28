@@ -48,8 +48,8 @@ Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in eine
 ## Start mit Docker
 
 ```bash
-docker run --rm \
-  -p 8297:8297 \
+docker run --rm  \
+  --network=host \
   -e ILM_AL_HOST=application-layer \
   -e ILM_AL_PORT=8080 \
   -e ILM_AL_SSL=false \

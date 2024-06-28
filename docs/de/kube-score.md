@@ -1,6 +1,6 @@
 # [Kube-Score](https://kube-score.com/) Report
 
-Report from Fri May 31 18:31:36 CEST 2024 on `kubernetes/kustomize/nscale/overlays/azure-cluster`
+Report from Fri Jun 28 13:09:33 UTC 2024 on `kubernetes/kustomize/nscale/overlays/azure-cluster`
 
 | Resource Type | Resource Name | Summary |
 | - | - | - |
@@ -8,26 +8,28 @@ Report from Fri May 31 18:31:36 CEST 2024 on `kubernetes/kustomize/nscale/overla
 |apps/v1/Deployment: | administrator | (administrator) The container running with a low group ID |
 |apps/v1/Deployment: | application-layer-web | (application-layer-web) The pod has a container with a writable root filesystem |
 |apps/v1/Deployment: | application-layer-web | (application-layer-web) The container running with a low group ID |
+|apps/v1/Deployment: | application-layer-web | The deployment is targeted by a HPA, but a static replica count is configured in the DeploymentSpec |
 |apps/v1/Deployment: | cmis-connector | (cmis-connector) The pod has a container with a writable root filesystem |
 |apps/v1/Deployment: | cmis-connector | (cmis-connector) The container running with a low group ID |
 |apps/v1/Deployment: | console | (console) The container running with a low group ID |
 |apps/v1/Deployment: | console | (console) The pod has a container with a writable root filesystem |
-|apps/v1/Deployment: | ilm-connector | (ilm-connector) The pod has a container with a writable root filesystem |
 |apps/v1/Deployment: | ilm-connector | Container is missing a readinessProbe |
+|apps/v1/Deployment: | ilm-connector | (ilm-connector) The pod has a container with a writable root filesystem |
 |apps/v1/Deployment: | ilm-connector | (ilm-connector) The container running with a low group ID |
 |apps/v1/Deployment: | monitoring-console | (monitoring-console-conf) The container running with a low group ID |
 |apps/v1/Deployment: | monitoring-console | (monitoring-console) The container running with a low group ID |
 |apps/v1/Deployment: | postgresql | (postgresql) The pod has a container with a writable root filesystem |
 |apps/v1/Deployment: | postgresql | (postgresql) The container running with a low group ID |
-|apps/v1/Deployment: | process-automation-modeler | (process-automation-modeler) The pod has a container with a writable root filesystem |
 |apps/v1/Deployment: | process-automation-modeler | (process-automation-modeler) The container running with a low group ID |
-|apps/v1/Deployment: | rendition-server | (rendition-server) The container running with a low group ID |
+|apps/v1/Deployment: | process-automation-modeler | (process-automation-modeler) The pod has a container with a writable root filesystem |
 |apps/v1/Deployment: | rendition-server | (rendition-server) The pod has a container with a writable root filesystem |
+|apps/v1/Deployment: | rendition-server | (rendition-server) The container running with a low group ID |
+|apps/v1/Deployment: | rendition-server | The deployment is targeted by a HPA, but a static replica count is configured in the DeploymentSpec |
+|apps/v1/Deployment: | webdav-connector | (webdav-connector) The pod has a container with a writable root filesystem |
 |apps/v1/Deployment: | webdav-connector | Container is missing a readinessProbe |
 |apps/v1/Deployment: | webdav-connector | (webdav-connector) The container running with a low group ID |
-|apps/v1/Deployment: | webdav-connector | (webdav-connector) The pod has a container with a writable root filesystem |
-|apps/v1/Deployment: | xta-connector | (xta-connector) The pod has a container with a writable root filesystem |
 |apps/v1/Deployment: | xta-connector | (xta-connector) The container running with a low group ID |
+|apps/v1/Deployment: | xta-connector | (xta-connector) The pod has a container with a writable root filesystem |
 |batch/v1/Job: | application-layer-setup | (wait-for-application-layer) The container running with a low group ID |
 |batch/v1/Job: | application-layer-setup | (application-layer) The container running with a low group ID |
 |batch/v1/Job: | application-layer-setup2 | (application-layer-setup) The pod has a container with a writable root filesystem |

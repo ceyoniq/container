@@ -371,16 +371,17 @@ Der erste Endpunkt liefert Informationen zu nscale Monitoring Console, während 
 
 Den aktuellen Scaning Report können Sie über [hier](./kube-score.md) einsehen. Beachten Sie die folgenden Hinweise:
 
-`Container Security Context User Group ID`
+`The container running with a low group ID`
 
 Wir unterstützen [Red Hat OpenShift](https://www.redhat.com/de/technologies/cloud-computing/openshift). 
 Dafür müssen wir unsere Container entsprechend vorbereiten in dem wir dem `nscale` Benutzer die `root` Gruppen Rechte geben
 (siehe [Adapting Docker and Kubernetes containers to run on Red Hat OpenShift Container Platform](https://developers.redhat.com/blog/2020/10/26/adapting-docker-and-kubernetes-containers-to-run-on-red-hat-openshift-container-platform)).
 
-`Container is missing a livenessProbe`
+`Container is missing a Probe`
 
 Wir halten uns an die Empfehlung von `kube-score` und haben identische Liveness und Readiness Probles gelöscht
 ([Readiness and Liveness Probes](https://github.com/zegl/kube-score/blob/master/README_PROBES.md#livenessprobe)).
+Aber weiterhin fehlen uns leider Health Checks für den `ilm connector` und `webdav connector`.
 
 `The pod has a container with a writable root filesystem`
 

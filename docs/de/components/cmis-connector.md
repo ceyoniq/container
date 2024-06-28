@@ -29,6 +29,7 @@ Diese Komponente benötigt keine Persistierung.
 |CMIS_AL_PORT=8080 |Sie können den Port angeben, der verwendet werden soll, um eine Verbindung zu nscale Server Application Layer aufzubauen. Der Standardwert ist "8080".|
 |CMIS_AL_SSL=false |Sie können festlegen, ob SSL verwendet werden soll, um eine Verbindung zu nscale Server Application Layer aufzubauen. Der Standardwert ist "false".|
 |CMIS_AL_INSTANCE=nscalealinst1 |Sie können die Instanz für den Anmeldeversuch am nscale Server Application Layer auswählen.|
+|CONF_USE_WHITELIST=true/false|Über die nscale-Rollen kann der Zugriff speziell über den CMIS Connector eingeschränkt werden.|
 
 ## Logging in Kubernetes
 
@@ -54,5 +55,5 @@ docker run -it \
   -e CMIS_AL_PORT=8080 \
   -e CMIS_AL_SSL=false \
   -e CMIS_AL_INSTANCE=nscalealinst1 \
-  ceyoniq.azurecr.io/release/nscale/cmis-connector:ubi.9.2.1100.2024042309
+  ceyoniq.azurecr.io/release/nscale/cmis-connector:ubi.9.2.1200.2024060311
 ```
