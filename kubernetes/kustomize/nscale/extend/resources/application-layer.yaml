@@ -9,21 +9,21 @@ spec:
       - name: wait-for-database
         resources:
           limits:
-            cpu: "200m"
-            memory: "200Mi"
-            ephemeral-storage: "350Mi"
+            cpu: "50m"
+            memory: "50Mi"
+            ephemeral-storage: "0Mi"
           requests:
-            cpu: "100m"
-            memory: "100Mi"
-            ephemeral-storage: "300Mi"
+            cpu: "10m"
+            memory: "10Mi"
+            ephemeral-storage: "0Mi"           
       containers:
       - name: application-layer
         resources:
           limits:
             cpu: "3000m"
-            memory: "3000Mi"
+            memory: "4000Mi"
             ephemeral-storage: "900Mi"
           requests:
-            cpu: "1500m"
-            memory: "1500Mi"
+            cpu: "300m"
+            memory: "1000Mi"
             ephemeral-storage: "800Mi"

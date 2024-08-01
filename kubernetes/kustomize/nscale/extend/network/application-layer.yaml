@@ -129,7 +129,7 @@ spec:
   egress:
   - to:
     - ipBlock:
-        # allow complete internet for demo
+        # allow complete internet for now
         cidr: "0.0.0.0/0"
     # NOTE: open necessary IPs for Kubernetes API Server (10.0.0.1), LDAP and SMTP server.
     # Kubernetes API Server

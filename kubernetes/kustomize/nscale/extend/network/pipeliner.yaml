@@ -36,11 +36,10 @@ spec:
     ports:
       - protocol: TCP
         port: 5432
+  # TODO: access api-server
+  # > kubectl get endpoints --namespace default kubernetes
+  # see https://pauldally.medium.com/accessing-kubernetes-api-server-when-there-is-an-egress-networkpolicy-af4435e005f9
   - to:
     - ipBlock:
-        # allow complete internet for demo
-        cidr: "0.0.0.0/0"
-    # NOTE: open necessary IPs for Kubernetes API Server (10.0.0.1), LDAP and SMTP server.
-    # Kubernetes API Server
-    #- ipBlock:
-    #    cidr: 10.0.0.1/32
+        # allow complete internet for now
+        cidr: 0.0.0.0/0

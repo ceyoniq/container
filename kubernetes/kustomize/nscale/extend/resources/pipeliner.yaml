@@ -9,13 +9,13 @@ spec:
       - name: wait-for-application-layer
         resources:
           limits:
-            cpu: "200m"
-            memory: "200Mi"
-            ephemeral-storage: "350Mi"
+            cpu: "50m"
+            memory: "50Mi"
+            ephemeral-storage: "0Mi"
           requests:
-            cpu: "100m"
-            memory: "100Mi"
-            ephemeral-storage: "300Mi"
+            cpu: "10m"
+            memory: "10Mi"
+            ephemeral-storage: "0Mi"           
       containers:
       - name: pipeliner
         resources:
@@ -24,6 +24,6 @@ spec:
             memory: "2000Mi"
             ephemeral-storage: "300Mi"
           requests:
-            cpu: "500m"
-            memory: "500Mi"
+            cpu: "100m"
+            memory: "100Mi"
             ephemeral-storage: "300Mi"

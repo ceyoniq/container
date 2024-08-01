@@ -12,7 +12,7 @@ labels:
     app.kubernetes.io/part-of: nscale
 - includeSelectors: false
   pairs:
-    version: v9.2.1302
+    version: v9.2.1402
 
 secretGenerator:
 - literals:

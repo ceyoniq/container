@@ -38,28 +38,28 @@ spec:
             type: RuntimeDefault
         resources:
           limits:
-            cpu: "200m"
-            memory: "200Mi"
-            ephemeral-storage: "350Mi"
+            cpu: "50m"
+            memory: "50Mi"
+            ephemeral-storage: "0Mi"
           requests:
-            cpu: "100m"
-            memory: "100Mi"
-            ephemeral-storage: "300Mi"
+            cpu: "10m"
+            memory: "10Mi"
+            ephemeral-storage: "0Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1302.42399
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1402.46530
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
         - > 
           echo "initialize Document Area 'DA'";
           java -jar ./al-cmdclient-*.jar -host application-layer run-cfg-method -method lockSystem || exit 1;
-          java -jar ./al-cmdclient-*.jar -host application-layer scenario-da -da DA -displayname DA -rs host=rendition-server -sl host=storage-layer;
+          java -jar ./al-cmdclient-*.jar -host application-layer scenario-da -da DA -displayname DA -rs host=rendition-server -sl host=storage-layer || exit 1;
           java -jar ./al-cmdclient-*.jar -host application-layer run-cfg-method -method unlockSystem || exit 1;
           echo "done";
         securityContext:
           runAsUser: 10001
-          readOnlyRootFilesystem: true
+          readOnlyRootFilesystem: false
           allowPrivilegeEscalation: false
           runAsNonRoot: true
           capabilities:

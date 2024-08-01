@@ -22,7 +22,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1302.42399
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1402.46530
         imagePullPolicy: Always
         startupProbe:
           httpGet:

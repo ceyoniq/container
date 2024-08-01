@@ -10,7 +10,10 @@ metadata:
   name: kubeapi-role
 rules:
 - apiGroups: [""]
-  resources: ["services", "pods"]
+  resources: ["services", "pods", "jobs"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["batch"]
+  resources: ["jobs"]
   verbs: ["get", "list", "watch"]
 
 ---

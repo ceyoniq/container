@@ -3,6 +3,12 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 9.2.1400 (August 2024)
+
+* Aktualisierung der Container Images.
+* Fehlerbehebung in der kustomize Konfiguration (HorizontalPodAutoscaler).
+* Verbesserungen der Kustomize Konfiguration (Datenbank Setup Skript, nscale Application Layer Setup Skript).
+
 ## 9.2.1300 (Juli 2024)
 
 * Aktualisierung der Container Images.
