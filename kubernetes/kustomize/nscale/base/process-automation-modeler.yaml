@@ -19,7 +19,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: process-automation-modeler
-        image: ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.9.2.1300.42214
+        image: ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.9.2.1500.49636
         imagePullPolicy: Always
         startupProbe:
           httpGet:

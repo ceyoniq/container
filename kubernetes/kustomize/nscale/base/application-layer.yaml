@@ -22,7 +22,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1402.46530
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1501.2024082921
         imagePullPolicy: Always
         startupProbe:
           httpGet:
@@ -76,11 +76,11 @@ spec:
           - name: INSTANCE1_CLUSTER_CORE_NAME
             valueFrom:
               fieldRef:
-                fieldPath: metadata.namespace
+                fieldPath: metadata.name
           - name: INSTANCE1_CLUSTER_CORE_DESCRIPTION
             valueFrom:
               fieldRef:
-                fieldPath: metadata.namespace
+                fieldPath: metadata.name
           - name: JAVA_OPTS          
             value: -XX:MaxRAMPercentage=50.0 -Duser.country=DE -Duser.language=de
           - name: METRICS_ALLOW_REMOTE_REQUESTS
