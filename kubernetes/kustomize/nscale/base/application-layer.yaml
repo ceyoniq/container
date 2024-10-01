@@ -22,30 +22,25 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1502.2024090410
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1503.2024092521
         imagePullPolicy: Always
         startupProbe:
           httpGet:
             path: /index.html
             port: 8080
-          initialDelaySeconds: 30
+          initialDelaySeconds: 60
           failureThreshold: 10
-          periodSeconds: 10
-          timeoutSeconds: 1
         livenessProbe:
           httpGet:
             path: /nscalealinst1/rest/configuration/sysinfo.json
             port: 8080
-          initialDelaySeconds: 120
-          periodSeconds: 10
+          initialDelaySeconds: 60
           timeoutSeconds: 3
           failureThreshold: 5
         readinessProbe:
           httpGet:
             path: /jmx/status
             port: 8080
-          periodSeconds: 10
-          timeoutSeconds: 1
           failureThreshold: 3
         env:
           - name: INSTANCE1_INSTANCE_LOGGER_CONF
@@ -133,6 +128,10 @@ apiVersion: v1
 kind: Service
 metadata:
   name: application-layer
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: '/nscalealinst1/metrics'
+    prometheus.io/port: '8080'
   labels:
     app: application-layer
 spec:
@@ -152,10 +151,6 @@ metadata:
   name: application-layer
   labels:
     app: application-layer
-  annotations:
-    prometheus.io/scrape: 'true'
-    prometheus.io/path: '/nscalealinst1/metrics'
-    prometheus.io/port: '8080'
 spec:
   minAvailable: 1
   selector:

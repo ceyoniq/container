@@ -9,6 +9,16 @@ spec:
       app: pipeliner
   policyTypes:
   - Egress
+  - Ingress
+  ingress:
+  - from:
+    # access from administrator in the same namespace
+    - podSelector:
+        matchLabels:
+          app: monitoring-console
+    ports:
+      - protocol: TCP
+        port: 4173
   egress:
   - to:
     - podSelector:

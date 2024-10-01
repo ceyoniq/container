@@ -50,7 +50,6 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.UserManagementService" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.TransactionService" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.WorkflowService" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.adapter.xsap.XsapContentService" level="debug" /-->
 
 
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -76,7 +75,7 @@
         <!-- cache cleanup job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.CacheCleanupJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextCacheCleanup" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.job.SessionCacheCleanupExecutor" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.session.impl.clean.SessionCacheCleanupExecutor" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.CompassTasksExecutor" level="debug" /-->
 
         <!-- content delete job -->
@@ -103,6 +102,11 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextOptimizerJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextOptimizer" level="debug" /-->
 
+        <!-- ft resource index prepare job -->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextPrepareResourceIndexCreatorJob" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextResourceIndexCreator" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.job.ResourceFulltextStateErrorMarker" level="debug" /-->
+
         <!-- ft resource index create job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextResourceIndexCreatorJob" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.FulltextResourceIndexCreator" level="debug" /-->
@@ -123,10 +127,8 @@
 
         <!-- infrequent system job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.InfrequentSystemJob" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.job.ActivationExecutor" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.ConfigurationOrphansDeleter" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.job.DbIndexCreator" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.job.ResourcesCountExecutor" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.job.DbObjectCreator" level="debug" /-->
 
         <!-- ldap synchronize job -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.LdapSynchronizeJob" level="debug" /-->
@@ -179,15 +181,12 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.ColdToTIFBuiltInConnectorHandler" level="debug" /-->
 
         <!-- OfficeToPDFA -->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.AbstractOfficeBuiltInRsConnectorHandler" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.OfficeToPDFABuiltInConnectorHandler" level="debug" /-->
 
         <!-- OfficeToPDF -->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.AbstractOfficeBuiltInRsConnectorHandler" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.OfficeToPDFBuiltInConnectorHandler" level="debug" /-->
 
         <!-- OfficeToTIF -->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.AbstractOfficeBuiltInRsConnectorHandler" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.rs.OfficeToTIFBuiltInConnectorHandler" level="debug" /-->
 
 
@@ -196,15 +195,15 @@
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.authentication.impl.AuthenticationServiceImpl" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.security.PrincipalAuthenticationProvider" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.security.DaoDbAuthenticator" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.security.DaoLdapAuthenticator" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.security.GssAuthenticator" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.security.WindowsAuthenticator" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.security.NegotiateAuthenticator" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.security.ClientAuthenticator" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.security.GuestAuthenticator" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.security.IDAuthenticator" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.security.KNMAuthenticator" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.security.div.DaoDbAuthenticator" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.security.authentication.ldap.DaoLdapAuthenticator" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.security.authentication.gss.GssAuthenticator" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.security.authentication.neg.WindowsAuthenticator" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.security.authentication.neg.NegotiateAuthenticator" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.security.authentication.client.ClientAuthenticator" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.security.div.GuestAuthenticator" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.security.div.IDAuthenticator" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.security.authentication.knm.KNMAuthenticator" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.identity.ldap.IdentityLdapDao" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.identity.persist.IdentityDao" level="debug" /-->
 
@@ -212,7 +211,7 @@
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
         <!-- ### authorization +++++++++++++++++++++++++++++++++++++++++++++ -->
 
-        <!-- Logger name="com.ceyoniq.nscale.al.core.security.AclAuthorizationVoter" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.security.acl.AclAuthorizationVoter" level="debug" /-->
 
 
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -243,7 +242,6 @@
         <!-- +++ fulltext ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.ft" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.plugin.ft.PDFTextHighlighter" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.fulltext.impl.FulltextResourceConnectorImpl" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.fulltext.persist.FulltextDao" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.search.impl.SearchBean" level="debug" /-->
@@ -322,7 +320,7 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.job.LdapSynchronizeExecutor" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.identity.persist.IdentityDao" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.identity.ldap.IdentityLdapDao" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.security.DaoLdapAuthenticator" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.security.authentication.ldap.DaoLdapAuthenticator" level="debug" /-->
 
 
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -330,7 +328,7 @@
 
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.cluster.ChannelFactoryDynamicBean" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.cluster.ChannelHolderDynamicBean" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.engine.cluster.ClusterJobCoordinator" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.job.coordinate.ClusterJobCoordinator" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.cluster.ClusterJobCoordinatorDynamicBean" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.cluster.ClusterRpcDispatcher" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.cluster.ClusterRpcDispatcherDynamicBean" level="debug" /-->
@@ -396,8 +394,8 @@
 
         <!-- in-memory queue -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.msg.impl.MsgEventsQueue" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.msg.impl.MsgResourceEventsQueue" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.msg.impl.MsgWorkflowEventsQueue" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.msg.event.res.MsgResourceEventsQueue" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.msg.event.wf.MsgWorkflowEventsQueue" level="debug" /-->
 
         <!-- database -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.msg.impl.MsgPersistInterceptor" level="debug" /-->
@@ -406,8 +404,8 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.msg.impl.MsgQueueEventSaver$Impl" level="debug" /-->
 
         <!-- message creation -->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.msg.impl.MsgResolverForResourceEvents" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.msg.impl.MsgResolverForWorkflowEvents" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.msg.event.res.MsgResolverForResourceEvents" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.msg.event.wf.MsgResolverForWorkflowEvents" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.msg.impl.MsgDescriptionBuilderInterceptor" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.msg.impl.MsgHeuristicDisplaynameDetector" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.msg.impl.MsgVersionInterceptor" level="debug" /-->
@@ -426,7 +424,7 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.msg.impl.MsgListenerManagerDelegate$Impl" level="debug" /-->
 
         <!-- workflow auto-add -->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.msg.impl.MsgWorkflowAutoAdder" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.msg.event.wf.MsgWorkflowAutoAdder" level="debug" /-->
 
         <!-- cluster -->
         <!-- Logger name="com.ceyoniq.nscale.al.core.msg.impl.MsgClusterInterceptor" level="debug" /-->
@@ -473,40 +471,16 @@
 
 
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-        <!-- +++ tree cache ++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++ infinispan tree cache +++++++++++++++++++++++++++++++++++++ -->
 
-        <!-- Logger name="org.jboss.cache" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.CacheImpl" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.lock.IdentityLock" level="trace" /-->
-
-        <!-- pessimistic -->
-        <!-- Logger name="org.jboss.cache.interceptors.CallInterceptor" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.interceptors.PessimisticLockInterceptor" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.interceptors.ReplicationInterceptor" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.interceptors.NotificationInterceptor" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.interceptors.TxInterceptor" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.interceptors.CacheMgmtInterceptor" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.interceptors.InvocationContextInterceptor" level="trace" /-->
-
-        <!-- optimistic -->
-        <!-- Logger name="org.jboss.cache.interceptors.CallInterceptor" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.interceptors.OptimisticNodeInterceptor" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.interceptors.OptimisticCreateIfNotExistsInterceptor" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.interceptors.OptimisticValidatorInterceptor" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.interceptors.OptimisticLockingInterceptor" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.interceptors.InvalidationInterceptor" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.interceptors.OptimisticReplicationInterceptor" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.interceptors.NotificationInterceptor" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.interceptors.OptimisticTxInterceptor" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.interceptors.CacheMgmtInterceptor" level="trace" /-->
-        <!-- Logger name="org.jboss.cache.interceptors.InvocationContextInterceptor" level="trace" /-->
+        <!-- Logger name="org.infinispan" level="debug" /-->
 
 
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
         <!-- +++ hessian    ++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="com.ceyoniq.nscale.al.adapter.hessian.AdaptorHessianSkeleton" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.adapter.HessianServiceExporter" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.adapter.hessian.HessianServiceExporter" level="debug" /-->
 
 
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -525,8 +499,8 @@
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.datasource.PooledServerSession" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.datasource.ServerSessionDataSource" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.engine.SessionFactoryBean" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.engine.treecache.SimpleQueryCache" level="debug" /-->
-        <!-- Logger name="com.ceyoniq.nscale.al.core.engine.treecache.SimpleUpdateTimestampsCache" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.engine.cache.config.cache.SimpleQueryCache" level="debug" /-->
+        <!-- Logger name="com.ceyoniq.nscale.al.core.engine.cache.config.cache.SimpleUpdateTimestampsCache" level="debug" /-->
         <!-- Logger name="com.ceyoniq.nscale.al.core.cfg.persist.ConfigurationContainerPersistInitialiser" level="debug" /-->
 
 
@@ -587,7 +561,6 @@
         <!-- log HQL and SQL ASTs during query parsing -->
         <!-- Logger name="org.hibernate.hql.ast.AST" level="trace" /-->
 
-
         <!-- log everything (a lot of information, but very useful for troubleshooting) -->
         <!-- Logger name="org.hibernate" level="trace" /-->
 
@@ -596,9 +569,11 @@
         <!-- +++ jgroups +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
         <!-- Logger name="org.jgroups" level="debug" /-->
-        <!-- Logger name="org.jgroups.protocols.pbcast.GMS" level="trace" /-->
+        <Logger name="org.jgroups.protocols.pbcast.GMS" level="debug" />
         <!-- Logger name="org.jgroups.protocols.pbcast.STABLE" level="info" /-->
         <!-- Logger name="org.jgroups.protocols.pbcast.NAKACK" level="info" /-->
+
+
 
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
         <!--    internal logger (do not edit)                                -->

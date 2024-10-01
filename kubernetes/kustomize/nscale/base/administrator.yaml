@@ -19,15 +19,18 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: administrator
-        image: ceyoniq.azurecr.io/release/nscale/administrator:ubi.9.2.1500
+        image: ceyoniq.azurecr.io/release/nscale/administrator:ubi.9.3.1000
         imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /rapadm/
+            port: 8080
+          initialDelaySeconds: 20
         readinessProbe:
           httpGet:
             path: /rapadm/
             port: 8080
           initialDelaySeconds: 20
-          periodSeconds: 10
-          timeoutSeconds: 1
         env:
           - name: APPLICATION_LAYER_HOST
             value: "application-layer"

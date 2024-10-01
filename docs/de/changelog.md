@@ -3,6 +3,14 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 9.3.1000 (Oktober 2024)
+
+* Aktualisierung der Container Images.
+* Aktualisierung der Application Layer Standard Log Konfiguration.
+* Kleinere Fehlerbehebungen (console in Kubernetes, health check in compose, network policy für den nscale Pipeliner).
+* Kubernetes Overlay für Ingress und Anpassung der Pod Resource Requests.
+* Wiederaufnahme der LivenessProbes bei identischen ReadinessProbes für einge JVM Pods, um Out-Of-Memory Situationen zu erkennen.
+
 ## 9.2.1500 (September 2024)
 
 * Aktualisierung der Container Images.

@@ -1,0 +1,20 @@
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: process-automation-modeler-ingress
+spec:
+  podSelector:
+    matchLabels:
+      app: process-automation-modeler
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    # access from system namespace (ingress)
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+      - protocol: TCP
+        port: 8092

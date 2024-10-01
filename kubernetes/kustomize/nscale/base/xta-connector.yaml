@@ -21,6 +21,11 @@ spec:
       - name: xta-connector
         image: ceyoniq.azurecr.io/release/nscale/xta-connector:ubi.9.2.1000.2024032222
         imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /xta/
+            port: 8099
+          initialDelaySeconds: 30
         readinessProbe:
           httpGet:
             path: /xta/

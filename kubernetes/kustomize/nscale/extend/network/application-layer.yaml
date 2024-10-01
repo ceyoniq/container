@@ -12,15 +12,6 @@ spec:
   - Egress
   ingress:
   - from:
-    # access from system namespace (ingress)
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: kube-system
-    # access from ingress controller (if not in kube-system)
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: ingress-nginx
-  - from:
     # access from administrator in the same namespace
     - podSelector:
         matchLabels:
@@ -127,6 +118,9 @@ spec:
       - protocol: TCP
         port: 8080
   egress:
+  # TODO: access api-server and additional services like LDAP and SMTP server.
+  # > kubectl get endpoints --namespace default kubernetes
+  # see https://pauldally.medium.com/accessing-kubernetes-api-server-when-there-is-an-egress-networkpolicy-af4435e005f9
   - to:
     - ipBlock:
         # allow complete internet for now

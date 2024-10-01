@@ -8,18 +8,7 @@ spec:
     matchLabels:
       app: application-layer-web
   policyTypes:
-  - Ingress
   - Egress
-  ingress:
-  - from:
-    # access from system namespace (ingress)
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: kube-system
-    # access from ingress controller (if not in kube-system)
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: ingress-nginx
   egress:
   - to:
     - podSelector:

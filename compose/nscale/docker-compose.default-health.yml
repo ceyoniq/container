@@ -4,21 +4,21 @@ services:
   postgresql:
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgresql"]
-      timeout: 0.3s  
+      timeout: 1s  
       interval: 10s
 
   storage-layer:
     healthcheck:
       test: ["CMD", "/opt/ceyoniq/nscale-server/storage-layer/bin/cstool", "srv", "-m1", "-c", "sock"]
-      start_period: 1s
-      timeout: 0.3s  
+      start_period: 5s
+      timeout: 1s  
       interval: 10s
 
   application-layer:
     healthcheck:
       test: ["CMD", "curl", "--head", "--location", "--silent", "http://localhost:8080/jmx/status"]
-      start_period: 50s
-      timeout: 0.3s  
+      start_period: 60s
+      timeout: 1s  
       interval: 10s
       retries: 3
     depends_on:
@@ -30,38 +30,38 @@ services:
   application-layer-web:
     healthcheck:
       test: ["CMD", "curl", "--head", "--location", "--silent", "http://localhost:8090/nscale_web/systemConfiguration.xml"]
-      start_period: 20s
-      timeout: 0.3s  
+      start_period: 30s
+      timeout: 1s  
       interval: 10s
 
   console:
     healthcheck:
       test: ["CMD", "curl", "--location", "--silent", "http://localhost:8086/console/systemConfiguration.xml"]
       start_period: 30s
-      timeout: 0.3s  
+      timeout: 1s  
       interval: 10s
-      retries: 3
+      retries: 5
 
   monitoring-console:
     healthcheck:
       test: ["CMD", "curl", "--location", "--silent", "http://localhost:8387/nscalemc/"]
-      start_period: 30s
-      timeout: 0.3s  
+      start_period: 20s
+      timeout: 1s  
       interval: 10s
-      retries: 3
+      retries: 5
 
   rendition-server:
     healthcheck:
       test: ["CMD", "curl", "--location", "--silent", "http://localhost:8192/rs/"]
       start_period: 20s
-      timeout: 0.3s  
+      timeout: 1s  
       interval: 10s
-      retries: 3
+      retries: 5
 
   administrator:
     healthcheck:
       test: ["CMD", "curl", "--location", "--silent", "http://localhost:8080/rapadm/"]
-      start_period: 10s
-      timeout: 0.3s  
+      start_period: 20s
+      timeout: 1s  
       interval: 10s
-      retries: 3
+      retries: 5

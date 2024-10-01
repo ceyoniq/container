@@ -2,25 +2,19 @@
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: monitoring-console
+  name: monitoring-console-ingress
 spec:
   podSelector:
     matchLabels:
       app: monitoring-console
   policyTypes:
-  - Egress
   - Ingress
   ingress:
   - from:
-    # access from administrator in the same namespace
-    - podSelector:
+    # access from system namespace (ingress)
+    - namespaceSelector:
         matchLabels:
-          app: administrator
+          kubernetes.io/metadata.name: kube-system
     ports:
       - protocol: TCP
         port: 8387
-  egress:
-  - to:
-    - podSelector:
-        matchLabels:
-          app.kubernetes.io/part-of: nscale

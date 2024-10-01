@@ -1,0 +1,131 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+generatorOptions:
+  annotations:
+    nscale.ceyoniq.com: Copyright Ceyoniq GmbH
+  disableNameSuffixHash: true
+
+resources:
+- ../../extend/ingress
+
+# patches using inline definitions
+patches:
+- path: ingress.yaml
+- target:
+    kind: Ingress
+    name: ingress-nscale
+  patch: |-
+    - op: add
+      path: /spec/rules/0/host
+      value: ${HOSTNAME}
+- target:
+    kind: NetworkPolicy
+    name: administrator-ingress
+  patch: |-
+    - op: add
+      path: /spec/ingress/0/from/-
+      value:
+        namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: ingress-nginx
+- target:
+    kind: NetworkPolicy
+    name: application-layer-web-ingress
+  patch: |-
+    - op: add
+      path: /spec/ingress/0/from/-
+      value:
+        namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: ingress-nginx
+- target:
+    kind: NetworkPolicy
+    name: application-layer-ingress
+  patch: |-
+    - op: add
+      path: /spec/ingress/0/from/-
+      value:
+        namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: ingress-nginx
+- target:
+    kind: NetworkPolicy
+    name: console-ingress
+  patch: |-
+    - op: add
+      path: /spec/ingress/0/from/-
+      value:
+        namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: ingress-nginx
+- target:
+    kind: NetworkPolicy
+    name: monitoring-console-ingress
+  patch: |-
+    - op: add
+      path: /spec/ingress/0/from/-
+      value:
+        namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: ingress-nginx
+- target:
+    kind: NetworkPolicy
+    name: process-automation-modeler-ingress
+  patch: |-
+    - op: add
+      path: /spec/ingress/0/from/-
+      value:
+        namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: ingress-nginx
+- target:
+    kind: NetworkPolicy
+    name: cmis-connector-ingress
+  patch: |-
+    - op: add
+      path: /spec/ingress/0/from/-
+      value:
+        namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: ingress-nginx
+- target:
+    kind: NetworkPolicy
+    name: ilm-connector-ingress
+  patch: |-
+    - op: add
+      path: /spec/ingress/0/from/-
+      value:
+        namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: ingress-nginx
+- target:
+    kind: NetworkPolicy
+    name: webdav-connector-ingress
+  patch: |-
+    - op: add
+      path: /spec/ingress/0/from/-
+      value:
+        namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: ingress-nginx
+- target:
+    kind: NetworkPolicy
+    name: xta-connector-ingress
+  patch: |-
+    - op: add
+      path: /spec/ingress/0/from/-
+      value:
+        namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: ingress-nginx
+- target:
+    kind: NetworkPolicy
+    name: sap-proxy-connector-ingress
+  patch: |-
+    - op: add
+      path: /spec/ingress/0/from/-
+      value:
+        namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: ingress-nginx

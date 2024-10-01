@@ -1,0 +1,16 @@
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ingress.yaml
+- application-layer.yaml
+- application-layer-web.yaml
+- administrator.yaml
+- monitoring-console.yaml
+- console.yaml
+- process-automation-modeler.yaml
+- cmis-connector.yaml
+- ilm-connector.yaml
+- webdav-connector.yaml
+- xta-connector.yaml

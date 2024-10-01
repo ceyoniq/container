@@ -19,11 +19,11 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: ilm-connector
-        image: ceyoniq.azurecr.io/release/nscale/ilm-connector:ubi.9.2.1100.2024042917
+        image: ceyoniq.azurecr.io/release/nscale/ilm-connector:ubi.9.3.1000.2024091702
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:
-#            path: /sap_ilm
+#            path: /sap_ilm/
 #            port: 8297
 #            httpHeaders:
 #            - name: Authorization

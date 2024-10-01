@@ -1,0 +1,20 @@
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: ilm-connector-ingress
+spec:
+  podSelector:
+    matchLabels:
+      app: ilm-connector
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    # access from system namespace (ingress)
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+      - protocol: TCP
+        port: 8297
