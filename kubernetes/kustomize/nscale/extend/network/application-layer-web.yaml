@@ -9,6 +9,16 @@ spec:
       app: application-layer-web
   policyTypes:
   - Egress
+  - Ingress
+  ingress:
+  - from:
+    # access from monitoring-console in the same namespace
+    - podSelector:
+        matchLabels:
+          app: monitoring-console
+    ports:
+      - protocol: TCP
+        port: 8090
   egress:
   - to:
     - podSelector:

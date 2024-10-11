@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - ../security
 - application-layer-setup.yaml
+- monitoring-console-setup.yaml
 - rbac.yaml
 
 patches:

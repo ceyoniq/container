@@ -1,0 +1,26 @@
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: monitoring-console-setup
+spec:
+  podSelector:
+    matchLabels:
+      app: monitoring-console-setup
+  policyTypes:
+  - Egress
+  egress:
+  # TODO: access api-server
+  # > kubectl get endpoints --namespace default kubernetes
+  # see https://pauldally.medium.com/accessing-kubernetes-api-server-when-there-is-an-egress-networkpolicy-af4435e005f9
+  - to:
+    - ipBlock:
+        # allow complete internet for now
+        cidr: 0.0.0.0/0
+  - to:
+    - podSelector:
+        matchLabels:
+          app: monitoring-console
+    ports:
+      - protocol: TCP
+        port: 8387

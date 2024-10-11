@@ -13,6 +13,10 @@ spec:
       app: rendition-server
   template:
     metadata:
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/path: '/metrics'
+        prometheus.io/port: '8192'
       labels:
         app: rendition-server
     spec:
@@ -66,10 +70,6 @@ metadata:
   name: rendition-server
   labels:
     service: rendition-server
-  annotations:
-    prometheus.io/scrape: 'true'
-    prometheus.io/path: '/rs/rest/metrics'
-    prometheus.io/port: '8192'
 spec:
   ports:
   - port: 8192

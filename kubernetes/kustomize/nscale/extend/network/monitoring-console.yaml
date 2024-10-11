@@ -12,6 +12,14 @@ spec:
   - Ingress
   ingress:
   - from:
+    # access from monitoring-console-setup container in the same namespace
+    - podSelector:
+        matchLabels:
+          app: monitoring-console-setup
+    ports:
+      - protocol: TCP
+        port: 8387
+  - from:
     # access from administrator in the same namespace
     - podSelector:
         matchLabels:

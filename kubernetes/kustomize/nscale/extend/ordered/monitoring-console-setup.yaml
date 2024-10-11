@@ -1,22 +1,23 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: application-layer-setup
+  name: monitoring-console-setup
   labels:
-    app: application-layer-setup
+    app: monitoring-console-setup
 spec:
   template:
     metadata:
-      annotations:                                                                                                                                                                         
+      annotations:
+        #sidecar.istio.io/inject: "false"
         traffic.sidecar.istio.io/excludeOutboundPorts: "443"
       labels:
-        app: application-layer-setup
+        app: monitoring-console-setup
     spec:
       serviceAccountName: kubeapi-svc-account
       imagePullSecrets:
       - name: regcred
       initContainers:
-      - name: wait-for-application-layer
+      - name: wait-for-monitoring-console
         image: docker.io/bitnami/kubectl:1.30.1
         imagePullPolicy: Always
         args:
@@ -24,7 +25,7 @@ spec:
         - pod 
         - --for=condition=ready 
         - --selector 
-        - 'app=application-layer'
+        - 'app=monitoring-console'
         - --timeout=150s
         securityContext:
           runAsUser: 10001
@@ -46,16 +47,19 @@ spec:
             memory: "10Mi"
             ephemeral-storage: "0Mi"
       containers:
-      - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1504.55666
+      - name: monitoring-console
+        image: ceyoniq.azurecr.io/release/nscale/monitoring-console:ubi.9.3.1000.2024092618
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
         - > 
-          echo "initialize Document Area 'DA'";
-          java -jar ./al-cmdclient-*.jar -host application-layer run-cfg-method -method lockSystem || exit 1;
-          java -jar ./al-cmdclient-*.jar -host application-layer scenario-da -da DA -displayname DA -rs host=rendition-server -sl host=storage-layer || exit 1;
-          java -jar ./al-cmdclient-*.jar -host application-layer run-cfg-method -method unlockSystem || exit 1;
+          echo "initialize Monitoring";
+          echo 'Application Layer Configuration=host=application-layer-0.application-layer,port=8080' >> /tmp/mc.properties;
+          echo 'Application Layer=host=application-layer,port=8080' >> /tmp/mc.properties;
+          echo 'Storage Layer=host=storage-layer,port=3005' >> /tmp/mc.properties;
+          echo 'alw=host=application-layer-web,port=8090' >> /tmp/mc.properties;
+          echo 'rendition-server=host=rendition-server,port=8192' >> /tmp/mc.properties;
+          java -jar lib/mc-cmdclient.jar --host monitoring-console INITCOMPOSE admin=admin admin=admin /tmp/mc.properties || exit 1;
           echo "done";
         securityContext:
           runAsUser: 10001

@@ -15,6 +15,12 @@ spec:
     metadata:
       labels:
         app: monitoring-console
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/path: '/nscalemc/rest/metrics/nscale'
+        prometheus.io/port: '8387'
+        prometheus.openshift.io/password: ''
+        prometheus.openshift.io/username: "anonymous"
     spec:
       automountServiceAccountToken: false
       initContainers:
@@ -81,12 +87,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: monitoring-console
-  annotations:
-    prometheus.io/scrape: 'true'
-    prometheus.io/path: '/nscalemc/rest/metrics/nscale'
-    prometheus.io/port: monitoring
-    prometheus.openshift.io/password: ''
-    prometheus.openshift.io/username: "anonymous"
   labels:
     app: monitoring-console
 spec:

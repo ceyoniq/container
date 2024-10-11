@@ -12,6 +12,7 @@ resources:
 - rendition-server.yaml
 - administrator.yaml
 - monitoring-console.yaml
+- monitoring-console-setup.yaml
 - console.yaml
 - process-automation-modeler.yaml
 - pipeliner.yaml
