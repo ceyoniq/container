@@ -3,6 +3,10 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 9.3.1100 (November 2024)
+
+* Aktualisierung der Container Images.
+
 ## 9.3.1001
 
 * Aktualisierung der Images des nscale Application Layer und Application Layer Web; siehe auch die Hinweise zu "Fehler in nscale Releases 9.2.1302-1404" im Ceyoniq Service Portal.

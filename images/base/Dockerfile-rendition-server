@@ -12,7 +12,7 @@ RUN yum update --disablerepo=* --enablerepo=ubi-* --assumeyes && \
 WORKDIR /tmp
 
 RUN \
-  curl -L https://github.com/ImageMagick/ImageMagick/archive/7.1.1-38.tar.gz | tar -xz && \
+  curl -L https://github.com/ImageMagick/ImageMagick/archive/7.1.1-39.tar.gz | tar -xz && \
   cd ImageMagick-* && \
   ./configure --prefix=/opt && \
   make && \

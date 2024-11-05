@@ -19,7 +19,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: administrator
-        image: ceyoniq.azurecr.io/release/nscale/administrator:ubi.9.3.1000
+        image: ceyoniq.azurecr.io/release/nscale/administrator:ubi.9.3.1100
         imagePullPolicy: Always
         livenessProbe:
           httpGet:

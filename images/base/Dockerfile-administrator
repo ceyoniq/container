@@ -56,7 +56,6 @@ USER root
 RUN \
        microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes \
 	     gzip-1.12-1.el9 \
-		 tar-2:1.34-6.el9_1 \
 	&& microdnf clean all \
     && mkdir -p $TMPDIR \
 	&& chmod 775 $TMPDIR \
