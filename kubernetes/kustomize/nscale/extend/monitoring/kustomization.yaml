@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- storage-layer.yaml
+- application-layer.yaml
+- rendition-server.yaml
+- monitoring-console.yaml
+

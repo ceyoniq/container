@@ -16,5 +16,5 @@ spec:
           app: application-layer
     ports:
       - protocol: TCP
-        port: 8080
+        port: application
 

@@ -24,7 +24,7 @@ spec:
 #        readinessProbe:
 #          httpGet:
 #            path: /sap_ilm/
-#            port: 8297
+#            port: ilm
 #            httpHeaders:
 #            - name: Authorization
 #              value: "Basic YW5vbjphbm9u"

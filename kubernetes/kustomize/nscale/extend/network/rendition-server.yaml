@@ -17,7 +17,7 @@ spec:
           app: application-layer
     ports:
       - protocol: TCP
-        port: 8192
+        port: rendition
   - from:
     # access from administrator in the same namespace
     - podSelector:
@@ -25,7 +25,7 @@ spec:
           app: administrator
     ports:
       - protocol: TCP
-        port: 8192
+        port: rendition
   - from:
     # access from monitoring namespace
     - podSelector:
@@ -33,4 +33,4 @@ spec:
           app: monitoring-console
     ports:
       - protocol: TCP
-        port: 8192
+        port: rendition

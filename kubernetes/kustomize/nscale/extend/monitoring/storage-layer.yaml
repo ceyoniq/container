@@ -1,0 +1,38 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: storage-layer
+spec:
+  selector:
+    matchLabels:
+      app: storage-layer
+  podTargetLabels: 
+  - app
+  podMetricsEndpoints:
+  - port: metrics
+    path: /metrics
+
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: storage-layer-monitoring
+spec:
+  podSelector:
+    matchLabels:
+      app: storage-layer
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    # access from monitoring namespace
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    - ipBlock:
+        # allow complete internet for now
+        cidr: 0.0.0.0/0
+    ports:
+      - protocol: TCP
+        port: metrics

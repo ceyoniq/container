@@ -20,23 +20,23 @@ spec:
       initContainers: []
       containers:
       - name: application-layer-web
-        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.9.3.1100.2024102811
+        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.9.3.1201.2024112811
         imagePullPolicy: Always
         startupProbe:
           httpGet:
             path: /nscale_web/systemConfiguration.xml
-            port: 8090
+            port: web
           initialDelaySeconds: 10
           failureThreshold: 6
         livenessProbe:
           httpGet:
             path: /nscale_web/
-            port: 8090
+            port: web
           initialDelaySeconds: 60
         readinessProbe:
           httpGet:
             path: /nscale_web/systemConfiguration.xml
-            port: 8090
+            port: web
         env:
           - name: NSCALE_HOST
             value: application-layer
@@ -85,8 +85,7 @@ metadata:
   labels:
     app: application-layer-web
 spec:
-  minAvailable: 1
+  minAvailable: 0
   selector:
     matchLabels:
       app: application-layer-web
-

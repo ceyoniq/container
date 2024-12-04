@@ -17,14 +17,14 @@ spec:
           app: application-layer
     ports:
       - protocol: TCP
-        port: 3005
+        port: storage
   - from:
     - podSelector:
         matchLabels:
           app: pipeliner
     ports:
       - protocol: TCP
-        port: 3005
+        port: storage
   - from:
     # access from administrator in the same namespace
     - podSelector:
@@ -32,7 +32,7 @@ spec:
           app: administrator
     ports:
       - protocol: TCP
-        port: 3005
+        port: storage
   - from:
     # access from administrator in the same namespace
     - podSelector:
@@ -40,4 +40,4 @@ spec:
           app: monitoring-console
     ports:
       - protocol: TCP
-        port: 3005
+        port: storage

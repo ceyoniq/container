@@ -7,11 +7,11 @@ metadata:
 spec:
   template:
     metadata:
-      annotations:
-        #sidecar.istio.io/inject: "false"
-        traffic.sidecar.istio.io/excludeOutboundPorts: "443"
       labels:
+        #sidecar.istio.io/inject: "false"
         app: monitoring-console-setup
+      annotations:
+        traffic.sidecar.istio.io/excludeOutboundPorts: "443"
     spec:
       serviceAccountName: kubeapi-svc-account
       imagePullSecrets:

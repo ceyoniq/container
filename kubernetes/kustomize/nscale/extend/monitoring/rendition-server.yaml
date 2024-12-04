@@ -1,0 +1,35 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: rendition-server
+spec:
+  selector:
+    matchLabels:
+      app: rendition-server
+  podTargetLabels: 
+  - app
+  podMetricsEndpoints:
+  - port: rendition
+    path: /metrics
+
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: rendition-server-monitoring
+spec:
+  podSelector:
+    matchLabels:
+      app: rendition-server
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    # access from monitoring namespace
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - protocol: TCP
+      port: rendition

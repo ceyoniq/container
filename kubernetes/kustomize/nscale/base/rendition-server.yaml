@@ -13,33 +13,29 @@ spec:
       app: rendition-server
   template:
     metadata:
-      annotations:
-        prometheus.io/scrape: 'true'
-        prometheus.io/path: '/metrics'
-        prometheus.io/port: '8192'
       labels:
         app: rendition-server
     spec:
       automountServiceAccountToken: false
       containers:
       - name: rendition-server
-        image: ceyoniq.azurecr.io/release/nscale/rendition-server:ubi.9.3.1001.2024092712
+        image: ceyoniq.azurecr.io/release/nscale/rendition-server:ubi.9.3.1200.2024112208
         imagePullPolicy: Always
         startupProbe:
           httpGet:
             path: /rs/
-            port: 8192
+            port: rendition
           initialDelaySeconds: 10
           failureThreshold: 5
         livenessProbe:
           httpGet:
             path: /rs/
-            port: 8192
+            port: rendition
           initialDelaySeconds: 60
         readinessProbe:
           httpGet:
             path: /rs/
-            port: 8192
+            port: rendition
         env:
         - name: RSX_APPENDER
           value: Console

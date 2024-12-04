@@ -15,12 +15,6 @@ spec:
     metadata:
       labels:
         app: monitoring-console
-      annotations:
-        prometheus.io/scrape: 'true'
-        prometheus.io/path: '/nscalemc/rest/metrics/nscale'
-        prometheus.io/port: '8387'
-        prometheus.openshift.io/password: ''
-        prometheus.openshift.io/username: "anonymous"
     spec:
       automountServiceAccountToken: false
       initContainers:
@@ -45,18 +39,18 @@ spec:
         startupProbe:
           httpGet:
             path: /nscalemc/
-            port: 8387
+            port: monitoring
           initialDelaySeconds: 10
           failureThreshold: 5
         livenessProbe:
           httpGet:
             path: /nscalemc/
-            port: 8387
+            port: monitoring
           initialDelaySeconds: 60
         readinessProbe:
           httpGet:
             path: /nscalemc/
-            port: 8387
+            port: monitoring
         env:
         - name: MC_APPENDER
           value: Console

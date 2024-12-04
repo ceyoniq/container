@@ -19,17 +19,17 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: cmis-connector
-        image: ceyoniq.azurecr.io/release/nscale/cmis-connector:ubi.9.3.1000.2024092511
+        image: ceyoniq.azurecr.io/release/nscale/cmis-connector:ubi.9.3.1200.2024112508
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
             path: /cmis/
-            port: 8096
+            port: cmis
           initialDelaySeconds: 20
         readinessProbe:
           httpGet:
             path: /cmis/
-            port: 8096
+            port: cmis
           initialDelaySeconds: 20
         env:
         - name: CMIS_AL_HOST

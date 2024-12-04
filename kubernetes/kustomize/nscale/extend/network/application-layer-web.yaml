@@ -18,7 +18,7 @@ spec:
           app: monitoring-console
     ports:
       - protocol: TCP
-        port: 8090
+        port: web
   egress:
   - to:
     - podSelector:
@@ -26,4 +26,4 @@ spec:
           app: application-layer
     ports:
       - protocol: TCP
-        port: 8080
+        port: application

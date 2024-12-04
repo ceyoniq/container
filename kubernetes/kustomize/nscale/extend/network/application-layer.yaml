@@ -18,7 +18,7 @@ spec:
           app: administrator
     ports:
       - protocol: TCP
-        port: 8080
+        port: application
   - from:
     # access from application-layer in the same namespace to setup a cluster
     - podSelector:
@@ -38,7 +38,7 @@ spec:
           app: application-layer-setup
     ports:
       - protocol: TCP
-        port: 8080
+        port: application
   - from:
     # access from application-layer-web in the same namespace
     - podSelector:
@@ -46,7 +46,7 @@ spec:
           app: application-layer-web
     ports:
       - protocol: TCP
-        port: 8080
+        port: application
   - from:
     # access from monitoring-console in the same namespace
     - podSelector:
@@ -54,7 +54,7 @@ spec:
           app: monitoring-console
     ports:
       - protocol: TCP
-        port: 8080
+        port: application
   - from:
     # access from console in the same namespace
     - podSelector:
@@ -62,7 +62,7 @@ spec:
           app: console
     ports:
       - protocol: TCP
-        port: 8080
+        port: application
   - from:
     # access from pipeliner in the same namespace
     - podSelector:
@@ -70,7 +70,7 @@ spec:
           app: pipeliner
     ports:
       - protocol: TCP
-        port: 8080
+        port: application
       - protocol: TCP
         port: 7800
         endPort: 7802
@@ -84,7 +84,7 @@ spec:
           app: cmis-connector
     ports:
       - protocol: TCP
-        port: 8080
+        port: application
   - from:
     # access from ilm-connector in the same namespace
     - podSelector:
@@ -92,7 +92,7 @@ spec:
           app: ilm-connector
     ports:
       - protocol: TCP
-        port: 8080
+        port: application
   - from:
     # access from webdav-connector in the same namespace
     - podSelector:
@@ -100,7 +100,7 @@ spec:
           app: webdav-connector
     ports:
       - protocol: TCP
-        port: 8080
+        port: application
   - from:
     # access from xta-connector in the same namespace
     - podSelector:
@@ -108,7 +108,7 @@ spec:
           app: xta-connector
     ports:
       - protocol: TCP
-        port: 8080
+        port: application
   - from:
     # access from process-automation-modeler in the same namespace
     - podSelector:
@@ -116,7 +116,7 @@ spec:
           app: process-automation-modeler
     ports:
       - protocol: TCP
-        port: 8080
+        port: application
   egress:
   # TODO: access api-server and additional services like LDAP and SMTP server.
   # > kubectl get endpoints --namespace default kubernetes
@@ -142,7 +142,7 @@ spec:
           app: postgresql
     ports:
       - protocol: TCP
-        port: 5432
+        port: postgresql
   - to:
     # access to application-layer in the same namespace to setup a cluster
     - podSelector:
@@ -173,7 +173,7 @@ spec:
           app: storage-layer
     ports:
       - protocol: TCP
-        port: 3005
+        port: storage
   - to:
     # access to rendition-server in the same namespace
     - podSelector:
@@ -181,4 +181,4 @@ spec:
           app: rendition-server
     ports:
       - protocol: TCP
-        port: 8192
+        port: rendition

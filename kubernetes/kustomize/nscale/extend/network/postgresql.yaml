@@ -16,11 +16,11 @@ spec:
           app: application-layer
     ports:
       - protocol: TCP
-        port: 5432
+        port: postgresql
   - from:
     - podSelector:
         matchLabels:
           app: pipeliner
     ports:
       - protocol: TCP
-        port: 5432
+        port: postgresql

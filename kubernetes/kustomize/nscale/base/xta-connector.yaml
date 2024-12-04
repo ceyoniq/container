@@ -24,12 +24,12 @@ spec:
         livenessProbe:
           httpGet:
             path: /xta/
-            port: 8099
+            port: xta
           initialDelaySeconds: 30
         readinessProbe:
           httpGet:
             path: /xta/
-            port: 8099
+            port: xta
           initialDelaySeconds: 20
         env:
         - name: XTA_AL_HOST
@@ -75,5 +75,9 @@ spec:
     targetPort: 8099
     name: xta
     appProtocol: http
+  - port: 8199
+    targetPort: 8199
+    name: xta-https
+    appProtocol: https
   selector:
     app: xta-connector

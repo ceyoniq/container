@@ -14,7 +14,7 @@ spec:
             port:
               name: application
       - path: /index.html
-        pathType: ImplementationSpecific
+        pathType: Exact
         backend:
           service:
             name: application-layer
@@ -28,7 +28,7 @@ spec:
             port:
               name: application
       - path: /engine.properties
-        pathType: ImplementationSpecific
+        pathType: Exact
         backend:
           service:
             name: application-layer

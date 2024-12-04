@@ -3,6 +3,12 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 9.3.1200 (Dezember 2024)
+
+* Aktualisierung der Container Images.
+* Add Kustomize Overlay for Service- and PodMonitors of basic nscale components.
+* Reference ports by name in Kubernetes resources. 
+
 ## 9.3.1100 (November 2024)
 
 * Aktualisierung der Container Images.

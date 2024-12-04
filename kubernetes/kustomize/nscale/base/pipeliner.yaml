@@ -20,7 +20,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: pipeliner
-        image: ceyoniq.azurecr.io/release/nscale/pipeliner:ubi.9.2.1501.2024083013
+        image: ceyoniq.azurecr.io/release/nscale/pipeliner:ubi.9.3.1200.2024112714
         imagePullPolicy: Always
         startupProbe:
           exec:

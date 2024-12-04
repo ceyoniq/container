@@ -18,33 +18,29 @@ spec:
       labels:
         app: application-layer
         ceyoniq.com/application-layer-cluster-name: cluster1
-      annotations:
-        prometheus.io/scrape: 'true'
-        prometheus.io/path: '/nscalealinst1/metrics'
-        prometheus.io/port: '8080'
     spec:
       automountServiceAccountToken: false
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.2.1505.2024102808
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.3.1202.2024120408
         imagePullPolicy: Always
         startupProbe:
           httpGet:
             path: /index.html
-            port: 8080
+            port: application
           initialDelaySeconds: 60
           failureThreshold: 10
         livenessProbe:
           httpGet:
             path: /nscalealinst1/rest/configuration/sysinfo.json
-            port: 8080
+            port: application
           initialDelaySeconds: 60
           timeoutSeconds: 3
           failureThreshold: 5
         readinessProbe:
           httpGet:
             path: /jmx/status
-            port: 8080
+            port: application
           failureThreshold: 3
         env:
           - name: INSTANCE1_INSTANCE_LOGGER_CONF
@@ -81,7 +77,7 @@ spec:
               fieldRef:
                 fieldPath: metadata.name
           - name: JAVA_OPTS          
-            value: -XX:MaxRAMPercentage=50.0 -Duser.country=DE -Duser.language=de
+            value: -XX:MaxRAMPercentage=50.0 -Duser.country=DE -Duser.language=de -Djava.io.tmpdir=/opt/ceyoniq/nscale-server/application-layer/temp/transfer
           - name: METRICS_ALLOW_REMOTE_REQUESTS
             value: "true"
           - name: KUBERNETES_NAMESPACE
@@ -123,7 +119,7 @@ spec:
           name: application-layer-log4j
       - name: logs
         emptyDir:
-          sizeLimit: 2Mi
+          sizeLimit: 50Mi
       - name: temp
         emptyDir:
           sizeLimit: 1Gi

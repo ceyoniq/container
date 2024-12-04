@@ -19,23 +19,23 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: process-automation-modeler
-        image: ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.9.3.1000.52696
+        image: ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.9.3.1200.63696
         imagePullPolicy: Always
         startupProbe:
           httpGet:
             path: /modeler/
-            port: 8092
+            port: modeler
           initialDelaySeconds: 10
           failureThreshold: 10
         livenessProbe:
           httpGet:
             path: /modeler/
-            port: 8092
+            port: modeler
           initialDelaySeconds: 60
         readinessProbe:
           httpGet:
             path: /modeler/
-            port: 8092
+            port: modeler
         env:
         - name: NSCALE_HOST
           value: "application-layer"

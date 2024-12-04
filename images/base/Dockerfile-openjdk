@@ -2,7 +2,7 @@
 # https://catalog.redhat.com/software/containers/ubi9/openjdk-17-runtime/61ee7d45384a3eb331996bee
 # https://catalog.redhat.com/software/containers/ubi9/openjdk-21-runtime/6501ce769a0d86945c422d5f
 #ARG baseImage=registry.access.redhat.com/ubi9/openjdk-11-runtime:1.17-1.1705602323
-ARG baseImage=registry.access.redhat.com/ubi9/openjdk-17-runtime:1.20-2.1726695178
+ARG baseImage=registry.access.redhat.com/ubi9/openjdk-17-runtime:1.20-2.1729773460
 
 FROM $baseImage
 
@@ -10,7 +10,7 @@ FROM $baseImage
 # unzip for application-layer-web to read a plugin jar from the nappl before starting the container
 USER root
 RUN \
-     microdnf reinstall --disablerepo=* --enablerepo=ubi-* --assumeyes tzdata-2024a-1.el9 \
+     microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes tzdata-2024b-2.el9 \
   && microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes \
        unzip-6.0-56.el9 \
   && microdnf clean all

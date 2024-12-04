@@ -5,6 +5,6 @@ FROM $baseImage
 
 # see https://access.redhat.com/solutions/5616681
 RUN \
-     microdnf reinstall --disablerepo=* --enablerepo=ubi-* --assumeyes tzdata-2024a-1.el9 \
+     microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes tzdata-2024b-2.el9 \
   && microdnf clean all
 

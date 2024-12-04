@@ -24,7 +24,7 @@ spec:
 #        readinessProbe:
 #          httpGet:
 #            path: /dav/
-#            port: 8088
+#            port: webdav
 #          initialDelaySeconds: 20
         env:
         - name: WEBDAV_AL_HOST
@@ -35,6 +35,8 @@ spec:
           value: "0"
         - name: WEBDAV_AL_INSTANCE
           value: "nscalealinst1"
+        - name: WEBDAV_AL_DOMAIN
+          value: "nscale"
         - name: JAVA_OPTS
           value: "-XX:MaxRAMPercentage=50.0"
         ports:

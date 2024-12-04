@@ -17,4 +17,4 @@ spec:
           kubernetes.io/metadata.name: kube-system
     ports:
       - protocol: TCP
-        port: 8092
+        port: modeler

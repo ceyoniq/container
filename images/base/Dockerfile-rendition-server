@@ -19,7 +19,7 @@ RUN \
   make install
 
 RUN \
-  curl -L https://github.com/DanBloomberg/leptonica/archive/1.84.1.tar.gz | tar -xz && \
+  curl -L https://github.com/DanBloomberg/leptonica/archive/1.85.0.tar.gz | tar -xz && \
   cd leptonica-* && \
   ./autogen.sh && \
   ./configure --prefix=/opt && \

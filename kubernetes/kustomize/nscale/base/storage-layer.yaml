@@ -13,14 +13,17 @@ spec:
   template:
     metadata:
       labels:
+        #sidecar.istio.io/inject: "false"
         app: storage-layer
+      annotations:
+        traffic.sidecar.istio.io/excludeOutboundPorts: "443"      
     spec:
       automountServiceAccountToken: false
       initContainers:
       # The license file mount inside the conf volume prevents the volume to get initialized with the image data.
       # Therefore we need to copy the data from the image to the volume manually before startup.
       - name: storage-layer-conf
-        image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.9.3.1101.2024102818
+        image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.9.3.1201.2024112518
         imagePullPolicy: Always
         command: [ "/bin/sh", "-c" ]
         args:
@@ -34,7 +37,7 @@ spec:
           mountPath: /mnt
       containers:
       - name: storage-layer
-        image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.9.3.1101.2024102818
+        image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.9.3.1201.2024112518
         imagePullPolicy: Always
         readinessProbe:
           exec:
@@ -73,6 +76,34 @@ spec:
         - name: storage-layer
           subPath: arc
           mountPath: /opt/ceyoniq/nscale-server/storage-layer/arc
+      #- name: prometheus-exporter
+      #  image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.9.3.1201.2024112518
+      #  imagePullPolicy: Always
+      #  command: 
+      #  - cstool-prometheus-exporter
+      #  args:
+      #  - --urls 
+      #  - http://::9090
+      #  - --host=$(INSTANCE_NAME) 
+      #  - --port=3005 
+      #  - --Logging:LogLevel:Microsoft=Warning
+      #  ports:
+      #  - containerPort: 9090
+      #    name: metrics
+      #  env:
+      #  - name: INSTANCE_NAME
+      #    valueFrom:
+      #      fieldRef:
+      #        fieldPath: metadata.name
+      #  resources:
+      #    limits:
+      #      cpu: "50m"
+      #      memory: "100Mi"
+      #      ephemeral-storage: "0Mi"
+      #    requests:
+      #      cpu: "20m"
+      #      memory: "50Mi"
+      #      ephemeral-storage: "0Mi"
       volumes:
       - name: license
         configMap:
@@ -100,7 +131,7 @@ spec:
   ports:
   - port: 3005
     targetPort: 3005
-    name: storage-layer
+    name: storage
     appProtocol: tcp
   selector:
     app: storage-layer

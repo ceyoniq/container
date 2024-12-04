@@ -1,0 +1,75 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: monitoring-console
+spec:
+  labelLimit: 63
+  labelNameLengthLimit: 511
+  labelValueLengthLimit: 1023
+  selector:
+    matchLabels:
+      app: monitoring-console
+  endpoints:
+  - port: monitoring
+    path: /nscalemc/rest/metrics/nscale
+    basicAuth:
+      password:
+        name: monitoring-auth
+        key: password
+      username:
+        name: monitoring-auth
+        key: username
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: monitoring-console
+spec:
+  selector:
+    matchLabels:
+      app: monitoring-console
+  podTargetLabels: 
+  - app
+  podMetricsEndpoints:
+  - port: monitoring
+    path: /nscalemc/rest/metrics
+    basicAuth:
+      password:
+        name: monitoring-auth
+        key: password
+      username:
+        name: monitoring-auth
+        key: username
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: monitoring-auth
+data:
+  password: YW5vbnltb3Vz # anonymous
+  username: YW5vbnltb3Vz # anonymous
+type: Opaque
+
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: monitoring-console-monitoring
+spec:
+  podSelector:
+    matchLabels:
+      app: monitoring-console
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    # access from monitoring namespace
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - protocol: TCP
+      port: monitoring
