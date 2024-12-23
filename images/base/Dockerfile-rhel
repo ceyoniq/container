@@ -24,5 +24,6 @@ RUN \
   # install ImageMagick from EPEL (see https://access.redhat.com/solutions/4437561)
   && subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms \
   && dnf install --assumeyes https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm \
+  && dnf repolist \
   && microdnf install --assumeyes ImageMagick \
   && microdnf clean all

@@ -5,6 +5,6 @@ USER root
 RUN \
      microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes \
         jq-1.6-15.el9 \
-        findutils-4.8.0-6.el9 \
+        findutils-1:4.8.0-7.el9 \
   && microdnf clean all
 USER default
