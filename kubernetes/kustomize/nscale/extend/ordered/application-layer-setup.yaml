@@ -48,7 +48,7 @@ spec:
             ephemeral-storage: "0Mi"
       containers:
       - name: application-layer
-        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.3.1300.2024121814
+        image: ceyoniq.azurecr.io/release/nscale/application-layer:ubi.9.3.1401.2025013021
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:

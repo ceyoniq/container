@@ -48,7 +48,7 @@ spec:
             ephemeral-storage: "0Mi"
       containers:
       - name: monitoring-console
-        image: ceyoniq.azurecr.io/release/nscale/monitoring-console:ubi.9.3.1000.2024092618
+        image: ceyoniq.azurecr.io/release/nscale/monitoring-console:ubi.9.3.1400.2025012015
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:

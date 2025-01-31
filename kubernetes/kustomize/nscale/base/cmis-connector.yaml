@@ -19,7 +19,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: cmis-connector
-        image: ceyoniq.azurecr.io/release/nscale/cmis-connector:ubi.9.3.1200.2024112508
+        image: ceyoniq.azurecr.io/release/nscale/cmis-connector:ubi.9.3.1401.2025012920
         imagePullPolicy: Always
         livenessProbe:
           httpGet:

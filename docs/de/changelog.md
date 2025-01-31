@@ -3,6 +3,12 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 9.3.1400 (Februar 2025)
+
+* Aktualisierung der Container Images.
+* Fix nscale Console mapping in compose traefik configuration.
+* Refactor directory layout in kustomize overlay for Azure.
+
 ## 9.3.1300 (Januar 2025)
 
 * Aktualisierung der Container Images.

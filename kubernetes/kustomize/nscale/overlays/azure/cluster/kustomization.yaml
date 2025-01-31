@@ -25,8 +25,8 @@ secretGenerator:
   name: users
 
 resources:
-- ../azure
-- ../../extend/hpa
+- ../base
+- ../../../extend/hpa
 - application-layer-setup2.yaml
 - network-policy.yaml
 

@@ -28,6 +28,7 @@ services:
       - "traefik.http.routers.consolesec.entrypoints=websecure"
       - "traefik.http.routers.consolesec.tls=true"
       - "traefik.http.routers.consolesec.tls.certresolver=myresolver"
+      - "traefik.http.services.consolesec.loadbalancer.server.port=8086"
 
   administrator:
     labels:
