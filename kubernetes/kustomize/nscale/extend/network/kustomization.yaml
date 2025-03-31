@@ -17,6 +17,7 @@ resources:
 - process-automation-modeler.yaml
 - pipeliner.yaml
 - cmis-connector.yaml
-- ilm-connector.yaml
+- erp-cmis-connector.yaml
+- erp-ilm-connector.yaml
 - webdav-connector.yaml
 - xta-connector.yaml

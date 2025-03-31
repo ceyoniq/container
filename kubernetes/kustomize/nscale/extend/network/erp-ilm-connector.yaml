@@ -2,11 +2,11 @@
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: ilm-connector
+  name: erp-ilm-connector
 spec:
   podSelector:
     matchLabels:
-      app: ilm-connector
+      app: erp-ilm-connector
   policyTypes:
   - Egress
   egress:

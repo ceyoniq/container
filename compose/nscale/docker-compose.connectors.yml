@@ -15,6 +15,22 @@ services:
     depends_on:
       - application-layer
 
+  erp-cmis-connector:
+    image: ${ERP_CMIS_CONNECTOR}
+    environment:
+      - CMIS_AL_HOST=application-layer
+      - CMIS_AL_PORT=8080
+      - CMIS_AL_SSL=false
+      - CMIS_AL_INSTANCE=nscalealinst1
+      - ERPCMIS_CONTEXT_PATH=/erp-cmis
+    ports:
+      - "8097:8096" # HTTP
+      - "8197:8196" # HTTPS
+    networks:
+      - nscale
+    depends_on:
+      - application-layer
+
   xta-connector:
     image: ${XTA_CONNECTOR}
     environment:
@@ -36,7 +52,7 @@ services:
     depends_on:
       - application-layer
 
-  ilm-connector:
+  erp-ilm-connector:
     image: ${ILM_CONNECTOR}
     environment:
       - ILM_AL_HOST=application-layer

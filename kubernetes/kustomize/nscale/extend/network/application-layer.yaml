@@ -86,10 +86,18 @@ spec:
       - protocol: TCP
         port: application
   - from:
-    # access from ilm-connector in the same namespace
+    # access from erp-cmis-connector in the same namespace
     - podSelector:
         matchLabels:
-          app: ilm-connector
+          app: erp-cmis-connector
+    ports:
+      - protocol: TCP
+        port: application
+  - from:
+    # access from erp-ilm-connector in the same namespace
+    - podSelector:
+        matchLabels:
+          app: erp-ilm-connector
     ports:
       - protocol: TCP
         port: application

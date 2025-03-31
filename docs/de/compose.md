@@ -92,8 +92,9 @@ Weitere Information zu den nscale Standard Containern finden Sie hier:
 - [nscale/console (nscale Console)](components/console.md)
 - [nscale/process-automation-modeler (nscale Process Automation Modeler)](components/process-automation-modeler.md)
 - [nscale/cmis-connector (nscale CMIS-Connector)](components/cmis-connector.md)
+- [nscale/erp-cmis-connector (nscale ERP-CMIS-Connector)](components/erp-cmis-connector.md)
 - [nscale/webdav-connector (nscale WebDAV-Connector)](components/webdav-connector.md)
-- [nscale/ilm-connector (nscale ERP Connector ILM)](components/ilm-connector.md)
+- [nscale/erp-ilm-connector (nscale ERP Connector ILM)](components/erp-ilm-connector.md)
 - [nscale/xta-connector (nscale XTA Connector)](components/xta-connector.md)
 
 > Die Ceyoniq Technology GmbH übernimmt keine Gewährleistung und Haftung für die Funktionsfähigkeit, Verfügbarkeit, Stabilität und Zuverlässigkeit von Software von Drittanbietern, die nicht Teil der oben aufgelisteten nscale Standard Container ist.

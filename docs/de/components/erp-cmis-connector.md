@@ -1,8 +1,8 @@
-# nscale CMIS-Connector
+# nscale ERP CMIS
 
 ## Inhalt
 
-- [nscale CMIS-Connector](#nscale-cmis-connector)
+- [nscale ERP CMIS](#nscale-erp-cmis)
   - [Inhalt](#inhalt)
   - [Lizenzierung](#lizenzierung)
   - [Persistierung](#persistierung)
@@ -29,17 +29,24 @@ Diese Komponente benötigt keine Persistierung.
 |CMIS_AL_PORT=8080 |Sie können den Port angeben, der verwendet werden soll, um eine Verbindung zu nscale Server Application Layer aufzubauen. Der Standardwert ist "8080".|
 |CMIS_AL_SSL=false |Sie können festlegen, ob SSL verwendet werden soll, um eine Verbindung zu nscale Server Application Layer aufzubauen. Der Standardwert ist "false".|
 |CMIS_AL_INSTANCE=nscalealinst1 |Sie können die Instanz für den Anmeldeversuch am nscale Server Application Layer auswählen.|
-|CONF_USE_WHITELIST=true/false|Über die nscale-Rollen kann der Zugriff speziell über den CMIS Connector eingeschränkt werden.|
+|ERPCMIS_CONTEXT_PATH=/cmis|Es kann ein neuer Context und damit eine andere URL gesetzt werden (Standard: /cmis). Beispiel: ERPCMIS_CONTEXT_PATH = "/foobar" setzt die URL auf den Wert "http://server:port/foobar/browser".
+|CONF_VIRUSSCAN_ACTIVE=false|Sie geben hier an, ob ein Virenscanner angeschlossen werden soll.
+|CONF_VIRUSSCAN_UNIXSOCK=true|Der Virenscanner kann über Sockets oder Unix Domain Socket angesprochen werden (Standard).
+|CONF_VIRUSSCAN_TEMP_FOLDER=/tmp|Für eine Zwischenspeicherung wird ein temporärer Ordner angegeben.
+|CONF_VIRUSSCAN_SOCKPATH=/tmp/clamd.sock|Angabe des Unix Domain Socket.
+|CONF_VIRUSSCAN_HOST=clamav|Wird kein Unix Domain Socket verwendet, erfolgt die Kommunikation mit dem Virenscanner über eine Socket-Verbindung: Host:Port.
+|CONF_VIRUSSCAN_PORT=3310|Port für die Socket-Verbindung.
+
 
 ## Logging in Kubernetes
 
 Um das Log Level im Kubernetes Betrieb zu ändern kann eine ConfigMap verwendet werden. Diese ConfigMap sollte die Log4j 
 Konfiguration ```log4j.properties``` aus dem Originalimage enthalten. 
-Diese ConfigMap muss auf ```/opt/ceyoniq/nscale-cmis-connector/conf/log4j``` im Container gemappt werden.
+Diese ConfigMap muss auf ```/opt/ceyoniq/nscale-for-sap/erp-cmis/conf/log4j``` im Container gemappt werden.
 Ändert sich die ConfigMap im Cluster wird diese automatisch verteilt und über log4j Mechanismen nach wenigen Minuten in den
-Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in einem Deployment.
+Serverprozess übernommen. Das gilt auch für mehrere Containerinstanzen in einem Deployment.
 
-*Achtung:* Die ConfigMap muss auf ein Verzeichnis gemappt werden. Die Verwendung von subPath im Volume Mount verhindert eine automatische Aktualiserung bei Änderungen der ConfigMap!
+*Achtung:* Die ConfigMap muss auf ein Verzeichnis gemappt werden. Die Verwendung von subPath im Volume Mount verhindert eine automatische Aktualisierung bei Änderungen der ConfigMap!
 
 ## Ports
 
@@ -55,5 +62,5 @@ docker run -it \
   -e CMIS_AL_PORT=8080 \
   -e CMIS_AL_SSL=false \
   -e CMIS_AL_INSTANCE=nscalealinst1 \
-  ceyoniq.azurecr.io/release/nscale/cmis-connector:ubi.10.0.1000.2025032520
+  ceyoniq.azurecr.io/release/nscale/erp-cmis-connector:ubi.10.0.1000.2025031920
 ```

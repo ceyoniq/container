@@ -20,7 +20,7 @@ spec:
       initContainers: []
       containers:
       - name: application-layer-web
-        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.9.3.1501.2025022612
+        image: ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.10.0.1000.2025032416
         imagePullPolicy: Always
         startupProbe:
           httpGet:

@@ -65,7 +65,7 @@ docker run --rm \
   -e NSCALE_HOST=application-layer \
   -e LOG4JCONFIGLOCATION=../conf/nscale_stdout_log_conf.xml \
   -e NSCALE_PORT=8080 \
-  ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.9.3.1501.2025022612
+  ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.10.0.1000.2025032416
 ```
 
 ## Information für Entwickler
@@ -87,7 +87,7 @@ Kopieren Sie die Datei `nscale_web.xml` lokal auf Ihr System:
 
 ```bash
 # Erzeugen eines temporären Containers
-$ docker create ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.9.3.1501.2025022612[version]  # Passen Sie bitte diese Version an
+$ docker create ceyoniq.azurecr.io/release/nscale/application-layer-web:ubi.10.0.1000.2025032416[version]  # Passen Sie bitte diese Version an
 a0123456789                                             # Diese ID wird auf Ihrem System eine andere sein
 
 # Kopieren der Datei nscale_web.xml auf Ihr Entwicklungssystem

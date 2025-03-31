@@ -3,6 +3,12 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 10.0.1000 (April 2025)
+
+* Aktualisierung der Container Images.
+* Aufnahme des nscale ERP CMIS Containers in die Liste der unterstützten Konnektoren.
+* Umbenennung des nscale ILM Containers in nscale ERP ILM Container.
+
 ## 9.3.1500 (März 2025)
 
 * Aktualisierung der Container Images.

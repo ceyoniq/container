@@ -62,13 +62,19 @@
 | installierte Tools | tzdata, unzip |
 | erweiterte Tools | |
 
+| erp-cmis-connector | Hinweise |
+|:--|:--|
+| Basis Image | registry.access.redhat.com/ubi9/openjdk-17-runtime |
+| installierte Tools | tzdata, unzip |
+| erweiterte Tools | |
+
 | webdav-connector | Hinweise |
 |:--|:--|
 | Basis Image | registry.access.redhat.com/ubi9/openjdk-17-runtime |
 | installierte Tools | tzdata, unzip |
 | erweiterte Tools | |
 
-| ilm-connector | Hinweise |
+| erp-ilm-connector | Hinweise |
 |:--|:--|
 | Basis Image | registry.access.redhat.com/ubi9/openjdk-17-runtime |
 | installierte Tools | tzdata, unzip |

@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ilm-connector
+  name: erp-ilm-connector
 spec:
   template:
     spec:
       containers:
-      - name: ilm-connector
+      - name: erp-ilm-connector
         securityContext:
           readOnlyRootFilesystem: false
           allowPrivilegeEscalation: false

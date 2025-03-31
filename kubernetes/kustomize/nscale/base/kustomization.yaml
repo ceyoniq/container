@@ -12,7 +12,7 @@ labels:
     app.kubernetes.io/part-of: nscale
 - includeSelectors: false
   pairs:
-    version: v9.3.1501
+    version: v10.0.1002
 
 secretGenerator:
 - literals:
@@ -52,14 +52,17 @@ resources:
 - process-automation-modeler.yaml
 - pipeliner.yaml
 - cmis-connector.yaml
-- ilm-connector.yaml
+- erp-cmis-connector.yaml
+- erp-ilm-connector.yaml
 - webdav-connector.yaml
 - xta-connector.yaml
 
 replicas:
 - name: cmis-connector
   count: 0
-- name: ilm-connector
+- name: erp-cmis-connector
+  count: 0
+- name: erp-ilm-connector
   count: 0
 - name: webdav-connector
   count: 0

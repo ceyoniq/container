@@ -105,8 +105,9 @@ Folgende nscale Standard Container beinhalten Java-Applikationen:
 - nscale/application-layer
 - nscale/application-layer-web
 - nscale/cmis-connector
+- nscale/erp-cmis-connector
 - nscale/console
-- nscale/ilm-connector
+- nscale/erp-ilm-connector
 - nscale/monitoring-console
 - nscale/rendition-server
 - nscale/webdav-connector

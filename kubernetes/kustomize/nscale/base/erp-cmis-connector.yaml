@@ -1,34 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cmis-connector
+  name: erp-cmis-connector
   labels:
-    app: cmis-connector
+    app: erp-cmis-connector
 spec:
   selector:
     matchLabels:
-      app: cmis-connector
+      app: erp-cmis-connector
   replicas: 1
   strategy: 
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: cmis-connector
+        app: erp-cmis-connector
     spec:
       automountServiceAccountToken: false
       containers:
-      - name: cmis-connector
-        image: ceyoniq.azurecr.io/release/nscale/cmis-connector:ubi.10.0.1000.2025032520
+      - name: erp-cmis-connector
+        image: ceyoniq.azurecr.io/release/nscale/erp-cmis-connector:ubi.10.0.1000.2025031920
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
-            path: /cmis/
+            path: /erp-cmis/
             port: cmis
           initialDelaySeconds: 20
         readinessProbe:
           httpGet:
-            path: /cmis/
+            path: /erp-cmis/
             port: cmis
           initialDelaySeconds: 20
         env:
@@ -40,6 +40,8 @@ spec:
           value: "0"
         - name: CMIS_AL_INSTANCE
           value: "nscalealinst1"
+        - name: ERPCMIS_CONTEXT_PATH
+          value: "/erp-cmis"
         - name: JAVA_OPTS
           value: "-XX:MaxRAMPercentage=50.0"
         ports:
@@ -47,7 +49,7 @@ spec:
           name: cmis
         volumeMounts:
         - name: temp
-          mountPath: /opt/ceyoniq/nscale-cmis-connector/temp/
+          mountPath: /opt/ceyoniq/nscale-for-sap/erp-cmis/temp/
       volumes:
       - name: temp
         emptyDir:
@@ -56,9 +58,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cmis-connector
+  name: erp-cmis-connector
   labels:
-    service: cmis-connector
+    service: erp-cmis-connector
 spec:
   ports:
   - port: 8096
@@ -66,4 +68,4 @@ spec:
     name: cmis
     appProtocol: http
   selector:
-    app: cmis-connector
+    app: erp-cmis-connector

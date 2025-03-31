@@ -91,7 +91,17 @@ patches:
             kubernetes.io/metadata.name: ingress-nginx
 - target:
     kind: NetworkPolicy
-    name: ilm-connector-ingress
+    name: erp-cmis-connector-ingress
+  patch: |-
+    - op: add
+      path: /spec/ingress/0/from/-
+      value:
+        namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: ingress-nginx
+- target:
+    kind: NetworkPolicy
+    name: erp-ilm-connector-ingress
   patch: |-
     - op: add
       path: /spec/ingress/0/from/-

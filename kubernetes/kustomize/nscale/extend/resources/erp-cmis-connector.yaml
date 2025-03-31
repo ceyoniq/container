@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ilm-connector
+  name: erp-cmis-connector
 spec:
   template:
     spec:
       containers:
-      - name: ilm-connector
+      - name: erp-cmis-connector
         resources:
           limits:
             cpu: "1000m"
             memory: "1000Mi"
-            ephemeral-storage: "500Mi"
+            ephemeral-storage: "550Mi"
           requests:
-            cpu: "300m"
+            cpu: "500m"
             memory: "500Mi"
-            ephemeral-storage: "400Mi"
+            ephemeral-storage: "450Mi"

@@ -76,11 +76,18 @@ spec:
             name: cmis-connector
             port:
               name: cmis
+      - path: /erp-cmis/
+        pathType: Prefix
+        backend:
+          service:
+            name: erp-cmis-connector
+            port:
+              name: cmis
       - path: /sap_ilm/
         pathType: Prefix
         backend:
           service:
-            name: ilm-connector
+            name: erp-ilm-connector
             port:
               name: ilm
       - path: /dav/

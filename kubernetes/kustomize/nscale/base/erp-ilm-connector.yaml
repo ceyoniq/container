@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ilm-connector
+  name: erp-ilm-connector
   labels:
-    app: ilm-connector
+    app: erp-ilm-connector
 spec:
   selector:
     matchLabels:
-      app: ilm-connector
+      app: erp-ilm-connector
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: ilm-connector
+        app: erp-ilm-connector
     spec:
       automountServiceAccountToken: false
       containers:
-      - name: ilm-connector
-        image: ceyoniq.azurecr.io/release/nscale/ilm-connector:ubi.9.3.1000.2024091702
+      - name: erp-ilm-connector
+        image: ceyoniq.azurecr.io/release/nscale/erp-ilm-connector:ubi.10.0.1000.2025032002
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:
@@ -58,9 +58,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ilm-connector
+  name: erp-ilm-connector
   labels:
-    service: ilm-connector
+    service: erp-ilm-connector
 spec:
   ports:
   - port: 8297
@@ -68,4 +68,4 @@ spec:
     name: ilm
     appProtocol: http
   selector:
-    app: ilm-connector
+    app: erp-ilm-connector

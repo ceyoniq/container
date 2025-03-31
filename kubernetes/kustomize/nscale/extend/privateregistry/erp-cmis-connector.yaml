@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ilm-connector
+  name: erp-cmis-connector
 spec:
   template:
     spec:

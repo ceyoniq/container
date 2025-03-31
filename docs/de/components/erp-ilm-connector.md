@@ -34,7 +34,7 @@ Diese Komponente benötigt keine Persistierung.
 
 Um das Log Level im Kubernetes Betrieb zu ändern kann eine ConfigMap verwendet werden. Diese ConfigMap sollte die Log4j 
 Konfiguration ```log4j.properties``` aus dem Originalimage enthalten. 
-Diese ConfigMap muss auf ```/opt/ceyoniq/nscale-cmis-connector/conf/log4j``` im Container gemappt werden.
+Diese ConfigMap muss auf ```/opt/ceyoniq/nscale-erp-ilm-connector/conf/log4j``` im Container gemappt werden.
 Ändert sich die ConfigMap im Cluster wird diese automatisch verteilt und über log4j Mechanismen nach wenigen Minuten in den
 Serverprozeß übernommen. Das gilt auch für mehrere Containerinstanzen in einem Deployment.
 
@@ -54,5 +54,5 @@ docker run --rm  \
   -e ILM_AL_PORT=8080 \
   -e ILM_AL_SSL=false \
   -e ILM_AL_DOMAIN=nscale \
-  ceyoniq.azurecr.io/release/nscale/ilm-connector:ubi.9.3.1000.2024091702
+  ceyoniq.azurecr.io/release/nscale/erp-ilm-connector:ubi.10.0.1000.2025032002
 ```

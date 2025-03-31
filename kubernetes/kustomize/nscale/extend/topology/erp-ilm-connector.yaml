@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ilm-connector
+  name: erp-ilm-connector
 spec:
   template:
     spec:
       topologySpreadConstraints:
         - labelSelector:
             matchLabels:
-              app: ilm-connector
+              app: erp-ilm-connector
           maxSkew: 1
           topologyKey: topology.kubernetes.io/zone
           whenUnsatisfiable: ScheduleAnyway 

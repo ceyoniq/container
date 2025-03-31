@@ -15,6 +15,7 @@ patches:
 - path: console.yaml
 - path: pipeliner.yaml
 - path: cmis-connector.yaml
-- path: ilm-connector.yaml
+- path: erp-cmis-connector.yaml
+- path: erp-ilm-connector.yaml
 - path: webdav-connector.yaml
 - path: xta-connector.yaml
