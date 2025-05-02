@@ -58,5 +58,5 @@ docker run --rm \
   -e ALINSTANCE=nscalealinst1 \
   -p 8086:8086 \
   -e LOG_APPENDER=Console \
-  ceyoniq.azurecr.io/release/nscale/console:ubi.10.0.1001.13350
+  ceyoniq.azurecr.io/release/nscale/console:ubi.10.0.1100.13363
 ```
