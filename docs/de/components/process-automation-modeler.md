@@ -48,5 +48,5 @@ docker run --rm \
   -e NSCALE_HOST=application-layer \
   -e NSCALE_PORT=8080 \
   -e NSCALE_INSTANCE=nscalealinst1 \
-  ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.10.0.1101.85016
+  ceyoniq.azurecr.io/release/nscale/process-automation-modeler:ubi.10.0.1200.92544
 ```
