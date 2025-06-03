@@ -1,0 +1,10 @@
+ARG baseImage=registry.source.ceyoniq.com/ceyoniq/fe/nbox/container/base/openjdk-17-runtime:latest
+FROM $baseImage
+
+USER root
+RUN \
+     microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes \
+        jq-1.6-15.el9 \
+        findutils-1:4.8.0-7.el9 \
+  && microdnf clean all
+USER default
