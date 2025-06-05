@@ -1,0 +1,48 @@
+ARG baseImage=registry.source.ceyoniq.com/ceyoniq/fe/nbox/container/base/minimal:latest
+FROM $baseImage
+
+# install full package manager
+RUN \
+     microdnf update --assumeyes \
+  && microdnf install --assumeyes dnf libmodulemd dnf-plugins-core
+
+COPY fedora.repo /etc/yum.repos.d/fedora.repo
+COPY rawhide.repo /etc/yum.repos.d/rawhide.repo
+
+# see https://access.redhat.com/solutions/5616681
+# see https://docs.fedoraproject.org/en-US/quick-docs/fedora-and-red-hat-enterprise-linux/
+RUN \
+  # add and enable fedora upstream source
+     dnf config-manager --add-repo /etc/yum.repos.d/fedora.repo \
+  && dnf config-manager --set-enabled fedora \
+  && dnf config-manager --add-repo /etc/yum.repos.d/rawhide.repo \
+  && dnf config-manager --set-enabled rawhide \
+  # add epel upstream
+  && dnf install --assumeyes https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm \
+  && /usr/bin/crb enable \
+  && microdnf repolist
+
+# install wget from ubi upstream
+RUN \
+     dnf --disablerepo=* --enablerepo=ubi-9-appstream-rpms --enablerepo=ubi-9-baseos-rpms repoquery wget \
+  && dnf --assumeyes --disablerepo=* --enablerepo=ubi-9-appstream-rpms --enablerepo=ubi-9-baseos-rpms --nogpgcheck install wget \
+  && /usr/bin/wget --version
+
+# override fonts with Microsoft Fonts
+RUN \
+  # install expand Tool
+      dnf install --assumeyes --nogpgcheck cabextract fonts-filesystem fontconfig \
+  # remove preinstalled Croscore fonts
+  #&& rpm -e --nodeps google-cousine-fonts google-arimo-fonts google-tinos-fonts \
+  && rpm -e --nodeps dejavu-sans-fonts \
+  # install Microsoft Fonts instead
+  && rpm --install --nodeps https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+
+# install ImageMagick from fedora upstream
+RUN \
+     dnf --disablerepo=* --enablerepo=rawhide repoquery ImageMagick \
+  && dnf --disablerepo=* --enablerepo=rawhide --enablerepo=ubi-9-baseos-rpms --assumeyes --nogpgcheck install ImageMagick \
+  && /usr/bin/magick -version
+
+#RUN \
+#    microdnf clean all
