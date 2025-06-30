@@ -1,5 +1,5 @@
 ARG baseImage=registry.source.ceyoniq.com/ceyoniq/fe/nbox/container/base/openjdk-17-runtime:latest
-#ARG jettyVersion=12.0.20
+#ARG jettyVersion=12.0.22
 ARG jettyVersion=9.4.57
 
 FROM mirror.gcr.io/library/jetty:$jettyVersion AS jetty
@@ -47,7 +47,7 @@ jetty.sslContext.trustStorePassword=OBF:1vn21ugu1saj1v9i1v941sar1ugw1vo0\n\
 
 FROM $baseImage
 
-#ARG jettyVersion=12.0.20
+#ARG jettyVersion=12.0.22
 ARG jettyVersion=9.4.57
 
 # https://github.com/eclipse/jetty.docker/blob/734954b4f7602caa4f87a06837620b7f5225d583/9.4-jre11-slim/Dockerfile

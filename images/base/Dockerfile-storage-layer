@@ -4,5 +4,5 @@ FROM $baseImage
 RUN \
      microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes \
        procps-ng-3.3.17-14.el9 \
-       shadow-utils-2:4.9-10.el9_5 \
+       shadow-utils-2:4.9-12.el9 \
   && microdnf clean all

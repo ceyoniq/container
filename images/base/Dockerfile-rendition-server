@@ -27,7 +27,7 @@ RUN \
   make install
 
 RUN \
-  curl -L https://github.com/tesseract-ocr/tesseract/archive/5.5.0.tar.gz | tar -xz && \
+  curl -L https://github.com/tesseract-ocr/tesseract/archive/5.5.1.tar.gz | tar -xz && \
   cd tesseract-* && \
   ./autogen.sh && \
   ./configure LDFLAGS="-L/opt/lib"  LEPTONICA_LIBS="-lleptonica" LEPTONICA_CFLAGS="-I/opt/include/leptonica/" --disable-legacy --prefix=/opt && \
@@ -71,7 +71,7 @@ RUN \
        giflib-5.2.1-9.el9 \
        libgomp-11.5.0-5.el9_5 \
        libpng-2:1.6.37-12.el9 \
-       libX11-1.7.0-9.el9 \
+       libX11-1.7.0-11.el9 \
 	&& microdnf clean all \
   # patch installation directory
   #ln -s /opt/ceyoniq/tools/bin/wkhtmltopdf /usr/bin/wkhtmltopdf \
