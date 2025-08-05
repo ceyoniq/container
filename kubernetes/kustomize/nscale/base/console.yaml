@@ -19,7 +19,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: console
-        image: ceyoniq.azurecr.io/release/nscale/console:ubi.10.0.1300.13371
+        image: ceyoniq.azurecr.io/release/nscale/console:ubi.10.0.1400.13395
         imagePullPolicy: Always
         startupProbe:
           httpGet:

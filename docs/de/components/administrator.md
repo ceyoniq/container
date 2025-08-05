@@ -77,5 +77,5 @@ docker run --rm \
   -e Port=8080 \
   -e ALInstance=nscalealinst1 \
   -e JAVA_OPTIONS="-Dorg.eclipse.rap.rwt.settingStoreFactory=settings-per-user -Duser.language=de" \
-  ceyoniq.azurecr.io/release/nscale/administrator:ubi.10.0.1301.0
+  ceyoniq.azurecr.io/release/nscale/administrator:ubi.10.0.1400.0
 ```

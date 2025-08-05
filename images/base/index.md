@@ -46,7 +46,7 @@
 
 | console | Hinweise |
 |:--|:--|
-| Basis Image | registry.access.redhat.com/ubi9/openjdk-11-runtime |
+| Basis Image | registry.access.redhat.com/ubi9/openjdk-17-runtime |
 | installierte Tools | tzdata, unzip |
 | erweiterte Tools | |
 

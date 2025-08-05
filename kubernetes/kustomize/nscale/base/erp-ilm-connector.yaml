@@ -19,7 +19,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: erp-ilm-connector
-        image: ceyoniq.azurecr.io/release/nscale/erp-ilm-connector:ubi.10.0.1300.2025061614
+        image: ceyoniq.azurecr.io/release/nscale/erp-ilm-connector:ubi.10.0.1401.2025071810
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:
