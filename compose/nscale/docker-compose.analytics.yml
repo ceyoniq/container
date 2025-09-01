@@ -5,6 +5,8 @@ volumes:
   grafana_data: {}
   prometheus_data: {}
 
+#  install driver
+#  https://grafana.com/docs/loki/latest/send-data/docker-driver/
 x-logging: &loki-logging
   driver: loki
   options:
@@ -14,11 +16,11 @@ x-logging: &loki-logging
     max-file: 2
     keep-file: "true"
 
-
 services:
   loki:
     image: ${LOKI_IMAGE}
     container_name: loki
+    restart: always
     volumes:
       - loki_data:/loki:rw
     networks: 
@@ -48,6 +50,12 @@ services:
       - "traefik.http.routers.grafana.rule=PathPrefix(`/grafana`)"
       - "traefik.http.routers.grafana.entrypoints=web"
       - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+      #- "traefik.enable=true"
+      #- "traefik.http.routers.grafanasec.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/grafana`)"
+      #- "traefik.http.routers.grafanasec.entrypoints=websecure"
+      #- "traefik.http.routers.grafanasec.tls=true"
+      #- "traefik.http.routers.grafanasec.tls.certresolver=myresolver"
+      #- "traefik.http.services.grafanasec.loadbalancer.server.port=3000"
     networks:
       - nscale
     logging:  *loki-logging

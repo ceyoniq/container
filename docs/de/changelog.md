@@ -3,6 +3,11 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 10.0.1500 (September 2025)
+
+* Aktualisierung der Container Images.
+* Wechsel des *bitnami* Repositories zu *bitnamilegacy* Images aufgrund einer Lizenzänderung des Anbieters.
+
 ## 10.0.1400 (August 2025)
 
 * Aktualisierung der Container Images.
