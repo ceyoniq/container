@@ -54,5 +54,5 @@ docker run --rm  \
   -e ILM_AL_PORT=8080 \
   -e ILM_AL_SSL=false \
   -e ILM_AL_DOMAIN=nscale \
-  ceyoniq.azurecr.io/release/nscale/erp-ilm-connector:ubi.10.0.1500.2025082510
+  ceyoniq.azurecr.io/release/nscale/erp-ilm-connector:ubi.10.1.1000.2025092314
 ```

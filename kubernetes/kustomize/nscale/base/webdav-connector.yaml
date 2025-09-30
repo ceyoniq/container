@@ -19,7 +19,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: webdav-connector
-        image: ceyoniq.azurecr.io/release/nscale/webdav-connector:ubi.10.0.1500.110870
+        image: ceyoniq.azurecr.io/release/nscale/webdav-connector:ubi.10.1.1000.2025092216
         imagePullPolicy: Always
 #        readinessProbe:
 #          httpGet:

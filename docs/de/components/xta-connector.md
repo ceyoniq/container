@@ -67,5 +67,5 @@ docker run --rm \
   -e XTA_AL_DOMAIN=nscale \
   -e XTA_READER='*' \
   -e XTA_AL_FOLDERQUERY="resourcetype=1 and displayname='Postausgang'" \
-  ceyoniq.azurecr.io/release/nscale/xta-connector:ubi.9.2.1500.2025062013
+  ceyoniq.azurecr.io/release/nscale/xta-connector:ubi.9.2.1501.2025090414
 ```
