@@ -23,7 +23,7 @@ spec:
       # The license file mount inside the conf volume prevents the volume to get initialized with the image data.
       # Therefore we need to copy the data from the image to the volume manually before startup.
       - name: storage-layer-conf
-        image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.10.1.1000.117809
+        image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.10.1.1100.125978
         imagePullPolicy: Always
         command: [ "/bin/sh", "-c" ]
         args:
@@ -37,7 +37,7 @@ spec:
           mountPath: /mnt
       containers:
       - name: storage-layer
-        image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.10.1.1000.117809
+        image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.10.1.1100.125978
         imagePullPolicy: Always
         readinessProbe:
           exec:
@@ -77,7 +77,7 @@ spec:
           subPath: arc
           mountPath: /opt/ceyoniq/nscale-server/storage-layer/arc
       #- name: prometheus-exporter
-      #  image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.10.1.1000.117809
+      #  image: ceyoniq.azurecr.io/release/nscale/storage-layer:ubi.10.1.1100.125978
       #  imagePullPolicy: Always
       #  command: 
       #  - cstool-prometheus-exporter

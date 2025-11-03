@@ -1,0 +1,29 @@
+ARG baseImage=registry.source.ceyoniq.com/ceyoniq/fe/nbox/container/base/minimal:latest
+FROM $baseImage
+
+ARG username=
+ARG password=
+
+ENV SMDEV_CONTAINER_OFF=1
+ENV TESSDATA_PREFIX=/usr/share/tesseract/tessdata
+RUN \
+  # install subscription manager on ubi minimal image
+     microdnf install --assumeyes dnf findutils subscription-manager \
+  # register account: This command will download the entitlement and consumer certificates in /etc/pki
+  # NOTE: Do no put the cleartext password into a dockerfile instruction file!
+  && subscription-manager register --username=$username --password=$password \
+  # list repositories
+  && subscription-manager list --available --all \
+  # list available repositories
+  && microdnf repolist \
+  # install leptonica / tesseract from RHEL repositories
+  && microdnf install --assumeyes leptonica tesseract \
+  # install tesseract language packages
+  && curl -L https://github.com/tesseract-ocr/tessdata_fast/raw/main/deu.traineddata -o ${TESSDATA_PREFIX}/deu.traineddata \
+  && curl -L https://github.com/tesseract-ocr/tessdata_fast/raw/main/eng.traineddata -o ${TESSDATA_PREFIX}/eng.traineddata  \
+  # install ImageMagick from EPEL (see https://access.redhat.com/solutions/4437561)
+  && subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms \
+  && dnf install --assumeyes https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm \
+  && dnf repolist \
+  && microdnf install --assumeyes ImageMagick \
+  && microdnf clean all
