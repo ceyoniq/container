@@ -1,0 +1,8 @@
+ARG baseImage=registry.source.ceyoniq.com/ceyoniq/fe/nbox/container/base/minimal
+FROM $baseImage
+
+RUN \
+     microdnf install --disablerepo=* --enablerepo=ubi-* --assumeyes \
+       procps-ng-3.3.17-14.el9 \
+       shadow-utils-2:4.9-15.el9 \
+  && microdnf clean all
