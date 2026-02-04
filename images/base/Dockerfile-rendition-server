@@ -12,14 +12,14 @@ RUN yum update --disablerepo=* --enablerepo=ubi-* --assumeyes && \
 WORKDIR /tmp
 
 RUN \
-  curl -L https://github.com/ImageMagick/ImageMagick/archive/7.1.2-8.tar.gz | tar -xz && \
+  curl -L https://github.com/ImageMagick/ImageMagick/archive/7.1.2-12.tar.gz | tar -xz && \
   cd ImageMagick-* && \
   ./configure --prefix=/opt && \
   make && \
   make install
 
 RUN \
-  curl -L https://github.com/DanBloomberg/leptonica/archive/1.86.0.tar.gz | tar -xz && \
+  curl -L https://github.com/DanBloomberg/leptonica/archive/1.87.0.tar.gz | tar -xz && \
   cd leptonica-* && \
   ./autogen.sh && \
   ./configure --prefix=/opt && \
@@ -27,7 +27,7 @@ RUN \
   make install
 
 RUN \
-  curl -L https://github.com/tesseract-ocr/tesseract/archive/5.5.1.tar.gz | tar -xz && \
+  curl -L https://github.com/tesseract-ocr/tesseract/archive/5.5.2.tar.gz | tar -xz && \
   cd tesseract-* && \
   ./autogen.sh && \
   ./configure LDFLAGS="-L/opt/lib"  LEPTONICA_LIBS="-lleptonica" LEPTONICA_CFLAGS="-I/opt/include/leptonica/" --disable-legacy --prefix=/opt && \
@@ -70,7 +70,7 @@ RUN \
        libwebp-1.2.0-8.el9_3 \
        giflib-5.2.1-9.el9 \
        libgomp-11.5.0-11.el9 \
-       libpng-2:1.6.37-12.el9 \
+       libpng-2:1.6.37-12.el9_7.1 \
        libX11-1.7.0-11.el9 \
 	&& microdnf clean all \
   # patch installation directory
