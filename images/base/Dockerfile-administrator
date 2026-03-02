@@ -1,5 +1,5 @@
 ARG baseImage=registry.source.ceyoniq.com/ceyoniq/fe/nbox/container/base/openjdk-17-runtime:latest
-#ARG jettyVersion=12.1.5
+#ARG jettyVersion=12.1.6
 ARG jettyVersion=9.4.58
 
 FROM mirror.gcr.io/library/jetty:$jettyVersion AS jetty
