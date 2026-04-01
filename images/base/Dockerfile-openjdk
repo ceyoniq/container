@@ -1,7 +1,9 @@
 # https://catalog.redhat.com/software/containers/ubi9/openjdk-17-runtime/61ee7d45384a3eb331996bee
 # https://catalog.redhat.com/software/containers/ubi9/openjdk-21-runtime/6501ce769a0d86945c422d5f
-#ARG baseImage=registry.access.redhat.com/ubi9/openjdk-17-runtime:1.24-2.1769595321
-ARG baseImage=registry.access.redhat.com/ubi9/openjdk-21-runtime:1.24-2.1769595317
+# https://catalog.redhat.com/en/software/containers/ubi9/openjdk-25-runtime/69204990c46419100ce30a5b
+#ARG baseImage=registry.access.redhat.com/ubi9/openjdk-17-runtime:1.24-2.1773186562
+#ARG baseImage=registry.access.redhat.com/ubi9/openjdk-21-runtime:1.24-2.1773186561
+ARG baseImage=registry.access.redhat.com/ubi9/openjdk-25-runtime:1.24-2.1773186582
 
 FROM $baseImage
 

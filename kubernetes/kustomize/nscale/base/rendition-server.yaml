@@ -19,7 +19,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: rendition-server
-        image: ceyoniq.azurecr.io/release/nscale/rendition-server:ubi.10.1.1500.156138
+        image: ceyoniq.azurecr.io/release/nscale/rendition-server:ubi.10.2.1000.2026032616
         imagePullPolicy: Always
         startupProbe:
           httpGet:

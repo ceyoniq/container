@@ -3,6 +3,10 @@
 Die Releasenotes der Softwarekomponenten finden Sie in unserem [Downloadportal](https://downloadportal.ceyoniq.com/).  
 Die aktuelle Liste der Container Images finden Sie [hier](https://github.com/ceyoniq/container/blob/main/docs/de/index.md#nscale-standard-container-images).
 
+## 10.2.1000 (April 2026)
+
+* Aktualisierung der Container Images.
+
 ## 10.1.1500 (März 2026)
 
 * Aktualisierung der Container Images.

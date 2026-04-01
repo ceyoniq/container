@@ -12,7 +12,7 @@ RUN yum update --disablerepo=* --enablerepo=ubi-* --assumeyes && \
 WORKDIR /tmp
 
 RUN \
-  curl -L https://github.com/ImageMagick/ImageMagick/archive/7.1.2-13.tar.gz | tar -xz && \
+  curl -L https://github.com/ImageMagick/ImageMagick/archive/7.1.2-17.tar.gz | tar -xz && \
   cd ImageMagick-* && \
   ./configure --prefix=/opt && \
   make && \
@@ -70,7 +70,7 @@ RUN \
        libwebp-1.2.0-8.el9_3 \
        giflib-5.2.1-9.el9 \
        libgomp-11.5.0-11.el9 \
-       libpng-2:1.6.37-12.el9_7.1 \
+       libpng-2:1.6.37-12.el9_7.2 \
        libX11-1.7.0-11.el9 \
 	&& microdnf clean all \
   # patch installation directory

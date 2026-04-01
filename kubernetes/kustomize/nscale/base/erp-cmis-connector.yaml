@@ -19,7 +19,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: erp-cmis-connector
-        image: ceyoniq.azurecr.io/release/nscale/erp-cmis-connector:ubi.10.1.1500.2026021916
+        image: ceyoniq.azurecr.io/release/nscale/erp-cmis-connector:ubi.10.2.1001.2026032508
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
