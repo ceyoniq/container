@@ -64,7 +64,7 @@ Folgende Komponenten stehen als nscale Standard Container zur Verfügung:
 > Der Eintrag in der Spalte **nscale Komponente** führt Sie jeweils zu weiteren Informationen.
 
 | Komponente | Image | 
-|:---|:---|:---|:---|
+|:---|:---|
 | [nscale Server Application Layer](components/application-layer.md) | registry.source.ceyoniq.com/ceyoniq-public/nscale/container/release/application-layer |
 | [nscale Server Application Layer Web](components/application-layer-web.md) | registry.source.ceyoniq.com/ceyoniq-public/nscale/container/release/application-layer-web |
 | [nscale Pipeliner](components/pipeliner.md) | registry.source.ceyoniq.com/ceyoniq-public/nscale/container/release/pipeliner | 
